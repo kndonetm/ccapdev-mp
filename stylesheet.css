@@ -1,0 +1,24 @@
+img {
+    height: 200px;
+    width: 200px;
+}
+
+.average-rating {
+    position: relative;
+    appearance: none;
+    color: transparent;
+    width: auto;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+.average-rating::before {
+  --percent: calc(3.2/5*100%);
+  content: '★★★★★';
+  position: absolute;
+  color: rgba(0,0,0,0.2);
+  background: linear-gradient(90deg, rgb(9, 142, 40) var(--percent), rgba(0,0,0,0.2) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
