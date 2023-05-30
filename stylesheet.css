@@ -1,6 +1,16 @@
-img {
-    height: 200px;
-    width: 200px;
+nav img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.card {
+    width: 400px;
+}
+
+.card img {
+    height: 250px;
+    width: 400px;
 }
 
 .average-rating {
