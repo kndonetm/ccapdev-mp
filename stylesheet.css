@@ -4,14 +4,10 @@ nav img {
     height: 30px;
 }
 
-.card {
-    width: 400px;
-}
-
+/* jic
 .card img {
-    height: 250px;
-    width: 400px;
-}
+    aspect-ratio: 4 / 3;
+} */
 
 .average-rating {
     position: relative;
@@ -25,7 +21,6 @@ nav img {
 .average-rating::before {
   --percent: calc(3.2/5*100%);
   content: '★★★★★';
-  position: absolute;
   color: rgba(0,0,0,0.2);
   background: linear-gradient(90deg, rgb(9, 142, 40) var(--percent), rgba(0,0,0,0.2) var(--percent));
   -webkit-background-clip: text;
