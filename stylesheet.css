@@ -11,18 +11,21 @@ nav img {
   width: 500px;
 }
 
-/* .search-container > input:focus {
+/*puro rough estimation na to just to make the search bar lookz good at big screens x_x */
+.search-container > input:focus {
     border-color: lightgreen;
-    box-shadow: 0px 0px 3px #b3e2be;
-} */
+    box-shadow: inset 0px 0px 3px #198754;;
+}
 
 .search-container > input {
-  border-radius: 50px;
+  border-radius: 60px 0 0 60px;
+  width: 458.5px;
 }
 
 .search-container > button {
   border-radius: 0% 70% 70% 0%;
 }
+
 
 .average-rating {
   position: relative;
