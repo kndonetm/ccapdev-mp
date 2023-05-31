@@ -1,7 +1,5 @@
 nav img {
   display: inline-block;
-  width: 30px;
-  height: 30px;
 }
 
 /* jic
@@ -48,10 +46,21 @@ nav img {
   -webkit-text-fill-color: transparent;
 }
 
+.modal img {
+  width: 500px;
+}
+
+.myform img,
+nav img {
+  height: 30px;
+  width: 30px;
+}
+
 .modal-content {
   width: 80%;
   margin: 0 auto;
 }
+
 .modal-body {
   padding: 0;
 }
@@ -60,6 +69,7 @@ nav img {
   right: 0;
   padding: 1em;
 }
+
 .modal h1 {
   color: white;
   font-size: 2.3em;
@@ -68,7 +78,7 @@ nav img {
 
 .myform {
   padding: 2em;
-  max-width: 100%;
+  width: 100%;
   box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
 }
 

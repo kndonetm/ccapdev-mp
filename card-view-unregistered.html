@@ -37,28 +37,35 @@
     </nav>
 
     <!--Modal-->
-    <div class="modal fade" id="login" tabindex="-1">
+    <div class="modal modal-xl fade" id="login" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                <div class="myform bg-dark">
-                    <h1 class="text-center">Log in</h1>
-                    <form>
-                        <div class="mb-3 mt-4 form-floating">
-                            <input placeholder="username" type="text" class="form-control" id="username">
-                            <label for="username" class="form-label">Username</label>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"></button>
+                    <div class="d-flex">
+                        <div class="myform bg-dark">
+                            <div class="d-flex mt-2">
+                                <img src="images/icon-placeholder.png" alt="" class="me-2">
+                                <h5 class="text-white">Navbar</h5>
+                            </div>
+                            <h1 class="text-center mt-5">Welcome Back!</h1>
+                            <form>
+                                <div class="mb-3 mt-4 form-floating">
+                                    <input placeholder="username" type="text" class="form-control" id="username">
+                                    <label for="username" class="form-label">Username</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input placeholder="password" type="password" class="form-control" id="password">
+                                    <label for="password" class="form-label">Password</label>
+                                </div>
+                                <button type="submit" class="btn btn-light mt-3">LOG IN</button>
+                                <p>Don't have an account? <a href="#" data-bs-target="#signup" data-bs-toggle="modal">Sign up</a></p>
+                            </form>
                         </div>
-                        <div class="mb-3 form-floating">
-                            <input placeholder="password" type="password" class="form-control" id="password">
-                            <label for="password" class="form-label">Password</label>
-                        </div>
-                        <button type="submit" class="btn btn-light mt-3">LOG IN</button>
-                        <p>Not a member? <a href="#" data-bs-target="#signup" data-bs-toggle="modal">Sign up now</a></p>
-                    </form>
+                        <img src="images/modal-placeholder.jpg" alt="" class="d-block">
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
     </div>
 
