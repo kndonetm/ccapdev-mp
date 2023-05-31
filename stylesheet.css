@@ -1,13 +1,30 @@
 nav img {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width:30px;
+    height:30px;
 }
 
 /* jic
 .card img {
     aspect-ratio: 4 / 3;
 } */
+
+.search-container {
+    width: 500px;
+}
+
+/* .search-container > input:focus {
+    border-color: lightgreen;
+    box-shadow: 0px 0px 3px #b3e2be;
+} */
+
+.search-container > input {
+    border-radius: 50px;
+}
+
+.search-container > button {
+    border-radius:  0% 70% 70% 0%;
+}
 
 .average-rating {
     position: relative;
