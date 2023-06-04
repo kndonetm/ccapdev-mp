@@ -14,13 +14,14 @@
   <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
         <div class="container">
-            <a href="#" class="navbar-brand h1 mb-0">
+            <a href="#" class="navbar-brand h1 mb-0 mr-auto">
                 <img src="images/icon-placeholder.png" alt="">
-                Navbar
+                Website Name
             </a>
-            <form class="d-flex position-relative search-container">
-                <input type="text" class="form-control" placeholder="Search">
-                <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
+            <!-- btn still wraps seperately -->
+            <form class="form-inline my-0 mr-3">
+                <input class="form-control form-control-sm mr-auto h-10" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-sm mr-0" type="submit">O</button>
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -38,6 +39,11 @@
             </ul>
         </div>
     </nav>
+    <div class="container">
+        <div class="search-filter">
+            <p class="smaller-header">Searching for "Word Filter"</p>
+        </div>
+    </div>
     <section class="store-section container">
         <div class="store-header">
             <p class="h2">Establishments</p>
@@ -47,11 +53,55 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <a href="#" class="text-decoration-none text-dark">
-                        <div class="list-item-container d-flex justify=content:">
-                            <img class="store-image" src="images/store-placeholder.png" alt="">
-                            <div class="store-info d-flex flex-column">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/store-placeholder.png" alt="">
+                            <div class="result-info d-flex flex-column">
                                 <p class="h3 m-0">Establishment Name</p>
-                                <p class="store-desc text-wrap m-0">Establishment Short Description</p>
+                                <p class="smaller-text text-wrap m-0">Establishment Short Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/store-placeholder.png" alt="">
+                            <div class="result-info d-flex flex-column">
+                                <p class="h3 m-0">Establishment Name</p>
+                                <p class="smaller-text text-wrap m-0">Establishment Short Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/store-placeholder.png" alt="">
+                            <div class="result-info d-flex flex-column">
+                                <p class="h3 m-0">Establishment Name</p>
+                                <p class="smaller-text text-wrap m-0">Establishment Short Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/store-placeholder.png" alt="">
+                            <div class="result-info d-flex flex-column">
+                                <p class="h3 m-0">Establishment Name</p>
+                                <p class="smaller-text text-wrap m-0">Establishment Short Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/store-placeholder.png" alt="">
+                            <div class="result-info d-flex flex-column">
+                                <p class="h3 m-0">Establishment Name</p>
+                                <p class="smaller-text text-wrap m-0">Establishment Short Description</p>
                             </div>
                         </div>
                     </a>
@@ -68,11 +118,55 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <a href="#" class="text-decoration-none text-dark">
-                        <div class="list-item-container d-flex justify=content:">
-                            <img class="store-image" src="images/placeholder.jpg" alt="">
-                            <div class="store-info d-flex flex-column">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/placeholder.jpg" alt="">
+                            <div class="user-info d-flex flex-column">
                                 <p class="m-0"><span class="h3">Review Title</span><span class="smaller-text"> by User</span></p>
-                                <p class="store-desc text-wrap m-0">Review body</p>
+                                <p class="smaller-text text-wrap m-0">Review body</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/placeholder.jpg" alt="">
+                            <div class="user-info d-flex flex-column">
+                                <p class="m-0"><span class="h3">Review Title</span><span class="smaller-text"> by User</span></p>
+                                <p class="smaller-text text-wrap m-0">Review body</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/placeholder.jpg" alt="">
+                            <div class="user-info d-flex flex-column">
+                                <p class="m-0"><span class="h3">Review Title</span><span class="smaller-text"> by User</span></p>
+                                <p class="smaller-text text-wrap m-0">Review body</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/placeholder.jpg" alt="">
+                            <div class="user-info d-flex flex-column">
+                                <p class="m-0"><span class="h3">Review Title</span><span class="smaller-text"> by User</span></p>
+                                <p class="smaller-text text-wrap m-0">Review body</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="list-item-container d-flex">
+                            <img class="result-image" src="images/placeholder.jpg" alt="">
+                            <div class="user-info d-flex flex-column">
+                                <p class="m-0"><span class="h3">Review Title</span><span class="smaller-text"> by User</span></p>
+                                <p class="smaller-text text-wrap m-0">Review body</p>
                             </div>
                         </div>
                     </a>
