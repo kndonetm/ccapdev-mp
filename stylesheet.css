@@ -1,0 +1,40 @@
+nav img {
+    width: 30px;
+    height: 30px;
+}
+
+.container {
+    margin-top: 12px;
+}
+
+.h2 {
+    font-size: 32px;
+}
+
+hr {
+    margin: 8px 0;
+    border-color: black;
+}
+
+.search-results {
+    padding: 8px;
+    background-color: #F9F6F6;
+}
+
+.d-flex {
+    gap:3px;
+}
+
+.store-image {
+    width: 60px;
+    height: 60px;
+}
+
+.h3 {
+    font-size: 20px;
+}
+
+.store-desc,
+.smaller-text {
+    font-size: 12px;
+}
