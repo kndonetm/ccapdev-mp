@@ -1,0 +1,56 @@
+nav img {
+    width: 30px;
+    height: 30px;
+}
+
+nav .form-control {
+    border-radius: 5px 0 0 5px;
+}
+
+nav .btn {
+    border-radius: 0 5px 5px 0;
+}
+
+.container {
+    margin-top: 12px;
+}
+
+.h2 {
+    font-size: 32px;
+}
+
+hr {
+    margin: 8px 0;
+    border-color: black;
+}
+
+.search-filter,
+.search-results {
+    padding: 8px;
+    background-color: #F9F6F6;
+}
+.search-filter {
+    padding-left: 3px;
+}
+
+.smaller-header {
+    font-size: 20px;
+    margin: 0;
+}
+
+.d-flex {
+    gap:3px;
+}
+
+.result-image {
+    width: 60px;
+    height: 60px;
+}
+
+.h3 {
+    font-size: 20px;
+}
+
+.smaller-text {
+    font-size: 12px;
+}
