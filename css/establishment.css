@@ -1,0 +1,22 @@
+.box {
+    background-color: lightblue;
+    border: 1px;
+    min-height: 50px;
+    font-size: 2em;
+}
+
+.E-pic {
+    width: 90%;
+}
+
+.pfp {
+    height: 95%;
+    margin-right: 5px;
+    border-radius: 50%;
+    background-color: #FAFAFA;
+    border: 1px solid #EFEFEF;
+}
+
+.user-profile {
+    height: 2.75em;
+}
