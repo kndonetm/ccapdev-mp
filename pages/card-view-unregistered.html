@@ -30,7 +30,7 @@
                     <button class="btn btn-success rounded-5" data-bs-target="#login" data-bs-toggle="modal">Log in</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-success rounded-5" data-bs-target="#signup" data-bs-toggle="modal">Sign up</button>
+                    <button class="btn btn-success rounded-5" data-bs-target="#register" data-bs-toggle="modal">Sign up</button>
                 </li>
             </ul>
         </div>
@@ -59,7 +59,7 @@
                                     <label for="password" class="form-label">Password</label>
                                 </div>
                                 <button type="submit" class="btn btn-light mt-4 gy-0">LOG IN</button>
-                                <p>Don't have an account? <a href="#" data-bs-target="#signup" data-bs-toggle="modal">Sign up</a></p>
+                                <p class="pt-3">Don't have an account? <a href="#" data-bs-target="#register" data-bs-toggle="modal">Sign up</a></p>
                             </form>
                         </div>
                         <img src="../images/modal-placeholder.jpg" alt="" class="d-block">
@@ -68,6 +68,52 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-xl fade" id="register" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"></button>
+                    <div class="d-flex">
+                        <div class="myform bg-dark">
+                            <div class="d-flex mt-2">
+                                <img src="../images/icon-placeholder.png" alt="" class="me-2">
+                                <h5 class="text-white">Navbar</h5>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="register-intro">
+                                    <h2 class="mt-5">Create your account</h2>
+                                    <p class="text-start">Write food reviews for your fellow Lasallians!</p>
+                                </div> 
+                                <div class="user-img">
+                                    <input type="file" id="file">
+                                    <label for="file" id="uploadbtn"><i class="fas fa-camera"></i></label>
+                                </div>
+                            </div>
+                           
+                            <form>
+                                <div class="mb-3 mt-4 form-floating">
+                                    <input placeholder="username" type="text" class="form-control" id="username">
+                                    <label for="username" class="form-label">Username</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input placeholder="password" type="password" class="form-control" id="password">
+                                    <label for="password" class="form-label">Password</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input placeholder="about-you" type="text" class="form-control" id="about=you">
+                                    <label for="about-you" class="form-label">About You</label>
+                                </div>
+                                <button type="submit" class="btn btn-light mt-4 gy-0">SIGN UP</button>
+                            </form>
+                        </div>
+                        <img src="../images/modal-placeholder.jpg" alt="" class="d-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container">
         <h3 class="pt-4 pb-2">Food establishments near Taft</h3>
