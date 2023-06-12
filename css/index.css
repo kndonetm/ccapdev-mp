@@ -147,16 +147,16 @@ nav img {
   width: 70%;
 }
 
-.user-img {
+.user-img, #pfp-input {
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background: url(../images/store-placeholder.png);
-  background-size: 100% 100%;
   align-self: flex-end;
+
 }
 
 #uploadbtn {
+  position: absolute;
   height: 30px;
   width: 30px;
   padding: 2.5px 7.5px;
@@ -164,7 +164,7 @@ nav img {
   cursor: pointer;
   color: white;
   background-color: rgb(9, 142, 40);
-  transform: translate(195%, 150%);
+  transform: translate(-80%, 150%);
 }
 
 #file {
