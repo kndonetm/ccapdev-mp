@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="stylesheet.css">
 
     <title>Search Results</title>
+    <script src="search-result-page.js" defer></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
@@ -19,9 +20,9 @@
                 Website Name
             </a>
             <!-- btn still wraps seperately -->
-            <form class="form-inline my-0 mr-3">
-                <input class="form-control form-control-sm mr-auto h-10" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-sm mr-0" type="submit">O</button>
+            <form id="search_form"class="form-inline my-0 mr-3">
+                <input name="search_input" class="form-control form-control-sm mr-auto h-10" type="search" placeholder="Search" aria-label="Search">
+                <button id="search_btn" class="btn btn-outline-success btn-sm mr-0" type="submit">O</button>
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -41,7 +42,7 @@
     </nav>
     <div class="container">
         <div class="search-filter">
-            <p class="smaller-header">Searching for "Word Filter"</p>
+            <p class="smaller-header">Searching for "<span id="search-key">Word Filter</span>"</p>
         </div>
     </div>
     <section class="store-section container">
