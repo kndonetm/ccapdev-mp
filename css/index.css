@@ -156,12 +156,12 @@ nav img {
     position: absolute;
     height: 30px;
     width: 30px;
-    padding: 4px 7px;
+    padding: 2.5px 7.5px;
     border-radius: 50%;
     cursor: pointer;
     color: white;
     background-color: rgb(9, 142, 40);
-    transform: translate(330%, 320%);
+    transform: translate(195%, 150%);
 }
 
 #file {
