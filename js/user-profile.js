@@ -17,7 +17,7 @@ function editProfile() {
     textarea = document.querySelector("#profile-description-textarea");
 
     desc.style.display = "none";
-    textarea.style.display = "flex";
+    textarea.style.display = null;
     textarea.innerHTML = desc.innerHTML.trim();
     editButton.innerHTML = "Finish editing";
 }
@@ -27,7 +27,7 @@ function finishEditing() {
     textarea = document.querySelector("#profile-description-textarea");
     
     textarea.style.display = "none";
-    desc.style.display = "flex";
+    desc.style.display = null;
     desc.innerHTML = textarea.value.trim();
     editButton.innerHTML = "Edit Profile";
 }

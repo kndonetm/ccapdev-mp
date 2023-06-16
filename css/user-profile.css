@@ -42,10 +42,11 @@
     max-width: 100%;
 }
 
-.card-block {
+.card-body {
     word-wrap: break-word;
 }
 
 .card-text {
     word-wrap: break-word;
+    max-width: 100%;
 }
