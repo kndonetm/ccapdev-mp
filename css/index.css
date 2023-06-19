@@ -3,27 +3,26 @@
  ayusin ung search bar
 clean styles*/
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
 
 .floating-nav {
   border-radius: 2px;
-  box-shadow: 0px 1px 5px #EDEDED;
+  box-shadow: 0px 1px 5px #ededed;
 }
 
 .navbar-custom {
   background-color: white;
-  border-bottom: solid 2px #F0F1F1;
+  border-bottom: solid 2px #f0f1f1;
   transition: 0.2s;
 }
-
 
 nav img {
   display: inline-block;
 }
-
-/* jic
-  .card img {
-      aspect-ratio: 4 / 3;
-  } */
 
 .search-container {
   width: 500px;
@@ -49,26 +48,26 @@ nav img {
   width: 15%;
 }
 
-.average-rating {
-  position: relative;
-  appearance: none;
-  color: transparent;
-  width: auto;
-  display: inline-block;
-  vertical-align: baseline;
+.cards img {
+  border-radius: 15px;
+  aspect-ratio: 364/325;
+  width: 100%;
 }
 
-.average-rating::before {
-  --percent: calc(3.2 / 5 * 100%);
-  content: "★★★★★";
-  color: rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    90deg,
-    rgb(9, 142, 40) var(--percent),
-    rgba(0, 0, 0, 0.2) var(--percent)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.cards i {
+  color: #198754;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.regular {
+  font-weight: 500;
+}
+
+.subtext {
+  color: #717171;
 }
 
 .modal img {
@@ -160,12 +159,12 @@ nav img {
   width: 70%;
 }
 
-.user-img, #pfp-input {
+.user-img,
+#pfp-input {
   height: 80px;
   width: 80px;
   border-radius: 50%;
   align-self: flex-end;
-
 }
 
 #uploadbtn {
