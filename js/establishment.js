@@ -71,6 +71,18 @@ $('.reply').on({
     }
 })
 
+$('button.moreRev').on({
+    click: function(event){
+         $('div.moreRev').collapse('toggle')
+        if ($(this).text().includes("more")) {
+        $('button.moreRev').text('------------ see less ------------')
+        }
+        else {
+            $('button.moreRev').text('see more')
+        }
+     }
+ })
+
 function updateCommentCount (reviewID) {
     var ul = document.querySelector(reviewID.concat('.comment'));
     var i=0, itemCount =0;

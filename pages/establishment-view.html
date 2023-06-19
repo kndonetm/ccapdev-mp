@@ -65,11 +65,21 @@
             </div>
             <div class="col ms-4 mt-5">
                 <div class="row mb-2">
+                        <form>
                         <div class="form-group">
+                            <p class="fw-light mb-0">Rate this establishment</p>
+                            <div class="fs-3 ms-1 mb-1 rate d-flex justify-content-between flex-row-reverse">
+                                <input type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>
+                            </div>
                             <label for="c00001xxtext" class="fw-light form-label mb-1">Write a Review</label>
-                            <textarea class="form-control" id="c00001xxtext" rows="3"></textarea>
+                            <textarea class="form-control fw-light" id="c00001xxtext" rows="3" placeholder="Describe your experience (optional) "></textarea>
                             <div class="d-flex justify-content-end"><button type="submit" class="btn btn-secondary mt-2 me-1">Post</button></div>
-                          </div>
+                        </div>
+                        </form>
                 </div>
             <div class="row">
                 <p class="fw-light mb-2">Top Reviews</p>
@@ -139,6 +149,8 @@
                         </li>
                       </ul>
                 </div>
+            </div>
+            <div class="row">
                 <div class="card mb-3">
                     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
                             <div class="user-profile">
@@ -199,6 +211,78 @@
                         <li class="c00002xc list-group-item">A third item</li>
                         <li class="c00002xc list-group-item">A third item</li>
                       </ul>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <button class="fw-light fst-italic moreRev">see more</button> 
+            </div>
+            <div class="row moreRev collapse">
+                <div class="card mb-3">
+                    <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
+                            <div class="user-profile">
+                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
+                                <span class="fs-6"> Juan </span>
+                            </div>
+                            <div>
+                                <h5 class="d-inline-blockz"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                            </div>
+                    </div>
+                    <div class="card-body pt-0 pb-2 m-0">
+                        <p class="reviewtext mb-2 card-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                            officia quod animi rerum omnis? Repellendus officia 
+                            perferendis ad in non! Similique eos atque quod, dolorum 
+                            nihil repellendus provident. Facilis, similique.<span class="c00003xx dots">...</span> 
+                            <span class="c00003xx more"> Error odit mollitia cupiditate, consequuntur, libero repudiandae 
+                            veniam nemo quae, sit nesciunt alias ducimus! Quia.</span>
+                            <button onclick="moreorless(event)" class="c00003xx fw-light fst-italic rtextbtn">Read more</button> 
+                        </p>
+                        <div class="d-flex justify-content-end align-items-center mb-0">
+                            <span class="c00003xx chat chatbg "></span>
+                            <span class="c00003xx cNum card-text">1</span>
+                            <span class="c00003xx up upbg ms-2"> </span>
+                            <span class="c00003xx uvote card-text">6</span>
+                            <span class="c00003xx down downbg ms-2"></span>
+                            <span class="c00003xx dvote card-text">9</span>
+                            <span class="c00003xx reply replybg ms-3"></span>
+                        </div>
+                    </div>
+                    <div class="c00003xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                        <div class="form-group">
+                            <label for="c00003xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
+                            <textarea class="form-control" id="c00003xxtext" rows="3"></textarea>
+                            <div class="d-flex justify-content-end"><button type="submit" class="btn btn-secondary mt-2 me-1">Post</button></div>
+                          </div>
+                    </div>
+                    <ul class="c00003xx comment list-group list-group-flush collapse">
+                        <li class="c00003xa list-group-item">An item</li>
+                        <li class="c00003xb list-group-item">A second item</li>
+                        <li class="c00003xc list-group-item">
+                            <div class="  user-profilecomment">
+                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
+                                <span class="fs-6"> Juan </span>
+                            </div>
+                            <p class="reviewtext mb-2 card-text">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                                officia quod animi rerum<span class="c00003xc dots">...</span><span class="c00003xc more">
+                                 omnis? Repellendus officia perferendis ad in non! Similique eos atque quod, dolorum 
+                                </span> 
+                                <button onclick="moreorless(event)" class="c00003xc fw-light fst-italic rtextbtn">Read more</button> 
+                            </p>
+                            <div class="d-flex justify-content-end align-items-center mb-0">
+                                <span class="c00003xc chat chatbg "></span>
+                                <span class="c00003xc cNum card-text">0</span>
+                                <span class="c00003xc up upbg ms-2"> </span>
+                                <span class="c00003xc uvote card-text">3</span>
+                                <span class="c00003xc down downbg ms-2"></span>
+                                <span class="c00003xc dvote card-text">1</span>
+                                <span class="c00003xc reply replybg ms-2"></span>
+                            </div>
+                        </li>
+                      </ul>
+                </div>
                 </div>
             </div>
         </div>
