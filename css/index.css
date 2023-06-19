@@ -30,13 +30,13 @@ nav img {
 
 /*puro rough estimation na to just to make the search bar lookz good at big screens x_x */
 .search-container > input:focus {
-  border-color: lightgreen;
-  box-shadow: inset 0px 0px 3px #198754;
+  border-color: #198754;
+  box-shadow: none;
 }
 
 .search-container > input {
   border-radius: 60px 0 0 60px;
-  width: 458.5px;
+  width: 459px;
 }
 
 .search-container > button {
@@ -113,7 +113,6 @@ nav img {
 
 .modal h1,
 .modal h2 {
-  color: white;
   font-weight: bold;
 }
 
@@ -141,34 +140,38 @@ nav img {
   display: block;
   margin: auto;
   font-weight: 800;
-  background-color: #fff;
+  background-color: #198754;
+  color: #fff;
   border-radius: 20px;
   padding: 0.5em 0;
 }
 
 .myform .btn:hover {
   background-color: inherit;
-  color: #fff;
-  border-color: #fff;
+  color: #198754;
+  border-color: #198754;
 }
 
 .modal p {
   text-align: center;
-  color: grey;
   margin: 0px;
 }
 
+.caption {
+  font-size: 15px;
+}
+
 .modal p a {
-  color: #e1e1e1;
+  color: rgb(37, 37, 37);
   text-decoration: none;
 }
 
 .modal p a:hover {
-  color: #fff;
+  color: #198754;
 }
 
 .register-intro {
-  width: 70%;
+  width: 72%;
 }
 
 .user-img,
@@ -187,10 +190,14 @@ nav img {
   border-radius: 50%;
   cursor: pointer;
   color: white;
-  background-color: rgb(9, 142, 40);
+  background-color: #198754;
   transform: translate(-80%, 150%);
 }
 
 #file {
   display: none;
 }
+
+input[type="checkbox"] {
+  accent-color: #198754;
+} 
