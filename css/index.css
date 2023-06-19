@@ -3,6 +3,19 @@
  ayusin ung search bar
 clean styles*/
 
+
+.floating-nav {
+  border-radius: 2px;
+  box-shadow: 0px 1px 5px #EDEDED;
+}
+
+.navbar-custom {
+  background-color: white;
+  border-bottom: solid 2px #F0F1F1;
+  transition: 0.2s;
+}
+
+
 nav img {
   display: inline-block;
 }
