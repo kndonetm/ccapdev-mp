@@ -15,12 +15,13 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-        <div class="container p-1">
-            <a href="#" class="navbar-brand h1 mb-0">
+        <div class="container">
+            <a href="card-view.html" class="navbar-brand h1 mb-0">
                 <img src="../assets/icon-placeholder.png" alt="">
-                Navbar
+                Food in Taft
             </a>
-            <form class="d-flex position-relative search-container">
+            <!-- btn still wraps seperately -->
+            <form class="d-flex position-relative search-container" action="search-result-page.html">
                 <input type="text" class="form-control" placeholder="Search establishments">
                 <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
             </form>
@@ -28,13 +29,13 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
                         <div class="d-inline-block mb-0">
-                            <img src="../assets/icon-placeholder.png" alt="">
+                            <img src="../assets/placeholder.jpg" alt="">
                             <span class="fs-6">Hello,<span class="fw-semibold"> Juan</span> </span>
                         </div>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="" class="dropdown-item">Profile</a></li>
-                        <li><a href="" class="dropdown-item">Logout</a></li>
+                        <li><a href="user-profile-view.html" class="dropdown-item">Profile</a></li>
+                        <li><a href="card-view-unregistered.html" class="dropdown-item">Logout</a></li>
                     </ul>
                 </li>
             </ul>
