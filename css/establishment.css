@@ -21,6 +21,10 @@
     height: 2.75em;
 }
 
+.user-profilecomment {
+    height: 1.75em;
+}
+
 .rtextbtn {
     outline: none;
     background: transparent;
@@ -106,12 +110,4 @@ copy for icons
 
 .b {
     background-color: blue;
-}
-
-span.verified-sprite {
-	background-image: url("../images/sprites2.png");
-	background-size: 411px 393px;
-	background-position: -396px -163px;
-	background-repeat: no-repeat;
-
 }
