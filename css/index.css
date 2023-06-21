@@ -175,10 +175,16 @@ nav img {
 }
 
 .user-img,
-#pfp-input {
+#pfp-input,
+.pfp {
+  border-radius: 50%;
+}
+
+.user-img,
+#pfp-input,
+.pfp {
   height: 80px;
   width: 80px;
-  border-radius: 50%;
   align-self: flex-end;
 }
 
