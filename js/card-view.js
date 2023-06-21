@@ -19,6 +19,5 @@ establishments.forEach((establishment) => {
         </a>
     </div>`
 });
-console.log(establishmentsHTML)
 
 document.querySelector('.js-establishments-grid').innerHTML = establishmentsHTML;

@@ -4,5 +4,4 @@ window.addEventListener('scroll', () => {
     } else {
         document.querySelector('.navbar-custom').classList.remove('floating-nav');
     }
-    console.log(document.querySelector('.navbar-custom').classList)
 })
