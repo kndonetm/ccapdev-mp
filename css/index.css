@@ -181,8 +181,7 @@ nav img {
 }
 
 .user-img,
-#pfp-input,
-.pfp {
+#pfp-input {
   height: 80px;
   width: 80px;
   align-self: flex-end;
