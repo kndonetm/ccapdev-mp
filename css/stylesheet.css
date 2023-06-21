@@ -36,9 +36,10 @@ nav img {
   vertical-align: baseline;
 }
 
+
 .average-rating::before {
-  --percent: calc(3.2 / 5 * 100%);
   content: "★★★★★";
+  --percent: calc(3.2 / 5 * 100%);
   color: rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     90deg,

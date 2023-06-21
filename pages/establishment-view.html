@@ -62,25 +62,26 @@
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia obcaecati maiores natus vitae repellendus nesciunt id est doloremque dolores repellat consequu</p>
                     </div>
                 </div>
-            </div>
-            <div class="col ms-4 mt-5">
-                <div class="row mb-2">
-                        <form>
+            </div> 
+            <div class="col ms-4 mt-5 reviews">
+                <div class="row mb-2 collapse show revForm">
+                        <form method="post">
                         <div class="form-group">
                             <p class="fw-light mb-0">Rate this establishment</p>
                             <div class="fs-3 ms-1 mb-1 rate d-flex justify-content-between flex-row-reverse">
-                                <input type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label>
-                                <input type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label>
-                                <input type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>
+                                <input required type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label>
+                                <input required type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label>
+                                <input required type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label>
+                                <input required type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label>
+                                <input required type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>
                             </div>
-                            <label for="c00001xxtext" class="fw-light form-label mb-1">Write a Review</label>
-                            <textarea class="form-control fw-light" id="c00001xxtext" rows="3" placeholder="Describe your experience (optional) "></textarea>
-                            <div class="d-flex justify-content-end"><button type="submit" class="btn btn-secondary mt-2 me-1">Post</button></div>
+                            <label for="c00000xxtext" class="fw-light form-label mb-1">Write a Review</label>
+                            <textarea class="form-control fw-light" id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (optional) "></textarea>
+                            <div class="d-flex justify-content-end"><button type="submit" class="postReview btn btn-secondary mt-2 me-1">Post</button></div>
                         </div>
                         </form>
                 </div>
+            <div class ="row yourReview"></div>
             <div class="row">
                 <p class="fw-light mb-2">Top Reviews</p>
                 <div class="card mb-3">
@@ -117,13 +118,12 @@
                     <div class="c00001xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
                         <div class="form-group">
                             <label for="c00001xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
-                            <textarea class="form-control" id="c00001xxtext" rows="3"></textarea>
-                            <div class="d-flex justify-content-end"><button type="submit" class="btn btn-secondary mt-2 me-1">Post</button></div>
+                            <textarea class="form-control" id="c00001xxtext" name="c00001xxtext" rows="3"></textarea>
+                            <div class="d-flex justify-content-end"><button type="submit" class="c00001xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
                           </div>
+                        
                     </div>
-                    <ul class="c00001xx comment list-group list-group-flush collapse">
-                        <li class="c00001xa list-group-item">An item</li>
-                        <li class="c00001xb list-group-item">A second item</li>
+                    <ul class="c00001xx ms-4 comment list-group list-group-flush collapse">
                         <li class="c00001xc list-group-item">
                             <div class="  user-profilecomment">
                                 <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
@@ -146,6 +146,15 @@
                                 <span class="c00001xc dvote card-text">1</span>
                                 <span class="c00001xc reply replybg ms-2"></span>
                             </div>
+                            <div class="c00001xc wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                                <div class="form-group">
+                                    <label for="c00001xctext" class="form-label mb-1 fw-light">Write a Reply</label>
+                                    <textarea class="form-control" id="c00001xctext" name="c00001xctext" rows="3"></textarea>
+                                    <div class="d-flex justify-content-end"><button type="submit" class="c00001xc postReply btn btn-secondary mt-2 me-1">Post</button></div>
+                                  </div>
+                            </div>
+                            <ul class="c00001xc ms-4 comment list-group list-group-flush collapse"></ul>
+                            
                         </li>
                       </ul>
                 </div>
@@ -182,7 +191,14 @@
                             <span class="c00002xx reply replybg ms-3"></span>
                         </div>
                     </div>
-                    <ul class="ms-4 c00002xx comment list-group list-group-flush collapse">
+                    <div class="c00002xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                        <div class="form-group">
+                            <label for="c00002xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
+                            <textarea class="form-control" id="c00002xxtext" name="c00002xxtext" rows="3"></textarea>
+                            <div class="d-flex justify-content-end"><button type="submit" class="c00002xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
+                          </div>
+                    </div>
+                    <ul class="c00002xx ms-4 comment list-group list-group-flush collapse">
                         <li class=" c00002xa list-group-item">
                                 <div class="  user-profilecomment">
                                     <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
@@ -205,11 +221,15 @@
                                     <span class="c00002xa dvote card-text">1</span>
                                     <span class="c00002xa reply replybg ms-2"></span>
                                 </div>
+                                <div class="c00002xa wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                                    <div class="form-group">
+                                        <label for="c00002xatext" class="form-label mb-1 fw-light">Write a Reply</label>
+                                        <textarea class="form-control" id="c00002xatext" name="c00002xatext" rows="3"></textarea>
+                                        <div class="d-flex justify-content-end"><button type="submit" class="c00002xa postReply btn btn-secondary mt-2 me-1">Post</button></div>
+                                      </div>
+                                </div>
+                                <ul class="c00002xa ms-4 comment list-group list-group-flush collapse"></ul>
                         </li>
-                        <li class="c00002xb list-group-item">A second item</li>
-                        <li class="c00002xc list-group-item">A third item</li>
-                        <li class="c00002xc list-group-item">A third item</li>
-                        <li class="c00002xc list-group-item">A third item</li>
                       </ul>
                 </div>
             </div>
@@ -251,39 +271,15 @@
                     <div class="c00003xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
                         <div class="form-group">
                             <label for="c00003xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
-                            <textarea class="form-control" id="c00003xxtext" rows="3"></textarea>
-                            <div class="d-flex justify-content-end"><button type="submit" class="btn btn-secondary mt-2 me-1">Post</button></div>
+                            <textarea class="form-control" id="c00003xxtext" name="c00003xxtext" rows="3"></textarea>
+                            <div class="d-flex justify-content-end"><button type="submit" class="c00003xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
                           </div>
                     </div>
-                    <ul class="c00003xx comment list-group list-group-flush collapse">
-                        <li class="c00003xa list-group-item">An item</li>
-                        <li class="c00003xb list-group-item">A second item</li>
-                        <li class="c00003xc list-group-item">
-                            <div class="  user-profilecomment">
-                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                <span class="fs-6"> Juan </span>
-                            </div>
-                            <p class="reviewtext mb-2 card-text">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                Quisquam, dignissimos. Voluptate quos voluptatem numquam 
-                                officia quod animi rerum<span class="c00003xc dots">...</span><span class="c00003xc more">
-                                 omnis? Repellendus officia perferendis ad in non! Similique eos atque quod, dolorum 
-                                </span> 
-                                <button onclick="moreorless(event)" class="c00003xc fw-light fst-italic rtextbtn">Read more</button> 
-                            </p>
-                            <div class="d-flex justify-content-end align-items-center mb-0">
-                                <span class="c00003xc chat chatbg "></span>
-                                <span class="c00003xc cNum card-text">0</span>
-                                <span class="c00003xc up upbg ms-2"> </span>
-                                <span class="c00003xc uvote card-text">3</span>
-                                <span class="c00003xc down downbg ms-2"></span>
-                                <span class="c00003xc dvote card-text">1</span>
-                                <span class="c00003xc reply replybg ms-2"></span>
-                            </div>
-                        </li>
+                    <ul class="c00003xx ms-4 comment list-group list-group-flush collapse">
                       </ul>
                 </div>
-                </div>
+            </div>
+            </div>
             </div>
         </div>
     </div>
