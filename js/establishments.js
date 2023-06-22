@@ -1,33 +1,33 @@
 establishments = [{
-    image: '../images/placeholder.jpg',
+    image: '../assets/placeholder.jpg',
     name: 'Mang Inasal',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
     rating: '3.20',
     link: '#'
     }, {
-    image: '../images/placeholder.jpg',
+    image: '../assets/placeholder.jpg',
     name: 'Mang Inasal',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
     rating: '3.20',
     link: '#'
     }, {
-    image: '../images/placeholder.jpg',
+    image: '../assets/placeholder.jpg',
     name: 'Mang Inasal',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
     rating: '3.20',
     link: '#'
     }, {
-    image: '../images/placeholder.jpg',
+    image: '../assets/placeholder.jpg',
     name: 'Mang Inasal',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
     rating: '3.20',
     link: '#'
     }, {
-    image: '../images/placeholder.jpg',
+    image: '../assets/placeholder.jpg',
     name: 'Mang Inasal',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
