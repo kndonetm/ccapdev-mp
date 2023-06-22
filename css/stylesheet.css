@@ -49,6 +49,82 @@ nav img {
   -webkit-text-fill-color: transparent;
 }
 
+.average-rating.star-0::before {
+  --percent: 0%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.average-rating.star-1::before {
+  --percent: 20%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.average-rating.star-2::before {
+  --percent: 40%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.average-rating.star-3::before {
+  --percent: 60%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.average-rating.star-4::before {
+  --percent: 80%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.average-rating.star-5::before {
+  --percent: 100%;
+  content: "★★★★★";
+  color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgb(9, 142, 40) var(--percent),
+    rgba(0, 0, 0, 0.2) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
 .modal img {
   width: 500px;
 }
