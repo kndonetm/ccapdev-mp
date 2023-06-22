@@ -36,9 +36,10 @@ nav img {
   vertical-align: baseline;
 }
 
+
 .average-rating::before {
-  --percent: calc(3.2 / 5 * 100%);
   content: "★★★★★";
+  --percent: calc(3.2 / 5 * 100%);
   color: rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     90deg,
@@ -135,11 +136,6 @@ hr {
     border-color: black;
 }
 
-.search-filter,
-.search-results {
-    padding: 8px;
-    background-color: #F9F6F6;
-}
 .search-filter {
     padding-left: 3px;
 }
@@ -151,11 +147,6 @@ hr {
 
 .d-flex {
     gap:3px;
-}
-
-.result-image {
-    width: 60px;
-    height: 60px;
 }
 
 .h3 {
