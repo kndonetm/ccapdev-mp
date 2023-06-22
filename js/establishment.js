@@ -71,12 +71,27 @@ function reply (event) {
     console.log(id)
 }
 
-review = document.querySelector(".reviews")
+function showEstabResponse (event) {
+    id = ".".concat(event.target.className.substring(0,8));
+    $(id.concat('.estabResponseText')).collapse('toggle') // changes background on click
+    console.log(id)
+}
 
+function showMoreReadLess(event) {
+    targ = event.target
+    id = ".".concat(targ.className.substring(0,8));
+    if (targ.classList.contains("truncate")) {
+        $(targ).removeClass('truncate') 
+    } else {
+        $(targ).addClass('truncate') 
+    }
+}
+
+review = document.querySelector(".reviews")
 review.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
-
+    
     if (classlist.contains('reply')) {
         reply(event)
     } else if (classlist.contains('chat')) {
@@ -93,9 +108,11 @@ review.addEventListener("click", event=> {
         editText(event)
     } else if (classlist.contains('doneEdit')) {
         doneEditText(event)
+    } else if (classlist.contains('estabResponse')) {
+        showEstabResponse(event)
+    } else if (classlist.contains('reviewtext')) {
+        showMoreReadLess(event)
     }
-
-
 })
 
 $('button.moreRev').on({

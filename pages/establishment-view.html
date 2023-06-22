@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Establishment View</title>
         <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         
@@ -15,7 +16,6 @@
         <script defer src="https://kit.fontawesome.com/f3e84a984d.js" crossorigin="anonymous"></script>
         
         <script defer src="../js/establishment.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="../css/stylesheet.css" rel="stylesheet">
         <link rel="stylesheet" href="..\css\establishment.css">
     </head>
@@ -95,15 +95,11 @@
                             </div>
                     </div>
                     <div class="card-body pt-0 pb-2 m-0">
-                        <p class="reviewtext mb-2 card-text">
+                        <p class="c00001xx  reviewtext truncate mb-2 card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
                             officia quod animi rerum omnis? Repellendus officia 
                             perferendis ad in non! Similique eos atque quod, dolorum 
-                            nihil repellendus provident. Facilis, similique.<span class="c00001xx dots">...</span> 
-                            <span class="c00001xx more"> Error odit mollitia cupiditate, consequuntur, libero repudiandae 
-                            veniam nemo quae, sit nesciunt alias ducimus! Quia.</span>
-                            <button onclick="moreorless(event)" class="c00001xx fw-light fst-italic rtextbtn">Read more</button> 
                         </p>
                         <div class="d-flex justify-content-end align-items-center mb-0">
                             <span class="c00001xx chat chatbg "></span>
@@ -123,19 +119,49 @@
                           </div>
                         
                     </div>
+                    <div class="a00002xx ms-4 card-footer bg-white pt-2 pb-2 m-0">
+                        <button class="a00002xx ps-0 estabResponse font-italic fw-light mb-0">view establishment's response</button>
+                        <div class="a00002xx estabResponseText collapse">
+                        <p class="a00002xx reviewtext truncate mt-1 mb-2 card-text ">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                            officia quod animi rerum omnis? Repellendus officia 
+                        </p>
+                        <div class="d-flex justify-content-end align-items-center mb-0">
+                            <span class="a00002xx chat chatbg "></span>
+                            <span class="a00002xx cNum card-text">1</span>
+                            <span class="a00002xx up upbg ms-2"> </span>
+                            <span class="a00002xx uvote card-text">6</span>
+                            <span class="a00002xx down downbg ms-2"></span>
+                            <span class="a00002xx dvote card-text">9</span>
+                            <span class="a00002xx reply replybg ms-3"></span>
+                        </div>
+                        <div class="a00002xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                            <div class="form-group">
+                                <label for="a00002xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
+                                <textarea class="form-control" id="a00002xxtext" name="a00002xxtext" rows="3"></textarea>
+                                <div class="d-flex justify-content-end"><button type="submit" class="a00002xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
+                              </div>
+                        </div>
+                        <ul class="a00002xx ms-4 comment list-group list-group-flush collapse"></ul>
+                    </div>
+                    </div>
                     <ul class="c00001xx ms-4 comment list-group list-group-flush collapse">
                         <li class="c00001xc list-group-item">
                             <div class="  user-profilecomment">
                                 <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
                                 <span class="fs-6"> Juan </span>
                             </div>
-                            <p class="reviewtext mb-2 card-text">
+                            <p class="c00001xc reviewtext truncate mb-2 card-text">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                Quisquam, dignissimos. Voluptate quos voluptatem numquam 
-                                officia quod animi rerum<span class="c00001xc dots">...</span><span class="c00001xc more">
-                                 omnis? Repellendus officia perferendis ad in non! Similique eos atque quod, dolorum 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
                                 </span> 
-                                <button onclick="moreorless(event)" class="c00001xc fw-light fst-italic rtextbtn">Read more</button> 
                             </p>
                             <div class="d-flex justify-content-end align-items-center mb-0">
                                 <span class="c00001xc chat chatbg "></span>
@@ -171,15 +197,11 @@
                             </div>
                     </div>
                     <div class="card-body pt-0 pb-2 m-0">
-                        <p class="reviewtext mb-2 card-text">
+                        <p class="c00002xx reviewtext truncate mb-2 card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
                             officia quod animi rerum omnis? Repellendus officia 
                             perferendis ad in non! Similique eos atque quod, dolorum 
-                            nihil repellendus provident. Facilis, similique.<span class="c00002xx dots">...</span> 
-                            <span class="c00002xx more"> Error odit mollitia cupiditate, consequuntur, libero repudiandae 
-                            veniam nemo quae, sit nesciunt alias ducimus! Quia.</span>
-                            <button onclick="moreorless(event)" class="c00002xx fw-light fst-italic rtextbtn">Read more</button> 
                         </p>
                         <div class="d-flex justify-content-end align-items-center mb-0">
                             <span class="c00002xx chat chatbg "></span>
@@ -198,19 +220,17 @@
                             <div class="d-flex justify-content-end"><button type="submit" class="c00002xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
                           </div>
                     </div>
+                    
                     <ul class="c00002xx ms-4 comment list-group list-group-flush collapse">
                         <li class=" c00002xa list-group-item">
                                 <div class="  user-profilecomment">
                                     <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
                                     <span class="fs-6"> Juan </span>
                                 </div>
-                                <p class="reviewtext mb-2 card-text">
+                                <p class="c00002xa reviewtext truncate mb-2 card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                                     Quisquam, dignissimos. Voluptate quos voluptatem numquam 
-                                    officia quod animi rerum<span class="c00002xa dots">...</span><span class="c00002xa more">
-                                     omnis? Repellendus officia perferendis ad in non! Similique eos atque quod, dolorum 
-                                    </span> 
-                                    <button onclick="moreorless(event)" class="c00002xa fw-light fst-italic rtextbtn">Read more</button> 
+                                    officia quod animi rer
                                 </p>
                                 <div class="d-flex justify-content-end align-items-center mb-0">
                                     <span class="c00002xa chat chatbg "></span>
@@ -248,15 +268,11 @@
                             </div>
                     </div>
                     <div class="card-body pt-0 pb-2 m-0">
-                        <p class="reviewtext mb-2 card-text">
+                        <p class="c00003xx reviewtext truncate mb-2 card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
                             officia quod animi rerum omnis? Repellendus officia 
                             perferendis ad in non! Similique eos atque quod, dolorum 
-                            nihil repellendus provident. Facilis, similique.<span class="c00003xx dots">...</span> 
-                            <span class="c00003xx more"> Error odit mollitia cupiditate, consequuntur, libero repudiandae 
-                            veniam nemo quae, sit nesciunt alias ducimus! Quia.</span>
-                            <button onclick="moreorless(event)" class="c00003xx fw-light fst-italic rtextbtn">Read more</button> 
                         </p>
                         <div class="d-flex justify-content-end align-items-center mb-0">
                             <span class="c00003xx chat chatbg "></span>

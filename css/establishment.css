@@ -25,7 +25,7 @@
     height: 1.75em;
 }
 
-.rtextbtn, button.moreRev {
+button.moreRev, .estabResponse  {
     outline: none;
     background: transparent;
     border: none;
@@ -148,3 +148,11 @@ copy for icons
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+.truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow:hidden;
+    word-wrap: break-word;
+}
