@@ -1,46 +1,43 @@
-// Check if the user is already logged in
-let currentLogin = localStorage.getItem('currentLogin') === 'true';
-let savedUsername = localStorage.getItem('username');
-
-// Update the navbar based on the stored login status and username
 updateNavbar();
+
+function login(username, modal, image) {
+    localStorage.setItem('currentLogin', 'true');
+    localStorage.setItem('savedUsername', username);
+    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'icon.png');
+
+    $(modal).modal('hide');
+    updateNavbar();
+}
 
 document.querySelector('.signin-js').addEventListener('click', () => {
     login(document.querySelector('#username-login').value, document.querySelector('.signin-modal'));
-})
+});
 
 document.querySelector('.reg-js').addEventListener('click', () => {
     const fileInput = document.querySelector('#file');
     const file = fileInput.files[0];
-    file ? login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'), file.name) :
-           login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'));
-})
+    file ? 
+        login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'), file.name) :
+        login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'));
+});
 
-function login(username, modal, image = 'icon.png') {
-    if (!currentLogin) {
-        currentLogin = true;
-        savedUsername = username;
-
-        // Store the login status and username in localStorage
-        localStorage.setItem('currentLogin', currentLogin);
-        localStorage.setItem('username', savedUsername);
-
-        updateNavbar();
-
-        $(modal).modal('hide');
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('logout')) {
+      localStorage.setItem('currentLogin', 'false');
+      localStorage.clear();
+      updateNavbar();
     }
-}
+  });
 
 function updateNavbar() {
     let navHTML = '';
-
-    if (currentLogin) {
+    if (localStorage.getItem('currentLogin') === 'true') {
         navHTML = `
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
                     <div class="d-inline-block mb-0">
-                        <img src="../images/icon.png" alt="" class="pfp">
-                        <span class="fs-6">Hello,<span class="fw-semibold"> ${savedUsername}</span> </span>
+                        <img src="../images/${localStorage.getItem('pfp')}" alt="" class="pfp">
+                        <span class="fs-6">Hello,<span class="fw-semibold"> ${localStorage.getItem('savedUsername')}</span> </span>
                     </div>
                 </a>
                 <ul class="dropdown-menu">
@@ -60,10 +57,4 @@ function updateNavbar() {
     }
 
     document.querySelector('.navbar-nav').innerHTML = navHTML;
-}
-
-if (currentLogin) {
-    document.querySelector('.logout').addEventListener('click', () => {
-        localStorage.clear();
-    })
 }
