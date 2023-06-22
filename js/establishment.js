@@ -23,6 +23,8 @@ review.addEventListener("click", event=> {
         showEstabResponse(event)
     } else if (classlist.contains('reviewtext')) {
         showMoreReadLess(event)
+    } else if (classlist.contains('del')) {
+        deleteCommit (event)
     }
 })
 
@@ -79,6 +81,18 @@ function showEstabResponse (event) {
     id = "." + event.target.className.substring(0,8);
     $(id + '.estabResponseText').collapse('toggle') // changes background on click
     console.log(id)
+}
+
+function deleteCommit (event) {
+    id = "." + event.target.className.substring(0,8);
+    if (id == ".c00000xx"){
+        bye = document.querySelector('.yourReview')
+        bye.innerHTML = "";
+        $('.revForm').collapse('show')
+    } else {
+        bye = document.querySelector(id + '.list-group-item')
+        bye.remove();
+    }
 }
 
 function showMoreReadLess(event) {
@@ -142,7 +156,8 @@ function insertReview (event) {
             <span class="c00000xx uvote card-text">0</span>
             <span class="c00000xx down downbg ms-2"></span>
             <span class="c00000xx dvote card-text">0</span>
-            <span class="c00000xx edit editbg ms-2"></span>
+            <span class="c00000xx edit editbg ms-3"></span>
+            <span class="c00000xx del delbg ms-2"></span>
             <button class="c00000xx doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
         </div>
     </div>
@@ -150,6 +165,8 @@ function insertReview (event) {
     `;
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
+    clearForm = document.querySelector("#reviewForm")
+    clearForm.reset();
 }
 
 function editText(event) {
@@ -214,7 +231,8 @@ function insertReply (event) {
                                     <span class="` + newReplyID + ` uvote card-text">0</span>
                                     <span class="` + newReplyID + ` down downbg ms-2"></span>
                                     <span class="` + newReplyID + ` dvote card-text">0</span>
-                                    <span class="` + newReplyID + ` edit editbg ms-2"></span>
+                                    <span class="` + newReplyID + ` edit editbg ms-3"></span>
+                                    <span class="` + newReplyID + ` del delbg ms-2"></span>
                                     <button class="` + newReplyID + ` doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
                                 </div>
                                 <ul class="` + newReplyID + `  ms-4 comment list-group list-group-flush collapse"></ul>
