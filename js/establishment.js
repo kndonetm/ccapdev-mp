@@ -1,93 +1,4 @@
-function moreorless(event) {
-    id = ".".concat(event.target.className.substring(0,8));
-    dots = document.querySelector(id.concat('.dots'));
-    readMore = document.querySelector(id.concat('.more'));
-    rtextbtn = document.querySelector(id.concat('.rtextbtn'));
-
-    console.log(id)
-    if(dots.style.display === 'none') {
-        dots.style.display = 'inline';
-        rtextbtn.innerHTML = 'Read More';
-        readMore.style.display = 'none';
-    } else{
-        dots.style.display = 'none';
-        rtextbtn.innerHTML = 'see less';
-        readMore.style.display = 'inline'  
-}
-}
-
-// classlist = event.target.classList;
-//     console.log(classlist)
-
-//     if (classlist.contains('reply')) {
-
-
-function markUp (event) {
-    targ = event.target
-    let id = ".".concat(targ.className.substring(0,8));
-    let votes = parseInt($(id.concat('.uvote')).text());
-    console.log(id.concat('.down'));
-    if (targ.classList.contains("upbg")) {
-        $(targ).addClass('upbgfill').removeClass('upbg') 
-        $(id.concat('.uvote')).text(votes + 1);
-        if ($(id.concat('.down')).hasClass("downbgfill")) {
-            $(id.concat('.downbgfill')).addClass('downbg').removeClass('downbgfill')
-            $(id.concat('.dvote')).text(parseInt($(id.concat('.dvote')).text()) - 1);
-        }
-    } else {
-        $(targ).addClass('upbg').removeClass('upbgfill')
-        $(id.concat('.uvote')).text(votes - 1);
-    }
-}
-
-function markDown (event) {
-    targ = event.target
-    id = ".".concat(targ.className.substring(0,8));
-    let votes = parseInt($(id.concat('.dvote')).text());
-    if (targ.classList.contains("downbg")) {
-        $(targ).addClass('downbgfill').removeClass('downbg') 
-        $(id.concat('.dvote')).text(votes + 1);
-        if ($(id.concat('.up')).hasClass("upbgfill")) {
-            $(id.concat('.upbgfill')).addClass('upbg').removeClass('upbgfill')
-            $(id.concat('.uvote')).text(parseInt($(id.concat('.uvote')).text()) - 1);
-        }
-    } else {
-        console.log("Aww");
-        $(targ).addClass('downbg').removeClass('downbgfill')
-        $(id.concat('.dvote')).text(votes - 1);
-    }
-}
-
-function showChat (event) {
-    let id = ".".concat(event.target.className.substring(0,8));
-    $(id.concat('.comment')).collapse('toggle') // changes background on click
-    console.log(id)
-    updateCommentCount (id)
-}
-
-function reply (event) {
-    id = ".".concat(event.target.className.substring(0,8));
-    $(id.concat('.wReply')).collapse('toggle') // changes background on click
-    console.log(id)
-}
-
-function showEstabResponse (event) {
-    id = ".".concat(event.target.className.substring(0,8));
-    $(id.concat('.estabResponseText')).collapse('toggle') // changes background on click
-    console.log(id)
-}
-
-function showMoreReadLess(event) {
-    targ = event.target
-    id = ".".concat(targ.className.substring(0,8));
-    if (targ.classList.contains("truncate")) {
-        $(targ).removeClass('truncate') 
-    } else {
-        $(targ).addClass('truncate') 
-    }
-}
-
-review = document.querySelector(".reviews")
+const review = document.querySelector(".reviews")
 review.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
@@ -115,6 +26,71 @@ review.addEventListener("click", event=> {
     }
 })
 
+function markUp (event) {
+    targ = event.target
+    let id = "." + targ.className.substring(0,8);
+    let votes = parseInt($(id + '.uvote').text());
+    console.log(id + '.down');
+    if (targ.classList.contains("upbg")) {
+        $(targ).addClass('upbgfill').removeClass('upbg') 
+        $(id + '.uvote').text(votes + 1);
+        if ($(id + '.down').hasClass("downbgfill")) {
+            $(id + '.downbgfill').addClass('downbg').removeClass('downbgfill')
+            $(id + '.dvote').text(parseInt($(id + '.dvote').text()) - 1);
+        }
+    } else {
+        $(targ).addClass('upbg').removeClass('upbgfill')
+        $(id + '.uvote').text(votes - 1);
+    }
+}
+
+function markDown (event) {
+    targ = event.target
+    id = "." + targ.className.substring(0,8);
+    let votes = parseInt($(id + '.dvote').text());
+    if (targ.classList.contains("downbg")) {
+        $(targ).addClass('downbgfill').removeClass('downbg') 
+        $(id + '.dvote').text(votes + 1);
+        if ($(id + '.up').hasClass("upbgfill")) {
+            $(id + '.upbgfill').addClass('upbg').removeClass('upbgfill')
+            $(id + '.uvote').text(parseInt($(id + '.uvote').text()) - 1);
+        }
+    } else {
+        console.log("Aww");
+        $(targ).addClass('downbg').removeClass('downbgfill')
+        $(id + '.dvote').text(votes - 1);
+    }
+}
+
+function showChat (event) {
+    let id = "." + event.target.className.substring(0,8);
+    $(id + '.comment').collapse('toggle') // changes background on click
+    console.log(id)
+    updateCommentCount (id)
+}
+
+function reply (event) {
+    id = "." + event.target.className.substring(0,8);
+    $(id + '.wReply').collapse('toggle') // changes background on click
+    console.log(id)
+}
+
+function showEstabResponse (event) {
+    id = "." + event.target.className.substring(0,8);
+    $(id + '.estabResponseText').collapse('toggle') // changes background on click
+    console.log(id)
+}
+
+function showMoreReadLess(event) {
+    targ = event.target
+    id = "." + targ.className.substring(0,8);
+    if (targ.classList.contains("truncate")) {
+        $(targ).removeClass('truncate') 
+    } else {
+        $(targ).addClass('truncate') 
+    }
+}
+
 $('button.moreRev').on({
     click: function(event){
          $('div.moreRev').collapse('toggle')
@@ -128,11 +104,11 @@ $('button.moreRev').on({
  })
 
 function updateCommentCount (reviewID) {
-    var ul = document.querySelector(reviewID.concat('.comment'));
+    var ul = document.querySelector(reviewID + '.comment');
     var i=0, itemCount =0;
     while(ul.getElementsByTagName('li') [i++]) itemCount++;
     //from https://techwelkin.com/javascript-count-items-in-html-list
-    document.querySelector(reviewID.concat('.cNum')).innerHTML = itemCount;
+    document.querySelector(reviewID + '.cNum').innerHTML = itemCount;
 }
 
 function insertReview (event) {
@@ -142,7 +118,7 @@ function insertReview (event) {
 
     event.preventDefault();
     $('.revForm').collapse('hide')
-    reviewBox.innerHTML = `<p class="fw-light mb-2">Your Review</p>`.concat(`
+    reviewBox.innerHTML = `<p class="fw-light mb-2">Your Review</p>` + `
     <div class="card mb-3">
     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
             <div class="user-profile">
@@ -150,12 +126,12 @@ function insertReview (event) {
                 <span class="fs-6"> Juan </span>
             </div>
             <div>
-                <h5 class="d-inline-blockz"><span class="me-3">`).concat(rating).concat(`</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                <h5 class="d-inline-blockz"><span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
             </div>
     </div>
     <div class="card-body pt-0 pb-2 m-0">
         <p class="c00000xx reviewtext mb-2 card-text">
-        `).concat(reviewDesc).concat(`
+        ` + reviewDesc + `
         </p>
         <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
         </textarea>
@@ -171,20 +147,20 @@ function insertReview (event) {
         </div>
     </div>
 
-    `);
+    `;
     r = document.querySelector(':root');
-    r.style.setProperty('--yourRev', 'calc('.concat(rating).concat('/ 5 * 100%)'));
+    r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
 }
 
 function editText(event) {
-    let id = ".".concat(event.target.className.substring(0,8));
-    desc = document.querySelector(id.concat(".reviewtext"));
-    textarea = document.querySelector(id.concat(".yourRevEdit"));
-    icon = document.querySelector(id.concat(".edit"));
-    btn = document.querySelector(id.concat(".doneEdit"));
+    let id = "." + event.target.className.substring(0,8);
+    desc = document.querySelector(id + ".reviewtext");
+    textarea = document.querySelector(id + ".yourRevEdit");
+    icon = document.querySelector(id + ".edit");
+    btn = document.querySelector(id + ".doneEdit");
 
-    console.log(id.concat(".reviewtext"))
-    console.log(id.concat(".yourRevEdit"))
+    console.log(id + ".reviewtext")
+    console.log(id + ".yourRevEdit")
     desc.style.display = "none";
     textarea.style.display = null;
     icon.style.display = "none";
@@ -193,11 +169,11 @@ function editText(event) {
 }
 
 function doneEditText(event){
-    let id = ".".concat(event.target.className.substring(0,8));
-    desc = document.querySelector(id.concat(".reviewtext"));
-    textarea = document.querySelector(id.concat(".yourRevEdit"));
-    icon = document.querySelector(id.concat(".edit"));
-    btn = document.querySelector(id.concat(".doneEdit"));
+    let id = "." + event.target.className.substring(0,8);
+    desc = document.querySelector(id + ".reviewtext");
+    textarea = document.querySelector(id + ".yourRevEdit");
+    icon = document.querySelector(id + ".edit");
+    btn = document.querySelector(id + ".doneEdit");
     
     textarea.style.display = "none";
     desc.style.display = null;
@@ -207,7 +183,6 @@ function doneEditText(event){
 }
 
 var replyNum = 99; 
-
 function insertReply (event) {
     let id = event.target.className.substring(0,8);
     textname = id + 'text';
@@ -248,6 +223,6 @@ function insertReply (event) {
     `;
     replyNum--; 
     updateCommentCount ("." + id)
-    $("." + id.concat('.wReply')).collapse('hide')
-    $("." + id.concat('.comment')).collapse('show')
+    $("." + id + '.wReply').collapse('hide')
+    $("." + id + '.comment').collapse('show')
 }

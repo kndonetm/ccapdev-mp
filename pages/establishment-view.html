@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,6 +19,8 @@
         <link rel="stylesheet" href="..\css\establishment.css">
     </head>
   <body>
+
+    <!-- navbar  -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
         <div class="container">
             <a href="#" class="navbar-brand h1 mb-0 me-auto">
@@ -47,8 +48,12 @@
             </ul>
         </div>
     </nav>
+
+    <!-- whole screen -->
     <div class="container">
         <div class="row">
+
+            <!-- establishment card -->
             <div class="col-5">
                 <div class="card mt-5">
                     <img class="card-img-top" src="../assets/placeholder.jpg" alt="">
@@ -63,7 +68,11 @@
                     </div>
                 </div>
             </div> 
+
+            <!-- everything else -->
             <div class="col ms-4 mt-5 reviews">
+
+                <!-- rate form -->
                 <div class="row mb-2 collapse show revForm">
                         <form method="post">
                         <div class="form-group">
@@ -81,20 +90,32 @@
                         </div>
                         </form>
                 </div>
-            <div class ="row yourReview"></div>
-            <div class="row">
+
+                <!-- form submitted injected here -->
+                <div class ="row yourReview"></div>
+
                 <p class="fw-light mb-2">Top Reviews</p>
+            
+            <!-- Top Reviews / one row per review-->
+            <!-- UNIQUE ID (c00001xx) PER REVIEW/REPLY/RESPONSE -->
+            <!-- For ID: use only letters on the last 2 -->
+            <div class="row">
                 <div class="card mb-3">
+
+                    <!-- profile (req)-->
                     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
                             <div class="user-profile">
                                 <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
                                 <span class="fs-6"> Juan </span>
                             </div>
                             <div>
-                                <h5 class="d-inline-blockz"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                                <h5 class="d-inline-block"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                             </div>
                     </div>
+
+                    <!-- review text (req)-->
                     <div class="card-body pt-0 pb-2 m-0">
+                        <!-- UNIQUE ID PER REVIEW -->
                         <p class="c00001xx  reviewtext truncate mb-2 card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
@@ -111,41 +132,48 @@
                             <span class="c00001xx reply replybg ms-3"></span>
                         </div>
                     </div>
+
+                    <!-- reply area (req)-->
                     <div class="c00001xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
                         <div class="form-group">
                             <label for="c00001xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
                             <textarea class="form-control" id="c00001xxtext" name="c00001xxtext" rows="3"></textarea>
                             <div class="d-flex justify-content-end"><button type="submit" class="c00001xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
                           </div>
-                        
                     </div>
-                    <div class="a00002xx ms-4 card-footer bg-white pt-2 pb-2 m-0">
+
+                    <!-- establishment response (opt) -->
+                    <div class="ms-4 card-footer bg-white pt-2 pb-2 m-0">
                         <button class="a00002xx ps-0 estabResponse font-italic fw-light mb-0">view establishment's response</button>
                         <div class="a00002xx estabResponseText collapse">
-                        <p class="a00002xx reviewtext truncate mt-1 mb-2 card-text ">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
-                            officia quod animi rerum omnis? Repellendus officia 
-                        </p>
-                        <div class="d-flex justify-content-end align-items-center mb-0">
-                            <span class="a00002xx chat chatbg "></span>
-                            <span class="a00002xx cNum card-text">1</span>
-                            <span class="a00002xx up upbg ms-2"> </span>
-                            <span class="a00002xx uvote card-text">6</span>
-                            <span class="a00002xx down downbg ms-2"></span>
-                            <span class="a00002xx dvote card-text">9</span>
-                            <span class="a00002xx reply replybg ms-3"></span>
+                            <p class="a00002xx reviewtext truncate mt-1 mb-2 card-text ">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                                officia quod animi rerum omnis? Repellendus officia 
+                            </p>
+                            <div class="d-flex justify-content-end align-items-center mb-0">
+                                <span class="a00002xx chat chatbg "></span>
+                                <span class="a00002xx cNum card-text">1</span>
+                                <span class="a00002xx up upbg ms-2"> </span>
+                                <span class="a00002xx uvote card-text">6</span>
+                                <span class="a00002xx down downbg ms-2"></span>
+                                <span class="a00002xx dvote card-text">9</span>
+                                <span class="a00002xx reply replybg ms-3"></span>
+                            </div>
+                            <div class="a00002xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
+                                <div class="form-group">
+                                    <label for="a00002xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
+                                    <textarea class="form-control" id="a00002xxtext" name="a00002xxtext" rows="3"></textarea>
+                                    <div class="d-flex justify-content-end"><button type="submit" class="a00002xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
+                                </div>
+                            </div>
+                            <!-- comment section list of reply -->
+                            <ul class="a00002xx ms-4 comment list-group list-group-flush collapse"></ul>
                         </div>
-                        <div class="a00002xx wReply card-footer collapse bg-white pt-2 pb-2 m-0">
-                            <div class="form-group">
-                                <label for="a00002xxtext" class="form-label mb-1 fw-light">Write a Reply</label>
-                                <textarea class="form-control" id="a00002xxtext" name="a00002xxtext" rows="3"></textarea>
-                                <div class="d-flex justify-content-end"><button type="submit" class="a00002xx postReply btn btn-secondary mt-2 me-1">Post</button></div>
-                              </div>
-                        </div>
-                        <ul class="a00002xx ms-4 comment list-group list-group-flush collapse"></ul>
                     </div>
-                    </div>
+
+                    <!-- comment section list of review-->
+                    <!-- UL ID is for review // the reply will have a unique ID -->
                     <ul class="c00001xx ms-4 comment list-group list-group-flush collapse">
                         <li class="c00001xc list-group-item">
                             <div class="  user-profilecomment">
@@ -179,12 +207,15 @@
                                     <div class="d-flex justify-content-end"><button type="submit" class="c00001xc postReply btn btn-secondary mt-2 me-1">Post</button></div>
                                   </div>
                             </div>
+
+                            <!-- reply comment section list -->
                             <ul class="c00001xc ms-4 comment list-group list-group-flush collapse"></ul>
-                            
                         </li>
                       </ul>
                 </div>
             </div>
+
+            <!--  second review -->
             <div class="row">
                 <div class="card mb-3">
                     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
@@ -193,7 +224,7 @@
                                 <span class="fs-6"> Juan </span>
                             </div>
                             <div>
-                                <h5 class="d-inline-blockz"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                                <h5 class="d-inline-block"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                             </div>
                     </div>
                     <div class="card-body pt-0 pb-2 m-0">
@@ -253,10 +284,14 @@
                       </ul>
                 </div>
             </div>
+
+            <!-- Truncated reviews -->
             <div class="row mb-2">
                 <button class="fw-light fst-italic moreRev">see more</button> 
             </div>
             <div class="row moreRev collapse">
+
+                <!-- third review -->
                 <div class="card mb-3">
                     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
                             <div class="user-profile">
@@ -295,10 +330,9 @@
                       </ul>
                 </div>
             </div>
-            </div>
-            </div>
         </div>
     </div>
-    <!-- //<yes-po></yes-po> -->
+    </div>
+    </div>
   </body>
 </html>
