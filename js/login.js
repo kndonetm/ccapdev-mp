@@ -1,5 +1,5 @@
 // Check if the user is already logged in
-let currentLogin = localStorage.getItem('currentLogin') === 'true';
+let currentLogin = localStorage.getItem('currentLogin') === 'false';
 let savedUsername = localStorage.getItem('username');
 
 // Update the navbar based on the stored login status and username
@@ -19,6 +19,7 @@ document.querySelector('.reg-js').addEventListener('click', () => {
 function login(username, modal, image = 'icon.png') {
     if (!currentLogin) {
         currentLogin = true;
+        localStorage.getItem('currentLogin');
         savedUsername = username;
 
         // Store the login status and username in localStorage
@@ -63,7 +64,11 @@ function updateNavbar() {
 }
 
 if (currentLogin) {
-    document.querySelector('.logout').addEventListener('click', () => {
-        localStorage.clear();
+    document.querySelector('.logout').addEventListener('click', (event) => {
+        event.preventDefault();
+        currentLogin = false;
+        localStorage.setItem('currentLogin', currentLogin);
+        updateNavbar();
     })
 }
+
