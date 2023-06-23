@@ -1,40 +1,44 @@
-var storeToggle = document.querySelector("#store-toggle");
-var reviewToggle = document.querySelector("#review-toggle");
 var filterBtn = document.querySelector("#star-filter-dropdown");
-
 var filterDropdownItems = document.querySelectorAll(".star-filter");
 
-var isStoreShowing = true;
-var isReviewShowing = true;
+var storeToggle = document.querySelector("#store-toggle");
+var reviewToggle = document.querySelector("#review-toggle");
 
+var isStoreVisible = true;
+var isReviewVisible = true;
+
+var storeSectionResult = document.querySelector("#store-section-result");
 var storeResultList = establishments;
 var storeResultHTML = ``;
 
+var reviewSectionResult = document.querySelector("#review-section-result");
+
 updateStoreResultHTML();
 
-filterDropdownItems.forEach((elem) => {
-    elem.addEventListener('click', () => {
-        filterBtn.innerHTML = elem.innerHTML;
+filterDropdownItems.forEach((item) => {
+    item.addEventListener('click', () => {
+        filterBtn.innerHTML = item.innerHTML;
 
-        if (elem.innerHTML[0] == 'N') {
+        if (item.innerHTML[0] == 'N') {
             storeResultList = establishments;
         }
         else {
             storeResultList = [];
 
             establishments.forEach((store) => {
-                if(elem.innerHTML[0] == store.rating[0]) {
+                if(item.innerHTML[0] == store.rating[0]) {
                     storeResultList.push(store);
                 }
             });
         }
 
         updateStoreResultHTML();
+        showStore();
     });
 });
 
 storeToggle.addEventListener('click', () => {
-    if(isStoreShowing) {
+    if(isStoreVisible) {
         hideStore();
     } else {
         showStore();
@@ -42,7 +46,7 @@ storeToggle.addEventListener('click', () => {
 });
 
 reviewToggle.addEventListener('click', () => {
-    if(isReviewShowing) {
+    if(isReviewVisible) {
         hideReview();
     } else {
         showReview();
@@ -69,9 +73,7 @@ function updateStoreResultHTML() {
         </li>`;
         })
     
-        storeResultHTML += `</ul>`;
-    
-        storeSectionResult = document.querySelector("#store-section-result");
+        storeResultHTML += `</ul>`;      
         storeSectionResult.innerHTML = storeResultHTML;
     }
     else {
@@ -80,22 +82,16 @@ function updateStoreResultHTML() {
 }
 
 function showStore() {
-    isStoreShowing = true;
+    isStoreVisible = true;
 
-    storeToggle = document.querySelector("#store-toggle");
     storeToggle.innerHTML = "Hide"
-
-    storeSectionResult = document.querySelector("#store-section-result");
     storeSectionResult.innerHTML = storeResultHTML;
 }
 
 function showReview() {
-    isReviewShowing = true;
+    isReviewVisible = true;
 
-    reviewToggleToggle = document.querySelector("#review-toggle");
     reviewToggle.innerHTML = "Hide"
-
-    reviewSectionResult = document.querySelector("#review-section-result");
     reviewSectionResult.innerHTML = `
     <ul class="list-unstyled m-0">
         <li>
@@ -168,21 +164,15 @@ function showReview() {
 }
 
 function hideStore() {
-    isStoreShowing = false;
+    isStoreVisible = false;
 
-    storeToggle = document.querySelector("#store-toggle");
     storeToggle.innerHTML = "Show"
-
-    storeSectionResult = document.querySelector("#store-section-result");
     storeSectionResult.innerHTML = ""
 }
 
 function hideReview() {
-    isReviewShowing = false;
+    isReviewVisible = false;
 
-    reviewToggle = document.querySelector("#review-toggle");
     reviewToggle.innerHTML = "Show"
-
-    reviewSectionResult = document.querySelector("#review-section-result");
     reviewSectionResult.innerHTML = ""
 }

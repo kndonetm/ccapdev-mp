@@ -53,15 +53,17 @@
     <section class="container">
         <div class="row">
             <div class="search-key-container container">
-                <p class="h3 mt-0 mb-0">Searching for "<span id="search-key">Word Filter</span>"</p>
+                <p class="h3 mt-0 mb-0">Searching for "<span id="search-key"></span>"</p>
             </div>
         </div>
         <hr>
     </section>
+
     <section id="store-section" class="container pl-2">
-        <div class="row">
+        <section class="row">
             <div class="container m-0 d-flex gap-2 align-items-center">
                 <p class="h3 m-0">Establishment</p>
+
                 <div class="dropdown m-0">
                     <button id="star-filter-dropdown" class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">No filter</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -74,9 +76,10 @@
                         <button class="dropdown-item star-filter" type="button">0 Stars</button>
                     </div>
                 </div>
+
                 <button id="store-toggle" type="button" class="btn btn-outline-dark btn-sm">Hide</button>
             </div>        
-        </div>
+        </section>
 
         <section id="store-section-result">
             <ul class="list-unstyled m-0">
@@ -150,12 +153,13 @@
     </section>
     
     <section id="review-section" class="container pl-2">
-        <div class="row">
+        <section class="row">
             <div class="container m-0 d-flex gap-2 align-items-center">
                 <p class="h3 m-0">Reviews</p>
                 <button id="review-toggle" type="button" class="btn btn-outline-dark btn-sm">Hide</button>
             </div>
-        </div>
+        </section>
+        
         <section id="review-section-result" class="pt-0"> 
             <ul class="list-unstyled m-0">
                 <li>
