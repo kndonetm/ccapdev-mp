@@ -103,12 +103,12 @@ nav img {
   box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
 }
 
-.modal .form-control:focus {
+.authentication .form-control:focus {
   box-shadow: none;
   border: 2px solid #198754;
 }
 
-.myform .btn {
+.modal .btn {
   width: 50%;
   display: block;
   margin: auto;
@@ -119,7 +119,7 @@ nav img {
   padding: 0.5em 0;
 }
 
-.myform .btn:hover {
+.btn-hover:hover {
   background-color: inherit;
   color: #198754;
   border-color: #198754;
