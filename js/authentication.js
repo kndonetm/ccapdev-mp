@@ -36,7 +36,7 @@ function updateNavbar() {
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
                     <div class="d-inline-block mb-0">
-                        <img src="../images/${localStorage.getItem('pfp')}" alt="" class="pfp">
+                        <img src="../assets/${localStorage.getItem('pfp')}" alt="" class="pfp">
                         <span class="fs-6">Hello,<span class="fw-semibold"> ${localStorage.getItem('savedUsername')}</span> </span>
                     </div>
                 </a>

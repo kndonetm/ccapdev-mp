@@ -1,82 +1,8 @@
-function moreorless(event) {
-    id = ".".concat(event.target.className.substring(0,8));
-    dots = document.querySelector(id.concat('.dots'));
-    readMore = document.querySelector(id.concat('.more'));
-    rtextbtn = document.querySelector(id.concat('.rtextbtn'));
-
-    console.log(id)
-    if(dots.style.display === 'none') {
-        dots.style.display = 'inline';
-        rtextbtn.innerHTML = 'Read More';
-        readMore.style.display = 'none';
-    } else{
-        dots.style.display = 'none';
-        rtextbtn.innerHTML = 'see less';
-        readMore.style.display = 'inline'  
-}
-}
-
-// classlist = event.target.classList;
-//     console.log(classlist)
-
-//     if (classlist.contains('reply')) {
-
-
-function markUp (event) {
-    targ = event.target
-    let id = ".".concat(targ.className.substring(0,8));
-    let votes = parseInt($(id.concat('.uvote')).text());
-    console.log(id.concat('.down'));
-    if (targ.classList.contains("upbg")) {
-        $(targ).addClass('upbgfill').removeClass('upbg') 
-        $(id.concat('.uvote')).text(votes + 1);
-        if ($(id.concat('.down')).hasClass("downbgfill")) {
-            $(id.concat('.downbgfill')).addClass('downbg').removeClass('downbgfill')
-            $(id.concat('.dvote')).text(parseInt($(id.concat('.dvote')).text()) - 1);
-        }
-    } else {
-        $(targ).addClass('upbg').removeClass('upbgfill')
-        $(id.concat('.uvote')).text(votes - 1);
-    }
-}
-
-function markDown (event) {
-    targ = event.target
-    id = ".".concat(targ.className.substring(0,8));
-    let votes = parseInt($(id.concat('.dvote')).text());
-    if (targ.classList.contains("downbg")) {
-        $(targ).addClass('downbgfill').removeClass('downbg') 
-        $(id.concat('.dvote')).text(votes + 1);
-        if ($(id.concat('.up')).hasClass("upbgfill")) {
-            $(id.concat('.upbgfill')).addClass('upbg').removeClass('upbgfill')
-            $(id.concat('.uvote')).text(parseInt($(id.concat('.uvote')).text()) - 1);
-        }
-    } else {
-        console.log("Aww");
-        $(targ).addClass('downbg').removeClass('downbgfill')
-        $(id.concat('.dvote')).text(votes - 1);
-    }
-}
-
-function showChat (event) {
-    let id = ".".concat(event.target.className.substring(0,8));
-    $(id.concat('.comment')).collapse('toggle') // changes background on click
-    console.log(id)
-    updateCommentCount (id)
-}
-
-function reply (event) {
-    id = ".".concat(event.target.className.substring(0,8));
-    $(id.concat('.wReply')).collapse('toggle') // changes background on click
-    console.log(id)
-}
-
-review = document.querySelector(".reviews")
-
+const review = document.querySelector(".reviews")
 review.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
-
+    
     if (classlist.contains('reply')) {
         reply(event)
     } else if (classlist.contains('chat')) {
@@ -93,10 +19,91 @@ review.addEventListener("click", event=> {
         editText(event)
     } else if (classlist.contains('doneEdit')) {
         doneEditText(event)
+    } else if (classlist.contains('estabResponse')) {
+        showEstabResponse(event)
+    } else if (classlist.contains('reviewtext')) {
+        showMoreReadLess(event)
+    } else if (classlist.contains('del')) {
+        deleteCommit (event)
     }
-
-
 })
+
+function markUp (event) {
+    targ = event.target
+    let id = "." + targ.className.substring(0,8);
+    let votes = parseInt($(id + '.uvote').text());
+    console.log(id + '.down');
+    if (targ.classList.contains("upbg")) {
+        $(targ).addClass('upbgfill').removeClass('upbg') 
+        $(id + '.uvote').text(votes + 1);
+        if ($(id + '.down').hasClass("downbgfill")) {
+            $(id + '.downbgfill').addClass('downbg').removeClass('downbgfill')
+            $(id + '.dvote').text(parseInt($(id + '.dvote').text()) - 1);
+        }
+    } else {
+        $(targ).addClass('upbg').removeClass('upbgfill')
+        $(id + '.uvote').text(votes - 1);
+    }
+}
+
+function markDown (event) {
+    targ = event.target
+    id = "." + targ.className.substring(0,8);
+    let votes = parseInt($(id + '.dvote').text());
+    if (targ.classList.contains("downbg")) {
+        $(targ).addClass('downbgfill').removeClass('downbg') 
+        $(id + '.dvote').text(votes + 1);
+        if ($(id + '.up').hasClass("upbgfill")) {
+            $(id + '.upbgfill').addClass('upbg').removeClass('upbgfill')
+            $(id + '.uvote').text(parseInt($(id + '.uvote').text()) - 1);
+        }
+    } else {
+        console.log("Aww");
+        $(targ).addClass('downbg').removeClass('downbgfill')
+        $(id + '.dvote').text(votes - 1);
+    }
+}
+
+function showChat (event) {
+    let id = "." + event.target.className.substring(0,8);
+    $(id + '.comment').collapse('toggle') // changes background on click
+    console.log(id)
+    updateCommentCount (id)
+}
+
+function reply (event) {
+    id = "." + event.target.className.substring(0,8);
+    $(id + '.wReply').collapse('toggle') // changes background on click
+    console.log(id)
+}
+
+function showEstabResponse (event) {
+    id = "." + event.target.className.substring(0,8);
+    $(id + '.estabResponseText').collapse('toggle') // changes background on click
+    console.log(id)
+}
+
+function deleteCommit (event) {
+    id = "." + event.target.className.substring(0,8);
+    if (id == ".c00000xx"){
+        bye = document.querySelector('.yourReview')
+        bye.innerHTML = "";
+        $('.revForm').collapse('show')
+    } else {
+        bye = document.querySelector(id + '.list-group-item')
+        bye.remove();
+    }
+}
+
+function showMoreReadLess(event) {
+    targ = event.target
+    id = "." + targ.className.substring(0,8);
+    if (targ.classList.contains("truncate")) {
+        $(targ).removeClass('truncate') 
+    } else {
+        $(targ).addClass('truncate') 
+    }
+}
 
 $('button.moreRev').on({
     click: function(event){
@@ -111,21 +118,23 @@ $('button.moreRev').on({
  })
 
 function updateCommentCount (reviewID) {
-    var ul = document.querySelector(reviewID.concat('.comment'));
+    var ul = document.querySelector(reviewID + '.comment');
     var i=0, itemCount =0;
     while(ul.getElementsByTagName('li') [i++]) itemCount++;
     //from https://techwelkin.com/javascript-count-items-in-html-list
-    document.querySelector(reviewID.concat('.cNum')).innerHTML = itemCount;
+    document.querySelector(reviewID + '.cNum').innerHTML = itemCount;
 }
 
 function insertReview (event) {
     rating = document.querySelector('input[name="rate"]:checked').value;
+    tite = document.querySelector('input[name="title"]').value;
     reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
     reviewBox = document.querySelector('.yourReview');
+    thefiles = document.querySelector('#customFile1').files;
 
     event.preventDefault();
     $('.revForm').collapse('hide')
-    reviewBox.innerHTML = `<p class="fw-light mb-2">Your Review</p>`.concat(`
+    reviewBox.innerHTML += `<p class="fw-light mb-2">Your Review</p>` + `
     <div class="card mb-3">
     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
             <div class="user-profile">
@@ -133,13 +142,74 @@ function insertReview (event) {
                 <span class="fs-6"> Juan </span>
             </div>
             <div>
-                <h5 class="d-inline-blockz"><span class="me-3">`).concat(rating).concat(`</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                <h5 class="d-inline-blockz"><span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
             </div>
     </div>
     <div class="card-body pt-0 pb-2 m-0">
+        <h6 class="card-title mb-1">` + tite +`</h6>
         <p class="c00000xx reviewtext mb-2 card-text">
-        `).concat(reviewDesc).concat(`
+        ` + reviewDesc + `
         </p>
+    
+        <div class=" card-body p-0 d-flex mb-2 revMedia">
+        `;
+
+        for(let x = 0; x < 3; x++) {
+            if (thefiles[x] instanceof File) {
+                theURL = URL.createObjectURL( thefiles[x]);
+                type = thefiles[x]['type'];
+        
+                switch (type.split('/')[0]) {
+                    case "image":
+                        reviewBox.innerHTML += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                        break;
+                    case "video":
+                        reviewBox.innerHTML += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                        break;
+                    case "audio":
+                        reviewBox.innerHTML += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
+                        break;
+                }
+            }
+        }
+
+
+    //     `
+    //         <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+            
+    //         <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
+    //         <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">
+    //         <img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg">
+    //         </button>
+    //    </div>
+
+    //     <div class="modal c00001xx moreImg">
+    //                         <div class="modal-dialog modal-xl">
+    //                         <div class="modal-content">
+    //                             <div class="modal-header p-4">
+    //                                 <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
+    //                             </div>
+    //                                 <div class="modal-body moreImgBox">
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                                 <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
+    //                                 <span class="audio"><audio src="../assets\sampleaudio.mp3" controls></span>
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                             </div>
+    //                         </div>
+    //                         </div>
+    //                     </div>
+
+    //     for (i in thefiles) {
+    //         if (thefiles[i] instanceof File) {
+    //         theURL = URL.createObjectURL( thefiles[i]);
+    //         ext = thefiles[i].name.split('.')[1];
+    //         console.log(ext)
+    //         reviewBox.innerHTML += 'yey' + '<img src="' + theURL +'">'
+    //     }
+    //     }
+    reviewBox.innerHTML += `
+    </div>
         <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
         </textarea>
         <div class="d-flex justify-content-end align-items-center mb-0">
@@ -149,25 +219,28 @@ function insertReview (event) {
             <span class="c00000xx uvote card-text">0</span>
             <span class="c00000xx down downbg ms-2"></span>
             <span class="c00000xx dvote card-text">0</span>
-            <span class="c00000xx edit editbg ms-2"></span>
+            <span class="c00000xx edit editbg ms-3"></span>
+            <span class="c00000xx del delbg ms-2"></span>
             <button class="c00000xx doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
         </div>
     </div>
 
-    `);
+    `;
     r = document.querySelector(':root');
-    r.style.setProperty('--yourRev', 'calc('.concat(rating).concat('/ 5 * 100%)'));
+    r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
+    clearForm = document.querySelector("#reviewForm")
+    clearForm.reset();
 }
 
 function editText(event) {
-    let id = ".".concat(event.target.className.substring(0,8));
-    desc = document.querySelector(id.concat(".reviewtext"));
-    textarea = document.querySelector(id.concat(".yourRevEdit"));
-    icon = document.querySelector(id.concat(".edit"));
-    btn = document.querySelector(id.concat(".doneEdit"));
+    let id = "." + event.target.className.substring(0,8);
+    desc = document.querySelector(id + ".reviewtext");
+    textarea = document.querySelector(id + ".yourRevEdit");
+    icon = document.querySelector(id + ".edit");
+    btn = document.querySelector(id + ".doneEdit");
 
-    console.log(id.concat(".reviewtext"))
-    console.log(id.concat(".yourRevEdit"))
+    console.log(id + ".reviewtext")
+    console.log(id + ".yourRevEdit")
     desc.style.display = "none";
     textarea.style.display = null;
     icon.style.display = "none";
@@ -176,11 +249,11 @@ function editText(event) {
 }
 
 function doneEditText(event){
-    let id = ".".concat(event.target.className.substring(0,8));
-    desc = document.querySelector(id.concat(".reviewtext"));
-    textarea = document.querySelector(id.concat(".yourRevEdit"));
-    icon = document.querySelector(id.concat(".edit"));
-    btn = document.querySelector(id.concat(".doneEdit"));
+    let id = "." + event.target.className.substring(0,8);
+    desc = document.querySelector(id + ".reviewtext");
+    textarea = document.querySelector(id + ".yourRevEdit");
+    icon = document.querySelector(id + ".edit");
+    btn = document.querySelector(id + ".doneEdit");
     
     textarea.style.display = "none";
     desc.style.display = null;
@@ -190,7 +263,6 @@ function doneEditText(event){
 }
 
 var replyNum = 99; 
-
 function insertReply (event) {
     let id = event.target.className.substring(0,8);
     textname = id + 'text';
@@ -222,7 +294,8 @@ function insertReply (event) {
                                     <span class="` + newReplyID + ` uvote card-text">0</span>
                                     <span class="` + newReplyID + ` down downbg ms-2"></span>
                                     <span class="` + newReplyID + ` dvote card-text">0</span>
-                                    <span class="` + newReplyID + ` edit editbg ms-2"></span>
+                                    <span class="` + newReplyID + ` edit editbg ms-3"></span>
+                                    <span class="` + newReplyID + ` del delbg ms-2"></span>
                                     <button class="` + newReplyID + ` doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
                                 </div>
                                 <ul class="` + newReplyID + `  ms-4 comment list-group list-group-flush collapse"></ul>
@@ -231,6 +304,6 @@ function insertReply (event) {
     `;
     replyNum--; 
     updateCommentCount ("." + id)
-    $("." + id.concat('.wReply')).collapse('hide')
-    $("." + id.concat('.comment')).collapse('show')
+    $("." + id + '.wReply').collapse('hide')
+    $("." + id + '.comment').collapse('show')
 }
