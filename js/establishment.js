@@ -15,7 +15,10 @@ review.addEventListener("click", event=> {
         insertReply (event)
     } else if (classlist.contains('postReview')) {
         insertReview (event)
-    } else if (classlist.contains('edit')) {
+    } else if (classlist.contains('c00000xx') && 
+                classlist.contains('editRev')) {
+        editReview (event)
+    }else if (classlist.contains('edit')) {
         editText(event)
     } else if (classlist.contains('doneEdit')) {
         doneEditText(event)
@@ -25,14 +28,16 @@ review.addEventListener("click", event=> {
         showMoreReadLess(event)
     } else if (classlist.contains('del')) {
         deleteCommit (event)
-    }
+    } 
+
+    
 })
 
 function markUp (event) {
     targ = event.target
     let id = "." + targ.className.substring(0,8);
     let votes = parseInt($(id + '.uvote').text());
-    console.log(id + '.down');
+
     if (targ.classList.contains("upbg")) {
         $(targ).addClass('upbgfill').removeClass('upbg') 
         $(id + '.uvote').text(votes + 1);
@@ -58,7 +63,6 @@ function markDown (event) {
             $(id + '.uvote').text(parseInt($(id + '.uvote').text()) - 1);
         }
     } else {
-        console.log("Aww");
         $(targ).addClass('downbg').removeClass('downbgfill')
         $(id + '.dvote').text(votes - 1);
     }
@@ -66,21 +70,18 @@ function markDown (event) {
 
 function showChat (event) {
     let id = "." + event.target.className.substring(0,8);
-    $(id + '.comment').collapse('toggle') // changes background on click
-    console.log(id)
+    $(id + '.comment').collapse('toggle')
     updateCommentCount (id)
 }
 
 function reply (event) {
     id = "." + event.target.className.substring(0,8);
-    $(id + '.wReply').collapse('toggle') // changes background on click
-    console.log(id)
+    $(id + '.wReply').collapse('toggle') 
 }
 
 function showEstabResponse (event) {
     id = "." + event.target.className.substring(0,8);
-    $(id + '.estabResponseText').collapse('toggle') // changes background on click
-    console.log(id)
+    $(id + '.estabResponseText').collapse('toggle') 
 }
 
 function deleteCommit (event) {
@@ -88,6 +89,8 @@ function deleteCommit (event) {
     if (id == ".c00000xx"){
         bye = document.querySelector('.yourReview')
         bye.innerHTML = "";
+        clearForm = document.querySelector("#reviewForm")
+        clearForm.reset();
         $('.revForm').collapse('show')
     } else {
         bye = document.querySelector(id + '.list-group-item')
@@ -100,6 +103,7 @@ function showMoreReadLess(event) {
     id = "." + targ.className.substring(0,8);
     if (targ.classList.contains("truncate")) {
         $(targ).removeClass('truncate') 
+        targ.style.cursor = "pointer";
     } else {
         $(targ).addClass('truncate') 
     }
@@ -133,6 +137,7 @@ function insertReview (event) {
     thefiles = document.querySelector('#customFile1').files;
 
     event.preventDefault();
+    $('.yourReview').collapse('show')
     $('.revForm').collapse('hide')
     string1 = `<p class="fw-light mb-2">Your Review</p>` + `
     <div class="card mb-3">
@@ -142,11 +147,13 @@ function insertReview (event) {
                 <span class="fs-6"> Juan </span>
             </div>
             <div>
-                <h5 class="d-inline-blockz"><span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                <h5 class="d-inline-blockz">
+                <span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
+                </meter></h5>
             </div>
     </div>
     <div class="card-body pt-0 pb-2 m-0">
-        <h6 class="card-title mb-1">` + tite +`</h6>
+        <h6 class="c00000xx card-title mb-1">` + tite +`</h6>
         <p class="c00000xx reviewtext mb-2 card-text">
         ` + reviewDesc + `
         </p>
@@ -154,8 +161,9 @@ function insertReview (event) {
         `;
 
     string2 = ""
+    string3 = "";
     if (thefiles.length > 0) {
-        string2 = '<div class="card-body p-0 d-flex mb-2 revMedia">"'
+        string2 = '<div class="card-body p-0 d-flex mb-2 revMedia">'
         y = 4
         if (thefiles.length > 4)
             y = 3
@@ -177,8 +185,8 @@ function insertReview (event) {
                 }
             }
         }
+        string3 = "</div>"
     }
-    string3 = "";
     string4 ="";
     string5 ="";
     if (thefiles.length > 4) {
@@ -213,8 +221,6 @@ function insertReview (event) {
                 string5 = '</div></div> </div></div> '        
     }
     string6 = `
-        <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
-        </textarea>
         <div class="d-flex justify-content-end align-items-center mb-0">
             <span class="c00000xx chat chatbg "></span>
             <span class="c00000xx cNum card-text">0</span>
@@ -222,10 +228,11 @@ function insertReview (event) {
             <span class="c00000xx uvote card-text">0</span>
             <span class="c00000xx down downbg ms-2"></span>
             <span class="c00000xx dvote card-text">0</span>
-            <span class="c00000xx edit editbg ms-3"></span>
+            <span class="c00000xx editRev edit editbg ms-3"></span>
             <span class="c00000xx del delbg ms-2"></span>
-            <button class="c00000xx doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
+            <button type="submit" class="c00000xx postReview doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
         </div>
+        </form>
     </div>
 
     `;
@@ -239,19 +246,25 @@ function insertReview (event) {
 
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
-    clearForm = document.querySelector("#reviewForm")
-    clearForm.reset();
+
+}
+
+function editReview(event) {
+    $('.revForm').collapse('show')
+    $('.yourReview').collapse('hide')
+    bye = document.querySelector('.yourReview')
+    bye.innerHTML = "";
+
 }
 
 function editText(event) {
+    console.log("Her")
     let id = "." + event.target.className.substring(0,8);
     desc = document.querySelector(id + ".reviewtext");
     textarea = document.querySelector(id + ".yourRevEdit");
     icon = document.querySelector(id + ".edit");
     btn = document.querySelector(id + ".doneEdit");
 
-    console.log(id + ".reviewtext")
-    console.log(id + ".yourRevEdit")
     desc.style.display = "none";
     textarea.style.display = null;
     icon.style.display = "none";
@@ -277,7 +290,6 @@ var replyNum = 99;
 function insertReply (event) {
     let id = event.target.className.substring(0,8);
     textname = id + 'text';
-    console.log("#" + textname)
     replyDesc = document.querySelector('textarea[name="' + textname + '"]').value;
     replyList = document.querySelector('.comment.' + id);
     replyTextArea = document.querySelector("#" + textname);
@@ -286,7 +298,6 @@ function insertReply (event) {
     replyTextArea.value = "";
 
     newReplyID = id.substring(0,6) + replyNum;
-    console.log(newReplyID)
     replyList.innerHTML += `
     <li class=" ` + newReplyID + ` list-group-item">
                                 <div class="  user-profilecomment">
