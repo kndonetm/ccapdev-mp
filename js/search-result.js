@@ -1,8 +1,37 @@
 var storeToggle = document.querySelector("#store-toggle");
 var reviewToggle = document.querySelector("#review-toggle");
+var filterBtn = document.querySelector("#star-filter-dropdown");
+
+var filterDropdownItems = document.querySelectorAll(".star-filter");
 
 var isStoreShowing = true;
 var isReviewShowing = true;
+
+var storeResultList = establishments;
+var storeResultHTML = ``;
+
+updateStoreResultHTML();
+
+filterDropdownItems.forEach((elem) => {
+    elem.addEventListener('click', () => {
+        filterBtn.innerHTML = elem.innerHTML;
+
+        if (elem.innerHTML[0] == 'N') {
+            storeResultList = establishments;
+        }
+        else {
+            storeResultList = [];
+
+            establishments.forEach((store) => {
+                if(elem.innerHTML[0] == store.rating[0]) {
+                    storeResultList.push(store);
+                }
+            });
+        }
+
+        updateStoreResultHTML();
+    });
+});
 
 storeToggle.addEventListener('click', () => {
     if(isStoreShowing) {
@@ -20,6 +49,36 @@ reviewToggle.addEventListener('click', () => {
     }
 });
 
+function updateStoreResultHTML() {
+    storeResultHTML = `<ul class="list-unstyled m-0">`;
+
+    if (storeResultList.length >= 1) {
+        storeResultList.forEach((result) => {
+            storeResultHTML += `<li class="m-0 p-0">
+            <a href="#" class="text-decoration-none">
+                <div class="row" >
+                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
+                        <img class="result-image" src="${result.image}" alt="">
+                        <div class="result-info d-flex flex-column w-90">
+                            <p class="h3 m-0">${result.name}</p>
+                            <p class="smaller-text text-wrap m-0">${result.shortdesc}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>`;
+        })
+    
+        storeResultHTML += `</ul>`;
+    
+        storeSectionResult = document.querySelector("#store-section-result");
+        storeSectionResult.innerHTML = storeResultHTML;
+    }
+    else {
+        storeSectionResult.innerHTML = "No establishments found";
+    }
+}
+
 function showStore() {
     isStoreShowing = true;
 
@@ -27,75 +86,7 @@ function showStore() {
     storeToggle.innerHTML = "Hide"
 
     storeSectionResult = document.querySelector("#store-section-result");
-    storeSectionResult.innerHTML = `
-    <ul class="list-unstyled m-0">
-        <li class="m-0 p-0">
-            <a href="#" class="text-decoration-none">
-                <div class="row" >
-                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                        <img class="result-image" src="../assets/restaurants/mcdo_alt.png" alt="">
-                        <div class="result-info d-flex flex-column w-90">
-                            <p class="h3 m-0">Mcdonalds</p>
-                            <p class="smaller-text text-wrap m-0">McDonald's is a global fast-food giant known for its iconic golden arches, serving up a wide range of classic burgers, fries, and beloved menu items that have become synonymous with convenience and familiarity.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="m-0 p-0">
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="row" >
-                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                        <img class="result-image" src="../assets/restaurants/colonelscurry.jpg" alt="">
-                        <div class="result-info d-flex flex-column w-90">
-                            <p class="h3 m-0">Colonel Curry</p>
-                            <p class="smaller-text text-wrap m-0">Colonel Curry offers a tantalizing array of flavorful curries that take taste buds on a journey with their rich and aromatic blends of spices, ensuring a satisfying and memorable dining experience.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="m-0 p-0">
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="row" >
-                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                        <img class="result-image" src="../assets/restaurants/jolibee_alt.jpg" alt="">
-                        <div class="result-info d-flex flex-column w-90">
-                            <p class="h3 m-0">Jollibee</p>
-                            <p class="smaller-text text-wrap m-0">Jollibee is a beloved fast-food chain that captures the hearts of customers with its iconic fried chicken, sweet spaghetti, and a variety of Filipino-inspired dishes, creating a memorable and delightful dining experience.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="m-0 p-0">
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="row" >
-                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                        <img class="result-image" src="../assets/restaurants/atericas_bacsilog_alt.png" alt="">
-                        <div class="result-info d-flex flex-column w-90">
-                            <p class="h3 m-0">Ate Rica’s Bacsilog</p>
-                            <p class="smaller-text text-wrap m-0">Ate Rica's Bacsilog serves up a delightful combination of crispy bacon, garlic fried rice, and a perfectly cooked sunny-side-up egg, delivering a delicious and satisfying breakfast experience.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="m-0 p-0">
-            <a href="#" class="text-decoration-none text-dark">
-                <div class="row" >
-                    <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                        <img class="result-image" src="../assets/restaurants/24chicken_alt.jpg" alt="">
-                        <div class="result-info d-flex flex-column w-90">
-                            <p class="h3 m-0">24Chicken</p>
-                            <p class="smaller-text text-wrap m-0">24Chicken is a fast-food haven for chicken enthusiasts, offering a variety of mouthwatering dishes bursting with bold flavors.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-    </ul>
-    `
+    storeSectionResult.innerHTML = storeResultHTML;
 }
 
 function showReview() {
