@@ -9,15 +9,11 @@ li .card {
 
 .result-image {
     height: 70px;
-    min-width: 70px;
+    width: 70px;
 }
 
 .result-info p {
     text-overflow: ellipsis;
-}
-
-.w-90 {
-    width: 90%;
 }
 
 .result-info:hover {

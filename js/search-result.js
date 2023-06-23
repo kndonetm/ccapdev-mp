@@ -74,10 +74,9 @@ function updateStoreResultHTML() {
         })
     
         storeResultHTML += `</ul>`;      
-        storeSectionResult.innerHTML = storeResultHTML;
     }
     else {
-        storeSectionResult.innerHTML = "No establishments found";
+        storeResultHTML = "No establishments found";
     }
 }
 
