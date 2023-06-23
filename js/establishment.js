@@ -134,10 +134,10 @@ function insertReview (event) {
 
     event.preventDefault();
     $('.revForm').collapse('hide')
-    reviewBox.innerHTML += `<p class="fw-light mb-2">Your Review</p>` + `
+    string1 = `<p class="fw-light mb-2">Your Review</p>` + `
     <div class="card mb-3">
-    <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
-            <div class="user-profile">
+   <div class="card-header border-bottom-0 pt-2 pb-0 bg-white d-flex justify-content-between align-items-center">
+                            <div class="user-profile pb-0 mb-0">
                 <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
                 <span class="fs-6"> Juan </span>
             </div>
@@ -151,65 +151,68 @@ function insertReview (event) {
         ` + reviewDesc + `
         </p>
     
-        <div class=" card-body p-0 d-flex mb-2 revMedia">
         `;
 
-        for(let x = 0; x < 3; x++) {
+    string2 = ""
+    if (thefiles.length > 0) {
+        string2 = '<div class="card-body p-0 d-flex mb-2 revMedia">"'
+        y = 4
+        if (thefiles.length > 4)
+            y = 3
+        for(let x = 0; x < y; x++) {
             if (thefiles[x] instanceof File) {
                 theURL = URL.createObjectURL( thefiles[x]);
                 type = thefiles[x]['type'];
         
                 switch (type.split('/')[0]) {
                     case "image":
-                        reviewBox.innerHTML += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                        string2 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
                         break;
                     case "video":
-                        reviewBox.innerHTML += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                        string2 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
                         break;
                     case "audio":
-                        reviewBox.innerHTML += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
+                        string2 += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
                         break;
                 }
             }
         }
+    }
+    string3 = "";
+    string4 ="";
+    string5 ="";
+    if (thefiles.length > 4) {
+        string3 = 
+        `<button class="c00000xx imgBtn fs-1 text-white fw-normal" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
+        </div><div class="modal c00000xx moreImg">
+                            <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
+                                </div><div class="modal-body moreImgBox">
+                `
 
-
-    //     `
-    //         <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-            
-    //         <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
-    //         <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">
-    //         <img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg">
-    //         </button>
-    //    </div>
-
-    //     <div class="modal c00001xx moreImg">
-    //                         <div class="modal-dialog modal-xl">
-    //                         <div class="modal-content">
-    //                             <div class="modal-header p-4">
-    //                                 <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
-    //                             </div>
-    //                                 <div class="modal-body moreImgBox">
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                                 <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
-    //                                 <span class="audio"><audio src="../assets\sampleaudio.mp3" controls></span>
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                             </div>
-    //                         </div>
-    //                         </div>
-    //                     </div>
-
-    //     for (i in thefiles) {
-    //         if (thefiles[i] instanceof File) {
-    //         theURL = URL.createObjectURL( thefiles[i]);
-    //         ext = thefiles[i].name.split('.')[1];
-    //         console.log(ext)
-    //         reviewBox.innerHTML += 'yey' + '<img src="' + theURL +'">'
-    //     }
-    //     }
-    reviewBox.innerHTML += `
-    </div>
+                for (x in thefiles) {
+                    if (thefiles[x] instanceof File) {
+                        theURL = URL.createObjectURL( thefiles[x]);
+                        type = thefiles[x]['type'];
+                
+                        switch (type.split('/')[0]) {
+                            case "image":
+                                string4 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                                break;
+                            case "video":
+                                string4 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                                break;
+                            case "audio":
+                                string4 += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
+                                break;
+                        }
+                    }
+                }   
+                string5 = '</div></div> </div></div> '        
+    }
+    string6 = `
         <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
         </textarea>
         <div class="d-flex justify-content-end align-items-center mb-0">
@@ -226,6 +229,14 @@ function insertReview (event) {
     </div>
 
     `;
+
+    reviewBox.innerHTML = string1 + string2 + string3  + string4 + string5 + string6;
+    
+    if (thefiles.length > 4) {
+    button = document.querySelector('.c00000xx.imgBtn')                                                     
+    button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
+    }
+
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
     clearForm = document.querySelector("#reviewForm")

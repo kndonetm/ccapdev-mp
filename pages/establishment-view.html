@@ -87,7 +87,7 @@
                             </div>
                             <label for="c00000xxtext" class="fw-light form-label mb-1">Write a Review</label>
                             <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title" required />
-                            <textarea class="form-control fw-light  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) "></textarea>
+                            <textarea class="form-control fw-light "  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) "></textarea>
                             <div class="d-flex justify-content-end align-items-center mt-2">
                                 <label class="c00001xx mt-2 form-label img imgbg me-3" for="customFile1"></label>
                                 <input type="file" accept="media_type" class="form-control d-none" id="customFile1" name="media" multiple />
@@ -131,13 +131,11 @@
                         </p>
 
                         <!-- media  -->
-                        <div class=" card-body p-0 d-flex mb-2 revMedia">
+                        <div class="card-body p-0 d-flex mb-2 revMedia">
                                 <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
                                 <span class="audio"><audio  src="../assets\sampleaudio.mp3" controls></span>
                                 <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
-                                <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">
-                                <img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg">
-                                </button>
+                                <button class="imgBtn fs-1 text-white fw-normal" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">+4</button>
                         </div>
 
                         <div class="modal c00001xx moreImg">
@@ -151,7 +149,7 @@
                                     <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
                                     <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
                                     <span class="audio"><audio src="../assets\sampleaudio.mp3" controls></span>
-                                    <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+                                    <span ><img src="..//assets//restaurants/24chicken.jpg"></span>
                                 </div>
                             </div>
                             </div>
