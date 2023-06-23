@@ -17,7 +17,7 @@ review.addEventListener("click", event=> {
         insertReview (event)
     } else if (classlist.contains('c00000xx') && 
                 classlist.contains('editRev')) {
-        editReview (event)
+        editReview ()
     }else if (classlist.contains('edit')) {
         editText(event)
     } else if (classlist.contains('doneEdit')) {
@@ -92,6 +92,9 @@ function deleteCommit (event) {
         clearForm = document.querySelector("#reviewForm")
         clearForm.reset();
         $('.revForm').collapse('show')
+        btn = document.querySelector('.postReview')
+        btn.innerHTML = "Post"
+        posted = false;
     } else {
         bye = document.querySelector(id + '.list-group-item')
         bye.remove();
@@ -129,6 +132,7 @@ function updateCommentCount (reviewID) {
     document.querySelector(reviewID + '.cNum').innerHTML = itemCount;
 }
 
+var posted = false;
 function insertReview (event) {
     rating = document.querySelector('input[name="rate"]:checked').value;
     tite = document.querySelector('input[name="title"]').value;
@@ -138,14 +142,25 @@ function insertReview (event) {
 
     event.preventDefault();
     $('.yourReview').collapse('show')
-    $('.revForm').collapse('hide')
-    string1 = `<p class="fw-light mb-2">Your Review</p>` + `
+    console.log($('.revForm').collapse('hide'))
+    string1 = `<p class="fw-light mb-2">Your Review</p>
     <div class="card mb-3">
-   <div class="card-header border-bottom-0 pt-2 pb-0 bg-white d-flex justify-content-between align-items-center">
-                            <div class="user-profile pb-0 mb-0">
-                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                <span class="fs-6"> Juan </span>
-            </div>
+                <div class="card-header border-bottom-0 pt-3 pb-1 bg-white justify-content-between flex-center">
+                <div class="user-profile mt-1 mb-1 flex-center">
+                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                <div class="lh-1 fs-6">
+                    <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                    <div class="c00000xx status fw-lighter text-muted">`
+    if (posted == false) {
+        string1a = "Just Now"
+    } else {
+        string1a = "moments ago • edited"
+    }
+    console.log(string1a)
+
+    string1b = `</div>
+                </div>
+                </div>
             <div>
                 <h5 class="d-inline-blockz">
                 <span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
@@ -153,7 +168,7 @@ function insertReview (event) {
             </div>
     </div>
     <div class="card-body pt-0 pb-2 m-0">
-        <h6 class="c00000xx card-title mb-1">` + tite +`</h6>
+        <h6 class="c00000xx card-title mb-0">` + tite +`</h6>
         <p class="c00000xx reviewtext mb-2 card-text">
         ` + reviewDesc + `
         </p>
@@ -237,7 +252,7 @@ function insertReview (event) {
 
     `;
 
-    reviewBox.innerHTML = string1 + string2 + string3  + string4 + string5 + string6;
+    reviewBox.innerHTML = string1 + string1a + string1b + string2 + string3  + string4 + string5 + string6;
     
     if (thefiles.length > 4) {
     button = document.querySelector('.c00000xx.imgBtn')                                                     
@@ -246,15 +261,18 @@ function insertReview (event) {
 
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
-
+    posted = true;
 }
 
-function editReview(event) {
+var x = "";
+
+function editReview() {
     $('.revForm').collapse('show')
     $('.yourReview').collapse('hide')
     bye = document.querySelector('.yourReview')
     bye.innerHTML = "";
-
+    btn = document.querySelector('.postReview')
+    btn.innerHTML = "done"
 }
 
 function editText(event) {
@@ -278,13 +296,20 @@ function doneEditText(event){
     textarea = document.querySelector(id + ".yourRevEdit");
     icon = document.querySelector(id + ".edit");
     btn = document.querySelector(id + ".doneEdit");
+    thestatus = document.querySelector(id + ".status");
     
     textarea.style.display = "none";
     desc.style.display = null;
     btn.style.display = "none";
     icon.style.display = null;
     desc.innerHTML = textarea.value.trim();
+    
+    console.log(id + ".status")
+    
+    console.log(thestatus)
+    thestatus.innerHTML = "moments ago • edited"
 }
+
 
 var replyNum = 99; 
 function insertReply (event) {
@@ -300,9 +325,12 @@ function insertReply (event) {
     newReplyID = id.substring(0,6) + replyNum;
     replyList.innerHTML += `
     <li class=" ` + newReplyID + ` list-group-item">
-                                <div class="  user-profilecomment">
-                                    <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                    <span class="fs-6"> Juan </span>
+                                <div class="user-profile mt-1 mb-1 flex-center">
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                                    <div class="lh-1 fs-6">
+                                        <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                        <div class="` + newReplyID + ` status fw-lighter text-muted">Just Now</div>
+                                    </div>
                                 </div>
                                 <p class="` + newReplyID + ` reviewtext mb-1 card-text">
                                 ` + replyDesc + `

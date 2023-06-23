@@ -59,7 +59,7 @@
                 <div class="card mt-5">
                     <img class="card-img-top" src="../assets/placeholder.jpg" alt="">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="flex-center justify-content-between">
                             <h2 class="card-title">Mang Jinasal</h2>
                             <div class="card-text">
                                 <h5 class="d-inline-block"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
@@ -88,7 +88,7 @@
                             <label for="c00000xxtext" class="fw-light form-label mb-1">Write a Review</label>
                             <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title" required />
                             <textarea class="form-control fw-light "  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) "></textarea>
-                            <div class="d-flex justify-content-end align-items-center mt-2">
+                            <div class="flex-center justify-content-end mt-2">
                                 <label class="c00001xx mt-2 form-label img imgbg me-3" for="customFile1"></label>
                                 <input type="file" accept="media_type" class="form-control d-none" id="customFile1" name="media" multiple />
                                 <button type="submit" class="postReview btn btn-secondary me-1">Post</button>
@@ -109,10 +109,13 @@
                 <div class="card mb-3">
 
                     <!-- profile (req)-->
-                    <div class="card-header border-bottom-0 pt-2 pb-0 bg-white d-flex justify-content-between align-items-center">
-                            <div class="user-profile pb-0 mb-0">
-                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                <span class="fs-6"> Juan </span>
+                    <div class="card-header border-bottom-0 pt-3 pb-1 bg-white justify-content-between flex-center">
+                            <div class="user-profile mt-1 mb-1 flex-center">
+                                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                                <div class="lh-1 fs-6">
+                                    <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                    <div class="c00001xx status fw-lighter text-muted">1d • edited</div>
+                                </div>
                             </div>
                             <div>
                                 <h5 class="d-inline-block"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
@@ -122,12 +125,16 @@
                     <!-- review text (req)-->
                     <div class="card-body pt-0 pb-2 m-0">
                         <!-- UNIQUE ID PER REVIEW -->
-                        <h6 class="card-title mb-1">Ang Aking Review</h6>
-                        <p class="c00001xx  reviewtext truncate mb-2 card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
-                            officia quod animi rerum omnis? Repellendus officia 
-                            perferendis ad in non! Similique eos atque quod, dolorum 
+                            <h6 class="card-title mb-0">Ang Aking Review</h6>
+                        <p class="c00001xx reviewtext truncate mb-2 card-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing 
+                            elit. Deleniti voluptate eum incidunt dolore non 
+                            expedita debitis culpa esse neque? Eum ad repudiandae 
+                            quidem quo totam voluptas cupiditate enim! Sequi 
+                            tempora eligendi doloribus quas! Illo recusandae 
+                            tempora dolorem distinctio deleniti ad? Eligendi 
+                            obcaecati asperiores corporis iste explicabo? Dolor 
+                            consequuntur et sunt.
                         </p>
 
                         <!-- media  -->
@@ -156,7 +163,7 @@
                         </div>
 
                         <!-- icons -->
-                        <div class="d-flex justify-content-end align-items-center mb-0">
+                        <div class="flex-center justify-content-end mb-0">
                             <span class="c00001xx chat chatbg "></span>
                             <span class="c00001xx cNum card-text">1</span>
                             <span class="c00001xx up upbg ms-2"> </span>
@@ -185,7 +192,7 @@
                                 Quisquam, dignissimos. Voluptate quos voluptatem numquam 
                                 officia quod animi rerum omnis? Repellendus officia 
                             </p>
-                            <div class="d-flex justify-content-end align-items-center mb-0">
+                            <div class="flex-center justify-content-end  mb-0">
                                 <span class="a00001xx chat chatbg "></span>
                                 <span class="a00001xx cNum card-text">0</span>
                                 <span class="a00001xx up upbg ms-2"> </span>
@@ -210,9 +217,12 @@
                     <!-- UL ID is for review // the reply will have a unique ID -->
                     <ul class="c00001xx ms-4 comment list-group list-group-flush collapse">
                         <li class="c00001xc list-group-item">
-                            <div class="  user-profilecomment">
-                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                <span class="fs-6"> Juan </span>
+                            <div class="user-profile mt-1 mb-1 flex-center">
+                                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                                <div class="lh-1 fs-6">
+                                    <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                    <div class="c00001xc status fw-lighter text-muted">1d • edited</div>
+                                </div>
                             </div>
                             <p class="c00001xc reviewtext truncate mb-2 card-text">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
@@ -225,7 +235,7 @@
                                 Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
                                 </span> 
                             </p>
-                            <div class="d-flex justify-content-end align-items-center mb-0">
+                            <div class="flex-center justify-content-end mb-0">
                                 <span class="c00001xc chat chatbg "></span>
                                 <span class="c00001xc cNum card-text">0</span>
                                 <span class="c00001xc up upbg ms-2"> </span>
@@ -252,11 +262,14 @@
             <!--  second review -->
             <div class="row">
                 <div class="card mb-3">
-                    <div class="card-header border-bottom-0 pt-2 pb-0 bg-white d-flex justify-content-between align-items-center">
-                        <div class="user-profile pb-0 mb-0">
-                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                <span class="fs-6"> Juan </span>
+                    <div class="card-header border-bottom-0 pt-3 pb-1 bg-white justify-content-between flex-center">
+                        <div class="user-profile mt-1 mb-1 flex-center">
+                            <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                            <div class="lh-1 fs-6">
+                                <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                <div class="c00002xx status fw-lighter text-muted">1d • edited</div>
                             </div>
+                        </div>
                             <div>
                                 <h5 class="d-inline-block"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                             </div>
@@ -268,7 +281,7 @@
                             officia quod animi rerum omnis? Repellendus officia 
                             perferendis ad in non! Similique eos atque quod, dolorum 
                         </p>
-                        <div class="d-flex justify-content-end align-items-center mb-0">
+                        <div class="flex-center justify-content-end mb-0">
                             <span class="c00002xx chat chatbg "></span>
                             <span class="c00002xx cNum card-text">1</span>
                             <span class="c00002xx up upbg ms-2"> </span>
@@ -288,16 +301,19 @@
                     
                     <ul class="c00002xx ms-4 comment list-group list-group-flush collapse">
                         <li class=" c00002xa list-group-item">
-                                <div class="  user-profilecomment">
-                                    <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                    <span class="fs-6"> Juan </span>
+                                <div class="user-profile mt-1 mb-1 flex-center">
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                                    <div class="lh-1 fs-6">
+                                        <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                        <div class="c00002xa status fw-lighter text-muted">1d • edited</div>
+                                    </div>
                                 </div>
                                 <p class="c00002xa reviewtext truncate mb-2 card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                                     Quisquam, dignissimos. Voluptate quos voluptatem numquam 
                                     officia quod animi rer
                                 </p>
-                                <div class="d-flex justify-content-end align-items-center mb-0">
+                                <div class="flex-center justify-content-end mb-0">
                                     <span class="c00002xa chat chatbg "></span>
                                     <span class="c00002xa cNum card-text">0</span>
                                     <span class="c00002xa up upbg ms-2"> </span>
@@ -327,11 +343,14 @@
 
                 <!-- third review -->
                 <div class="card mb-3">
-                    <div class="card-header border-bottom-0 pt-2 pb-0 bg-white d-flex justify-content-between align-items-center">
-                        <div class="user-profile pb-0 mb-0">
-                                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                                <span class="fs-6"> Juan </span>
+                    <div class="card-header border-bottom-0 pt-3 pb-1 bg-white justify-content-between flex-center">
+                        <div class="user-profile mt-1 mb-1 flex-center">
+                            <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                            <div class="lh-1 fs-6">
+                                <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
+                                <div class="c00003xx status fw-lighter text-muted">1d • edited</div>
                             </div>
+                        </div>
                             <div>
                                 <h5 class="d-inline-blockz"><span class="me-3">3.2</span><meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                             </div>
@@ -343,7 +362,7 @@
                             officia quod animi rerum omnis? Repellendus officia 
                             perferendis ad in non! Similique eos atque quod, dolorum 
                         </p>
-                        <div class="d-flex justify-content-end align-items-center mb-0">
+                        <div class="flex-center justify-content-end mb-0">
                             <span class="c00003xx chat chatbg "></span>
                             <span class="c00003xx cNum card-text">1</span>
                             <span class="c00003xx up upbg ms-2"> </span>
