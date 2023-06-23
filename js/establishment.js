@@ -127,12 +127,14 @@ function updateCommentCount (reviewID) {
 
 function insertReview (event) {
     rating = document.querySelector('input[name="rate"]:checked').value;
+    tite = document.querySelector('input[name="title"]').value;
     reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
     reviewBox = document.querySelector('.yourReview');
+    thefiles = document.querySelector('#customFile1').files;
 
     event.preventDefault();
     $('.revForm').collapse('hide')
-    reviewBox.innerHTML = `<p class="fw-light mb-2">Your Review</p>` + `
+    reviewBox.innerHTML += `<p class="fw-light mb-2">Your Review</p>` + `
     <div class="card mb-3">
     <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
             <div class="user-profile">
@@ -144,9 +146,70 @@ function insertReview (event) {
             </div>
     </div>
     <div class="card-body pt-0 pb-2 m-0">
+        <h6 class="card-title mb-1">` + tite +`</h6>
         <p class="c00000xx reviewtext mb-2 card-text">
         ` + reviewDesc + `
         </p>
+    
+        <div class=" card-body p-0 d-flex mb-2 revMedia">
+        `;
+
+        for(let x = 0; x < 3; x++) {
+            if (thefiles[x] instanceof File) {
+                theURL = URL.createObjectURL( thefiles[x]);
+                type = thefiles[x]['type'];
+        
+                switch (type.split('/')[0]) {
+                    case "image":
+                        reviewBox.innerHTML += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                        break;
+                    case "video":
+                        reviewBox.innerHTML += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                        break;
+                    case "audio":
+                        reviewBox.innerHTML += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
+                        break;
+                }
+            }
+        }
+
+
+    //     `
+    //         <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+            
+    //         <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
+    //         <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">
+    //         <img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg">
+    //         </button>
+    //    </div>
+
+    //     <div class="modal c00001xx moreImg">
+    //                         <div class="modal-dialog modal-xl">
+    //                         <div class="modal-content">
+    //                             <div class="modal-header p-4">
+    //                                 <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
+    //                             </div>
+    //                                 <div class="modal-body moreImgBox">
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                                 <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
+    //                                 <span class="audio"><audio src="../assets\sampleaudio.mp3" controls></span>
+    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+    //                             </div>
+    //                         </div>
+    //                         </div>
+    //                     </div>
+
+    //     for (i in thefiles) {
+    //         if (thefiles[i] instanceof File) {
+    //         theURL = URL.createObjectURL( thefiles[i]);
+    //         ext = thefiles[i].name.split('.')[1];
+    //         console.log(ext)
+    //         reviewBox.innerHTML += 'yey' + '<img src="' + theURL +'">'
+    //     }
+    //     }
+    reviewBox.innerHTML += `
+    </div>
         <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
         </textarea>
         <div class="d-flex justify-content-end align-items-center mb-0">
