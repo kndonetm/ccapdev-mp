@@ -1,4 +1,6 @@
-const review = document.querySelector(".reviews")
+let reviewed = false;
+
+const review = document.querySelector("body")
 review.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
@@ -13,8 +15,10 @@ review.addEventListener("click", event=> {
         markUp(event)
     } else if (classlist.contains('postReply')) {
         insertReply (event)
-    } else if (classlist.contains('postReview')) {
-        insertReview (event)
+    } else if (classlist.contains('post-btn')) {
+        insertEditReview(event)
+    } else if (classlist.contains('trash')) {
+        delReview(event)
     } else if (classlist.contains('edit')) {
         editText(event)
     } else if (classlist.contains('doneEdit')) {
@@ -33,15 +37,15 @@ function markUp (event) {
     let id = "." + targ.className.substring(0,8);
     let votes = parseInt($(id + '.uvote').text());
     console.log(id + '.down');
-    if (targ.classList.contains("upbg")) {
-        $(targ).addClass('upbgfill').removeClass('upbg') 
+    if (targ.classList.contains("fa-thumbs-o-up")) {
+        $(targ).addClass('fa-thumbs-up').removeClass('fa-thumbs-o-up') 
         $(id + '.uvote').text(votes + 1);
-        if ($(id + '.down').hasClass("downbgfill")) {
-            $(id + '.downbgfill').addClass('downbg').removeClass('downbgfill')
+        if ($(id + '.down').hasClass("fa-thumbs-down")) {
+            $(id + '.fa-thumbs-down').addClass('fa-thumbs-o-down').removeClass('fa-thumbs-down')
             $(id + '.dvote').text(parseInt($(id + '.dvote').text()) - 1);
         }
     } else {
-        $(targ).addClass('upbg').removeClass('upbgfill')
+        $(targ).addClass('fa-thumbs-o-up').removeClass('fa-thumbs-up')
         $(id + '.uvote').text(votes - 1);
     }
 }
@@ -50,16 +54,16 @@ function markDown (event) {
     targ = event.target
     id = "." + targ.className.substring(0,8);
     let votes = parseInt($(id + '.dvote').text());
-    if (targ.classList.contains("downbg")) {
-        $(targ).addClass('downbgfill').removeClass('downbg') 
+    if (targ.classList.contains("fa-thumbs-o-down")) {
+        $(targ).addClass('fa-thumbs-down').removeClass('fa-thumbs-o-down') 
         $(id + '.dvote').text(votes + 1);
-        if ($(id + '.up').hasClass("upbgfill")) {
-            $(id + '.upbgfill').addClass('upbg').removeClass('upbgfill')
+        if ($(id + '.up').hasClass("fa-thumbs-up")) {
+            $(id + '.fa-thumbs-up').addClass('fa-thumbs-o-up').removeClass('fa-thumbs-up')
             $(id + '.uvote').text(parseInt($(id + '.uvote').text()) - 1);
         }
     } else {
         console.log("Aww");
-        $(targ).addClass('downbg').removeClass('downbgfill')
+        $(targ).addClass('fa-thumbs-o-down').removeClass('fa-thumbs-down')
         $(id + '.dvote').text(votes - 1);
     }
 }
@@ -125,111 +129,176 @@ function updateCommentCount (reviewID) {
     document.querySelector(reviewID + '.cNum').innerHTML = itemCount;
 }
 
-function insertReview (event) {
+function insertEditReview (event) {
+    revbtn = document.querySelector('.review-btn');
+    modal = document.querySelector('#post-review');
     rating = document.querySelector('input[name="rate"]:checked').value;
-    tite = document.querySelector('input[name="title"]').value;
+    title = document.querySelector('textarea[name="title"]').value;
     reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
-    reviewBox = document.querySelector('.yourReview');
-    thefiles = document.querySelector('#customFile1').files;
+    reviewBox = document.querySelector('.current-review');
+    thefiles = document.querySelector('#file-input').files;
+   
+    username = localStorage.getItem('savedUsername');
+    timeReviewed = '0 hours ago';
+    pfp = 'icon-placeholder.png';
+   
 
     event.preventDefault();
-    $('.revForm').collapse('hide')
-    reviewBox.innerHTML += `<p class="fw-light mb-2">Your Review</p>` + `
-    <div class="card mb-3">
-    <div class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center">
-            <div class="user-profile">
-                <img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt="">
-                <span class="fs-6"> Juan </span>
-            </div>
-            <div>
-                <h5 class="d-inline-blockz"><span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
-            </div>
-    </div>
-    <div class="card-body pt-0 pb-2 m-0">
-        <h6 class="card-title mb-1">` + tite +`</h6>
-        <p class="c00000xx reviewtext mb-2 card-text">
-        ` + reviewDesc + `
-        </p>
-    
-        <div class=" card-body p-0 d-flex mb-2 revMedia">
-        `;
 
-        for(let x = 0; x < 3; x++) {
+    content1 = ` <div class="row">
+                    <div class="card mb-3">
+                        <!-- profile (req)-->
+                        <div class="card-header border-bottom-0 pt-2 pb-0">
+                                <div class="user-profile pb-0 mb-0">
+                                    <img class="pfp img-fluid" src="../assets/${pfp}" alt="">
+                                    <span class="fs-6"> ${username} </span>
+                                    <span>&#9679; Reviewed ${timeReviewed}</span>
+                                </div>
+                        </div>
+
+                        <!-- review text (req)-->
+                        <div class="card-body pt-0 pb-2 ms-5">
+                            <h3><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5"></meter></h3>
+                            <!-- UNIQUE ID PER REVIEW -->
+                            <h6 class="card-title mb-1">${title}</h6>
+                            <p class="c00000xx  reviewtext truncate mb-2 card-text">
+                                ${reviewDesc}
+                            </p>
+                          `;
+
+    string2 = ""
+    string3 = "";
+    if (thefiles.length > 0) {
+        string2 = '<div class="card-body p-0 d-flex mb-2 revMedia">'
+        y = 4
+        if (thefiles.length > 4)
+            y = 3
+        for(let x = 0; x < y; x++) {
             if (thefiles[x] instanceof File) {
                 theURL = URL.createObjectURL( thefiles[x]);
                 type = thefiles[x]['type'];
         
                 switch (type.split('/')[0]) {
                     case "image":
-                        reviewBox.innerHTML += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                        string2 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
                         break;
                     case "video":
-                        reviewBox.innerHTML += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
-                        break;
-                    case "audio":
-                        reviewBox.innerHTML += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
+                        string2 += '<span class="d-inline-block video"><video class="vid" src="' + theURL +'" controls /></span>'
                         break;
                 }
             }
         }
+        string3 = "</div>"
+    }
 
+    string4 ="";
+    string5 ="";
+    if (thefiles.length > 4) {
+        string3 = 
+        `<button class="c00000xx imgBtn text-white" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
+        </div><div class="modal c00000xx moreImg">
+                            <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
+                                </div><div class="modal-body moreImgBox">
+                `
+                for (x in thefiles) {
+                    if (thefiles[x] instanceof File) {
+                        theURL = URL.createObjectURL( thefiles[x]);
+                        type = thefiles[x]['type'];
+                
+                        switch (type.split('/')[0]) {
+                            case "image":
+                                string4 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                                break;
+                            case "video":
+                                string4 += '<span class="d-inline-block video"><video class="vid" src="' + theURL +'" controls /></span>'
+                                break;
+                        }
+                    }
+                }   
+                string5 = '</div></div> </div></div> '        
+    }
+    
+    content2 = `<!-- icons -->
+                <div class="d-flex justify-content-between mt-3 icons">
+                    <div>
+                        <i class="c00000xx fa fa-thumbs-o-up up" type="button"></i>
+                        <span class="c00000xx uvote card-text ms-2 count-container d-inline-block">0</span>
+                        <i class="c00000xx fa fa-thumbs-o-down down" type="button"></i>
+                        <span class="c00000xx dvote card-text ms-2 count-container d-inline-block">0</span>
+                        <i class="a00000xx estabResponse far fa-comment-alt comment" type="button"></i>
+                    </div>
+                    <div>
+                        <i class="c00000xx reply ms-1 fas fa-reply" type="button"></i>
+                    </div>
+                </div>
+            </div>
 
-    //     `
-    //         <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-            
-    //         <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
-    //         <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00001xx.moreImg">
-    //         <img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg">
-    //         </button>
-    //    </div>
+            <!-- reply area (req)-->
+            <div class="c00000xx wReply card-footer collapse bg-white pt-2 pb-2 ms-5 mb-3">
+                <div class="form-group">
+                    <textarea class="form-control" id="c00002xxtext" name="c00000xxtext" placeholder="Write a reply"></textarea>
+                    <div class="d-flex justify-content-end"><i class="fas fa-paper-plane c00001xx postReply mt-2 me-1 mb-2 plane" type="button"></i></div>
+                </div>
+            </div>
 
-    //     <div class="modal c00001xx moreImg">
-    //                         <div class="modal-dialog modal-xl">
-    //                         <div class="modal-content">
-    //                             <div class="modal-header p-4">
-    //                                 <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
-    //                             </div>
-    //                                 <div class="modal-body moreImgBox">
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                                 <span><video class="img-fluid" src="../assets\sheep_-_57647 (1080p).mp4" controls /></span>
-    //                                 <span class="audio"><audio src="../assets\sampleaudio.mp3" controls></span>
-    //                                 <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
-    //                             </div>
-    //                         </div>
-    //                         </div>
-    //                     </div>
+            <!-- establishment response (opt) -->
+            <div class="pb-2 ps-3 pe-3 ms-5">
+                <div class="a00000xx estabResponseText collapse response">
+                    <p class="regular mt-1 mb-0">Mang Inasal's response</p>
+                    <p class="a00000xx reviewtext truncate mt-1 mb-2 card-text ">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                        officia quod animi rerum omnis? Repellendus officia 
+                    </p>
+                </div>
+            </div>
+            </div>
+            </div>` ;
+   
+   
+    if (!review) {
+        previousReviews = document.querySelector('.past-reviews').innerHTML;
+        reviewBox.innerHTML = content1 + string2 + string3  + string4 + string5 + content2 + previousReviews;
+        reviewed = true;
+       
+    } else {
+        header = document.querySelector('#post-review .modal-header h5')
+        header.innerText = 'Edit your review'
+        reviewBox.innerHTML = content1 + string2 + string3  + string4 + string5 + content2;
+        reviewed = false;
+    }
 
-    //     for (i in thefiles) {
-    //         if (thefiles[i] instanceof File) {
-    //         theURL = URL.createObjectURL( thefiles[i]);
-    //         ext = thefiles[i].name.split('.')[1];
-    //         console.log(ext)
-    //         reviewBox.innerHTML += 'yey' + '<img src="' + theURL +'">'
-    //     }
-    //     }
-    reviewBox.innerHTML += `
-    </div>
-        <textarea class="card-text c00000xx yourRevEdit form-control mb-2" style="display: none">
-        </textarea>
-        <div class="d-flex justify-content-end align-items-center mb-0">
-            <span class="c00000xx chat chatbg "></span>
-            <span class="c00000xx cNum card-text">0</span>
-            <span class="c00000xx up upbg ms-2"> </span>
-            <span class="c00000xx uvote card-text">0</span>
-            <span class="c00000xx down downbg ms-2"></span>
-            <span class="c00000xx dvote card-text">0</span>
-            <span class="c00000xx edit editbg ms-3"></span>
-            <span class="c00000xx del delbg ms-2"></span>
-            <button class="c00000xx doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
-        </div>
-    </div>
+    if (thefiles.length > 4) {
+    button = document.querySelector('.c00000xx.imgBtn')                                                  
+    button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
+    }
 
-    `;
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
-    clearForm = document.querySelector("#reviewForm")
-    clearForm.reset();
+    revbtn.innerText = 'Edit review';
+    $(modal).modal('hide');
+    
+}
+
+function delReview(event) {
+    event.preventDefault();
+    revbtn = document.querySelector('.review-btn');
+    modal = document.querySelector('#post-review');
+    header = document.querySelector('#post-review .modal-header h5')
+    header.innerText = 'New Review'
+    revbtn.innerText = 'Leave a review';
+    rating = document.querySelector('input[name="rate"]:checked').value;
+    document.querySelector('.post-form').reset()
+  
+    currReview = document.querySelector('.current-review');
+    currReview.innerHTML = '';
+
+    let fileList = document.getElementById("files-list");
+    fileList.innerHTML = '';
+    $(modal).modal('hide');
 }
 
 function editText(event) {

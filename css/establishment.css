@@ -26,7 +26,7 @@
     height: 1.75em;
 }
 
-button.moreRev, .estabResponse, .imgBtn {
+/* button.moreRev .imgBtn {
     outline: none;
     background: transparent;
     border: none;
@@ -34,7 +34,7 @@ button.moreRev, .estabResponse, .imgBtn {
     text-transform: lowercase;
     color: rgb(4, 32, 32);
     font-weight: 600;
-}
+} */
 
 .chat, .reply, .down, .up, .edit, .del {
     background-repeat: no-repeat;
@@ -176,36 +176,36 @@ copy for icons
     word-wrap: break-word;
 }
 
-.revMedia > * {
-    max-width: 24%;
-}
 
-.revMedia {
-    display: flex;
-    align-items: center;
-}
 
-.imgBtn {
+
+/* .imgBtn {
     width:100%;
     height: 100%;
     padding: 0;
-}
+} */
 
-.moreImgBox > * {
+ .moreImgBox > * {
     max-width: 33%;
     padding: 0.5em;
-}
+} 
 
 .moreImgBox .audio {
     width: 33%;
     padding: 0.5em;
 }
-.audio audio {
+/* .audio audio {
     max-width: 100%;
-}
+} */
 
 .moreImgBox  {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-}
+} 
+
+/* .revMedia  button  {
+    width: 24%;
+    height: 3em;
+} */
+
