@@ -145,12 +145,12 @@ function insertReview (event) {
     console.log($('.revForm').collapse('hide'))
     string1 = `<p class="fw-light mb-2">Your Review</p>
     <div class="card mb-3">
-                <div class="card-header border-bottom-0 pt-3 pb-1 bg-white justify-content-between flex-center">
-                <div class="user-profile mt-1 mb-1 flex-center">
+                <div class="card-header reviewHeader flex-center">
+                <div class="user-profile flex-center">
                 <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
-                <div class="lh-1 fs-6">
-                    <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
-                    <div class="c00000xx status fw-lighter text-muted">`
+                <div class="postDeats">
+                    <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                    <div class="c00000xx status">`
     if (posted == false) {
         string1a = "Just Now"
     } else {
@@ -163,13 +163,13 @@ function insertReview (event) {
                 </div>
             <div>
                 <h5 class="d-inline-blockz">
-                <span class="me-3">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
+                <span class="ratingz">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
                 </meter></h5>
             </div>
     </div>
-    <div class="card-body pt-0 pb-2 m-0">
-        <h6 class="c00000xx card-title mb-0">` + tite +`</h6>
-        <p class="c00000xx reviewtext mb-2 card-text">
+    <div class="card-body reviewBody">
+        <h6 class="card-title reviewTitle">` + tite +`</h6>
+        <p class="c00000xx reviewtext card-text">
         ` + reviewDesc + `
         </p>
     
@@ -178,7 +178,7 @@ function insertReview (event) {
     string2 = ""
     string3 = "";
     if (thefiles.length > 0) {
-        string2 = '<div class="card-body p-0 d-flex mb-2 revMedia">'
+        string2 = '<div class="card-body revMedia">'
         y = 4
         if (thefiles.length > 4)
             y = 3
@@ -206,12 +206,12 @@ function insertReview (event) {
     string5 ="";
     if (thefiles.length > 4) {
         string3 = 
-        `<button class="c00000xx imgBtn fs-1 text-white fw-normal" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
+        `<button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
         </div><div class="modal c00000xx moreImg">
                             <div class="modal-dialog modal-xl">
                             <div class="modal-content">
-                                <div class="modal-header p-4">
-                                    <button class="btn-close btn-close-secondary me-2" data-bs-dismiss="modal"></button>
+                                <div class="modal-header">
+                                    <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
                                 </div><div class="modal-body moreImgBox">
                 `
 
@@ -236,16 +236,15 @@ function insertReview (event) {
                 string5 = '</div></div> </div></div> '        
     }
     string6 = `
-        <div class="d-flex justify-content-end align-items-center mb-0">
+            <div class="flex-center iconBox">
             <span class="c00000xx chat chatbg "></span>
             <span class="c00000xx cNum card-text">0</span>
-            <span class="c00000xx up upbg ms-2"> </span>
+            <span class="c00000xx up upbg"> </span>
             <span class="c00000xx uvote card-text">0</span>
-            <span class="c00000xx down downbg ms-2"></span>
+            <span class="c00000xx down downbg"></span>
             <span class="c00000xx dvote card-text">0</span>
             <span class="c00000xx editRev edit editbg ms-3"></span>
             <span class="c00000xx del delbg ms-2"></span>
-            <button type="submit" class="c00000xx postReview doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
         </div>
         </form>
     </div>
@@ -325,30 +324,30 @@ function insertReply (event) {
     newReplyID = id.substring(0,6) + replyNum;
     replyList.innerHTML += `
     <li class=" ` + newReplyID + ` list-group-item">
-                                <div class="user-profile mt-1 mb-1 flex-center">
+                                <div class="user-profile flex-center">
                                     <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
-                                    <div class="lh-1 fs-6">
-                                        <a class="text-decoration-none link-dark" href="user-profile-view.html">Juan De La Cruz</a>
-                                        <div class="` + newReplyID + ` status fw-lighter text-muted">Just Now</div>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                        <div class="` + newReplyID + ` status">Just Now</div>
                                     </div>
                                 </div>
-                                <p class="` + newReplyID + ` reviewtext mb-1 card-text">
+                                <p class="` + newReplyID + ` reviewtext card-text">
                                 ` + replyDesc + `
                                 </p>
                                 <textarea class="` + newReplyID + ` card-text yourRevEdit form-control mb-2" style="display: none">
                                 </textarea>
-                                <div class="d-flex justify-content-end align-items-center mb-0">
+                                <div class="flex-center iconBox">
                                     <span class="` + newReplyID + ` chat chatbg "></span>
                                     <span class="` + newReplyID + ` cNum card-text">0</span>
-                                    <span class="` + newReplyID + ` up upbg ms-2"> </span>
+                                    <span class="` + newReplyID + ` up upbg"> </span>
                                     <span class="` + newReplyID + ` uvote card-text">0</span>
-                                    <span class="` + newReplyID + ` down downbg ms-2"></span>
+                                    <span class="` + newReplyID + ` down downbg"></span>
                                     <span class="` + newReplyID + ` dvote card-text">0</span>
                                     <span class="` + newReplyID + ` edit editbg ms-3"></span>
                                     <span class="` + newReplyID + ` del delbg ms-2"></span>
-                                    <button class="` + newReplyID + ` doneEdit btn btn-sm btn-outline-dark ms-2" style="display: none">done</button>
+                                    <button class="` + newReplyID + ` doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
                                 </div>
-                                <ul class="` + newReplyID + `  ms-4 comment list-group list-group-flush collapse"></ul>
+                                <ul class="` + newReplyID + ` comment list-group list-group-flush collapse"></ul>
                         </li>
     
     `;

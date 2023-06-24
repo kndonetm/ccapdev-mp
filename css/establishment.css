@@ -25,6 +25,7 @@
 
 .user-profile {
     height: 2.75em;
+    margin-block: 0.25em;
 }
 
 .user-profile a{
@@ -50,6 +51,7 @@ button.moreRev, .estabResponse, .imgBtn {
     background-size: 1rem 1rem;
     width: 1em;
     height: 1em;
+    color: blue;
 }
 
  .img {
@@ -57,6 +59,23 @@ button.moreRev, .estabResponse, .imgBtn {
     background-size: 1.5rem 1.5rem;
     width: 1.5em;
     height: 1.5em;
+    margin-top: 0.5em;
+    margin-right: 1em;
+}
+
+.reviewtext {
+    margin-bottom: 0.5em;
+}
+
+.reviewBody {
+    padding-top: 0em;
+    padding-bottom: 0.5em;
+    margin: 0em;
+}
+
+.reviewTitle {
+    margin-top: 0.25em;
+    margin-bottom: 0em;
 }
 
 .upbg {
@@ -128,9 +147,6 @@ copy for icons
     background-color: blue;
 }
 
-.rate {
-    width: 10em;
-}
 .rate:not(:checked) > input {
     position:absolute;
     top:-9999px;
@@ -191,6 +207,10 @@ copy for icons
     max-height: 7em;
 }
 
+.revMedia  span  {
+    padding-right: 0.075em;
+}
+
 .revMedia span img, .revMedia span video, .revMedia  span audio  {
     max-width: 100%;
     max-height: 7em;
@@ -200,6 +220,7 @@ copy for icons
     display: flex;
     align-items: center;
     height: 7em;
+    margin-bottom: .75em;
 }
 
 .imgBtn {
@@ -229,3 +250,127 @@ copy for icons
     display: flex;
     flex-wrap: wrap;
 }
+
+.up, .down, .chat {
+    margin-left: 0.5em;
+    margin-right: 0.2em;
+}
+
+.wReply {
+    padding-block: .75em;
+    margin: 0em;
+    background-color: white;
+}
+
+.estabResponseDiv {
+    padding-block: 0.5em;
+    margin-left: 1.5em;
+    background-color: white;
+}
+
+.reviewHeader {
+    padding-top: 1em;
+    padding-bottom: 0.25em;
+    background-color: white;
+    justify-content: space-between;
+    border-bottom: 0;
+}
+
+.status {
+    color: #717171;
+    font-weight: lighter;
+}
+
+.postDeats {
+    line-height: 1em;
+}
+
+.imgBtn {
+    font-size: 2.5em;
+    font-weight: 400;
+    color: white;
+}
+
+.modal-header {
+    padding: 1.5em;
+}
+
+.iconBox {
+    justify-content: end;
+    margin-bottom: 0em;
+}
+
+.writeReply {
+    margin-bottom: 0.25em;
+    font-weight: 300;
+}
+
+.postReply {
+    float: right;
+    margin-top: 0.5em;
+    margin-right: 0.25em;
+}
+
+.estabResponse {
+    padding-left: 0em;
+    font-weight: 325;     /* light */
+    color: #023020;
+}
+
+.comment {
+    margin-left: 1.5em;
+}
+
+.reply {
+    margin-left: 1em;
+}
+
+.ratingz {
+    margin-right: 1em;
+    font-weight: 500;
+    color: #023020;
+}
+
+.revForm {
+    margin-bottom: 0.5em;
+}
+.user-link {
+    text-decoration: none;
+    color: #023020;
+}
+
+.moreRev.moreRevText  {
+    font-weight: 325;
+    font-style: italic;
+    color: #023020;
+  }
+  
+.rateEstabText {
+    font-weight: 300;
+    margin-bottom:0em;
+}
+
+.writeRevText {
+    font-weight: 300;
+    margin-bottom:0.25em;
+}
+
+.rate {
+    width: 10em;
+    font-size: 1.75em;
+    margin-left: 0.145em;
+    margin-bottom: 0.15em;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row-reverse;
+}
+
+.postReview {
+    margin-right: 0.25em;
+}
+
+.postRevDiv {
+    justify-content: end;
+    margin-top: 0.5em;
+}
+
