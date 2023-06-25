@@ -384,3 +384,19 @@ copy for icons
     margin-top: 0.5em;
 }
 
+.estabName {
+    font-size: 1.75em;
+    white-space: nowrap;
+    margin-bottom: 0em;
+}
+
+.address {
+    color: #717171;
+    font-weight: 300;
+    line-height: 1em;
+    margin-bottom: 0.5em;
+}
+
+.ratingDiv {
+    margin-left: 2.5em;
+}

@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mang Jinasal | Food in Taft </title>
+        <title>Establishment View</title>
+        <link rel="icon" type="image/x-icon" href="../assets\icon.png">
+        
         <!-- Bootstrap -->
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -25,7 +27,8 @@
   <body>
 
     <!-- navbar  -->
-    <nav-component></nav-component> 
+    <nav-component></nav-component>
+    <nav-modal></nav-modal>
 
     <!-- whole screen -->
     <div class="container">
@@ -33,18 +36,21 @@
         <div class="row">
 
             <!-- establishment card -->
-            <div class="col-5">
+            <div class="col-lg-5">
                 <div class="card mt-5">
                     <img class="card-img-top" src="../assets/placeholder.jpg" alt="">
                     <div class="card-body">
                         <div class="flex-center justify-content-between">
-                            <h2 class="card-title">Mang Jinasal</h2>
-                            <div class="card-text">
+                            <div>
+                                <h2 class="card-title estabNamez">Colonel's Curry</h2>
+                                <p class="address">Taft Ave., Manila</p>
+                                </div>
+                            <span class="card-text ratingDiv">
                                 <h5 class="d-inline-block">
                                     <span class="ratingz">3.2</span>
-                                    <meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter>
+                                    <meter class="average-rating star-3" min="0" max="5"></meter>
                                 </h5>
-                            </div>
+                            </span>
                         </div>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia obcaecati maiores natus vitae repellendus nesciunt id est doloremque dolores repellat consequu</p>
                     </div>
@@ -84,8 +90,6 @@
                 <p class="fw-light mb-2">Top Reviews</p>
             
             <!-- Top Reviews / one row per review-->
-            <!-- UNIQUE ID () PER REVIEW/REPLY/RESPONSE -->
-            <!-- For ID: use only letters on the last 2 -->
             <div class="row">
                 <div class="card mb-3 REVIEW">
 
@@ -184,8 +188,6 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg"></span>
-                                
-                                
                             </div>
                             <div class="wReply card-footer collapse">
                                 <div class="form-group">
@@ -229,8 +231,6 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">1</span>
                                 <span class="reply replybg"></span>
-                                
-                                
                             </div>
                             <div class="wReply card-footer collapse">
                                 <div class="form-group">
@@ -252,9 +252,9 @@
                 <div class="card mb-3 REVIEW">
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/user_pfp/bhozx_josh.png" alt=""></a>
+                            <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon.png" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="user-profile-view.html">Bh0zx JosH</a>
+                                <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
                                 <div class="status">1d • edited</div>
                             </div>
                         </div>
@@ -266,7 +266,6 @@
                             </div>
                     </div>
                     <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                         <p class="reviewtext truncate card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
@@ -312,7 +311,7 @@
                                     <span class="uvote card-text">3</span>
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">1</span>
-                                    <span class="reply replybg"></span>      
+                                    <span class="reply replybg"></span>
                                 </div>
                                 <div class="wReply card-footer collapse">
                                     <div class="form-group">
@@ -351,7 +350,6 @@
                             </div>
                     </div>
                     <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                         <p class="reviewtext truncate card-text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                             Quisquam, dignissimos. Voluptate quos voluptatem numquam 
@@ -366,8 +364,6 @@
                             <span class="down downbg"></span>
                             <span class="dvote card-text">9</span>
                             <span class="reply replybg"></span>
-                            
-                            
                         </div>
                     </div>
                     <div class="wReply card-footer collapse">

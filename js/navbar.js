@@ -28,6 +28,47 @@ class Header extends HTMLElement {
       </div>
   </nav>
 
+      `;
+    }
+  }
+  
+customElements.define('nav-component', Header);
+
+class estabHeader extends HTMLElement {
+    constructor() {
+      super();
+    }
+  
+    connectedCallback() {
+      this.innerHTML = `
+      <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
+      <div class="container p-1">
+          <a href="../pages/index.html" class="navbar-brand h1 mb-0">
+              <img src="../assets/icon.png" alt="">
+              Navbar
+          </a>
+          <form class="d-flex position-relative search-container">
+              <input type="text" class="form-control" placeholder="Search establishments">
+              <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
+          </form>
+          <ul class="navbar-nav">
+          </ul>
+      </div>
+  </nav>
+      `;
+    }
+  }
+  
+customElements.define('estab-nav-component', estabHeader);
+
+
+class NavModal extends HTMLElement {
+    constructor() {
+      super();
+    }
+  
+    connectedCallback() {
+      this.innerHTML = `
   <!--Modal-->
   <div class="modal modal-xl fade signin-modal" id="signin" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
@@ -112,7 +153,4 @@ class Header extends HTMLElement {
     }
   }
   
-customElements.define('nav-component', Header);
-
-
-
+customElements.define('nav-modal', NavModal);

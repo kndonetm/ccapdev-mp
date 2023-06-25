@@ -5,7 +5,7 @@ establishments = [{
     type2: 'Fastfood restaurant',
     rating: '5',
     shortdesc: 'McDonald\'s is a global fast-food giant known for its iconic golden arches, serving up a wide range of classic burgers, fries, and beloved menu items that have become synonymous with convenience and familiarity.',
-    link: '#'
+    link: '../establishments/Mcdo.html'
     }, {
     image: '../assets/restaurants/colonelscurry.jpg',
     name: 'Colonel Curry',
@@ -13,7 +13,7 @@ establishments = [{
     type2: 'Fastfood restaurant',
     rating: '4',
     shortdesc: 'Colonel Curry offers a tantalizing array of flavorful curries that take taste buds on a journey with their rich and aromatic blends of spices, ensuring a satisfying and memorable dining experience.',
-    link: '#'
+    link: '../establishments/ColCurry.html'
     }, {
     image: '../assets/restaurants/jolibee_alt.jpg',
     name: 'Jollibee',
