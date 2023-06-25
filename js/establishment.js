@@ -266,7 +266,10 @@ function insertReview (event) {
             <span class=" down downbg"></span>
             <span class=" dvote card-text">0</span>
             <span class="c00000xx editRev edit editbg ms-3"></span>
-            <span class=" del delbg ms-2"></span>
+            <span class=" del delbg"></span>
+            <span class="edit-review editbg"></span>
+            <span class="del-review delbg"></span>
+            
         </div>
         </form>
     </div>
@@ -364,7 +367,9 @@ function insertReply (event) {
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">0</span>
                                     <span class="edit editbg ms-3"></span>
-                                    <span class=" del delbg ms-2"></span>
+                                    <span class=" del delbg"></span>
+                                    <span class="edit-review editbg"></span>
+                                    <span class="del-review delbg"></span>
                                     <button class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
                                 </div>
                                 <ul class="comment list-group list-group-flush collapse"></ul>

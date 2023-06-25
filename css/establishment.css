@@ -260,7 +260,12 @@ copy for icons
     margin-right: 0.2em;
 }
 
-.reply, .edit-review, .del-review {
+.edit-review {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+.reply, .del-review {
     margin-left: 0.9em;
     margin-right: 0.2em;
 }
