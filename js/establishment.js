@@ -169,9 +169,9 @@ function insertReview (event) {
     <div class="card REVIEW mb-3">
                 <div class="card-header reviewHeader flex-center">
                 <div class="user-profile flex-center">
-                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
                 <div class="postDeats">
-                    <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                    <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                     <div class="c00000xx status">`
     if (posted == false) {
         string1a = "Just Now"
@@ -344,9 +344,9 @@ function insertReply (event) {
     string1 = `
     <li class=" list-group-item REVIEW">
                                 <div class="user-profile flex-center">
-                                    <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
                                     <div class="postDeats">
-                                        <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                        <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                                         <div class=" status">Just Now</div>
                                     </div>
                                 </div>
@@ -379,4 +379,3 @@ function insertReply (event) {
     
     updateCommentCount (replyList)
 }
-
