@@ -21,7 +21,7 @@ establishments = [{
     type2: 'Fastfood restaurant',
     rating: '3',
     shortdesc: 'Jollibee is a beloved fast-food chain that captures the hearts of customers with its iconic fried chicken, sweet spaghetti, and a variety of Filipino-inspired dishes, creating a memorable and delightful dining experience.',
-    link: '#'
+    link: '../establishments/Jollibee.html'
     }, {
     image: '../assets/restaurants/atericas_bacsilog_alt.png',
     name: 'Ate Rica’s Bacsilog',
@@ -29,7 +29,7 @@ establishments = [{
     type2: 'Fastfood restaurant',
     rating: '2',
     shortdesc: 'Ate Rica\'s Bacsilog serves up a delightful combination of crispy bacon, garlic fried rice, and a perfectly cooked sunny-side-up egg, delivering a delicious and satisfying breakfast experience.',
-    link: '#'
+    link: '../establishments/AteRicas.html'
     }, {
     image: '../assets/restaurants/24chicken_alt.jpg',
     name: '24Chicken',
@@ -37,6 +37,6 @@ establishments = [{
     type2: 'Fastfood restaurant',
     rating: '1',
     shortdesc: '24Chicken is a fast-food haven for chicken enthusiasts, offering a variety of mouthwatering dishes bursting with bold flavors.',
-    link: '#'
+    link: '../establishments/24Chicken.html'
     }
 ];
