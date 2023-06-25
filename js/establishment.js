@@ -185,7 +185,7 @@ function insertReview (event) {
                 </div>
             <div>
                 <h5 class="d-inline-blockz">
-                <span class="ratingz">` + rating + `</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
+                <span class="ratingz">` + rating + `.0</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
                 </meter></h5>
             </div>
     </div>
