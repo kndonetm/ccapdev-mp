@@ -1,10 +1,9 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
-    console.log(localStorage.getItem('currentLogin') )
+    
     if (localStorage.getItem('currentLogin') === null && 
          (classlist.contains('reply') ||
-            classlist.contains('chat') ||
             classlist.contains('down') ||
             classlist.contains('up') ||
             classlist.contains('postReview')
@@ -45,62 +44,75 @@ document.addEventListener("click", event=> {
 
 })
 
-function markUp (event) {
-    targ = event.target
-    let id = "." + targ.className.substring(0,8);
-    let votes = parseInt($(id + '.uvote').text());
 
-    if (targ.classList.contains("upbg")) {
-        $(targ).addClass('upbgfill').removeClass('upbg') 
-        $(id + '.uvote').text(votes + 1);
-        if ($(id + '.down').hasClass("downbgfill")) {
-            $(id + '.downbgfill').addClass('downbg').removeClass('downbgfill')
-            $(id + '.dvote').text(parseInt($(id + '.dvote').text()) - 1);
+function markUp (event) {
+    parent = event.target.closest('.REVIEW')
+    up = parent.querySelector('.up')
+    down = parent.querySelector('.down')
+    upvote = parent.querySelector('.uvote')
+    downvote = parent.querySelector('.dvote')
+    let votes = parseInt(upvote.innerHTML);
+
+    if ($(up).hasClass("upbg")) {
+        $(up).addClass('upbgfill').removeClass('upbg') 
+        $(upvote).text(votes + 1);
+        if ($(down).hasClass("downbgfill")) {
+            $(down).addClass('downbg').removeClass('downbgfill')
+            $(downvote).text(parseInt($(downvote).text()) - 1);
         }
     } else {
-        $(targ).addClass('upbg').removeClass('upbgfill')
-        $(id + '.uvote').text(votes - 1);
+        $(up).addClass('upbg').removeClass('upbgfill')
+        $(upvote).text(votes - 1);
     }
 }
 
 function markDown (event) {
-    targ = event.target
-    id = "." + targ.className.substring(0,8);
-    let votes = parseInt($(id + '.dvote').text());
-    if (targ.classList.contains("downbg")) {
-        $(targ).addClass('downbgfill').removeClass('downbg') 
-        $(id + '.dvote').text(votes + 1);
-        if ($(id + '.up').hasClass("upbgfill")) {
-            $(id + '.upbgfill').addClass('upbg').removeClass('upbgfill')
-            $(id + '.uvote').text(parseInt($(id + '.uvote').text()) - 1);
+    parent = event.target.closest('.REVIEW')
+    up = parent.querySelector('.up')
+    down = parent.querySelector('.down')
+    upvote = parent.querySelector('.uvote')
+    downvote = parent.querySelector('.dvote')
+    let votes = parseInt(downvote.innerHTML);
+
+
+    if ($(down).hasClass("downbg")) {
+        $(down).addClass('downbgfill').removeClass('downbg') 
+        $(downvote).text(votes + 1);
+        if ($(up).hasClass("upbgfill")) {
+            $(up).addClass('upbg').removeClass('upbgfill')
+            $(upvote).text(parseInt($(upvote).text()) - 1);
         }
     } else {
-        $(targ).addClass('downbg').removeClass('downbgfill')
-        $(id + '.dvote').text(votes - 1);
+        $(down).addClass('downbg').removeClass('downbgfill')
+        $(downvote).text(votes - 1);
     }
 }
 
 function showChat (event) {
-    let id = "." + event.target.className.substring(0,8);
-    if($(id + '.comment').children().length != 0) {
-    $(id + '.comment').collapse('toggle')
-    updateCommentCount (id)
-}
+    parent = event.target.closest('.REVIEW')
+    targ = parent.querySelector(':scope > .comment')
+    if (targ == null) {
+        targ = parent.querySelector(':scope .comment')
+    } 
+
+    $(targ).collapse('toggle')
+    updateCommentCount(targ);
 }
 
 function reply (event) {
-    id = "." + event.target.className.substring(0,8);
-    $(id + '.wReply').collapse('toggle') 
+    parent = event.target.closest('.REVIEW')
+    replies = parent.querySelector('.wReply')
+    $(replies).collapse('toggle') 
 }
 
 function showEstabResponse (event) {
-    id = "." + event.target.className.substring(0,8);
-    $(id + '.estabResponseText').collapse('toggle') 
+    parent = event.target.closest('.REVIEW')
+    $(parent.querySelector('.estabResponseText')).collapse('toggle') 
 }
 
 function deleteCommit (event) {
-    id = "." + event.target.className.substring(0,8);
-    if (id == ".c00000xx"){
+    parent = event.target.closest('.REVIEW')
+    if (!parent.classList.contains('list-group-item')){
         bye = document.querySelector('.yourReview')
         bye.innerHTML = "";
         clearForm = document.querySelector("#reviewForm")
@@ -110,19 +122,18 @@ function deleteCommit (event) {
         btn.innerHTML = "Post"
         posted = false;
     } else {
-        bye = document.querySelector(id + '.list-group-item')
-        bye.remove();
+        parent.remove();
     }
 }
 
 function showMoreReadLess(event) {
-    targ = event.target
-    id = "." + targ.className.substring(0,8);
-    if (targ.classList.contains("truncate")) {
-        $(targ).removeClass('truncate') 
-        targ.style.cursor = "pointer";
+    parent = event.target.closest('.REVIEW')
+    text = parent.querySelector('.reviewtext')
+    if (text.classList.contains("truncate")) {
+        $(text).removeClass('truncate') 
+        text.style.cursor = "pointer";
     } else {
-        $(targ).addClass('truncate') 
+        $(text).addClass('truncate') 
     }
 }
 
@@ -138,12 +149,9 @@ $('button.moreRev').on({
      }
  })
 
-function updateCommentCount (reviewID) {
-    var ul = document.querySelector(reviewID + '.comment');
-    var i=0, itemCount =0;
-    while(ul.getElementsByTagName('li') [i++]) itemCount++;
-    //from https://techwelkin.com/javascript-count-items-in-html-list
-    document.querySelector(reviewID + '.cNum').innerHTML = itemCount;
+function updateCommentCount (list) {
+    console.log(list.getElementsByTagName("li"))
+    parent.querySelector('.cNum').innerHTML = list.getElementsByTagName("li").length;
 }
 
 var posted = false;
@@ -158,7 +166,7 @@ function insertReview (event) {
     $('.yourReview').collapse('show')
     console.log($('.revForm').collapse('hide'))
     string1 = `<p class="fw-light mb-2">Your Review</p>
-    <div class="card mb-3">
+    <div class="card REVIEW mb-3">
                 <div class="card-header reviewHeader flex-center">
                 <div class="user-profile flex-center">
                 <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
@@ -251,14 +259,14 @@ function insertReview (event) {
     }
     string6 = `
             <div class="flex-center iconBox">
-            <span class="c00000xx chat chatbg "></span>
-            <span class="c00000xx cNum card-text">0</span>
-            <span class="c00000xx up upbg"> </span>
-            <span class="c00000xx uvote card-text">0</span>
-            <span class="c00000xx down downbg"></span>
-            <span class="c00000xx dvote card-text">0</span>
+            <span class=" chat chatbg "></span>
+            <span class=" cNum card-text">0</span>
+            <span class=" up upbg"> </span>
+            <span class=" uvote card-text">0</span>
+            <span class=" down downbg"></span>
+            <span class=" dvote card-text">0</span>
             <span class="c00000xx editRev edit editbg ms-3"></span>
-            <span class="c00000xx del delbg ms-2"></span>
+            <span class=" del delbg ms-2"></span>
         </div>
         </form>
     </div>
@@ -290,11 +298,11 @@ function editReview() {
 
 function editText(event) {
     console.log("Her")
-    let id = "." + event.target.className.substring(0,8);
-    desc = document.querySelector(id + ".reviewtext");
-    textarea = document.querySelector(id + ".yourRevEdit");
-    icon = document.querySelector(id + ".edit");
-    btn = document.querySelector(id + ".doneEdit");
+    parent = event.target.closest('.REVIEW')
+    desc = parent.querySelector( ".reviewtext");
+    textarea = parent.querySelector( ".yourRevEdit");
+    icon = parent.querySelector( ".edit");
+    btn = parent.querySelector(".doneEdit");
 
     desc.style.display = "none";
     textarea.style.display = null;
@@ -304,69 +312,71 @@ function editText(event) {
 }
 
 function doneEditText(event){
-    let id = "." + event.target.className.substring(0,8);
-    desc = document.querySelector(id + ".reviewtext");
-    textarea = document.querySelector(id + ".yourRevEdit");
-    icon = document.querySelector(id + ".edit");
-    btn = document.querySelector(id + ".doneEdit");
-    thestatus = document.querySelector(id + ".status");
+    parent = event.target.closest('.REVIEW')
+    desc = parent.querySelector(".reviewtext");
+    textarea = parent.querySelector(".yourRevEdit");
+    icon = parent.querySelector( ".edit");
+    btn = parent.querySelector(".doneEdit");
+    thestatus = parent.querySelector(".status");
     
     textarea.style.display = "none";
     desc.style.display = null;
     btn.style.display = "none";
     icon.style.display = null;
     desc.innerHTML = textarea.value.trim();
-    
-    console.log(id + ".status")
-    
-    console.log(thestatus)
     thestatus.innerHTML = "moments ago • edited"
 }
 
-
-var replyNum = 99; 
 function insertReply (event) {
-    let id = event.target.className.substring(0,8);
-    textname = id + 'text';
-    replyDesc = document.querySelector('textarea[name="' + textname + '"]').value;
-    replyList = document.querySelector('.comment.' + id);
-    replyTextArea = document.querySelector("#" + textname);
- 
-    event.preventDefault();
-    replyTextArea.value = "";
+    parent = event.target.closest('.REVIEW')
+    replyDesc = parent.querySelector('textarea').value;
+    replyList = parent.querySelector(':scope > .comment');
+    
+    if (replyList == null) {
+        replyList = parent.querySelector(':scope .comment');
+    }
 
-    newReplyID = id.substring(0,6) + replyNum;
-    replyList.innerHTML += `
-    <li class=" ` + newReplyID + ` list-group-item">
+    console.log(event.target)
+    console.log(parent)
+    console.log(replyList)
+
+    event.preventDefault();
+    string1 = `
+    <li class=" list-group-item REVIEW">
                                 <div class="user-profile flex-center">
                                     <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/icon-placeholder.png" alt=""></a>
                                     <div class="postDeats">
                                         <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
-                                        <div class="` + newReplyID + ` status">Just Now</div>
+                                        <div class=" status">Just Now</div>
                                     </div>
                                 </div>
-                                <p class="` + newReplyID + ` reviewtext card-text">
-                                ` + replyDesc + `
+                                <p class="reviewtext card-text">
+                                ` 
+    string2 = `
                                 </p>
-                                <textarea class="` + newReplyID + ` card-text yourRevEdit form-control mb-2" style="display: none">
+                                <textarea class=" card-text yourRevEdit form-control mb-2" style="display: none">
                                 </textarea>
                                 <div class="flex-center iconBox">
-                                    <span class="` + newReplyID + ` chat chatbg "></span>
-                                    <span class="` + newReplyID + ` cNum card-text">0</span>
-                                    <span class="` + newReplyID + ` up upbg"> </span>
-                                    <span class="` + newReplyID + ` uvote card-text">0</span>
-                                    <span class="` + newReplyID + ` down downbg"></span>
-                                    <span class="` + newReplyID + ` dvote card-text">0</span>
-                                    <span class="` + newReplyID + ` edit editbg ms-3"></span>
-                                    <span class="` + newReplyID + ` del delbg ms-2"></span>
-                                    <button class="` + newReplyID + ` doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
+                                    <span class="chat chatbg "></span>
+                                    <span class="cNum card-text">0</span>
+                                    <span class="up upbg"> </span>
+                                    <span class=" uvote card-text">0</span>
+                                    <span class="down downbg"></span>
+                                    <span class="dvote card-text">0</span>
+                                    <span class="edit editbg ms-3"></span>
+                                    <span class=" del delbg ms-2"></span>
+                                    <button class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
                                 </div>
-                                <ul class="` + newReplyID + ` comment list-group list-group-flush collapse"></ul>
+                                <ul class="comment list-group list-group-flush collapse"></ul>
                         </li>
     
     `;
-    replyNum--; 
-    updateCommentCount ("." + id)
-    $("." + id + '.wReply').collapse('hide')
-    $("." + id + '.comment').collapse('show')
+    replyList.innerHTML += (string1 + replyDesc + string2)
+    parent.querySelector('textarea').value = "";
+    
+    $(parent.querySelector('.wReply')).collapse('hide')
+    $(replyList).collapse('show')
+    
+    updateCommentCount (replyList)
 }
+
