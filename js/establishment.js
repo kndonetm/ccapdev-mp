@@ -22,10 +22,6 @@ document.addEventListener("click", event=> {
             markDown(event)
         } else if (classlist.contains('up')) {
             markUp(event)
-        } else if (classlist.contains('postReply')) {
-            insertReply (event)
-        } else if (classlist.contains('postReview')) {
-            insertReview (event)
         } else if (classlist.contains('c00000xx') && 
                     classlist.contains('editRev')) {
             editReview ()
@@ -42,6 +38,15 @@ document.addEventListener("click", event=> {
         } 
     }
 
+})
+
+document.addEventListener("submit", event=> {
+    if (classlist.contains('postReview')) {
+    insertReview (event)
+    } else if (classlist.contains('postReply')) {
+        insertReply (event)
+    }
+    console.log("hey")
 })
 
 
@@ -169,7 +174,7 @@ function insertReview (event) {
     <div class="card REVIEW mb-3">
                 <div class="card-header reviewHeader flex-center">
                 <div class="user-profile flex-center">
-                <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
+                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
                 <div class="postDeats">
                     <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                     <div class="c00000xx status">`
@@ -345,7 +350,7 @@ function insertReply (event) {
     string1 = `
     <li class=" list-group-item REVIEW">
                                 <div class="user-profile flex-center">
-                                    <a href="user-profile-view.html" class="flex-center"><img class="pfp img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
                                     <div class="postDeats">
                                         <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                                         <div class=" status">Just Now</div>
