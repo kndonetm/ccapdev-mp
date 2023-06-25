@@ -1,4 +1,4 @@
-window.addEventListener('scroll', () => {
+document.addEventListener('scroll', () => {
     if (window.scrollY > 10) {
         document.querySelector('.navbar-custom').classList.add('floating-nav');
     } else {
@@ -13,7 +13,6 @@ class Header extends HTMLElement {
   
     connectedCallback() {
       this.innerHTML = `
-      <div class="delegateNav">
       <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
       <div class="container p-1">
           <a href="index.html" class="navbar-brand h1 mb-0">
@@ -109,7 +108,6 @@ class Header extends HTMLElement {
           </div>
       </div>
   </div>
-</div>
       `;
     }
   }
