@@ -29,7 +29,7 @@ document.addEventListener("click", event=> {
         } else if (classlist.contains('c00000xx') && 
                     classlist.contains('editRev')) {
             editReview ()
-        }else if (classlist.contains('edit')) {
+        }else if (classlist.contains('edit-review')) {
             editText(event)
         } else if (classlist.contains('doneEdit')) {
             doneEditText(event)
@@ -37,7 +37,7 @@ document.addEventListener("click", event=> {
             showEstabResponse(event)
         } else if (classlist.contains('reviewtext')) {
             showMoreReadLess(event)
-        } else if (classlist.contains('del')) {
+        } else if (classlist.contains('del-review')) {
             deleteCommit (event)
         } 
     }
@@ -265,9 +265,7 @@ function insertReview (event) {
             <span class=" uvote card-text">0</span>
             <span class=" down downbg"></span>
             <span class=" dvote card-text">0</span>
-            <span class="c00000xx editRev edit editbg ms-3"></span>
-            <span class=" del delbg"></span>
-            <span class="edit-review editbg"></span>
+            <span class="c00000xx editRev edit-review editbg ms-3"></span>
             <span class="del-review delbg"></span>
             
         </div>
@@ -304,7 +302,7 @@ function editText(event) {
     parent = event.target.closest('.REVIEW')
     desc = parent.querySelector( ".reviewtext");
     textarea = parent.querySelector( ".yourRevEdit");
-    icon = parent.querySelector( ".edit");
+    icon = parent.querySelector( ".edit-review");
     btn = parent.querySelector(".doneEdit");
 
     desc.style.display = "none";
@@ -318,7 +316,7 @@ function doneEditText(event){
     parent = event.target.closest('.REVIEW')
     desc = parent.querySelector(".reviewtext");
     textarea = parent.querySelector(".yourRevEdit");
-    icon = parent.querySelector( ".edit");
+    icon = parent.querySelector( ".edit-review");
     btn = parent.querySelector(".doneEdit");
     thestatus = parent.querySelector(".status");
     
@@ -357,8 +355,7 @@ function insertReply (event) {
                                 ` 
     string2 = `
                                 </p>
-                                <textarea class=" card-text yourRevEdit form-control mb-2" style="display: none">
-                                </textarea>
+                                <textarea class=" card-text yourRevEdit form-control mb-2" style="display: none"></textarea>
                                 <div class="flex-center iconBox">
                                     <span class="chat chatbg "></span>
                                     <span class="cNum card-text">0</span>
@@ -366,9 +363,7 @@ function insertReply (event) {
                                     <span class=" uvote card-text">0</span>
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">0</span>
-                                    <span class="edit editbg ms-3"></span>
-                                    <span class=" del delbg"></span>
-                                    <span class="edit-review editbg"></span>
+                                    <span class="edit-review editbg ms-3"></span>
                                     <span class="del-review delbg"></span>
                                     <button class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
                                 </div>
