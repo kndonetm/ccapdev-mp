@@ -1,35 +1,48 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
-    
-    if (classlist.contains('reply')) {
-        reply(event)
-    } else if (classlist.contains('chat')) {
-        showChat(event)
-    } else if (classlist.contains('down')) {
-        markDown(event)
-    } else if (classlist.contains('up')) {
-        markUp(event)
-    } else if (classlist.contains('postReply')) {
-        insertReply (event)
-    } else if (classlist.contains('postReview')) {
-        insertReview (event)
-    } else if (classlist.contains('c00000xx') && 
-                classlist.contains('editRev')) {
-        editReview ()
-    }else if (classlist.contains('edit')) {
-        editText(event)
-    } else if (classlist.contains('doneEdit')) {
-        doneEditText(event)
-    } else if (classlist.contains('estabResponse')) {
-        showEstabResponse(event)
-    } else if (classlist.contains('reviewtext')) {
-        showMoreReadLess(event)
-    } else if (classlist.contains('del')) {
-        deleteCommit (event)
-    } 
+    console.log(localStorage.getItem('currentLogin') )
+    if (localStorage.getItem('currentLogin') === null && 
+         (classlist.contains('reply') ||
+            classlist.contains('chat') ||
+            classlist.contains('down') ||
+            classlist.contains('up') ||
+            classlist.contains('postReview')
+        )) {
+            var myModal = new bootstrap.Modal(document.getElementById('signin'), {
+                keyboard: false
+                })
+            myModal.show()
+         
+    }  else {
+        if (classlist.contains('reply')) {
+            reply(event)
+        } else if (classlist.contains('chat')) {
+            showChat(event)
+        } else if (classlist.contains('down')) {
+            markDown(event)
+        } else if (classlist.contains('up')) {
+            markUp(event)
+        } else if (classlist.contains('postReply')) {
+            insertReply (event)
+        } else if (classlist.contains('postReview')) {
+            insertReview (event)
+        } else if (classlist.contains('c00000xx') && 
+                    classlist.contains('editRev')) {
+            editReview ()
+        }else if (classlist.contains('edit')) {
+            editText(event)
+        } else if (classlist.contains('doneEdit')) {
+            doneEditText(event)
+        } else if (classlist.contains('estabResponse')) {
+            showEstabResponse(event)
+        } else if (classlist.contains('reviewtext')) {
+            showMoreReadLess(event)
+        } else if (classlist.contains('del')) {
+            deleteCommit (event)
+        } 
+    }
 
-    
 })
 
 function markUp (event) {
