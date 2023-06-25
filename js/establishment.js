@@ -1,5 +1,4 @@
-const review = document.querySelector(".reviews")
-review.addEventListener("click", event=> {
+document.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(classlist)
     
@@ -70,8 +69,10 @@ function markDown (event) {
 
 function showChat (event) {
     let id = "." + event.target.className.substring(0,8);
+    if($(id + '.comment').children().length != 0) {
     $(id + '.comment').collapse('toggle')
     updateCommentCount (id)
+}
 }
 
 function reply (event) {

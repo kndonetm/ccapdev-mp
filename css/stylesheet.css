@@ -1,31 +1,7 @@
-nav img {
-  display: inline-block;
-}
-
 /* jic
 .card img {
     aspect-ratio: 4 / 3;
 } */
-
-.search-container {
-  width: 500px;
-}
-
-/*puro rough estimation na to just to make the search bar lookz good at big screens x_x */
-.search-container > input:focus {
-    border-color: lightgreen;
-    box-shadow: inset 0px 0px 3px #198754;;
-}
-
-.search-container > input {
-  border-radius: 60px 0 0 60px;
-  width: 458.5px;
-}
-
-.search-container > button {
-  border-radius: 0% 70% 70% 0%;
-}
-
 
 .average-rating {
   position: relative;
@@ -126,10 +102,6 @@ nav img {
 
 
 
-.modal img {
-  width: 500px;
-}
-
 .myform img,
 nav img {
   height: 30px;
@@ -191,17 +163,8 @@ nav img {
   color: #fff;
 }
 
-nav .form-control {
-    border-radius: 5px 0 0 5px;
-}
 
-nav .btn {
-    border-radius: 0 5px 5px 0;
-}
 
-.container {
-    margin-top: 12px;
-}
 
 .h2 {
     font-size: 32px;
