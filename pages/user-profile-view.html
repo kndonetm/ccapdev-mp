@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile | ___Jstn</title>
+        <title>___Jstn | Food in Taft</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link href="../css/user-profile.css" rel="stylesheet">
@@ -59,16 +59,17 @@
                     <p class="fw-light mb-2">All Reviews</p>
                     <div class="card mb-3 REVIEW">
                         <div class="card-header reviewHeader flex-center">
-                                <div class="user-profile">
-                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 5 hours ago</span>
-                                    <span class="smaller-text">· Edited</span>
+                            <div class="user-profile flex-center">
+                                <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
-                                <div>
-                                    <h5 class="d-inline-block"><span class="me-3">4.0</span><meter class="average-rating star-4 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
-                                </div>
-                        </div>
+                            </div>
+                            <div>
+                                <h5 class="d-inline-block"><span class="me-3">4.0</span><meter class="average-rating star-4 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                            </div>
+                    </div>
                         <div class="card-body reviewBody">
                             <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                             <p class="reviewtext truncate card-text">
@@ -87,6 +88,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -98,10 +101,12 @@
                         </div>
                         <ul class="comment list-group list-group-flush collapse">
                             <li class="REVIEW list-group-item">
-                                <div class="user-profile  flex-center">
+                                <div class="user-profile flex-center">
                                     <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                        <span class="fs-6"> ___Jstn </span>
-                                        <span class="smaller-text">· 2 hours ago</span>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
                                 </div>
                                 <p class="reviewtext truncate card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
@@ -115,6 +120,8 @@
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">1</span>
                                     <span class="reply replybg"></span>
+                                    <span class="edit-review editbg"></span>
+                                    <span class="del-review delbg"></span>
                                 </div>
                                 <div class="wReply card-footer collapse">
                                     <div class="form-group">
@@ -133,27 +140,33 @@
                         <div class="card-header reviewHeader flex-center">
                             <div class="user-profile flex-center">
                                 <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                <span class="fs-6"> ___Jstn </span>
-                                <span class="smaller-text">· 5 hours ago</span>
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
+                                </div>
                             </div>
                         </div>
+                        
                         <div class="card-body reviewBody">
                             <p class="reviewtext truncate card-text">
                                 Nice review
                             </p>
                             <p class="fw-light fst-italic">Commented on: </p>
-                            <div class="card">
+                             <div class="card REVIEW">
                                 <div class="card-header reviewHeader flex-center">
                                     <div class="user-profile flex-center">
                                         <img class="pfp img-fluid" src="../assets/user_pfp/bhozx_josh.png" alt="">
-                                        <span class="fs-6"> Bh0zx JosH </span>
-                                        <span class="smaller-text">· 5 days ago</span>
+                                        <div class="postDeats">
+                                            <a class="user-link" href="user-profile-view.html">Bh0zx JosH</a>
+                                            <div class=" status">1d • edited</div>
+                                        </div>
                                     </div>
                                     <div>
                                         <h5 class="d-inline-block"><span class="me-3">4.0</span><meter class="average-rating star-4 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                                     </div>
                                 </div>
                                 <div class="card-body reviewBody">
+                                    <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                                     <p class="reviewtext truncate card-text">
                                         McDonald's has truly mastered the art of the classic cheeseburger.
                                         The perfectly seasoned beef patty, topped with a slice of melted 
@@ -173,6 +186,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -188,16 +203,19 @@
                 <div class="row">
                     <div class="card mb-3 REVIEW">
                         <div class="card-header reviewHeader flex-center">
-                                <div class="user-profile flex-center">
-                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 2 days ago</span>
+                            <div class="user-profile flex-center">
+                                <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
+                            </div>
                                 <div>
                                     <h5 class="d-inline-blockz"><span class="me-3">5.0</span><meter class="average-rating star-5 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                                 </div>
                         </div>
                         <div class="card-body reviewBody">
+                            <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                             <p class="reviewtext truncate card-text">
                                 Colonel Curry's Coconut Curry Stew is a bowl of pure comfort. 
                                 The fragrant aroma of coconut milk and spices fills the air 
@@ -213,6 +231,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg ms-3"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -224,11 +244,13 @@
                         </div>
                         <ul class="comment list-group list-group-flush collapse">
                             <li class="REVIEW list-group-item">
-                                    <div class="  user-profile">
-                                        <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                        <span class="fs-6"> ___Jstn </span>
-                                        <span class="smaller-text">· 2 hours ago</span>
+                                <div class="user-profile flex-center">
+                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                        <div class=" status">1d • edited</div>
                                     </div>
+                                </div>
                                     <p class="reviewtext truncate card-text">
                                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                                         Quisquam, dignissimos. Voluptate quos voluptatem numquam 
@@ -241,6 +263,8 @@
                                         <span class="down downbg"></span>
                                         <span class="dvote card-text">1</span>
                                         <span class="reply replybg"></span>
+                                        <span class="edit-review editbg"></span>
+                                        <span class="del-review delbg"></span>
                                     </div>
                                     <div class="wReply card-footer collapse">
                                         <div class="form-group">
@@ -252,8 +276,6 @@
                                     <ul class="comment list-group list-group-flush collapse"></ul>
                             
                             </li>
-                            <li class="REVIEW list-group-item">A second item</li>
-                            <li class="REVIEW list-group-item">A third item</li>
                           </ul>
                     </div>
                 </div>
@@ -263,16 +285,19 @@
                 <div class="row moreRev collapse">
                     <div class="card mb-3 REVIEW">
                         <div class="card-header reviewHeader flex-center">
-                                <div class="user-profile">
-                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 3 days ago</span>
+                            <div class="user-profile flex-center">
+                                <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
+                            </div>
                                 <div>
                                     <h5 class="d-inline-blockz"><span class="me-3">5.0</span><meter class="average-rating star-5 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                                 </div>
                         </div>
                         <div class="card-body reviewBody">
+                            <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                             <p class="reviewtext truncate card-text">
                                 Jollibee's Chickenjoy is the epitome of fried chicken perfection. 
                                 The golden, crispy skin encases succulent, tender meat that 
@@ -287,6 +312,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg ms-3"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -297,13 +324,13 @@
                               </div>
                         </div>
                         <ul class="comment list-group list-group-flush collapse">
-                            <li class="REVIEW list-group-item">An item</li>
-                            <li class="REVIEW list-group-item">A second item</li>
                             <li class="REVIEW list-group-item">
-                                <div class="  user-profile">
+                                <div class="user-profile flex-center">
                                     <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 2 hours ago</span>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
                                 </div>
                                 <p class="reviewtext truncate card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
@@ -317,6 +344,8 @@
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">1</span>
                                     <span class="reply replybg"></span>
+                                    <span class="edit-review editbg"></span>
+                                    <span class="del-review delbg"></span>
                                 </div>
                                 <div class="wReply card-footer collapse">
                                     <div class="form-group">
@@ -332,16 +361,19 @@
                     </div>
                     <div class="card mb-3 REVIEW">
                         <div class="card-header reviewHeader flex-center">
-                                <div class="user-profile">
-                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 5 days ago</span>
+                            <div class="user-profile flex-center">
+                                <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
+                            </div>
                                 <div>
                                     <h5 class="d-inline-blockz"><span class="me-3">4.0</span><meter class="average-rating star-4 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                                 </div>
                         </div>
                         <div class="card-body reviewBody">
+                            <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                             <p class="reviewtext truncate card-text">
                                 24Chicken's Garlic Parmesan Fries are a 
                                 delightful twist on classic fries. These 
@@ -358,6 +390,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg ms-3"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -368,13 +402,13 @@
                               </div>
                         </div>
                         <ul class="comment list-group list-group-flush collapse">
-                            <li class="REVIEW list-group-item">An item</li>
-                            <li class="REVIEW list-group-item">A second item</li>
                             <li class="REVIEW list-group-item">
-                                <div class="  user-profile">
+                                <div class="user-profile flex-center">
                                     <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 2 hours ago</span>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
                                 </div>
                                 <p class="reviewtext truncate card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
@@ -389,6 +423,8 @@
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">1</span>
                                     <span class="reply replybg"></span>
+                                    <span class="edit-review editbg"></span>
+                                    <span class="del-review delbg"></span>
                                 </div>
                                 <div class="wReply card-footer collapse">
                                     <div class="form-group">
@@ -404,16 +440,19 @@
                     </div>
                     <div class="card mb-3 REVIEW">
                         <div class="card-header reviewHeader flex-center">
-                                <div class="user-profile">
-                                    <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 7 days ago</span>
+                            <div class="user-profile flex-center">
+                                <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
+                                <div class="postDeats">
+                                    <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
+                            </div>
                                 <div>
                                     <h5 class="d-inline-blockz"><span class="me-3">5.0</span><meter class="average-rating star-5 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                                 </div>
                         </div>
                         <div class="card-body reviewBody">
+                            <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                             <p class="reviewtext truncate card-text">
                                 Ate Rica's Chocsilog is a delightful twist on the classic bacsilog,
                                 offering a sweet ending to your meal. This version features tender 
@@ -430,6 +469,8 @@
                                 <span class="down downbg"></span>
                                 <span class="dvote card-text">9</span>
                                 <span class="reply replybg ms-3"></span>
+                                <span class="edit-review editbg"></span>
+                                <span class="del-review delbg"></span>
                             </div>
                         </div>
                         <div class="wReply card-footer collapse">
@@ -440,13 +481,13 @@
                               </div>
                         </div>
                         <ul class="comment list-group list-group-flush collapse">
-                            <li class="REVIEW list-group-item">An item</li>
-                            <li class="REVIEW list-group-item">A second item</li>
                             <li class="REVIEW list-group-item">
-                                <div class="  user-profile">
+                                <div class="user-profile flex-center">
                                     <img class="pfp img-fluid" src="../assets/user_pfp/jstn.png" alt="">
-                                    <span class="fs-6"> ___Jstn </span>
-                                    <span class="smaller-text">· 2 hours ago</span>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">___Jstn</a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
                                 </div>
                                 <p class="reviewtext truncate card-text">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
@@ -459,6 +500,8 @@
                                     <span class="down downbg"></span>
                                     <span class="dvote card-text">1</span>
                                     <span class="reply replybg"></span>
+                                    <span class="edit-review editbg"></span>
+                                    <span class="del-review delbg"></span>
                                 </div>
                                 <div class="wReply card-footer collapse">
                                     <div class="form-group">
