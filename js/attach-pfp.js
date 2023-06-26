@@ -12,10 +12,7 @@ document.addEventListener('change', (event) => {
                 img.setAttribute('src', reader.result);
             })
             reader.readAsDataURL(chosedfile);
-            console.log(chosedfile)
-            
+            console.log(reader.result)
         }
     }
 })
-
-
