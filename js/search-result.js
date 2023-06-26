@@ -59,7 +59,7 @@ function updateStoreResultHTML() {
     if (storeResultList.length >= 1) {
         storeResultList.forEach((result) => {
             storeResultHTML += `<li class="m-0 p-0">
-            <a href="#" class="text-decoration-none">
+            <a href="${result.link}" class="text-decoration-none">
                 <div class="row" >
                     <div class="card container d-flex flex-row m-2 p-0 gap-2">
                         <img class="result-image" src="${result.image}" alt="">
