@@ -11,7 +11,8 @@ function login(username, desc, modal, image) {
 }
 
 document.querySelector('.signin-js').addEventListener('click', () => {
-    login(document.querySelector('#username-login').value, "Hello, I'm " + document.querySelector('#username-login').value, document.querySelector('.signin-modal'));
+    desc = "Hello, I'm " + document.querySelector('#username-login').value
+    login(document.querySelector('#username-login').value, desc, document.querySelector('.signin-modal'));
 });
 
 document.querySelector('.reg-js').addEventListener('click', () => {
