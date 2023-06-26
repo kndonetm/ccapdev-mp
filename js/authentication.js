@@ -7,6 +7,8 @@ function login(username, desc, modal, image) {
 
     image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '../assets/unknown.jpg');
 
+
+
     if (localStorage.getItem('savedUsername') && (document.querySelector('#password-register').value || document.querySelector('#password-login').value)) {
         $(modal).modal('hide');
         updateNavbar();
@@ -21,10 +23,20 @@ document.querySelector('.signin-js').addEventListener('click', () => {
 document.querySelector('.reg-js').addEventListener('click', () => {
     const fileInput = document.querySelector('#file');
     const file = fileInput.files[0];
-
-    file ? 
-        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), URL.createObjectURL(file)) :
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageData = event.target.result;
+            login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), imageData);
+        }
+        reader.readAsDataURL(file);
+    } else {
         login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
+    }
+    
+  
+        
 });
 
 document.addEventListener('click', (event) => {
