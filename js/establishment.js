@@ -1,4 +1,5 @@
 let reviewed = false;
+let previousReviews = document.querySelector('.past-reviews').innerHTML;
 
 const review = document.querySelector("body")
 review.addEventListener("click", event=> {
@@ -29,8 +30,36 @@ review.addEventListener("click", event=> {
         showMoreReadLess(event)
     } else if (classlist.contains('del')) {
         deleteCommit (event)
-    }
+    } else if (classlist.contains('about-establishment')) {
+        displayAbout(event)
+    } else if (classlist.contains('reviews-establishment')) {
+        displayReviews(event)
+    } else if (classlist.contains('moreRev')) {
+        displayMoreRev()
+    } 
 })
+
+function loadEstablishements(event) {
+    };
+
+
+function displayReviews(event) {
+    event.preventDefault();
+
+    reviewContainer = document.querySelector('.review-list');  
+
+    reviewContainer.innerHTML = previousReviews;
+}
+
+function displayAbout(event) {
+    event.preventDefault();
+    aboutContainer = document.querySelector('.about');  
+
+
+    currEstablishment = establishments.find(establishment => establishment.name === 'Colonel Curry')
+
+    aboutContainer.innerHTML = `<p>${currEstablishment.about}<p>`;
+}
 
 function markUp (event) {
     targ = event.target
@@ -109,17 +138,30 @@ function showMoreReadLess(event) {
     }
 }
 
-$('button.moreRev').on({
-    click: function(event){
-         $('div.moreRev').collapse('toggle')
-        if ($(this).text().includes("more")) {
-        $('button.moreRev').text('------------ see less ------------')
-        }
-        else {
-            $('button.moreRev').text('see more')
-        }
-     }
- })
+function displayMoreRev() {
+    moreRev = document.querySelector('div.moreRev');
+    moreRevBtn = document.querySelector('button.moreRev')
+    moreRev.classList.toggle('collapse');
+
+    if (moreRevBtn.textContent.includes("more")) {
+        moreRevBtn.textContent = '------------ see less ------------';
+    } else {
+        moreRevBtn.textContent = 'see more';
+    }
+}
+
+
+// $('button.moreRev').on({
+//     click: function(event){
+//          $('div.moreRev').collapse('toggle')
+//         if ($(this).text().includes("more")) {
+//         $('button.moreRev').text('------------ see less ------------')
+//         }
+//         else {
+//             $('button.moreRev').text('see more')
+//         }
+//      }
+//  })
 
 function updateCommentCount (reviewID) {
     var ul = document.querySelector(reviewID + '.comment');
@@ -135,14 +177,15 @@ function insertEditReview (event) {
     rating = document.querySelector('input[name="rate"]:checked').value;
     title = document.querySelector('textarea[name="title"]').value;
     reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
-    reviewBox = document.querySelector('.current-review');
+    reviewBox = document.querySelector('.user-review');
     thefiles = document.querySelector('#file-input').files;
    
     username = localStorage.getItem('savedUsername');
     timeReviewed = '0 hours ago';
     pfp = 'icon-placeholder.png';
-   
-
+    
+  
+  
     event.preventDefault();
 
     content1 = ` <div class="row">
@@ -220,7 +263,8 @@ function insertEditReview (event) {
                 }   
                 string5 = '</div></div> </div></div> '        
     }
-    
+
+    //likes count
     content2 = `<!-- icons -->
                 <div class="d-flex justify-content-between mt-3 icons">
                     <div>
@@ -257,30 +301,44 @@ function insertEditReview (event) {
             </div>
             </div>
             </div>` ;
-   
-   
-    if (!review) {
-        previousReviews = document.querySelector('.past-reviews').innerHTML;
-        reviewBox.innerHTML = content1 + string2 + string3  + string4 + string5 + content2 + previousReviews;
-        reviewed = true;
-       
-    } else {
-        header = document.querySelector('#post-review .modal-header h5')
-        header.innerText = 'Edit your review'
-        reviewBox.innerHTML = content1 + string2 + string3  + string4 + string5 + content2;
-        reviewed = false;
+
+    if (previousReviews.includes('user-review')) {
+        const div = document.createElement('div');
+        div.innerHTML = previousReviews;
+        
+        const userReviewElements = div.getElementsByClassName('user-review');
+        while (userReviewElements.length > 0) {
+            const userReviewElement = userReviewElements[0];
+            userReviewElement.parentNode.removeChild(userReviewElement);
+        }
+        
+        previousReviews = div.innerHTML;
     }
+        
+    
+    reviewBox.innerHTML = content1 + string2 + string3  + string4 + string5 + content2;
+
+    previousReviews = reviewBox.outerHTML + previousReviews
+    
+    if (!reviewed) {
+        reviewed = true;
+        header = document.querySelector('#post-review .modal-header h5');
+        header.innerText = 'Edit your review';
+    }
+    
+
 
     if (thefiles.length > 4) {
     button = document.querySelector('.c00000xx.imgBtn')                                                  
     button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
     }
 
+
+
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
     revbtn.innerText = 'Edit review';
     $(modal).modal('hide');
-    
 }
 
 function delReview(event) {
@@ -293,7 +351,7 @@ function delReview(event) {
     rating = document.querySelector('input[name="rate"]:checked').value;
     document.querySelector('.post-form').reset()
   
-    currReview = document.querySelector('.current-review');
+    currReview = document.querySelector('.user-review');
     currReview.innerHTML = '';
 
     let fileList = document.getElementById("files-list");
