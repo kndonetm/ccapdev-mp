@@ -44,6 +44,13 @@ window.addEventListener("load", event=> {
     anchor.href = "index.html"
     dpic = document.querySelector("#profile-img-top")
     dpic.src = `../assets/${localStorage.getItem('pfp')}`;
+    pfP = document.querySelectorAll(".samplePfp")
+    sName = document.querySelectorAll(".sampleName")
+    for (let i=0; i < pfP.length; i++) {
+        pfP[i].src = `../assets/${localStorage.getItem('pfp')}`;
+    } for (let i=0; i < sName.length; i++) {
+        sName[i].innerHTML = localStorage.getItem('savedUsername')
+    }
 }})
 
 document.addEventListener ("change", event=>{
