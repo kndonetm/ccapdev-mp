@@ -1,6 +1,7 @@
 .img-parent {
   border-radius: 15px;
-  aspect-ratio: 364/325;
+  width: 18.5em;
+  height: 17em;
   overflow: hidden;
   position: relative;
   display: inline-block;
