@@ -19,7 +19,7 @@ class Header extends HTMLElement {
               <img src="../assets/icon.png" alt="">
               Navbar
           </a>
-          <form class="d-flex position-relative search-container" action="/search-result-page.html" method="get">
+          <form class="d-flex position-relative search-container" action="search-result-view.html" method="get">
               <input type="text" class="form-control" placeholder="Search establishments">
               <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
           </form>
@@ -47,7 +47,7 @@ class estabHeader extends HTMLElement {
               <img src="../assets/icon.png" alt="">
               Navbar
           </a>
-          <form class="d-flex position-relative search-container"  action="/search-result-page.html" method="get">
+          <form class="d-flex position-relative search-container"  action="../pages/search-result-view.html" method="get">
               <input type="text" class="form-control" placeholder="Search establishments">
               <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
           </form>
