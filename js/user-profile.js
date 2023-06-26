@@ -45,3 +45,16 @@ window.addEventListener("load", event=> {
     dpic = document.querySelector("#profile-img-top")
     dpic.src = `../assets/${localStorage.getItem('pfp')}`;
 }})
+
+document.addEventListener ("change", event=>{
+    if ($(event.target).is("#profile-img-caption")) {
+    dpic = document.querySelector("#profile-img-top")
+    thefiles = event.target.files;
+    if (thefiles[0] instanceof File) {
+        theURL = URL.createObjectURL( thefiles[0]);
+        localStorage.setItem('pfp', thefiles[0].name)
+        dpic.src = theURL;
+        updateNavbar();
+        }
+    }
+})
