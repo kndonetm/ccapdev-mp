@@ -5,7 +5,7 @@ function login(username, desc, modal, image) {
     localStorage.setItem('savedUsername', username);
     localStorage.setItem('descProf', desc);
 
-    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'unknown.jpg');
+    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '../assets/unknown.jpg');
 
     $(modal).modal('hide');
     updateNavbar();
@@ -19,9 +19,8 @@ document.querySelector('.signin-js').addEventListener('click', () => {
 document.querySelector('.reg-js').addEventListener('click', () => {
     const fileInput = document.querySelector('#file');
     const file = fileInput.files[0];
-    URL = URL.createObjectURL(file)
     file ? 
-        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), URL) :
+        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), URL.createObjectURL(file)) :
         login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
 });
 

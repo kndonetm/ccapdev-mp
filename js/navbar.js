@@ -84,11 +84,11 @@ class NavModal extends HTMLElement {
                             <h1 class="text-center mt-5">Welcome Back!</h1>
                             <form>
                                 <div class="mb-3 mt-4 form-floating">
-                                    <input placeholder="username" type="text" class="form-control" id="username-login">
+                                    <input placeholder="username" type="text" class="form-control" id="username-login" required>
                                     <label for="username-login" class="form-label">Username</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input placeholder="password" type="password" class="form-control" id="password-login">
+                                    <input placeholder="password" type="password" class="form-control" id="password-login" required>
                                     <label for="password-login" class="form-label">Password</label>
                                 </div>
                                 <input type="checkbox" id="remember-me">
@@ -128,11 +128,11 @@ class NavModal extends HTMLElement {
                             </div>
                             <form>
                                 <div class="mb-3 mt-4 form-floating">
-                                    <input placeholder="username" type="text" class="form-control" id="username-reg">
+                                    <input placeholder="username" type="text" class="form-control" id="username-reg" required>
                                     <label for="username-reg" class="form-label">Username</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input placeholder="password" type="password" class="form-control" id="password-reg">
+                                    <input placeholder="password" type="password" class="form-control" id="password-reg" required>
                                     <label for="password-reg" class="form-label">Password</label>
                                 </div>
                                 <div class="mb-3 form-floating">
