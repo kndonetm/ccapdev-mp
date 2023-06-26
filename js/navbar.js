@@ -82,18 +82,21 @@ class NavModal extends HTMLElement {
                                 <h5 class="nav-name">ArcherEats</h5>
                             </div>
                             <h1 class="text-center mt-5">Welcome Back!</h1>
+                            
+
+
                             <form>
                                 <div class="mb-3 mt-4 form-floating">
-                                    <input placeholder="username" type="text" class="form-control" id="username-login" required>
+                                    <input required placeholder="username" type="text" class="form-control" id="username-login">
                                     <label for="username-login" class="form-label">Username</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input placeholder="password" type="password" class="form-control" id="password-login" required>
+                                    <input required placeholder="password" type="password" class="form-control" id="password-login">
                                     <label for="password-login" class="form-label">Password</label>
                                 </div>
                                 <input type="checkbox" id="remember-me">
                                 <label for="remember-me"><p class="subtext">Remember Me</p></label>
-                                <button type="button" class="btn btn-light mt-4 gy-0 signin-js">SIGN IN</button>
+                                <button type="submit" class="btn btn-light mt-4 gy-0 signin-js">SIGN IN</button>
                                 <p class="pt-3 subtext">Don't have an account? <a href="#" data-bs-target="#register" data-bs-toggle="modal">Sign up</a></p>
                             </form>
                         </div>
@@ -128,18 +131,18 @@ class NavModal extends HTMLElement {
                             </div>
                             <form>
                                 <div class="mb-3 mt-4 form-floating">
-                                    <input placeholder="username" type="text" class="form-control" id="username-reg" required>
+                                    <input required placeholder="username" type="text" class="form-control" id="username-reg">
                                     <label for="username-reg" class="form-label">Username</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input placeholder="password" type="password" class="form-control" id="password-reg" required>
+                                    <input required placeholder="password" type="password" class="form-control" id="password-reg">
                                     <label for="password-reg" class="form-label">Password</label>
                                 </div>
                                 <div class="mb-3 form-floating">
                                     <input placeholder="about-you" type="text" class="form-control" id="about-you-reg">
                                     <label for="about-you-reg" class="form-label">About You</label>
                                 </div>
-                                <button type="button" class="btn btn-light mt-4 gy-0 reg-js">SIGN UP</button>
+                                <button type="submit" class="btn btn-light mt-4 gy-0 reg-js">SIGN UP</button>
                                 <p class="pt-3 subtext">Already have an account? <a href="#" data-bs-target="#signin" data-bs-toggle="modal">Sign in</a></p>
                             </form>
                         </div>
