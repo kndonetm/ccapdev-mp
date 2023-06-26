@@ -62,6 +62,12 @@ document.addEventListener ("change", event=>{
         localStorage.setItem('pfp', thefiles[0].name)
         dpic.src = theURL;
         updateNavbar();
+        anchor = document.querySelector('a.logout')
+        anchor.href = "index.html"
+        pfP = document.querySelectorAll(".samplePfp")
+        for (let i=0; i < pfP.length; i++) {
+            pfP[i].src = theURL;
+        }
         }
     }
 })
