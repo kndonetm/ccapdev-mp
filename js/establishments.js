@@ -8,7 +8,7 @@ establishments = [{
     link: '../establishments/Mcdo.html'
     }, {
     image: '../assets/restaurants/colonelscurry.jpg',
-    name: 'Colonel Curry',
+    name: 'Colonel’s Curry',
     type1: 'Filipino',
     type2: 'Fastfood restaurant',
     rating: '4',
