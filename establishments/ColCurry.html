@@ -80,12 +80,27 @@
                             <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title" required />
                             <textarea class="form-control fw-light "  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) " required ></textarea>
                             <div class="flex-center postRevDiv">
+                                <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached files</a>
                                 <label class=" form-label img imgbg" for="customFile1"></label>
                                 <input type="file" accept="media_type" class="form-control d-none" id="customFile1" name="media" multiple />
                                 <button type="submit" class="postReview btn btn-success">Post</button>
                             </div>
                         </div>
                         </form>
+                </div>
+
+                <div class="modal IMGFILES">
+                    <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="filelist">
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
                 </div>
 
                 <!-- form submitted injected here -->
@@ -224,6 +239,31 @@
                             However, the service was sluggishly slow it felt like a year til
                             we got our food.
                         </p>
+
+                        <div class="card-body revMedia">
+                            <span><img class="img-fluid" src="../assets\reviewPics\images (1).jpg"></span>
+                            <span><img class="img-fluid" src="../assets\reviewPics\download.jpg"></span>
+                            <span><img class="img-fluid" src="../assets\reviewPics\chiken.jpg"></span>
+                            <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00000.moreImg">+4</button>
+                    </div>
+
+                    <div class="modal c00000 moreImg">
+                        <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                            </div>
+                                <div class="modal-body moreImgBox">
+                                <span><img class="img-fluid" src="../assets\reviewPics\24-Chicken-3.jpg"></span>
+                                <span><img class="img-fluid" src="../assets\reviewPics\download.jpg"></span>
+                                <span><img class="img-fluid" src="../assets\reviewPics\chiken.jpg"></span>
+                                <span><img class="img-fluid" src="../assets\reviewPics\images (1).jpg"></span>
+                                <span><img class="img-fluid" src="../assets\reviewPics\images.jpg"></span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
                         <div class="flex-center iconBox">
                             <span class="chat chatbg "></span>
                             <span class="cNum card-text">0</span>

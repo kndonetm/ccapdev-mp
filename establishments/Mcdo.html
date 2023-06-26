@@ -80,12 +80,27 @@
                             <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title" required />
                             <textarea class="form-control fw-light "  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) " required ></textarea>
                             <div class="flex-center postRevDiv">
+                                <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached files</a>
                                 <label class=" form-label img imgbg" for="customFile1"></label>
                                 <input type="file" accept="media_type" class="form-control d-none" id="customFile1" name="media" multiple />
                                 <button type="submit" class="postReview btn btn-success">Post</button>
                             </div>
                         </div>
                         </form>
+                </div>
+
+                <div class="modal IMGFILES">
+                    <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="filelist">
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
                 </div>
 
                 <!-- form submitted injected here -->

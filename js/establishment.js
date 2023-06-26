@@ -128,6 +128,7 @@ function deleteCommit (event) {
         btn = document.querySelector('.postReview')
         btn.innerHTML = "Post"
         posted = false;
+        updateImgInputList ()
     } else {
         parent.remove();
     }
@@ -235,13 +236,13 @@ function insertReview (event) {
     string5 ="";
     if (thefiles.length > 4) {
         string3 = 
-        `<button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
+        `<button class="c00000xx imgBtn" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
         </div><div class="modal c00000xx moreImg">
                             <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
-                                </div><div class="modal-body moreImgBox">
+                                </div><div class="modal-body  moreImgBox">
                 `
 
                 for (x in thefiles) {
@@ -385,4 +386,28 @@ function insertReply (event) {
     $(replyList).collapse('show')
     
     updateCommentCount (replyList)
+}
+
+
+let fileInput = document.querySelector("#customFile1");
+let fileList = document.querySelector(".filelist");
+
+fileInput.addEventListener("change", () => {
+    updateImgInputList ()
+});
+
+function updateImgInputList () {
+    fileList.innerHTML = "";
+    console.log("hey")
+    for (i of fileInput.files) {
+      let listItem = document.createElement("li");
+      let fileName = i.name;
+      let fileSize = (i.size / 1024).toFixed(1);
+      listItem.innerHTML = `<p>${fileName}</p><p>${fileSize}KB</p>`;
+      if (fileSize >= 1024) {
+        fileSize = (fileSize / 1024).toFixed(1);
+        listItem.innerHTML = `<p>${fileName}</p><p>${fileSize}MB</p>`;
+      }
+      fileList.appendChild(listItem);
+    }
 }
