@@ -73,6 +73,7 @@ document.addEventListener ("change", events=>{
         for (let i=0; i < pfP.length; i++) {
             pfP[i].src = localStorage.getItem('pfp');
         }
+        location.reload();
     }
 
 })
