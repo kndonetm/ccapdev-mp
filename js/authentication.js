@@ -1,8 +1,9 @@
 updateNavbar();
 
-function login(username, modal, image) {
+function login(username, desc, modal, image) {
     localStorage.setItem('currentLogin', 'true');
     localStorage.setItem('savedUsername', username);
+    localStorage.setItem('descProf', desc);
     image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'icon.png');
 
     $(modal).modal('hide');
@@ -10,15 +11,15 @@ function login(username, modal, image) {
 }
 
 document.querySelector('.signin-js').addEventListener('click', () => {
-    login(document.querySelector('#username-login').value, document.querySelector('.signin-modal'));
+    login(document.querySelector('#username-login').value, "Hello, I'm " + document.querySelector('#username-login').value, document.querySelector('.signin-modal'));
 });
 
 document.querySelector('.reg-js').addEventListener('click', () => {
     const fileInput = document.querySelector('#file');
     const file = fileInput.files[0];
     file ? 
-        login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'), file.name) :
-        login(document.querySelector('#username-reg').value, document.querySelector('.reg-modal'));
+        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), file.name) :
+        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
 });
 
 document.addEventListener('click', (event) => {
@@ -30,9 +31,12 @@ document.addEventListener('click', (event) => {
   });
 
 function updateNavbar() {
-    let navHTML = '';
+    let navHTML1 = '';
+    let navHTML2 = '';
+    let navHTML3 = '';
+
     if (localStorage.getItem('currentLogin') === 'true') {
-        navHTML = `
+        navHTML1 = `
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
                     <div class="d-inline-block mb-0">
@@ -41,13 +45,19 @@ function updateNavbar() {
                     </div>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="" class="dropdown-item profile-view">Profile</a></li>
+                    <li><a href="`;
+
+        if ( document.URL.includes("establishments") ) {
+            navHTML2 = '../pages/';
+        }
+
+        navHTML3 = `user-profile-view.html" class="dropdown-item profile-view">Profile</a></li>
                     <li><a href="" class="dropdown-item logout">Logout</a></li>
                 </ul>
             </li>`;
     } else {
         // Default navbar HTML when the user is not logged in
-        navHTML = `
+        navHTML1 = `
             <li class="nav-item me-2">
             <button class="btn btn-success rounded-5" data-bs-target="#signin" data-bs-toggle="modal">Sign in</button>
             </li>
@@ -56,5 +66,5 @@ function updateNavbar() {
             </li>`;
     }
 
-    document.querySelector('.navbar-nav').innerHTML = navHTML;
+    document.querySelector('.navbar-nav').innerHTML = navHTML1 + navHTML2 + navHTML3;
 }

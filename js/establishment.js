@@ -41,12 +41,14 @@ document.addEventListener("click", event=> {
 })
 
 document.addEventListener("submit", event=> {
-    if (classlist.contains('postReview')) {
-    insertReview (event)
-    } else if (classlist.contains('postReply')) {
-        insertReply (event)
-    }
-    console.log("hey")
+    event.preventDefault()
+    if (localStorage.getItem('currentLogin') !==  null) {
+        if (classlist.contains('postReview')) {
+            insertReview (event)
+        } else if (classlist.contains('postReply')) {
+            insertReply (event)
+        }
+    } 
 })
 
 

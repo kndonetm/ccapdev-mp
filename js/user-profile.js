@@ -34,3 +34,14 @@ function finishEditing() {
 
 editButton.addEventListener("click", toggleEditing);
 
+window.addEventListener("load", event=> {
+    if ( document.URL.includes("user-profile-view.html") ) {
+    thename = document.querySelector('.username')
+    thename.innerHTML = localStorage.getItem('savedUsername')
+    profdesc = document.querySelector('#profile-description')
+    profdesc.innerHTML =  localStorage.getItem('descProf')
+    anchor = document.querySelector('a.logout')
+    anchor.href = "index.html"
+    dpic = document.querySelector("#profile-img-top")
+    dpic.src = `../assets/${localStorage.getItem('pfp')}`;
+}})
