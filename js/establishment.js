@@ -177,7 +177,7 @@ function insertReview (event) {
     <div class="card REVIEW mb-3">
                 <div class="card-header reviewHeader flex-center">
                 <div class="user-profile flex-center">
-                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
+                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="${localStorage.getItem('pfp')}" alt=""></a>
                 <div class="postDeats">
                     <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                     <div class="c00000xx status">`
@@ -353,7 +353,7 @@ function insertReply (event) {
     string1 = `
     <li class=" list-group-item REVIEW">
                                 <div class="user-profile flex-center">
-                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets/${localStorage.getItem('pfp')}" alt=""></a>
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="${localStorage.getItem('pfp')}" alt=""></a>
                                     <div class="postDeats">
                                         <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
                                         <div class=" status">Just Now</div>

@@ -47,27 +47,32 @@ window.addEventListener("load", event=> {
     pfP = document.querySelectorAll(".samplePfp")
     sName = document.querySelectorAll(".sampleName")
     for (let i=0; i < pfP.length; i++) {
-        pfP[i].src = `../assets/${localStorage.getItem('pfp')}`;
+        pfP[i].src = `${localStorage.getItem('pfp')}`;
     } for (let i=0; i < sName.length; i++) {
         sName[i].innerHTML = localStorage.getItem('savedUsername')
     }
 }})
 
-document.addEventListener ("change", event=>{
-    if ($(event.target).is("#profile-img-caption")) {
-    dpic = document.querySelector("#profile-img-top")
-    thefiles = event.target.files;
-    if (thefiles[0] instanceof File) {
-        theURL = URL.createObjectURL( thefiles[0]);
-        localStorage.setItem('pfp', thefiles[0].name)
-        dpic.src = theURL;
+document.addEventListener ("change", events=>{
+    const fileInputs = document.querySelector('#profile-img-caption');
+    const file = fileInputs.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageDatas = event.target.result;
+            localStorage.setItem('pfp', imageDatas)
+        }
+        reader.readAsDataURL(file);
+        dpic = document.querySelector("#profile-img-top")
+        dpic.src = localStorage.getItem('pfp')
         updateNavbar();
         anchor = document.querySelector('a.logout')
         anchor.href = "index.html"
         pfP = document.querySelectorAll(".samplePfp")
         for (let i=0; i < pfP.length; i++) {
-            pfP[i].src = theURL;
-        }
+            pfP[i].src = localStorage.getItem('pfp');
         }
     }
+
 })
