@@ -4,7 +4,7 @@ function login(username, desc, modal, image) {
     localStorage.setItem('currentLogin', 'true');
     localStorage.setItem('savedUsername', username);
     localStorage.setItem('descProf', desc);
-    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'icon.png');
+    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'unknown.jpg');
 
     $(modal).modal('hide');
     updateNavbar();
