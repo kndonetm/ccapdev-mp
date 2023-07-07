@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>McDonald's</title>
-        <link rel="icon" type="image/x-icon" href="../assets\icon.png">
-        
+        <title>Establishment View</title>
+        <link rel="icon" type="image/x-icon" href="static/assets\icon.png">
+
         <!-- Bootstrap -->
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -27,7 +27,7 @@
   <body>
 
     <!-- navbar  -->
-    <estab-nav-component></estab-nav-component> 
+    <nav-component></nav-component>
     <nav-modal></nav-modal>
 
     <!-- whole screen -->
@@ -38,25 +38,21 @@
             <!-- establishment card -->
             <div class="col-lg-5">
                 <div class="card mt-5">
-                    <img class="card-img-top" src="../assets\restaurants\Mcdo.jpg" alt="">
+                    <img class="card-img-top" src="static/assets/placeholder.jpg" alt="">
                     <div class="card-body">
                         <div class="flex-center justify-content-between">
                             <div>
-                                <h2 class="card-title estabName">McDonald's</h2>
+                                <h2 class="card-title estabNamez">Colonel's Curry</h2>
                                 <p class="address">Taft Ave., Manila</p>
                                 </div>
-                            <div class="card-text ratingDiv">
+                            <span class="card-text ratingDiv">
                                 <h5 class="d-inline-block">
-                                    <span class="ratingz">4.9</span>
-                                    <meter class="average-rating star-5 d-inline-block" min="0" max="5"></meter>
+                                    <span class="ratingz">3.2</span>
+                                    <meter class="average-rating star-3" min="0" max="5"></meter>
                                 </h5>
-                            </div>
+                            </span>
                         </div>
-                        <p class="card-text">
-                            McDonald's is a global fast-food giant known for its iconic golden arches, 
-                            serving up a wide range of classic burgers, fries, and beloved menu items 
-                            that have become synonymous with convenience and familiarity.
-                        </p>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia obcaecati maiores natus vitae repellendus nesciunt id est doloremque dolores repellat consequu</p>
                     </div>
                 </div>
             </div> 
@@ -115,16 +111,16 @@
                     <!-- profile (req)-->
                     <div class="card-header reviewHeader flex-center">
                             <div class="user-profile flex-center">
-                                <a href="../pages/errol09.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\errol09.png" alt=""></a>
+                                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="static/assets/icon.png" alt=""></a>
                                 <div class="postDeats">
-                                    <a class="user-link" href="../pages/errol09.html">Airol Batumbakal</a>
-                                    <div class=" status">1w</div>
+                                    <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                    <div class=" status">1d • edited</div>
                                 </div>
                             </div>
                             <div>
                                 <h5 class="d-inline-block">
-                                    <span class="ratingz">5.0</span>
-                                    <meter class="average-rating star-5 d-inline-block" min="0" max="5"></meter>
+                                    <span class="ratingz">3.2</span>
+                                    <meter class="average-rating star5 mang-inasal d-inline-block" min="0" max="5"></meter>
                                 </h5>
                             </div>
                     </div>
@@ -132,21 +128,41 @@
                     <!-- review text (req)-->
                     <div class="card-body reviewBody">
                         <!-- UNIQUE ID PER REVIEW -->
-                            <h6 class="card-title reviewTitle">McDonald's Classic Cheeseburger: A Timeless Delight!</h6>
+                            <h6 class="card-title reviewTitle">Ang Aking Review</h6>
                         <p class=" reviewtext truncate card-text">
-                            McDonald's has truly mastered the art of the classic cheeseburger. 
-                            The perfectly seasoned beef patty, topped with a slice of melted cheese, 
-                            nestled between two fluffy sesame seed buns is simply irresistible. The 
-                            flavors are well-balanced, and the quality of ingredients shines through. 
-                            It's a tried and true favorite that never fails to satisfy my cravings. The 
-                            only reason I didn't give it a perfect five-star rating is that I wish the 
-                            pickles were a bit more tangy. Nevertheless, McDonald's classic cheeseburger 
-                            remains an iconic choice that always hits the spot.
+                            Lorem ipsum dolor, sit amet consectetur adipisicing 
+                            elit. Deleniti voluptate eum incidunt dolore non 
+                            expedita debitis culpa esse neque? Eum ad repudiandae 
+                            quidem quo totam voluptas cupiditate enim! Sequi 
+                            tempora eligendi doloribus quas! Illo recusandae 
+                            tempora dolorem distinctio deleniti ad? Eligendi 
+                            obcaecati asperiores corporis iste explicabo? Dolor 
+                            consequuntur et sunt.
                         </p>
 
+                        <!-- media  -->
                         <div class="card-body revMedia">
-                            <span><img class="img-fluid" src="..\assets\reviewPics\Getty-1244662761-Resize-Recolor-DH-TOH-Mcdonalds-Burgers-Get-Upgrade-2023-e1685979312429.jpg"></span>
-                            <span><video class="img-fluid" src="..\assets\reviewPics\mcdooo.mp4" controls /></span>
+                                <span><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+                                <span class="audio"><audio  src="static/assets\sampleaudio.mp3" controls></span>
+                                <span><video class="img-fluid" src="static/assets\sheep_-_57647 (1080p).mp4" controls /></span>
+                                <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00000.moreImg">+4</button>
+                        </div>
+
+                        <div class="modal c00000 moreImg">
+                            <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                                </div>
+                                    <div class="modal-body moreImgBox">
+                                    <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+                                    <span><img  class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+                                    <span><video class="img-fluid" src="static/assets\sheep_-_57647 (1080p).mp4" controls /></span>
+                                    <span class="audio"><audio src="static/assets\sampleaudio.mp3" controls></span>
+                                    <span ><img class="img-fluid" src="..//assets//restaurants/24chicken.jpg"></span>
+                                </div>
+                            </div>
+                            </div>
                         </div>
 
                         <!-- icons -->
@@ -154,9 +170,9 @@
                             <span class=" chat chatbg "></span>
                             <span class=" cNum card-text">1</span>
                             <span class=" up upbg"> </span>
-                            <span class=" uvote card-text">16</span>
+                            <span class=" uvote card-text">6</span>
                             <span class=" down downbg"></span>
-                            <span class=" dvote card-text">2</span>
+                            <span class=" dvote card-text">9</span>
                             <span class=" reply replybg"></span>
                         </div>
                     </div>
@@ -175,8 +191,9 @@
                         <button class="estabResponse">view establishment's response</button>
                         <div class=" estabResponseText collapse">
                             <p class="reviewtext truncate mt-1 card-text ">
-                                Thank you for your review! We're glad you had a positive 
-                                experience at our store and we appreciate your support.
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                                officia quod animi rerum omnis? Repellendus officia 
                             </p>
                             <div class="flex-center iconBox">
                                 <span class="chat chatbg "></span>
@@ -204,17 +221,21 @@
                     <ul class=" comment list-group list-group-flush collapse">
                         <li class="REVIEW list-group-item">
                             <div class="user-profile  flex-center">
-                                <a href="../pages/steviee.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\steviee.png" alt=""></a>
+                                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="static/assets/icon.png" alt=""></a>
                                 <div class="postDeats">
-                                    <a class="user-link" href="../pages/steviee.html">Steviee</a>
-                                    <div class="status">2 hours ago • edited</div>
+                                    <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                    <div class="status">1d • edited</div>
                                 </div>
                             </div>
                             <p class="reviewtext truncate card-text">
-                                I couldn't agree more! McDonald's classic cheeseburger is truly a masterpiece, 
-                                with its perfectly seasoned beef patty, melted cheese, and fluffy sesame seed buns. 
-                                While I understand your desire for tangier pickles, it's undeniable that this iconic 
-                                choice never fails to satisfy cravings and remains a favorite among many.
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                Quisquam, dignissimos. Vferendis que eos atque quod, dolorum 
                                 </span> 
                             </p>
                             <div class="flex-center iconBox">
@@ -246,37 +267,31 @@
                 <div class="card mb-3 REVIEW">
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="../pages/___jstn.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\jstn.png" alt=""></a>
+                            <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="static/assets/icon.png" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="../pages/___jstn.html">___Jstn</a>
-                                <div class="status">3d • edited</div>
+                                <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                <div class="status">1d • edited</div>
                             </div>
                         </div>
                             <div>
                                 <h5 class="d-inline-block">
-                                    <span class="ratingz">4.9</span>
-                                    <meter class="average-rating star-5 d-inline-block" min="0" max="5"></meter>
+                                    <span class="ratingz">3.2</span>
+                                    <meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter>
                                 </h5>
                             </div>
                     </div>
                     <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">A Tropical Paradise in a Bite: McDonald's Pineapple Mango Smoothie!</h6>
                         <p class="reviewtext truncate card-text">
-                            Need a refreshing tropical escape? Look no further 
-                            than McDonald's Pineapple Mango Smoothie. Bursting 
-                            with the flavors of juicy pineapple and sweet mango, 
-                            this smoothie is a delightful blend of tropical goodness. 
-                            The smooth, icy texture is a perfect thirst quencher on a 
-                            hot summer day. My only critique is that I wish the 
-                            fruit flavors were a bit more pronounced, but overall, 
-                            it's a tasty treat that transports you to a sunny beach 
-                            with every sip.
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                            officia quod animi rerum omnis? Repellendus officia 
+                            perferendis ad in non! Similique eos atque quod, dolorum 
                         </p>
                         <div class="flex-center iconBox">
                             <span class="chat chatbg "></span>
-                            <span class="cNum card-text">0</span>
+                            <span class="cNum card-text">1</span>
                             <span class="up upbg"> </span>
-                            <span class="uvote card-text">12</span>
+                            <span class="uvote card-text">6</span>
                             <span class="down downbg"></span>
                             <span class="dvote card-text">9</span>
                             <span class="reply replybg"></span>
@@ -291,58 +306,38 @@
                     </div>
                     
                     <ul class="comment list-group list-group-flush collapse">
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="card mb-3 REVIEW">
-                    <div class="card-header reviewHeader flex-center">
-                        <div class="user-profile flex-center">
-                            <a href="../pages/jomarzkii.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\jomarzkii.png" alt=""></a>
-                            <div class="postDeats">
-                                <a class="user-link" href="../pages/jomarzkii.html">Jomar ng buhay mo</a>
-                                <div class="status">8 hours ago</div>
-                            </div>
-                        </div>
-                            <div>
-                                <h5 class="d-inline-block">
-                                    <span class="ratingz">4.7</span>
-                                    <meter class="average-rating star-5 d-inline-block" min="0" max="5"></meter>
-                                </h5>
-                            </div>
-                    </div>
-                    <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">A Morning Staple: McDonald's Sausage McMuffin Delivers!</h6>
-                        <p class="reviewtext truncate card-text">
-                            For a quick and satisfying breakfast, McDonald's Sausage McMuffin 
-                            is a reliable go-to. The combination of a savory sausage patty, a 
-                            slice of melty American cheese, and a perfectly toasted English muffin 
-                            creates a harmonious flavor profile. The convenience of a handheld breakfast 
-                            sandwich is unbeatable when you're on the go. My only suggestion would be 
-                            to add a touch more seasoning to the sausage for an extra flavor kick. 
-                            Nonetheless, McDonald's Sausage McMuffin remains a breakfast staple I can count on.
-                        </p>
-                        <div class="flex-center iconBox">
-                            <span class="chat chatbg "></span>
-                            <span class="cNum card-text">0</span>
-                            <span class="up upbg"> </span>
-                            <span class="uvote card-text">7</span>
-                            <span class="down downbg"></span>
-                            <span class="dvote card-text">0</span>
-                            <span class="reply replybg"></span>
-                        </div>
-                    </div>
-                    <div class="wReply card-footer collapse">
-                       <form> <div class="form-group">
-                            <label for="c00002xxtext" class="form-label writeReply">Write a Reply</label>
-                            <textarea class="form-control" required  id="c00002xxtext" name="c00002xxtext" rows="3"></textarea>
-                            <button type="submit" class="postReply btn btn-success">Post</button>
-                          </div></form>
-                    </div>
-                    
-                    <ul class="comment list-group list-group-flush collapse">
-                    </ul>
+                        <li class=" REVIEW list-group-item">
+                                <div class="user-profile flex-center">
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="static/assets/icon.png" alt=""></a>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                        <div class="status">1d • edited</div>
+                                    </div>
+                                </div>
+                                <p class="reviewtext truncate card-text">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                    Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                                    officia quod animi rer
+                                </p>
+                                <div class="flex-center iconBox">
+                                    <span class="chat chatbg "></span>
+                                    <span class="cNum card-text">0</span>
+                                    <span class="up upbg"> </span>
+                                    <span class="uvote card-text">3</span>
+                                    <span class="down downbg"></span>
+                                    <span class="dvote card-text">1</span>
+                                    <span class="reply replybg"></span>
+                                </div>
+                                <div class="wReply card-footer collapse">
+                                   <form> <div class="form-group">
+                                        <label for="c00002xatext" class="form-label writeReply">Write a Reply</label>
+                                        <textarea class="form-control" required  id="c00002xatext" name="c00002xatext" rows="3"></textarea>
+                                        <button type="submit" class="postReply btn btn-success">Post</button>
+                                      </div></form>
+                                </div>
+                                <ul class="comment list-group list-group-flush collapse"></ul>
+                        </li>
+                      </ul>
                 </div>
             </div>
 
@@ -356,101 +351,45 @@
                 <div class="card mb-3 REVIEW">
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="../pages/steviee.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\steviee.png" alt=""></a>
+                            <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="static/assets/icon.png" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="../pages/steviee.html">Steviee</a>
-                                <div class="status">4d • edited</div>
+                                <a class="user-link" href="user-profile-view.html">Juan De La Cruz</a>
+                                <div class="status">1d • edited</div>
                             </div>
                         </div>
                             <div>
-                                <h5 class="d-inline-block">
-                                    <span class="ratingz">4.3</span>
-                                    <meter class="average-rating star-4 d-inline-block" min="0" max="5"></meter>
+                                <h5 class="d-inline-blockz">
+                                    <span class="ratingz">3.2</span>
+                                    <meter class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter>
                                 </h5>
                             </div>
                     </div>
                     <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">Golden Perfection: McDonald's French Fries Are Simply Irresistible!</h6>
                         <p class="reviewtext truncate card-text">
-                            When it comes to French fries, McDonald's reigns supreme. 
-                            These golden sticks of pure joy are crisp on the outside and 
-                            perfectly fluffy on the inside. The level of saltiness is 
-                            spot-on, and they're always served piping hot. Whether 
-                            enjoyed on their own or paired with a burger, McDonald's 
-                            French fries never disappoint. Their consistent quality and 
-                            addictive taste make them an absolute winner. I can't resist 
-                            reaching for more every time I visit.
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                            Quisquam, dignissimos. Voluptate quos voluptatem numquam 
+                            officia quod animi rerum omnis? Repellendus officia 
+                            perferendis ad in non! Similique eos atque quod, dolorum 
                         </p>
                         <div class="flex-center iconBox">
                             <span class="chat chatbg "></span>
-                            <span class="cNum card-text">0</span>
+                            <span class="cNum card-text">1</span>
                             <span class="up upbg"> </span>
-                            <span class="uvote card-text">11</span>
+                            <span class="uvote card-text">6</span>
                             <span class="down downbg"></span>
-                            <span class="dvote card-text">1</span>
+                            <span class="dvote card-text">9</span>
                             <span class="reply replybg"></span>
                         </div>
                     </div>
                     <div class="wReply card-footer collapse">
                        <form> <div class="form-group">
-                            <label for="c00002xxtext" class="form-label writeReply">Write a Reply</label>
-                            <textarea class="form-control" required  id="c00002xxtext" name="c00002xxtext" rows="3"></textarea>
+                            <label for="c00003xxtext" class="form-label writeReply">Write a Reply</label>
+                            <textarea class="form-control" required  id="c00003xxtext" name="c00003xxtext" rows="3"></textarea>
                             <button type="submit" class="postReply btn btn-success">Post</button>
                           </div></form>
                     </div>
-                    
                     <ul class="comment list-group list-group-flush collapse">
-                    </ul>
-                </div>
-                <div class="card mb-3 REVIEW">
-                    <div class="card-header reviewHeader flex-center">
-                        <div class="user-profile flex-center">
-                            <a href="../pages/qwerty.html" class="flex-center"><img class="pfpRev img-fluid" src="../assets\user_pfp\qwerty.png" alt=""></a>
-                            <div class="postDeats">
-                                <a class="user-link" href="../pages/qwerty.html">anGeLICAA EELIIZaa</a>
-                                <div class="status">1d</div>
-                            </div>
-                        </div>
-                            <div>
-                                <h5 class="d-inline-block">
-                                    <span class="ratingz">5.0</span>
-                                    <meter class="average-rating star-5 d-inline-block" min="0" max="5"></meter>
-                                </h5>
-                            </div>
-                    </div>
-                    <div class="card-body reviewBody">
-                        <h6 class="card-title reviewTitle">Satisfy Your Sweet Tooth: McDonald's Apple Pie Delights!</h6>
-                        <p class="reviewtext truncate card-text">
-                            McDonald's Apple Pie is a warm, flaky slice of heaven that 
-                            never fails to satisfy my sweet cravings. The golden-brown 
-                            crust encases a luscious apple filling with just the right 
-                            amount of sweetness and a hint of cinnamon. Whether enjoyed 
-                            on its own or paired with a creamy ice cream scoop, this 
-                            dessert is pure indulgence. The contrast of textures between 
-                            the crispy crust and the tender apples is a delight with 
-                            every bite. McDonald's Apple Pie is a classic dessert that I 
-                            find myself coming back to time and time again.
-                        </p>
-                        <div class="flex-center iconBox">
-                            <span class="chat chatbg "></span>
-                            <span class="cNum card-text">0</span>
-                            <span class="up upbg"> </span>
-                            <span class="uvote card-text">3</span>
-                            <span class="down downbg"></span>
-                            <span class="dvote card-text">0</span>
-                            <span class="reply replybg"></span>
-                        </div>
-                    </div>
-                    <div class="wReply card-footer collapse">
-                       <form> <div class="form-group">
-                            <label for="c00002xxtext" class="form-label writeReply">Write a Reply</label>
-                            <textarea class="form-control" required  id="c00002xxtext" name="c00002xxtext" rows="3"></textarea>
-                            <button type="submit" class="postReply btn btn-success">Post</button>
-                          </div></form>
-                    </div>
-                    
-                    <ul class="comment list-group list-group-flush collapse">
-                    </ul>
+                      </ul>
                 </div>
             </div>
         </div>

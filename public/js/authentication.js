@@ -5,7 +5,7 @@ function login(username, desc, modal, image) {
     localStorage.setItem('savedUsername', username);
     localStorage.setItem('descProf', desc);
 
-    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '../assets/unknown.jpg');
+    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', 'static/assets/unknown.jpg');
 
 
 
