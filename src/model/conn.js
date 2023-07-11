@@ -4,8 +4,6 @@ const mongoURI = process.env.MONGODB_URI;
 const client = new MongoClient(mongoURI);
 
 export function connectToMongo(callback) {
-    console.log(mongoURI)
-
     client.connect().then(client => {
         callback();
     }).catch(err => {

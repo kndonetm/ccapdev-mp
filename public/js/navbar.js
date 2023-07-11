@@ -16,7 +16,7 @@ class Header extends HTMLElement {
       <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
       <div class="container p-1">
           <a href="index.html" class="navbar-brand h1 mb-0">
-              <img src="static/assets/icon.png" alt="">
+              <img src="/static/assets/icon.png" alt="">
               <span class="nav-name">ArcherEats</span>
           </a>
           <form class="d-flex position-relative search-container" action="search-result-view.html" method="get">
@@ -44,7 +44,7 @@ class estabHeader extends HTMLElement {
       <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
       <div class="container p-1">
           <a href="../pages/index.html" class="navbar-brand h1 mb-0">
-              <img src="static/assets/icon.png" alt="">
+              <img src="/static/assets/icon.png" alt="">
               <span class="nav-name">ArcherEats</span>
           </a>
           <form class="d-flex position-relative search-container"  action="../pages/search-result-view.html" method="get">
@@ -78,7 +78,7 @@ class NavModal extends HTMLElement {
                     <div class="d-flex">
                         <div class="myform">
                             <div class="d-flex mt-2">
-                                <img src="static/assets/icon.png" alt="" class="me-2">
+                                <img src="/static/assets/icon.png" alt="" class="me-2">
                                 <h5 class="nav-name">ArcherEats</h5>
                             </div>
                             <h1 class="text-center mt-5">Welcome Back!</h1>
@@ -100,7 +100,7 @@ class NavModal extends HTMLElement {
                                 <p class="pt-3 subtext">Don't have an account? <a href="#" data-bs-target="#register" data-bs-toggle="modal">Sign up</a></p>
                             </form>
                         </div>
-                        <img src="static/assets/modal-2.jpg" alt="" class="d-block">
+                        <img src="/static/assets/modal-2.jpg" alt="" class="d-block">
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@ class NavModal extends HTMLElement {
                     <div class="d-flex">
                         <div class="myform">
                             <div class="d-flex mt-2">
-                                <img src="static/assets/icon.png" alt="" class="me-2">
+                                <img src="/static/assets/icon.png" alt="" class="me-2">
                                 <h5 class="nav-name">ArcherEats</h5>
                             </div>
                             <div class="d-flex justify-content-between">
@@ -124,7 +124,7 @@ class NavModal extends HTMLElement {
                                     <p class="text-start caption">Write food reviews for your fellow Lasallians!</p>
                                 </div> 
                                 <div class="user-img">
-                                    <img src="static/assets/unknown.jpg" alt="" id="pfp-input">
+                                    <img src="/static/assets/unknown.jpg" alt="" id="pfp-input">
                                     <input type="file" id="file">
                                     <label for="file" id="uploadbtn"><i class="fas fa-camera"></i></label>
                                 </div>
@@ -146,7 +146,7 @@ class NavModal extends HTMLElement {
                                 <p class="pt-3 subtext">Already have an account? <a href="#" data-bs-target="#signin" data-bs-toggle="modal">Sign in</a></p>
                             </form>
                         </div>
-                        <img src="static/assets/modal-1.jpg" alt="" class="d-block">
+                        <img src="/static/assets/modal-1.jpg" alt="" class="d-block">
                     </div>
                 </div>
             </div>

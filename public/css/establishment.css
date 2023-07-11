@@ -240,19 +240,19 @@ copy for icons
 .ARBimgBtn {
     background-image: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('static/assets/reviewPics/arb4.jpg');
+    url('/static/assets/reviewPics/arb4.jpg');
 }
 
 .imgBtn {
     background-image: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('static/assets/reviewPics/24-Chicken-3.jpg');
+    url('/static/assets/reviewPics/24-Chicken-3.jpg');
 }
 
 .JBimgBtn {
     background-image: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('static/assets/reviewPics/jb4.jpg');
+    url('/static/assets/reviewPics/jb4.jpg');
 }
 
 .moreImgBox > * {

@@ -16,7 +16,7 @@ router.get("/search", function(req, res) {
 
 router.get("/users/:userid", function(req, res) {
     console.log(req.params.userid);
-    res.render("user-profile-view", {
+    res.render("___jstn", {
         title: "User profile"
     });
 })
