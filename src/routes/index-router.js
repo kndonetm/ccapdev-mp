@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import searchRouter from './search-router.js';
 
 const router = Router();
 
@@ -8,11 +9,7 @@ router.get("/", function(req, res) {
     });
 })
 
-router.get("/search", function(req, res) {
-    res.render("search-result-view", {
-        title: "Search results"
-    })
-})
+router.use(searchRouter);
 
 router.get("/users/:userid", function(req, res) {
     console.log(req.params.userid);
