@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "username": "___jstn",
+  "password": "12345",
+  "description": "Business Owner",
+  "profile-picture": "static/assets/user-pfp-placeholders/pfp_sample_1.png"
+},
+{
+  "_id": {
+    "$oid": "64aed2a8f586db31f5a01230"
+  },
+  "username": "errol09",
+  "password": "12345",
+  "description": "Chef",
+  "profile-picture": "/static/assets/user_pfp/errol09.png"
+},
+{
+  "_id": {
+    "$oid": "64aed2aff586db31f5a01231"
+  },
+  "username": "anGeLICAA EELIIZaa",
+  "password": "12345",
+  "description": "Hello, I'm anGeLICAA EELIIZaa, the Schuyler SISTERz.\nDaddy said to be home by sundown, but daddy doesn't really need to know :)",
+  "profile-picture": "/static/assets/user_pfp/qwerty.png"
+},
+{
+  "_id": {
+    "$oid": "64aed2b1f586db31f5a01232"
+  },
+  "username": "Jomar ng buhay mo",
+  "password": "12345",
+  "description": "Advocate",
+  "profile-picture": "/static/assets/user_pfp/jomarzkii.png"
+},
+{
+  "_id": {
+    "$oid": "64aed2b2f586db31f5a01233"
+  },
+  "username": "Steviee",
+  "password": "12345",
+  "description": "Vlogger, Food Enthusiast",
+  "profile-picture": "/static/assets/user_pfp/steviee.png"
+}]
