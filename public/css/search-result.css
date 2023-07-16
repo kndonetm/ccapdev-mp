@@ -7,6 +7,10 @@ li .card {
     overflow: hidden;
 }
 
+.fa-star {
+    color: #198754;
+  }
+
 .result-image {
     height: 70px;
     width: 70px;

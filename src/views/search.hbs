@@ -18,13 +18,13 @@
             <div class="dropdown m-0">
                 <button id="star-filter-dropdown" class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">No filter</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item star-filter" type="button">No filter</button>
-                    <button class="dropdown-item star-filter" type="button">5 Stars</button>
-                    <button class="dropdown-item star-filter" type="button">4 Stars</button>
-                    <button class="dropdown-item star-filter" type="button">3 Stars</button>
-                    <button class="dropdown-item star-filter" type="button">2 Stars</button>
-                    <button class="dropdown-item star-filter" type="button">1 Star</button>
-                    <button class="dropdown-item star-filter" type="button">0 Stars</button>
+                    <a href="" class="dropdown-item star-filter" type="button">No filter</a>
+                    <a href="" class="dropdown-item star-filter" type="button">5 Stars</a>
+                    <a href="" class="dropdown-item star-filter" type="button">4 Stars</a>
+                    <a href="" class="dropdown-item star-filter" type="button">3 Stars</a>
+                    <a href="" class="dropdown-item star-filter" type="button">2 Stars</a>
+                    <a href="" class="dropdown-item star-filter" type="button">1 Star</a>
+                    <a href="" class="dropdown-item star-filter" type="button">0 Stars</a>
                 </div>
             </div>
 
@@ -36,13 +36,13 @@
         <ul class="list-unstyled m-0">
             {{#each establishments}}
                 <li class="m-0 p-0">
-                    <a href={{pagePath}} class="text-decoration-none">
+                    <a href="/{{_id}}" class="text-decoration-none">
                         <div class="row" >
                             <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                                <img class="result-image" src={{imgPath}} alt="">
+                                <img class="result-image" src={{profile-picture}} alt="">
                                 <div class="result-info d-flex flex-column">
-                                    <p class="h3 m-0">{{name}}</p>
-                                    <p class="smaller-text text-wrap m-0">{{shortdesc}}</p>
+                                    <p class="h3 m-0">{{displayed-name}} <span class="fas fa-star me-1"></span>{{rating}} </p>
+                                    <p class="smaller-text text-wrap m-0">{{description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -65,13 +65,13 @@
         <ul class="list-unstyled m-0">
             {{#each reviews}}
                 <li>
-                    <a href={{pagePath}} class="text-decoration-none text-dark">
+                    <a href="/users/{{_id}}" class="text-decoration-none text-dark">
                         <div class="row" >
                             <div class="card container d-flex flex-row m-2 p-0 gap-2">
-                                <img class="result-image" src={{imgPath}} alt="">
+                                <img class="result-image" src={{user.profile-picture}} alt="">
                                 <div class="result-info d-flex flex-column">
-                                    <p class="h3 m-0">{{title}}<span class="smaller-text">by {{author}}</span></p>
-                                    <p class="smaller-text text-wrap m-0">{{body}}</p>
+                                    <p class="h3 m-0">{{title}}<span class="smaller-text"> by {{user.username}}</span></p>
+                                    <p class="smaller-text text-wrap m-0">{{content}}</p>
                                 </div>
                             </div>
                         </div>
