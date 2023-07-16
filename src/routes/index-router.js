@@ -1,11 +1,20 @@
 import { Router } from 'express'
 import searchRouter from './search-router.js';
 
-const router = Router();
+import { getDb } from '../model/conn.js';
 
-router.get("/", function(req, res) {
+const router = Router();
+const db = getDb();
+const establishments_db = db.collection("establishments");
+const users_db = db.collection("users");
+const reviews_db = db.collection("reviews");
+
+router.get("/", async function(req, res) {
+    const establishments = await establishments_db.find({}).toArray();
+
     res.render("index", {
-        title: "Home"
+        title: "Home",
+        establishments: establishments
     });
 })
 
