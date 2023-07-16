@@ -559,9 +559,16 @@
   "likes": [],
   "dislikes": [],
   "comments": [],
-  "edited": false,
-  "images": [],
-  "videos": [],
+  "edited": true,
+  "images": [
+    "/static/assets/restaurants/24chicken.jpg",
+    "/static/assets//restaurants/24chicken.jpg",
+    "/static/assets//restaurants/24chicken.jpg",
+    "/static/assets//restaurants/24chicken.jpg"
+  ],
+  "videos": [
+    "/static/assets/sheep_-_57647 (1080p).mp4"
+  ],
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
