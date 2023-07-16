@@ -9,14 +9,21 @@ import router from './src/routes/index-router.js';
 
 import { connectToMongo } from './src/model/conn.js';
 
+import hbsHelpers from './src/modules/handlebars-helpers/helpers.js'
+
 const app = express();
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 app.use("/static", express.static(__dirname + "/public"));
 
-app.engine("hbs", exphbs.engine({ 
-    extname: "hbs",
-}));
+var hbs = exphbs.create({
+    helpers: hbsHelpers,
+    defaultLayout: 'main',
+    partialsDir: ['views/partials/'],
+    extname: 'hbs'
+})
+
+app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "./src/views");
 app.set("view cache", false);
