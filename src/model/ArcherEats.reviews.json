@@ -26,8 +26,6 @@
           "likes": 0,
           "dislikes": 0,
           "comments": [],
-          "images": [],
-          "videos": [],
           "datePosted": {
             "$date": "2023-07-10T16:00:00.000Z"
           },
@@ -36,8 +34,6 @@
           }
         }
       ],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       },
@@ -50,8 +46,6 @@
       "likes": 0,
       "dislikes": 0,
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       },
@@ -96,8 +90,6 @@
       "likes": [],
       "dislikes": [],
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       }
@@ -228,8 +220,6 @@
       "likes": [],
       "dislikes": [],
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       }
@@ -288,8 +278,6 @@
       "likes": [],
       "dislikes": [],
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       }
@@ -468,8 +456,6 @@
       "likes": [],
       "dislikes": [],
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       }
@@ -631,8 +617,6 @@
       "likes": [],
       "dislikes": [],
       "comments": [],
-      "images": [],
-      "videos": [],
       "datePosted": {
         "$date": "2023-07-10T16:00:00.000Z"
       }
