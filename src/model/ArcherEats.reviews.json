@@ -20,6 +20,35 @@
       "content": "DIBAAAA?!?! Mapapabili ka nalang talaga! HAHAHA",
       "likes": 0,
       "dislikes": 0,
+      "comments": [
+        {
+          "content": "sample b",
+          "likes": 0,
+          "dislikes": 0,
+          "comments": [],
+          "images": [],
+          "videos": [],
+          "datePosted": {
+            "$date": "2023-07-10T16:00:00.000Z"
+          },
+          "userId": {
+            "$oid": "64ad73069c3a43fc64bb44c4"
+          }
+        }
+      ],
+      "images": [],
+      "videos": [],
+      "datePosted": {
+        "$date": "2023-07-10T16:00:00.000Z"
+      },
+      "userId": {
+        "$oid": "64ad73069c3a43fc64bb44c4"
+      }
+    },
+    {
+      "content": "sample a",
+      "likes": 0,
+      "dislikes": 0,
       "comments": [],
       "images": [],
       "videos": [],
