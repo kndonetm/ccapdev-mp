@@ -31,7 +31,7 @@ searchRouter.get("/search", async (req, res) => {
         {
             $lookup: {
                 from: "users",
-                localField: "user-id",
+                localField: "userId",
                 foreignField: "_id",
                 as: "user"
             }
