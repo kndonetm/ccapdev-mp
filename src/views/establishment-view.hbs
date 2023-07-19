@@ -92,10 +92,10 @@
                     <!-- profile (req)-->
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid"
+                            <a href="users/{{user._id}}" class="flex-center"><img class="pfpRev img-fluid"
                                     src="{{user.profilePicture}}" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="user-profile-view.html">{{user.username}}</a>
+                                <a class="user-link" href="users/{{user._id}}">{{user.username}}</a>
                                 <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
                             </div>
                         </div>
@@ -230,10 +230,10 @@
                     <!-- profile (req)-->
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid"
+                            <a href="users/{{user._id}}" class="flex-center"><img class="pfpRev img-fluid"
                                     src="{{user.profilePicture}}" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="user-profile-view.html">{{user.username}}</a>
+                                <a class="user-link" href="users/{{user._id}}">{{user.username}}</a>
                                 <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
                             </div>
                         </div>

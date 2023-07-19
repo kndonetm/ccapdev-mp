@@ -8,7 +8,7 @@
                     src="{{user.profilePicture}}" alt=""></a>
             <div class="postDeats">
                 <a class="user-link" href="/users/{{user._id}}">{{user.username}}</a>
-                <div class="status">1d • edited</div>
+                <div class="status">1d {{#if edited}}• edited{{/if}}</div>
             </div>
         </div>
         <p class="reviewtext truncate card-text">

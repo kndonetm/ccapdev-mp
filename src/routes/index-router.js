@@ -32,7 +32,7 @@ router.get("/:establishmentid", async function (req, res) {
     const reviews = await reviews_db.aggregate([
       {
         '$match': {
-          'establishmentId': new ObjectId('64ad74f29c3a43fc64bb44d5')
+          'establishmentId': oid
         }
       }, {
         '$lookup': {
@@ -162,6 +162,7 @@ router.get("/:establishmentid", async function (req, res) {
               'datePosted': '$comments.datePosted', 
               'userId': '$comments.userId', 
               'parent': '$comments.parent', 
+              'edited': '$comments.edited', 
               'user': '$comments.user'
             }
           }, 
@@ -316,6 +317,7 @@ router.get("/:establishmentid", async function (req, res) {
               'userId': '$comments.userId', 
               'parent': '$comments.parent', 
               'user': '$comments.user', 
+              'edited': '$comments.edited', 
               'children': '$children'
             }
           }
@@ -349,11 +351,10 @@ router.get("/:establishmentid", async function (req, res) {
             }
           }
         }
-      },
-      {
-        $sort: {
-          datePosted: -1,
-          _id: 1
+      }, {
+        '$sort': {
+          'datePosted': -1, 
+          '_id': 1
         }
       }
     ]).toArray();
