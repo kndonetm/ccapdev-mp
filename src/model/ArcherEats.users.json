@@ -5,7 +5,7 @@
   "username": "___jstn",
   "password": "12345",
   "description": "Business Owner",
-  "profilePicture": "static/assets/user-pfp-placeholders/pfp_sample_1.png"
+  "profilePicture": "/static/assets/user-pfp-placeholders/pfp_sample_1.png"
 },
 {
   "_id": {

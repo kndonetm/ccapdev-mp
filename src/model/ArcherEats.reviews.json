@@ -15,45 +15,6 @@
       "$oid": "64aed2aff586db31f5a01231"
     }
   ],
-  "comments": [
-    {
-      "content": "DIBAAAA?!?! Mapapabili ka nalang talaga! HAHAHA",
-      "likes": 0,
-      "dislikes": 0,
-      "comments": [
-        {
-          "content": "sample b",
-          "likes": 0,
-          "dislikes": 0,
-          "comments": [],
-          "datePosted": {
-            "$date": "2023-07-10T16:00:00.000Z"
-          },
-          "userId": {
-            "$oid": "64ad73069c3a43fc64bb44c4"
-          }
-        }
-      ],
-      "datePosted": {
-        "$date": "2023-07-10T16:00:00.000Z"
-      },
-      "userId": {
-        "$oid": "64ad73069c3a43fc64bb44c4"
-      }
-    },
-    {
-      "content": "sample a",
-      "likes": 0,
-      "dislikes": 0,
-      "comments": [],
-      "datePosted": {
-        "$date": "2023-07-10T16:00:00.000Z"
-      },
-      "userId": {
-        "$oid": "64ad73069c3a43fc64bb44c4"
-      }
-    }
-  ],
   "edited": false,
   "images": [],
   "videos": [],
@@ -77,7 +38,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -111,7 +71,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -135,7 +94,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -159,7 +117,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -183,7 +140,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": true,
   "images": [],
   "videos": [],
@@ -207,7 +163,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -241,7 +196,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -265,7 +219,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -299,7 +252,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -323,7 +275,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -347,7 +298,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -371,7 +321,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -395,7 +344,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -419,7 +367,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -443,7 +390,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -477,7 +423,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -501,7 +446,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -525,7 +469,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -549,7 +492,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -573,7 +515,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": true,
   "images": [
     "/static/assets/restaurants/24chicken.jpg",
@@ -604,7 +545,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -638,7 +578,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -662,7 +601,6 @@
   "rating": 4,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],
@@ -686,7 +624,6 @@
   "rating": 5,
   "likes": [],
   "dislikes": [],
-  "comments": [],
   "edited": false,
   "images": [],
   "videos": [],

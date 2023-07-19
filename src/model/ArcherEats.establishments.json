@@ -9,7 +9,7 @@
   "rating": 4.2,
   "displayedName": "McDonalds",
   "numReviews": 5,
-  "profilePicture": "static/assets\\restaurants\\Mcdo.jpg",
+  "profilePicture": "/static/assets\\restaurants\\Mcdo.jpg",
   "tag1": "Filipino",
   "tag2": "Fast Food"
 },
