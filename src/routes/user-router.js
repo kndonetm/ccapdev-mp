@@ -6,6 +6,7 @@ const userRouter = Router();
 const db = getDb();
 const users = db.collection("users");
 const reviews = db.collection("reviews");
+const comments = db.collection("comments");
 
 userRouter.get("/users/:userid", async (req, res) => {
     // get user from users collection
@@ -21,14 +22,19 @@ userRouter.get("/users/:userid", async (req, res) => {
     }).toArray();
 
     // add values needed in view to review object
-    reviewsArray.forEach((review) => {
+    reviewsArray.forEach(async (review) => {
         // get post age
         let currentDate = new Date();
         review.age = Math.ceil(Math.abs(currentDate - review.datePosted) / (1000 * 60 * 60 * 24));
 
         if(review.edited) review.editedTag = "edited";
 
-        review.commentNum = review.comments.length;
+        // get all the comments of the review (slow)
+        const commentArray = await comments.find({
+            reviewId: review._id,
+        }).toArray();
+
+        review.commentNum = commentArray.length;
         review.likesNum = review.likes.length;
         review.dislikesNum = review.dislikes.length;
     });
