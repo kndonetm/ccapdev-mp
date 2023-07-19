@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 
 import { Router } from 'express'
 import searchRouter from './search-router.js';
+import userRouter from './user-router.js';
 
 import { getDb } from '../model/conn.js';
 
@@ -20,14 +21,8 @@ router.get("/", async function (req, res) {
     });
 })
 
+router.use(userRouter);
 router.use(searchRouter);
-
-router.get("/users/:userid", function (req, res) {
-    console.log(req.params.userid);
-    res.render("___jstn", {
-        title: "User profile"
-    });
-})
 
 router.get("/:establishmentid", async function (req, res) {
     const oid = new ObjectId(req.params.establishmentid);
