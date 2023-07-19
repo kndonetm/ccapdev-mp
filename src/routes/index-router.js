@@ -35,22 +35,332 @@ router.get("/:establishmentid", async function (req, res) {
     const establishments = await establishments_db.find({}).toArray();
     const selectedEstab = await establishments_db.find({ _id: oid }).toArray();
     const reviews = await reviews_db.aggregate([
-        { $match: { establishmentId: oid } },
-        {
-            '$lookup': {
-                'from': 'establishments',
-                'localField': 'establishmentId',
-                'foreignField': '_id',
-                'as': 'establishment'
-            }
-        }, {
-            '$lookup': {
-                'from': 'users',
-                'localField': 'userId',
-                'foreignField': '_id',
-                'as': 'user'
-            }
+      {
+        '$match': {
+          'establishmentId': new ObjectId('64ad74f29c3a43fc64bb44d5')
         }
+      }, {
+        '$lookup': {
+          'from': 'comments', 
+          'localField': '_id', 
+          'foreignField': 'reviewId', 
+          'as': 'comments'
+        }
+      }, {
+        '$unwind': {
+          'path': '$comments', 
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$lookup': {
+          'from': 'users', 
+          'localField': 'userId', 
+          'foreignField': '_id', 
+          'as': 'user'
+        }
+      }, {
+        '$unwind': {
+          'path': '$user', 
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$lookup': {
+          'from': 'users', 
+          'localField': 'comments.userId', 
+          'foreignField': '_id', 
+          'as': 'comments.user'
+        }
+      }, {
+        '$unwind': {
+          'path': '$comments.user', 
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$match': {
+          'comments.parent': null
+        }
+      }, {
+        '$graphLookup': {
+          'from': 'comments', 
+          'startWith': '$comments._id', 
+          'connectFromField': '_id', 
+          'connectToField': 'parent', 
+          'as': 'comments.children', 
+          'depthField': 'level'
+        }
+      }, {
+        '$unwind': {
+          'path': '$comments.children', 
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$lookup': {
+          'from': 'users', 
+          'localField': 'comments.children.userId', 
+          'foreignField': '_id', 
+          'as': 'comments.children.user'
+        }
+      }, {
+        '$unwind': {
+          'path': '$comments.children.user', 
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$sort': {
+          '_id': 1, 
+          'comments.children.level': -1
+        }
+      }, {
+        '$group': {
+          '_id': {
+            'reviewid': '$_id', 
+            'commentid': '$comments._id'
+          }, 
+          'id': {
+            '$first': '$_id'
+          }, 
+          'title': {
+            '$first': '$title'
+          }, 
+          'content': {
+            '$first': '$content'
+          }, 
+          'rating': {
+            '$first': '$rating'
+          }, 
+          'likes': {
+            '$first': '$likes'
+          }, 
+          'dislikes': {
+            '$first': '$dislikes'
+          }, 
+          'edited': {
+            '$first': '$edited'
+          }, 
+          'images': {
+            '$first': '$images'
+          }, 
+          'videos': {
+            '$first': '$videos'
+          }, 
+          'datePosted': {
+            '$first': '$datePosted'
+          }, 
+          'estabResponse': {
+            '$first': '$estabResponse'
+          }, 
+          'establishmentId': {
+            '$first': '$establishmentId'
+          }, 
+          'userId': {
+            '$first': '$userId'
+          }, 
+          'user': {
+            '$first': '$user'
+          }, 
+          'comments': {
+            '$first': {
+              '_id': '$comments._id', 
+              'content': '$comments.content', 
+              'likes': '$comments.likes', 
+              'dislikes': '$comments.dislikes', 
+              'datePosted': '$comments.datePosted', 
+              'userId': '$comments.userId', 
+              'parent': '$comments.parent', 
+              'user': '$comments.user'
+            }
+          }, 
+          'children': {
+            '$push': '$comments.children'
+          }
+        }
+      }, {
+        '$replaceWith': {
+          '$arrayToObject': {
+            '$map': {
+              'input': {
+                '$objectToArray': '$$ROOT'
+              }, 
+              'as': 'item', 
+              'in': {
+                '$cond': {
+                  'if': {
+                    '$ne': [
+                      '$$item.v', [
+                        {}
+                      ]
+                    ]
+                  }, 
+                  'then': '$$item', 
+                  'else': {
+                    'k': '$$item.k', 
+                    'v': []
+                  }
+                }
+              }
+            }
+          }
+        }
+      }, {
+        '$addFields': {
+          'children': {
+            '$reduce': {
+              'input': '$children', 
+              'initialValue': {
+                'level': -1, 
+                'presentChild': [], 
+                'prevChild': []
+              }, 
+              'in': {
+                '$let': {
+                  'vars': {
+                    'prev': {
+                      '$cond': [
+                        {
+                          '$eq': [
+                            '$$value.level', '$$this.level'
+                          ]
+                        }, '$$value.prevChild', '$$value.presentChild'
+                      ]
+                    }, 
+                    'current': {
+                      '$cond': [
+                        {
+                          '$eq': [
+                            '$$value.level', '$$this.level'
+                          ]
+                        }, '$$value.presentChild', []
+                      ]
+                    }
+                  }, 
+                  'in': {
+                    'level': '$$this.level', 
+                    'prevChild': '$$prev', 
+                    'presentChild': {
+                      '$concatArrays': [
+                        '$$current', [
+                          {
+                            '$mergeObjects': [
+                              '$$this', {
+                                'children': {
+                                  '$filter': {
+                                    'input': '$$prev', 
+                                    'as': 'e', 
+                                    'cond': {
+                                      '$eq': [
+                                        '$$e.parent', '$$this._id'
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }, {
+        '$addFields': {
+          'children': '$children.presentChild'
+        }
+      }, {
+        '$group': {
+          '_id': '$id', 
+          'title': {
+            '$first': '$title'
+          }, 
+          'content': {
+            '$first': '$content'
+          }, 
+          'rating': {
+            '$first': '$rating'
+          }, 
+          'likes': {
+            '$first': '$likes'
+          }, 
+          'dislikes': {
+            '$first': '$dislikes'
+          }, 
+          'edited': {
+            '$first': '$edited'
+          }, 
+          'images': {
+            '$first': '$images'
+          }, 
+          'videos': {
+            '$first': '$videos'
+          }, 
+          'datePosted': {
+            '$first': '$datePosted'
+          }, 
+          'estabResponse': {
+            '$first': '$estabResponse'
+          }, 
+          'establishmentId': {
+            '$first': '$establishmentId'
+          }, 
+          'userId': {
+            '$first': '$userId'
+          }, 
+          'user': {
+            '$first': '$user'
+          }, 
+          'children': {
+            '$push': {
+              '_id': '$comments._id', 
+              'content': '$comments.content', 
+              'likes': '$comments.likes', 
+              'dislikes': '$comments.dislikes', 
+              'datePosted': '$comments.datePosted', 
+              'userId': '$comments.userId', 
+              'parent': '$comments.parent', 
+              'user': '$comments.user', 
+              'children': '$children'
+            }
+          }
+        }
+      }, {
+        '$replaceWith': {
+          '$arrayToObject': {
+            '$map': {
+              'input': {
+                '$objectToArray': '$$ROOT'
+              }, 
+              'as': 'item', 
+              'in': {
+                '$cond': {
+                  'if': {
+                    '$ne': [
+                      '$$item.v', [
+                        {
+                          'children': []
+                        }
+                      ]
+                    ]
+                  }, 
+                  'then': '$$item', 
+                  'else': {
+                    'k': '$$item.k', 
+                    'v': []
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        $sort: {
+          datePosted: -1,
+          _id: 1
+        }
+      }
     ]).toArray();
 
     for (let review of reviews) {
@@ -68,7 +378,7 @@ router.get("/:establishmentid", async function (req, res) {
     const topReviews = reviews.slice(0, 2);
     const truncatedReviews = reviews.slice(2);
 
-    console.log(reviews)
+    console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
 
     res.render("establishment-view", {
         title: `${selectedEstab[0].displayedName}`,

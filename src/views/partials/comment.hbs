@@ -1,0 +1,42 @@
+<!--  comment section list of review-->
+<!-- UL ID is for review // the reply will have a unique ID -->
+<ul class=" comment list-group list-group-flush collapse">
+    {{#each children}}
+    <li class="REVIEW list-group-item">
+        <div class="user-profile  flex-center">
+            <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid"
+                    src="{{user.profilePicture}}" alt=""></a>
+            <div class="postDeats">
+                <a class="user-link" href="/users/{{user._id}}">{{user.username}}</a>
+                <div class="status">1d • edited</div>
+            </div>
+        </div>
+        <p class="reviewtext truncate card-text">
+            {{content}}
+        </p>
+        <div class="flex-center iconBox">
+            <span class="chat chatbg "></span>
+            <span class="cNum card-text">{{length children}}</span>
+            <span class="up upbg"> </span>
+            <span class="uvote card-text">{{length likes}}</span>
+            <span class="down downbg"></span>
+            <span class="dvote card-text">{{length dislikes}}</span>
+            <span class="reply replybg"></span>
+        </div>
+        <div class="wReply card-footer collapse">
+            <form>
+                <div class="form-group">
+                    <label for="c00001xctext" class="form-label writeReply">Write a
+                        Reply</label>
+                    <textarea class="form-control" required id="c00001xctext" name="c00001xctext" rows="3"></textarea>
+                    <button type="submit" class="postReply btn btn-success">Post</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- reply comment section list -->
+        {{> comment }}
+        <ul class="comment list-group list-group-flush collapse"></ul>
+    </li>
+    {{/each}}
+</ul>

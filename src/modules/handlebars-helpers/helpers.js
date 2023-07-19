@@ -1,5 +1,6 @@
 const hbsHelpers = {
     'length': function(arr) {
+        console.log(arr)
         return arr.length;
     },
     'formatDate': function(date) {

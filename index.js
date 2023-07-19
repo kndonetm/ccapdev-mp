@@ -19,7 +19,7 @@ app.use("/static", express.static(__dirname + "/public"));
 var hbs = exphbs.create({
     helpers: hbsHelpers,
     defaultLayout: 'main',
-    partialsDir: ['views/partials/'],
+    partialsDir: __dirname + "/src/views/partials",
     extname: 'hbs'
 })
 
