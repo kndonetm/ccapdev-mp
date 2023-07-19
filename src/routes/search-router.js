@@ -14,6 +14,7 @@ searchRouter.get("/search", async (req, res) => {
         ]
     };
 
+    // add another condition if there is a filter
     if(req.query.filter) {
         let ratingFloor = Math.floor(req.query.filter);
         estabQueryPipe.$and = [ { rating: { $gt: ratingFloor, $lt: ratingFloor + 1 } } ]
