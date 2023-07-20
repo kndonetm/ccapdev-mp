@@ -51,6 +51,10 @@ document.addEventListener("submit", event=> {
     } 
 })
 
+document.querySelector("#searchForm button").addEventListener("click", (event) => {
+    console.log("flag");
+    document.querySelector("#searchForm").submit();
+})
 
 function markUp (event) {
     parent = event.target.closest('.REVIEW')

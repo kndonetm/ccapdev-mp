@@ -15,13 +15,13 @@ class Header extends HTMLElement {
       this.innerHTML = `
       <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
       <div class="container p-1">
-          <a href="index.html" class="navbar-brand h1 mb-0">
+          <a href="/" class="navbar-brand h1 mb-0">
               <img src="/static/assets/icon.png" alt="">
               <span class="nav-name">ArcherEats</span>
           </a>
-          <form class="d-flex position-relative search-container" action="search-result-view.html" method="get">
-              <input type="text" class="form-control" placeholder="Search">
-              <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
+          <form class="d-flex position-relative search-container" id="searchForm" action="/search" method="get">
+              <input type="text" class="form-control" name="q" placeholder="Search">
+              <button type="button" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
           </form>
           <ul class="navbar-nav">
           </ul>
@@ -43,13 +43,13 @@ class estabHeader extends HTMLElement {
       this.innerHTML = `
       <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
       <div class="container p-1">
-          <a href="../pages/index.html" class="navbar-brand h1 mb-0">
+          <a href="/" class="navbar-brand h1 mb-0">
               <img src="/static/assets/icon.png" alt="">
               <span class="nav-name">ArcherEats</span>
           </a>
-          <form class="d-flex position-relative search-container"  action="../pages/search-result-view.html" method="get">
-              <input type="text" class="form-control" placeholder="Search establishments">
-              <button type="submit" class="btn btn-success position-absolute end-0"><a href="../pages/search-result-view.html" class="text-decoration-none text-reset"><i class="fa fa-search"></i></a></button>
+          <form class="d-flex position-relative search-container" id="searchForm" action="/search" method="get">
+              <input type="text" class="form-control" name="q" placeholder="Search establishments">
+              <button type="button" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
           </form>
           <ul class="navbar-nav">
           </ul>
