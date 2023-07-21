@@ -32,12 +32,5 @@ app.use(router);
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log("Express app now listening...");
-    connectToMongo((err) => {
-        if (err) {
-            console.error("An error has occurred:");
-            console.error(err);
-            return;
-        }
-        console.log("Connected to Mongodb");
-    });
+    connectToMongo();
 });

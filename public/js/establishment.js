@@ -56,13 +56,25 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
     document.querySelector("#searchForm").submit();
 })
 
-function markUp (event) {
+async function markUp (event) {
     parent = event.target.closest('.REVIEW')
     up = parent.querySelector('.up')
     down = parent.querySelector('.down')
     upvote = parent.querySelector('.uvote')
     downvote = parent.querySelector('.dvote')
     let votes = parseInt(upvote.innerHTML);
+
+    fetch('/', {
+    method: 'POST',
+    body: JSON.stringify({
+    userId: 1,
+    }),
+    headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    },
+    })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 
     if ($(up).hasClass("upbg")) {
         $(up).addClass('upbgfill').removeClass('upbg') 
