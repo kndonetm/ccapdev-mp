@@ -378,7 +378,6 @@ router.get("/:establishmentid", async function (req, res) {
 
     res.render("establishment-view", {
         title: `${selectedEstab[0].displayedName}`,
-        establishments: establishments,
         selectedEstab: selectedEstab[0],
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,

@@ -3,7 +3,7 @@
 <nav-modal></nav-modal>
 
 <!-- whole screen -->
-<div class="container">
+<div class="container mb-5">
     <div class="row">
         <!-- establishment card -->
         {{#with selectedEstab}}
@@ -86,19 +86,25 @@
             <p class="fw-light mb-2">Top Reviews</p>
 
             <!-- Top Reviews / one row per review-->
+            {{#if topReviews}}
             {{#each topReviews}}
             {{> review this}}
             {{/each}}
 
             <!-- Truncated reviews -->
-            <div class="row mb-3">
-                <button class="moreRev moreRevText">see more</button>
-            </div>
-            <div class="row moreRev collapse">
-            {{#each truncatedReviews}}
-            {{> review this}}
-            {{/each}}
-            </div>
+            {{#if truncatedReviews}}
+                    <div class="row mb-3">
+                        <button class="moreRev moreRevText">see more</button>
+                    </div>
+                    <div class="row moreRev collapse">
+                    {{#each truncatedReviews}}
+                    {{> review this}}
+                    {{/each}}
+                    </div>
+                {{/if}}
+            {{else}}
+                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">. . . . . . . . . . . . . . . . .. .. ...WOah! such Empy... .. .. . . . . . . . . . . . . . . . .</p>
+            {{/if}}
         </div>
     </div>
 </div>
