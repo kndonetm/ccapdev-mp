@@ -6,7 +6,7 @@
   "password": "12345",
   "description": "McDonald's is a global fast-food giant known for its iconic golden arches, serving up a wide range of classic burgers, fries, and beloved menu items that have become synonymous with convenience and familiarity.",
   "address": "Taft Ave., Manila",
-  "rating": 4.2,
+  "rating": 4,
   "displayedName": "McDonalds",
   "numReviews": 5,
   "profilePicture": "/static/assets\\restaurants\\Mcdo.jpg",

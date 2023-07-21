@@ -5,6 +5,7 @@ import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 
 import { getDb } from '../model/conn.js';
+import Handlebars from 'handlebars'
 
 const router = Router();
 const db = getDb();
@@ -401,6 +402,8 @@ router.post('/:establishmentid', function (req, res) {
     console.log(req.params.establishmentid);
     res.redirect("/");
 })
+
+Handlebars.registerHelper('starr',  (num) => num / 5 *100)
 
 export default router;
 
