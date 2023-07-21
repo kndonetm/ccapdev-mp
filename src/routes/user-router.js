@@ -8,14 +8,15 @@ const users = db.collection("users");
 const reviews = db.collection("reviews");
 const comments = db.collection("comments");
 
-userRouter.get("/users/:userid", async (req, res) => {
+userRouter.get("/users/:username", async (req, res, next) => {
     // get user from users collection
-    let id = new ObjectId(req.params.userid);
-
-    const user = await users.findOne({
-        _id: id,
-    });
-
+    try {
+        const user = await users.findOne({
+            username: req.params.username,
+        });
+        if (user == null) next();
+        let id = new ObjectId(user._id);
+        
     // get reviews by user from reviews collection
     const reviewsArray = await reviews.find({
         userId: id,
@@ -48,6 +49,9 @@ userRouter.get("/users/:userid", async (req, res) => {
         description: user.description,
         reviews: reviewsArray
     })
+} catch (err) {
+    console.log(err)
+}
 })
 
 export default userRouter;

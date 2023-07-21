@@ -5,7 +5,6 @@ import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 
 import { getDb } from '../model/conn.js';
-import Handlebars from 'handlebars'
 
 const router = Router();
 const db = getDb();
@@ -25,11 +24,11 @@ router.get("/", async function (req, res) {
 router.use(userRouter);
 router.use(searchRouter);
 
-router.get("/:establishmentid", async function (req, res) {
-    const oid = new ObjectId(req.params.establishmentid);
-
-    const establishments = await establishments_db.find({}).toArray();
-    const selectedEstab = await establishments_db.find({ _id: oid }).toArray();
+router.get("/:username", async function (req, res, next) {
+  try {
+    let selectedEstab = await establishments_db.findOne({ username: req.params.username });
+    if(selectedEstab == null) next();
+    const oid = new ObjectId(selectedEstab._id);
     const reviews = await reviews_db.aggregate([
       {
         '$match': {
@@ -375,15 +374,18 @@ router.get("/:establishmentid", async function (req, res) {
     const topReviews = reviews.slice(0, 2);
     const truncatedReviews = reviews.slice(2);
 
-    console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
-
+    // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
+    console.log("what")
     res.render("establishment-view", {
-        title: `${selectedEstab[0].displayedName}`,
-        selectedEstab: selectedEstab[0],
+        title: `${selectedEstab.displayedName}`,
+        selectedEstab: selectedEstab,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
         css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">'
     })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 router.post('/login', function (req, res) {
@@ -403,7 +405,24 @@ router.post('/:establishmentid', function (req, res) {
     res.redirect("/");
 })
 
-Handlebars.registerHelper('starr',  (num) => num / 5 *100)
+router.patch('/',(req,res) => {
+  console.log("yey")
+})
+
+
+router.use((req,res) => {
+  res.send(`
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title> 404 | ArcherEats</title>
+  </head>
+  <body>
+    <h1>for oh for | resource aint found! </h1>
+  </body>
+  </html>
+  `)
+})
 
 export default router;
 

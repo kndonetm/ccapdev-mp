@@ -10,7 +10,8 @@
 }
 
 .pfpRev {
-    max-height: 90%;
+    height: 2.5em;
+    max-width: 2.5em;
     margin-right: 0.5em;
     border-radius: 50%;
     background-color: #FAFAFA;

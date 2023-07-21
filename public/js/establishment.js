@@ -65,16 +65,14 @@ async function markUp (event) {
     let votes = parseInt(upvote.innerHTML);
 
     fetch('/', {
-    method: 'POST',
+    method: 'PATCH',
     body: JSON.stringify({
-    userId: 1,
+    reviewId: parent.id,
     }),
     headers: {
     'Content-type': 'application/json; charset=UTF-8',
     },
-    })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+    }).then(console.log("yey")).catch((err) => console.log(err))
 
     if ($(up).hasClass("upbg")) {
         $(up).addClass('upbgfill').removeClass('upbg') 
