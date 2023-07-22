@@ -26,17 +26,18 @@
                             <h5 class="nav-name">ArcherEats</h5>
                         </div>
                         <h1 class="text-center mt-5">Welcome Back!</h1>
-                        <form>
+                        <form id="user-login-form">
                             <div class="mb-3 mt-4 form-floating">
                                 <input required placeholder="username" type="text" class="form-control"
-                                    id="username-login">
+                                    id="username-login" name="username-login">
                                 <label for="username-login" class="form-label">Username</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <input required placeholder="password" type="password" class="form-control"
-                                    id="password-login">
+                                    id="password-login" name="password-login">
                                 <label for="password-login" class="form-label">Password</label>
                             </div>
+                            <div class="error-text" id="error-text-login"></div>
                             <input type="checkbox" id="remember-me">
                             <label for="remember-me">
                                 <p class="subtext">Remember Me</p>
@@ -45,6 +46,7 @@
                             <p class="pt-3 subtext">Don't have an account? <a href="#" data-bs-target="#register"
                                     data-bs-toggle="modal">Sign up</a></p>
                         </form>
+                        
                     </div>
                     <img src="/static/assets/modal-2.jpg" alt="" class="d-block">
                 </div>
@@ -75,21 +77,23 @@
                                 <label for="file" id="uploadbtn"><i class="fas fa-camera"></i></label>
                             </div>
                         </div>
-                        <form>
+                        <form id="user-register-form">
                             <div class="mb-3 mt-4 form-floating">
                                 <input required placeholder="username" type="text" class="form-control"
-                                    id="username-reg">
+                                    id="username-reg" name="username-reg">
                                 <label for="username-reg" class="form-label">Username</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <input required placeholder="password" type="password" class="form-control"
-                                    id="password-reg">
+                                    id="password-reg" name="password-reg">
                                 <label for="password-reg" class="form-label">Password</label>
                             </div>
                             <div class="mb-3 form-floating">
-                                <input placeholder="about-you" type="text" class="form-control" id="about-you-reg">
+                                <input required placeholder="about-you" type="text" class="form-control" id="about-you-reg"
+                                 name="about-you-reg">
                                 <label for="about-you-reg" class="form-label">About You</label>
                             </div>
+                            <div class="error-text" id="error-text-reg"></div>
                             <button type="submit" class="btn btn-light mt-4 gy-0 reg-js">SIGN UP</button>
                             <p class="pt-3 subtext">Already have an account? <a href="#" data-bs-target="#signin"
                                     data-bs-toggle="modal">Sign in</a></p>

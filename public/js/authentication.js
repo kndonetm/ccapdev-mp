@@ -1,3 +1,8 @@
+const loginForm = document.querySelector("#user-login-form");
+const registerForm = document.querySelector("#user-register-form");
+const loginErrorElement = document.querySelector("#error-text-login");
+const registerErrorElement = document.querySelector("#register-text-login");
+
 updateNavbar();
 
 function login(username, desc, modal, image) {
@@ -13,34 +18,106 @@ function login(username, desc, modal, image) {
     }
 }
 
-document.querySelector('.signin-js').addEventListener('click', () => {
-    desc = "Hello, I'm " + document.querySelector('#username-login').value
-    login(document.querySelector('#username-login').value, desc, document.querySelector('.signin-modal'));
+
+registerForm.addEventListener('submit', async () => {
+    const formData = new FormData(registerForm);
+
+    const dataObj = {
+        "username": formData.get("username-reg"),
+        "password": formData.get("password-reg"),
+        "about": formData.get("about-you-reg"),
+
+        // TEMP: no profile pic uploads yet
+        "profilePicture": "/static/assets/user-pfp-placeholders/pfp_sample_1.png",
+    }
+
+    const jsonData = JSON.stringify(dataObj);
+    console.log(jsonData);
+
+    try {
+        const response = await fetch("/register", {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log(response);
+
+        if (response.status === 200) {
+            login(dataObj.username, dataObj.about, document.querySelector(".reg-modal"), dataObj.profilePicture);
+            location.reload();
+        } else {
+            console.log("Status code received: " + response.status);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    // const fileInput = document.querySelector('#file');
+    // const file = fileInput.files[0];
+
+    // if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = function(event) {
+    //         const imageData = event.target.result;
+    //         login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), imageData);
+    //     }
+    //     reader.readAsDataURL(file);
+    // } else {
+    //     login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
+    // }      
 });
 
-document.querySelector('.reg-js').addEventListener('click', () => {
-    const fileInput = document.querySelector('#file');
-    const file = fileInput.files[0];
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const imageData = event.target.result;
-            login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'), imageData);
+loginForm.addEventListener('submit', async () => {
+    const formData = new FormData(loginForm);
+
+    const dataObj = {
+        "username": formData.get("username-login"),
+        "password": formData.get("password-login"),
+    }
+
+    const jsonData = JSON.stringify(dataObj);
+
+    try {
+        const response = await fetch("/login", {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.status === 200) {
+            const result = await response.json();
+            console.log(result);
+            login(result.username, result.description, document.querySelector(".signin-modal"), result.profilePicture);
+            location.reload();
+        } else if (response.status === 403) {
+            const result = await response.json();
+            loginErrorElement.innerHTML = result.err;
+            console.log("Status code received: " + response.status);
+        } else {
+            console.log("Status code received: " + response.status);
         }
-        reader.readAsDataURL(file);
-    } else {
-        login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
-    }      
+    } catch (err) {
+        console.log(err);
+    }
+
+    // desc = "Hello, I'm " + document.querySelector('#username-login').value
+    // login(document.querySelector('#username-login').value, desc, document.querySelector('.signin-modal'));
 });
+
+
 
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('logout')) {
-      localStorage.setItem('currentLogin', 'false');
-      localStorage.clear();
-      updateNavbar();
+        localStorage.setItem('currentLogin', 'false');
+        localStorage.clear();
+        updateNavbar();
     }
-  });
+});
 
 function updateNavbar() {
     let navHTML = '';

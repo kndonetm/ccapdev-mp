@@ -4,6 +4,7 @@ import { Router } from 'express'
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 import establishmentRouter from "./establishment-router.js";
+import loginRegisterRouter from "./login-register-router.js";
 
 import { getDb } from '../model/conn.js';
 
@@ -27,14 +28,7 @@ router.get("/", async function (req, res) {
 router.use(userRouter);
 router.use(searchRouter);
 router.use(establishmentRouter);
-
-router.post('/login', function (req, res) {
-    res.redirect("/");
-})
-
-router.post('/register', function (req, res) {
-    res.redirect("/");
-})
+router.use(loginRegisterRouter);
 
 router.post('/comment', function (req, res) {
     res.redirect("/");

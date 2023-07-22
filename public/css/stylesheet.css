@@ -121,3 +121,7 @@ hr {
 .smaller-text {
     font-size: 12px;
 }
+
+.error-text {
+  color:rgb(214, 28, 28)
+}

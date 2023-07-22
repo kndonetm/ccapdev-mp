@@ -28,6 +28,8 @@ app.set("view engine", "hbs");
 app.set("views", "./src/views");
 app.set("view cache", false);
 
+app.use(express.json());
+
 app.use(router);
 
 app.listen(process.env.SERVER_PORT, () => {
