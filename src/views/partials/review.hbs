@@ -35,9 +35,9 @@
                         <div class="flex-center iconBox">
                             <span class=" chat chatbg "></span>
                             <span class=" cNum card-text">{{length children}}</span>
-                            <span class=" up upbg"> </span>
+                            <span class=" up {{#if userUp}}upbgfill{{else}}upbg{{/if}}"> </span>
                             <span class=" uvote card-text">{{length likes}}</span>
-                            <span class=" down downbg"></span>
+                            <span class=" down {{#if userDown}}downbgfill{{else}}downbg{{/if}}"></span>
                             <span class=" dvote card-text">{{length dislikes}}</span>
                             <span class=" reply replybg"></span>
                         </div>

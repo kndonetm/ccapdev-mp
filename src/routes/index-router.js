@@ -47,29 +47,30 @@ router.post('/:establishmentid', function (req, res) {
 
 router.patch('/',async (req,res) => {
   let {reviewId, userID, updateH } = req.body;
-
+  let __iod = new ObjectId(reviewId);
+  
   switch (updateH) {
     case "up":
       reviews_db.updateOne(
-        {_id: new ObjectId(reviewId)}, 
-        {$push:{likes:new ObjectId(userID)},
-        $pull:{dislikes:new ObjectId(userID)},
+        {_id: __iod}, 
+        {$push:{likes: userID},
+        $pull:{dislikes: userID},
       }); break;
     case "up_":
       reviews_db.updateOne(
-        {_id: new ObjectId(reviewId)}, 
-        {$pull:{likes:new ObjectId(userID)},
+        {_id: __iod}, 
+        {$pull:{likes: userID},
       }); break;
     case "down":
       reviews_db.updateOne(
-        {_id: new ObjectId(reviewId)}, 
-        {$pull:{likes:new ObjectId(userID)},
-        $push:{dislikes:new ObjectId(userID)},
+        {_id: __iod}, 
+        {$pull:{likes: userID},
+        $push:{dislikes: userID},
       }); break;
     case "down_":
       reviews_db.updateOne(
-        {_id: new ObjectId(reviewId)}, 
-        {$pull:{dislikes:new ObjectId(userID)},
+        {_id: __iod}, 
+        {$pull:{dislikes: userID},
       }); break;
   }
 })
