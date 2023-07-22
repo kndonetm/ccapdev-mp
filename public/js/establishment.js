@@ -117,7 +117,6 @@ function showChat (event) {
     } 
 
     $(targ).collapse('toggle')
-    updateCommentCount(targ);
 }
 
 function reply (event) {
@@ -170,11 +169,6 @@ $('button.moreRev').on({
         }
      }
  })
-
-function updateCommentCount (list) {
-    console.log(list.getElementsByTagName("li"))
-    parent.querySelector('.cNum').innerHTML = list.getElementsByTagName("li").length;
-}
 
 var posted = false;
 function insertReview (event) {
@@ -398,8 +392,6 @@ function insertReply (event) {
     
     $(parent.querySelector('.wReply')).collapse('hide')
     $(replyList).collapse('show')
-    
-    updateCommentCount (replyList)
 }
 
 
