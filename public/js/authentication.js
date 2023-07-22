@@ -10,7 +10,7 @@ function login(username, desc, modal, image) {
     if (localStorage.getItem('savedUsername') && (document.querySelector('#password-reg').value || document.querySelector('#password-login').value)) {
         $(modal).modal('hide');
         updateNavbar();
-    } 
+    }
 }
 
 document.querySelector('.signin-js').addEventListener('click', () => {
