@@ -7,8 +7,6 @@ function login(username, desc, modal, image) {
 
     image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '/static/assets/unknown.jpg');
 
-
-
     if (localStorage.getItem('savedUsername') && (document.querySelector('#password-register').value || document.querySelector('#password-login').value)) {
         $(modal).modal('hide');
         updateNavbar();
@@ -33,10 +31,7 @@ document.querySelector('.reg-js').addEventListener('click', () => {
         reader.readAsDataURL(file);
     } else {
         login(document.querySelector('#username-reg').value, document.querySelector('#about-you-reg').value, document.querySelector('.reg-modal'));
-    }
-    
-  
-        
+    }      
 });
 
 document.addEventListener('click', (event) => {

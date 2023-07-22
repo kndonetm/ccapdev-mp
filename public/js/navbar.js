@@ -34,34 +34,6 @@ class Header extends HTMLElement {
   
 customElements.define('nav-component', Header);
 
-class estabHeader extends HTMLElement {
-    constructor() {
-      super();
-    }
-  
-    connectedCallback() {
-      this.innerHTML = `
-      <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
-      <div class="container p-1">
-          <a href="/" class="navbar-brand h1 mb-0">
-              <img src="/static/assets/icon.png" alt="">
-              <span class="nav-name">ArcherEats</span>
-          </a>
-          <form class="d-flex position-relative search-container" id="searchForm" action="/search" method="get">
-              <input type="text" class="form-control" name="q" placeholder="Search establishments">
-              <button type="button" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
-          </form>
-          <ul class="navbar-nav">
-          </ul>
-      </div>
-  </nav>
-      `;
-    }
-  }
-  
-customElements.define('estab-nav-component', estabHeader);
-
-
 class NavModal extends HTMLElement {
     constructor() {
       super();
