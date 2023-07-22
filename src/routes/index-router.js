@@ -17,7 +17,9 @@ router.get("/", async function (req, res) {
 
     res.render("index", {
         title: "Home",
-        establishments: establishments
+        establishments: establishments,
+        css: `<link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/index.css">`
     });
 })
 
