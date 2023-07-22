@@ -39,8 +39,34 @@ router.post('/:establishmentid', function (req, res) {
     res.redirect("/");
 })
 
-router.patch('/',(req,res) => {
-  console.log("yey")
+router.patch('/',async (req,res) => {
+  let {reviewId, userID, updateH } = req.body;
+  let __iod = new ObjectId(reviewId);
+  
+  switch (updateH) {
+    case "up":
+      reviews_db.updateOne(
+        {_id: __iod}, 
+        {$push:{likes: userID},
+        $pull:{dislikes: userID},
+      }); break;
+    case "up_":
+      reviews_db.updateOne(
+        {_id: __iod}, 
+        {$pull:{likes: userID},
+      }); break;
+    case "down":
+      reviews_db.updateOne(
+        {_id: __iod}, 
+        {$pull:{likes: userID},
+        $push:{dislikes: userID},
+      }); break;
+    case "down_":
+      reviews_db.updateOne(
+        {_id: __iod}, 
+        {$pull:{dislikes: userID},
+      }); break;
+  }
 })
 
 

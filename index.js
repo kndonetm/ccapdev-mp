@@ -11,6 +11,8 @@ import { connectToMongo } from './src/model/conn.js';
 
 import hbsHelpers from './src/modules/handlebars-helpers/helpers.js'
 
+import bodyParser from 'body-parser';
+
 const app = express();
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
@@ -27,6 +29,8 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "./src/views");
 app.set("view cache", false);
+app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use(express.json());
 
