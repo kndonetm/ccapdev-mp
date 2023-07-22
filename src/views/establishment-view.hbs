@@ -23,14 +23,15 @@
                 </div>
             </div>
         </div>
-        {{/with}}
+        
 
         <!-- everything else -->
         <div class="col ms-4 mt-5">
 
             <!-- rate form -->
             <div class="row collapse show revForm">
-                <form id="reviewForm" method="post">
+                <form action="/{{username}}/dsad" id="reviewForm" name="reviewForm" method="post">
+                {{/with}}
                     <div class="form-group">
                         <p class="rateEstabText">Rate this establishment</p>
                         <div class="rate">
@@ -46,9 +47,10 @@
                                 title="text">1 star</label>
                         </div>
                         <label for="c00000xxtext" class="form-label writeRevText">Write a Review</label>
+                        <input type="hidden" name="estabID" value="{{selectedEstab._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
                             required />
-                        <textarea class="form-control fw-light " id="c00000xxtext" rows="3" name="revDesc"
+                        <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="revDesc"
                             placeholder="Describe your experience (required) " required></textarea>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached

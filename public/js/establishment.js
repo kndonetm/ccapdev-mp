@@ -182,13 +182,39 @@ $('button.moreRev').on({
 
 var posted = false;
 function insertReview (event) {
+
     rating = document.querySelector('input[name="rate"]:checked').value;
-    tite = document.querySelector('input[name="title"]').value;
+    estab = document.querySelector('input[name="estabID"]').value;
+    titlle = document.querySelector('input[name="title"]').value;
     reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
     reviewBox = document.querySelector('.yourReview');
     thefiles = document.querySelector('#customFile1').files;
 
     event.preventDefault();
+
+    const jString = JSON.stringify({
+        EstabID: estab,
+        title: titlle,
+        rating: rating,
+        content: reviewDesc,
+        media: thefiles,
+    })
+
+    console.log(jString);
+    fetch("/", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => {
+        console.log(response);
+        if (response.status == 200)
+            location.reload();
+        else
+            console.log("An error has occurred");
+    }).catch(err => console.log(err))
+
     $('.yourReview').collapse('show')
     console.log($('.revForm').collapse('hide'))
     string1 = `<p class="fw-light mb-2">Your Review</p>
@@ -216,7 +242,7 @@ function insertReview (event) {
             </div>
     </div>
     <div class="card-body reviewBody">
-        <h6 class="card-title reviewTitle">` + tite +`</h6>
+        <h6 class="card-title reviewTitle">` + titlle +`</h6>
         <p class="c00000xx reviewtext card-text">
         ` + reviewDesc + `
         </p>

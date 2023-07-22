@@ -341,8 +341,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }
       ]).toArray();
-  
-      let sampleUSER = "64aed2a8f586db31f5a01230";
+      let currUser = "64aed2a8f586db31f5a01230"
       for (let review of reviews) {
           // prioritize showing videos over images
           const nTopVideos = Math.min(review.videos.length, 3);
@@ -353,9 +352,9 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           review.truncatedImages = review.images.slice(nTopImages);
           review.nTruncatedMedia = review.truncatedVideos.length + review.truncatedImages.length;
           review.nMedia = review.videos.length + review.images.length;
-          if(review.likes.includes(sampleUSER))
+          if(review.likes.includes(currUser))
             review.userUp = 1;
-          else if(review.dislikes.includes(sampleUSER))
+          else if(review.dislikes.includes(currUser))
             review.userDown = 1;
       }
   

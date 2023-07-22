@@ -13,6 +13,7 @@ const db = getDb();
 const establishments_db = db.collection("establishments");
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
+const comments_db = db.collection("comments");
 
 router.get("/", async function (req, res) {
     const establishments = await establishments_db.find({}).toArray();
@@ -30,16 +31,59 @@ router.use(searchRouter);
 router.use(establishmentRouter);
 router.use(loginRegisterRouter);
 
-router.post('/comment', function (req, res) {
-    res.redirect("/");
-})
-
-router.post('/:establishmentid', function (req, res) {
+router.post('/', async function (req, res) {
     console.log(req.params.establishmentid);
+    console.log(req.body);
+    const {EstabID, title, rating, media, content, revID, parent} = req.body;
+    let sampleUSer = "64aed2a8f586db31f5a01230"
+    if (title && rating && content) {
+        const newReview = {
+            title: title,
+            rating: rating,
+            content: content,
+            likes: [],
+            dislikes: [],
+            edited: false,
+            images: media,
+            videos: [],
+            datePosted: new Date (),
+            estabResponse: [],
+            establishmentId: new ObjectId(EstabID),
+            userId: new ObjectId(sampleUSer),
+        };
+        reviews_db.insertOne(newReview);
+        // res.sendStatus(200);
+        res.status(200);
+        res.redirect("/");
+    } else if ( revID && parent && content){
+      const newReply = {
+        content: content,
+        likes: 0,
+        dislikes: 0,
+        datePosted: new Date (),
+        userId: new ObjectId(sampleUSer),
+        parent: new ObjectId(parent),
+        reviewId: new ObjectId(revID),
+        edited: false,
+    };
+    comments_db.push(newReply);
+    // res.sendStatus(200);
+    res.status(200);
     res.redirect("/");
+    } else {
+        // res.sendStatus(400);
+        res.status(400);
+        res.redirect("/");
+    }
 })
 
-router.patch('/',async (req,res) => {
+
+router.post('/comment', function (req, res) {
+  res.redirect("/");
+})
+
+
+router.patch('/', async (req,res) => {
   let {reviewId, userID, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
   
