@@ -56,6 +56,20 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
     document.querySelector("#searchForm").submit();
 })
 
+function updateHelp (_id, u_id, potch) {
+    fetch('/', {
+        method: 'PATCH',
+        body: JSON.stringify({
+        reviewId: _id,
+        userID: u_id,
+        updateH: potch
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+        }).then(console.log("yey")).catch((err) => console.log(err))
+}
+
 async function markUp (event) {
     parent = event.target.closest('.REVIEW')
     up = parent.querySelector('.up')
@@ -64,16 +78,6 @@ async function markUp (event) {
     downvote = parent.querySelector('.dvote')
     let votes = parseInt(upvote.innerHTML);
 
-    fetch('/', {
-    method: 'PATCH',
-    body: JSON.stringify({
-    reviewId: parent.id,
-    }),
-    headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-    },
-    }).then(console.log("yey")).catch((err) => console.log(err))
-
     if ($(up).hasClass("upbg")) {
         $(up).addClass('upbgfill').removeClass('upbg') 
         $(upvote).text(votes + 1);
@@ -81,10 +85,13 @@ async function markUp (event) {
             $(down).addClass('downbg').removeClass('downbgfill')
             $(downvote).text(parseInt($(downvote).text()) - 1);
         }
+        potch = "up";
     } else {
         $(up).addClass('upbg').removeClass('upbgfill')
         $(upvote).text(votes - 1);
+        potch = "up_";
     }
+    updateHelp (parent.id, "64aed2a8f586db31f5a01230", potch)
 }
 
 function markDown (event) {
@@ -103,10 +110,13 @@ function markDown (event) {
             $(up).addClass('upbg').removeClass('upbgfill')
             $(upvote).text(parseInt($(upvote).text()) - 1);
         }
+        potch = "down";
     } else {
         $(down).addClass('downbg').removeClass('downbgfill')
         $(downvote).text(votes - 1);
+        potch = "down_";
     }
+    updateHelp (parent.id, "64aed2a8f586db31f5a01230", potch)
 }
 
 function showChat (event) {

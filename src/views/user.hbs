@@ -26,18 +26,18 @@
                 <div class="card mb-3 REVIEW">
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
-                            <a href="/users/{{../_id}}"><img class="pfpRev img-fluid" src="{{../profilePicture}}" alt=""></a>
+                            <a href="/users/{{../username}}"><img class="pfpRev img-fluid" src="{{../profilePicture}}" alt=""></a>
                             <div class="postDeats">
-                                <a class="user-link" href="/users/{{../_id}}">{{username}}</a>
+                                <a class="user-link" href="/users/{{../username}}">{{../username}}</a>
                                 <div class=" status">{{age}}d {{editedTag}}</div>
                             </div>
                         </div>
                         <div>
-                            <h5 class="d-inline-block"><span class="me-3">{{../rating}}</span><meter class="average-rating star-{{../rating}} mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                            <h5 class="d-inline-block"><span class="me-3">{{rating}}.0</span><meter style="--percent: {{starr rating}}%" class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
                         </div>
                 </div>
                     <div class="card-body reviewBody">
-                        <a class="user-link" href="/{{establishment._id}}">
+                        <a class="user-link" href="/{{establishment.username}}">
                             <h6 class="card-title reviewTitle">{{title}}</h6>
                         </a>
                         <p class="reviewtext truncate card-text">
