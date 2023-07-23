@@ -367,9 +367,23 @@ establishmentRouter.get("/:username", async function (req, res, next) {
         review.user.link = "/users/" + review.user.username;
       });
 
+      let NReviews = reviews.length;
+      let sum = reviews.reduce((a, b) => a + b.rating, 0);
+      console.log(sum)
+      establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews) || 0}});
+
+      let rateSummary = {
+        nReviews: NReviews,
+        fiveRev: reviews.filter(rev => rev.rating == 5).length / NReviews * 100,
+        fourRev: reviews.filter(rev => rev.rating == 4).length / NReviews * 100,
+        threeRev: reviews.filter(rev => rev.rating == 3).length / NReviews * 100,
+        twoRev: reviews.filter(rev => rev.rating == 2).length / NReviews * 100,
+        oneRev: reviews.filter(rev => rev.rating == 1).length / NReviews * 100,
+      }
+
       reviews = reviews.filter(function( review ) {
         return review.userId != currUser;
-    });
+      });
 
       if (userReview != null)
       userReview.edit = true;
@@ -380,6 +394,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,
+          rateSummary: rateSummary,
           userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,
