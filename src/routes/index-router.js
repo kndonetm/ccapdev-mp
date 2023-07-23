@@ -15,7 +15,17 @@ const establishments_db = db.collection("establishments");
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
-const upload = multer({ dest: 'public/assets/reviewPics/' })
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/assets/reviewPics/')
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + file.originalname)
+    },
+  })
+const upload = multer({ storage: storage })
+
 router.get("/", async function (req, res) {
     const establishments = await establishments_db.find({}).toArray();
 
@@ -34,18 +44,17 @@ router.use(loginRegisterRouter);
 
 router.post('/', upload.array('mediaInput'), async function (req, res) {
     console.log(req.files);
-    const {EstabID, title, rate, content, revID, parent} = req.body;
-    let imageNames = []
-    let videoNames = []
+    const {estabID, title, rate, content, revID, parent} = req.body;
+    let imageURls = []
+    let videoUrls = []
     for (let files of req.files) {
       let type = files.mimetype;
       console.log(type)
       if (type.split('/')[0] == "image")
-          imageNames.push("/static/assets/review/"  + files.filename)
+      imageURls.push("/static/assets/reviewPics/"  + files.filename)
       else
-          videoNames.push("/static/assets/review/"  + files.filename)
+      videoUrls.push("/static/assets/reviewPics/"  + files.filename)
   }
-  console.log(imageNames)
     let sampleUSer = "64aed2a8f586db31f5a01230"
     if (title && rate && content) {
         const newReview = {
@@ -55,11 +64,11 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
             likes: [],
             dislikes: [],
             edited: false,
-            images: imageNames,
-            videos: videoNames,
+            images: imageURls,
+            videos: videoUrls,
             datePosted: new Date (),
             estabResponse: [],
-            establishmentId: new ObjectId(EstabID),
+            establishmentId: new ObjectId(estabID),
             userId: new ObjectId(sampleUSer),
         };
         reviews_db.insertOne(newReview);
