@@ -30,7 +30,7 @@
 
             <!-- rate form -->
             <div class="row collapse show revForm">
-                <form action="/{{username}}/dsad" id="reviewForm" name="reviewForm" method="post">
+                <form action="/{{username}}/dsad" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                 {{/with}}
                     <div class="form-group">
                         <p class="rateEstabText">Rate this establishment</p>
@@ -50,13 +50,13 @@
                         <input type="hidden" name="estabID" value="{{selectedEstab._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
                             required />
-                        <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="revDesc"
+                        <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="content"
                             placeholder="Describe your experience (required) " required></textarea>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached
                                 files</a>
-                            <label class=" form-label img imgbg" for="customFile1"></label>
-                            <input type="file" accept="media_type" class="form-control d-none" id="customFile1"
+                            <label class=" form-label img imgbg" for="mediaInput"></label>
+                            <input type="file" accept="media_type" class="form-control d-none" name="mediaInput" id="mediaInput"
                                 name="media" multiple />
                             <button type="submit" class="postReview btn btn-success">Post</button>
                         </div>

@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 
 import { Router } from 'express'
+import multer from 'multer';
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 import establishmentRouter from "./establishment-router.js";
@@ -14,7 +15,7 @@ const establishments_db = db.collection("establishments");
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
-
+const upload = multer({ dest: 'public/assets/reviewPics/' })
 router.get("/", async function (req, res) {
     const establishments = await establishments_db.find({}).toArray();
 
@@ -31,21 +32,31 @@ router.use(searchRouter);
 router.use(establishmentRouter);
 router.use(loginRegisterRouter);
 
-router.post('/', async function (req, res) {
-    console.log(req.params.establishmentid);
-    console.log(req.body);
-    const {EstabID, title, rating, media, content, revID, parent} = req.body;
+router.post('/', upload.array('mediaInput'), async function (req, res) {
+    console.log(req.files);
+    const {EstabID, title, rate, content, revID, parent} = req.body;
+    let imageNames = []
+    let videoNames = []
+    for (let files of req.files) {
+      let type = files.mimetype;
+      console.log(type)
+      if (type.split('/')[0] == "image")
+          imageNames.push("/static/assets/review/"  + files.filename)
+      else
+          videoNames.push("/static/assets/review/"  + files.filename)
+  }
+  console.log(imageNames)
     let sampleUSer = "64aed2a8f586db31f5a01230"
-    if (title && rating && content) {
+    if (title && rate && content) {
         const newReview = {
             title: title,
-            rating: rating,
+            rating: rate,
             content: content,
             likes: [],
             dislikes: [],
             edited: false,
-            images: media,
-            videos: [],
+            images: imageNames,
+            videos: videoNames,
             datePosted: new Date (),
             estabResponse: [],
             establishmentId: new ObjectId(EstabID),
@@ -54,7 +65,6 @@ router.post('/', async function (req, res) {
         reviews_db.insertOne(newReview);
         // res.sendStatus(200);
         res.status(200);
-        res.redirect("/");
     } else if ( revID && parent && content){
       const newReply = {
         content: content,
@@ -69,11 +79,10 @@ router.post('/', async function (req, res) {
     comments_db.push(newReply);
     // res.sendStatus(200);
     res.status(200);
-    res.redirect("/");
     } else {
         // res.sendStatus(400);
         res.status(400);
-        res.redirect("/");
+
     }
 })
 

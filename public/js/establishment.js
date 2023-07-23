@@ -1,6 +1,6 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
-    console.log(classlist)
+    // console.log(classlist)
     
     if (localStorage.getItem('currentLogin') === null && 
          (classlist.contains('reply') ||
@@ -182,31 +182,19 @@ $('button.moreRev').on({
 
 var posted = false;
 function insertReview (event) {
-
-    rating = document.querySelector('input[name="rate"]:checked').value;
-    estab = document.querySelector('input[name="estabID"]').value;
-    titlle = document.querySelector('input[name="title"]').value;
-    reviewDesc = document.querySelector('textarea[name="revDesc"]').value;
+    formDat = new FormData(document.forms.reviewForm)
+    console.log(formDat)
+    rating = formDat.get("rate");
+    estab = formDat.get("estabID");
+    titlle = formDat.get("title");
+    reviewDesc = formDat.get("content");
     reviewBox = document.querySelector('.yourReview');
-    thefiles = document.querySelector('#customFile1').files;
-
+    thefiles = document.querySelector('#mediaInput').files;
     event.preventDefault();
 
-    const jString = JSON.stringify({
-        EstabID: estab,
-        title: titlle,
-        rating: rating,
-        content: reviewDesc,
-        media: thefiles,
-    })
-
-    console.log(jString);
     fetch("/", {
         method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
+        body: formDat,
     }).then(response => {
         console.log(response);
         if (response.status == 200)
@@ -215,6 +203,7 @@ function insertReview (event) {
             console.log("An error has occurred");
     }).catch(err => console.log(err))
 
+    console.log("wyoo")
     $('.yourReview').collapse('show')
     console.log($('.revForm').collapse('hide'))
     string1 = `<p class="fw-light mb-2">Your Review</p>
@@ -431,7 +420,7 @@ function insertReply (event) {
 }
 
 
-let fileInput = document.querySelector("#customFile1");
+let fileInput = document.querySelector('#mediaInput');
 let fileList = document.querySelector(".filelist");
 
 fileInput.addEventListener("change", () => {
