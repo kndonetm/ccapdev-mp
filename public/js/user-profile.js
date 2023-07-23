@@ -22,14 +22,20 @@ function editProfile() {
     editButton.innerHTML = "Finish editing";
 }
 
-function finishEditing() {
-    desc = document.querySelector("#profile-description");
-    textarea = document.querySelector("#profile-description-textarea");
-    
-    textarea.style.display = "none";
-    desc.style.display = null;
-    desc.innerHTML = textarea.value.trim();
-    editButton.innerHTML = "Edit Profile";
+async function finishEditing() {
+    formmm = new FormData(document.forms.userDescs);
+    await fetch("/user/changeDesc", {
+        method: "PATCH",
+        body: JSON.stringify({
+            userDesc: formmm.get("userDesc")
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
 }
 
 editButton.addEventListener("click", toggleEditing);
@@ -53,27 +59,16 @@ window.addEventListener("load", event=> {
     }
 }})
 
-document.addEventListener ("change", events=>{
+document.addEventListener ("change", async events=>{
     const fileInputs = document.querySelector('#profile-img-caption');
     const file = fileInputs.files[0];
 
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const imageDatas = event.target.result;
-            localStorage.setItem('pfp', imageDatas)
-        }
-        reader.readAsDataURL(file);
-        dpic = document.querySelector("#profile-img-top")
-        dpic.src = localStorage.getItem('pfp')
-        updateNavbar();
-        anchor = document.querySelector('a.logout')
-        anchor.href = "index.html"
-        pfP = document.querySelectorAll(".samplePfp")
-        for (let i=0; i < pfP.length; i++) {
-            pfP[i].src = localStorage.getItem('pfp');
-        }
-        location.reload();
-    }
+    await fetch("/user/changeDesc", {
+        method: "PATCH",
+        body: formmm,
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
 
 })

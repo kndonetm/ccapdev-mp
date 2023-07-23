@@ -8,6 +8,33 @@ const user_db = db.collection("users");
 const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 
+import multer from 'multer';
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/assets/reviewPics/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "_" + file.originalname)
+  },
+})
+const upload = multer({ storage: storage })
+
+userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
+  let img = "/static/assets/user_pfp/"  + req.file.filename;
+  let sampleUSer = "64aed2aff586db31f5a01231"
+  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+  {$set:{profilePicture: img}})
+})
+
+userRouter.patch("/user/changeDesc", async function (req, res) { 
+  let {userDesc} = req.body;
+  let sampleUSer = "64aed2aff586db31f5a01231"
+  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+  {$set:{description: userDesc}})
+  res.status(200)
+  res.send("done edit desc")
+})
+
 userRouter.get("/users/:username", async (req, res, next) => {
     try {
         let user = await user_db.findOne({ username: req.params.username });
@@ -357,7 +384,9 @@ userRouter.get("/users/:username", async (req, res, next) => {
 
     const topReviews = reviews.slice(0, 5);
     const truncatedReviews = reviews.slice(5);
+    let sampleUSer = "64aed2aff586db31f5a01231"
 
+    if(user._id != sampleUSer) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',
@@ -367,7 +396,18 @@ userRouter.get("/users/:username", async (req, res, next) => {
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
+    })} else {
+      res.render("theUser", {
+        title: user.username + " - Profile",
+        css:'<link href="/static/css/user-profile.css" rel="stylesheet">',
+        js: '<script defer src="/static/js/user-profile.js"></script>',
+        profilePicture: user.profilePicture,
+        username: user.username,
+        description: user.description,
+        topReviews: topReviews,
+        truncatedReviews: truncatedReviews,
     })
+    }
 } catch (err) {
     console.log(err)
 }

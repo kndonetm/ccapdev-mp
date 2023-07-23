@@ -48,7 +48,6 @@ router.use(loginRegisterRouter);
 
 router.route('/review')
   .post(upload.array('mediaInput'), async function (req, res) {
-    console.log(req.files);
     const {estabID, title, rate, content} = req.body;
     let imageURls = []
     let videoUrls = []
