@@ -143,7 +143,7 @@ function showEstabResponse (event) {
 async function deleteCommit (event) {
     parent = event.target.closest('.REVIEW')
     if (!parent.classList.contains('list-group-item')){
-        await fetch('/', {
+        await fetch('/review', {
             method: 'DELETE',
             body: JSON.stringify({
             reviewId: parent.id
@@ -183,7 +183,21 @@ $('button.moreRev').on({
      }
  })
 
-var posted = false;
+ async function respoEstab (event) {
+    parent = event.target.closest('.REVIEW')
+    formm = new FormData(parent.querySelector('form'));
+    formm.append("revID", parent.id)
+    event.preventDefault();
+
+    await fetch("/estabRespo", {
+        method: "POST",
+        body: formm,
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
 async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
     console.log(formDat)
@@ -197,7 +211,7 @@ async function insertReview (event) {
 
     if (formDat.get("userID") != "") {
         console.log("posted HERE")
-        yo = await fetch("/editReview", {
+        yo = await fetch("/review", {
             method: "PATCH",
             body: formDat,
         })
@@ -206,7 +220,7 @@ async function insertReview (event) {
                 location.reload(); 
         }).catch((err) => console.log(err))
     } else {
-    fetch("/", {
+    fetch("/review", {
         method: "POST",
         body: formDat,
     }).then(res => {console.log(res);

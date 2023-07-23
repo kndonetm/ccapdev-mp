@@ -46,9 +46,10 @@ router.use(searchRouter);
 router.use(establishmentRouter);
 router.use(loginRegisterRouter);
 
-router.post('/', upload.array('mediaInput'), async function (req, res) {
+router.route('/review')
+  .post(upload.array('mediaInput'), async function (req, res) {
     console.log(req.files);
-    const {estabID, title, rate, content, revID, parent} = req.body;
+    const {estabID, title, rate, content} = req.body;
     let imageURls = []
     let videoUrls = []
     for (let files of req.files) {
@@ -79,27 +80,11 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
         // res.sendStatus(200);
         res.status(200);
         res.send("done review")
-    } else if ( revID && parent && content){
-      const newReply = {
-        content: content,
-        likes: 0,
-        dislikes: 0,
-        datePosted: new Date (),
-        userId: new ObjectId(sampleUSer),
-        parent: new ObjectId(parent),
-        reviewId: new ObjectId(revID),
-        edited: false,
-    };
-    comments_db.push(newReply);
-    res.status(200);
-    res.send("done reply")
-    } else {
+    }  else {
         res.status(400);
     }
-})
-
-
-router.patch('/editReview', upload.array('mediaInput'), async function (req, res) {
+}) 
+  .patch(upload.array('mediaInput'), async function (req, res) {
   const {estabID, title, rate, content, userID} = req.body;
 
   let imageURls = []
@@ -140,9 +125,8 @@ router.patch('/editReview', upload.array('mediaInput'), async function (req, res
       }})
       res.status(200)
       res.send('done edit')
-})
-
-router.delete('/', async function (req, res) {
+}) 
+.delete( async function (req, res) {
   let {reviewId} = req.body
   let __iod = new ObjectId(reviewId);
  let review = await reviews_db.findOne({_id: __iod});
@@ -195,11 +179,95 @@ router.patch('/', async (req,res) => {
         {_id: __iod}, 
         {$pull:{dislikes: userID},
       }); break;
-  }
+  }s
   res.status(200)
   res.send("done")
 })
 
+router.route('/comment')
+  .post(async function (req, res) {
+    const {revID, userID, parID, text} = req.body;
+
+    if (revID && userID && parID && text ) {
+        const newComment = {
+            content: text,
+            likes: [],
+            dislikes: [],
+            comments: [],
+            datePosted: new Date (),
+            userId: revID,
+            parent: parID,
+            reviewId: revID,
+            edited: false,
+        };
+        comments_db.insertOne(newComment);
+        // res.sendStatus(200);
+        res.status(200);
+        res.send("done comment")
+    }  else {
+        res.status(400);
+    }
+  })
+  .patch(async function (req, res) {
+    const {commID, text} = req.body;
+    comments_db.updateOne(
+      {_id: new ObjectId(commID)}, 
+      {$set: { 
+        content: text, 
+        edited: true }
+  })
+    res.status(200);
+        res.send("esited comment")
+})
+.delete(async function (req, res) {
+  const {commID, text} = req.body;
+    comments_db.deleteOne( {_id: new ObjectId(commID)} )
+    res.status(200);
+    res.send("deleted comment")
+})
+
+router.route('/estabRespo')
+  .post(async function (req, res) {
+    const {revID, text} = req.body;
+
+    if (revID && text ) {
+        const newEstabRespo = {
+            content: text,
+            likes: [],
+            dislikes: [],
+            comments: [],
+            edited: false,
+            datePosted: new Date ()
+        };
+        reviews_db.updateOne(
+          {_id: new ObjectId(revID)}, 
+          {$push:{estabResponse: newEstabRespo},
+        });
+        // res.sendStatus(200);
+        res.status(200);
+        res.send("done estab respo")
+    }  else {
+        res.status(400);
+    }
+  })
+  .patch(async function (req, res) {
+    const {revID, text} = req.body;
+    reviews_db.updateOne(
+      {_id: new ObjectId(revID)}, 
+      {$set: { "estabResponse.$.content": text, "estabResponse.$.edited": true }
+  })
+    res.status(200);
+        res.send("esited estab respo")
+})
+.delete(async function (req, res) {
+  const {revID, text} = req.body;
+    reviews_db.updateOne(
+      {_id: new ObjectId(revID)}, 
+      {$set: { "estabResponse": [] }
+  })
+    res.status(200);
+        res.send("deleted estab respo")
+})
 
 router.use((req,res) => {
   res.send(`

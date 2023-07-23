@@ -368,10 +368,10 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       });
 
       let NReviews = reviews.length;
-      let sum = reviews.reduce((a, b) => a + b.rating, 0);
-      console.log(sum)
-      establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews) || 0}});
-
+      let sum = reviews.reduce((a, b) => a + parseInt(b.rating), 0);
+      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews) || 0}});
+      selectedEstab = await establishments_db.findOne({ username: req.params.username });
+      
       let rateSummary = {
         nReviews: NReviews,
         fiveRev: reviews.filter(rev => rev.rating == 5).length / NReviews * 100,
@@ -389,7 +389,6 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       userReview.edit = true;
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
- 
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
