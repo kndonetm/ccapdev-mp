@@ -181,7 +181,7 @@ $('button.moreRev').on({
  })
 
 var posted = false;
-function insertReview (event) {
+async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
     console.log(formDat)
     rating = formDat.get("rate");
@@ -192,16 +192,25 @@ function insertReview (event) {
     thefiles = document.querySelector('#mediaInput').files;
     event.preventDefault();
 
+    if (formDat.get("userID") != "") {
+        console.log("posted HERE")
+        yo = await fetch("/editReview", {
+            method: "PATCH",
+            body: formDat,
+        }).then(response => {
+            console.log(response);
+            console.log("hety")
+        }).catch(err => console.log(err))
+        
+        location.reload();
+    } else {
     fetch("/", {
         method: "POST",
         body: formDat,
     }).then(response => {
         console.log(response);
-        if (response.status == 200)
-            location.reload();
-        else
-            console.log("An error has occurred");
     }).catch(err => console.log(err))
+    }
 
     console.log("wyoo")
     $('.yourReview').collapse('show')
@@ -276,7 +285,7 @@ function insertReview (event) {
                                 <div class="modal-header">
                                     <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
                                 </div><div class="modal-body  moreImgBox">
-                `
+                ` 
 
                 for (x in thefiles) {
                     if (thefiles[x] instanceof File) {

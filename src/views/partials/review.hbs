@@ -39,7 +39,12 @@
                             <span class=" uvote card-text">{{length likes}}</span>
                             <span class=" down {{#if userDown}}downbgfill{{else}}downbg{{/if}}"></span>
                             <span class=" dvote card-text">{{length dislikes}}</span>
+                            {{#if edit}}
+                            <span class="c00000xx editRev edit-review editbg ms-3"></span>
+                            <span class="del-review delbg"></span>
+                            {{else}}
                             <span class=" reply replybg"></span>
+                            {{/if}}
                         </div>
                     </div>
 

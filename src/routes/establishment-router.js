@@ -12,7 +12,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       let selectedEstab = await establishments_db.findOne({ username: req.params.username });
       if(selectedEstab == null) next();
       const oid = new ObjectId(selectedEstab._id);
-      const reviews = await reviews_db.aggregate([
+      let reviews = await reviews_db.aggregate([
         {
           '$match': {
             'establishmentId': oid
@@ -341,7 +341,9 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }
       ]).toArray();
-      let currUser = "64aed2a8f586db31f5a01230"
+      let currUser = "64aed2aff586db31f5a01231"
+      let userReview = null;
+
       for (let review of reviews) {
           // prioritize showing videos over images
           const nTopVideos = Math.min(review.videos.length, 3);
@@ -356,20 +358,29 @@ establishmentRouter.get("/:username", async function (req, res, next) {
             review.userUp = 1;
           else if(review.dislikes.includes(currUser))
             review.userDown = 1;
+          if (review.userId == currUser) 
+            userReview = review;
       }
-
+      
       // set page link
       reviews.forEach(review => {
         review.user.link = "/users/" + review.user.username;
       });
-  
+
+      reviews = reviews.filter(function( review ) {
+        return review.userId != currUser;
+    });
+
+      if (userReview != null)
+      userReview.edit = true;
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
-  
+ 
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,
+          userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,
           css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">'

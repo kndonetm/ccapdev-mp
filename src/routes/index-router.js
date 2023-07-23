@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
       cb(null, 'public/assets/reviewPics/')
     },
     filename: (req, file, cb) => {
-      cb(null, Date.now() + file.originalname)
+      cb(null, Date.now() + "_" + file.originalname)
     },
   })
 const upload = multer({ storage: storage })
@@ -55,7 +55,7 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
       else
       videoUrls.push("/static/assets/reviewPics/"  + files.filename)
   }
-    let sampleUSer = "64aed2a8f586db31f5a01230"
+    let sampleUSer = "64aed2aff586db31f5a01231"
     if (title && rate && content) {
         const newReview = {
             title: title,
@@ -94,6 +94,51 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
 
     }
 })
+import fs from 'fs';
+import { dirname } from "path";
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
+
+router.patch('/editReview', upload.array('mediaInput'), async function (req, res) {
+  const {estabID, title, rate, content, userID} = req.body;
+
+  let imageURls = []
+  let videoUrls = []
+  for (let files of req.files) {
+    let type = files.mimetype;
+
+    if (type.split('/')[0] == "image")
+    imageURls.push("/static/assets/reviewPics/"  + files.filename)
+    else
+    videoUrls.push("/static/assets/reviewPics/"  + files.filename)
+  }
+  let review = await reviews_db.findOne({establishmentId: new ObjectId(estabID), userId: new ObjectId(userID)
+  });
+
+  for (let img of review.images)
+    fs.unlink(__dirname + "../../../public" + img.substring(7), (err) => {
+      if (err)  console.error('Error deleting file:', err);
+    })
+ for (let vid of review.videos)
+    fs.unlink(__dirname + "../../../public" + vid.substring(7), (err) => {
+      if (err) console.error('Error deleting file:', err);
+    })
+
+  reviews_db.updateOne(
+      {establishmentId: new ObjectId(estabID),
+        userId: new ObjectId(userID)
+      },
+      {$set:{
+          title: title,
+          rating: rate,
+          content: content,
+          edited: true,
+          images: imageURls,
+          videos: videoUrls,
+      }})
+      res.send('done')
+})
+
 
 
 router.post('/comment', function (req, res) {
