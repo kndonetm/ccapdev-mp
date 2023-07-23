@@ -357,12 +357,16 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           else if(review.dislikes.includes(currUser))
             review.userDown = 1;
       }
+
+      // set page link
+      reviews.forEach(review => {
+        review.user.link = "/users/" + review.user.username;
+      });
   
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
   
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
-      console.log("what")
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,

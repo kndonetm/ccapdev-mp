@@ -21,49 +21,25 @@
             <div class="row">
                 <p class="fw-light mb-2">All Reviews and Comments</p>
             </div>
-            {{#each reviews}}
-            <div class="row">
-                <div class="card mb-3 REVIEW">
-                    <div class="card-header reviewHeader flex-center">
-                        <div class="user-profile flex-center">
-                            <a href="/users/{{../username}}"><img class="pfpRev img-fluid" src="{{../profilePicture}}" alt=""></a>
-                            <div class="postDeats">
-                                <a class="user-link" href="/users/{{../username}}">{{../username}}</a>
-                                <div class=" status">{{age}}d {{editedTag}}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="d-inline-block"><span class="me-3">{{rating}}.0</span><meter style="--percent: {{starr rating}}%" class="average-rating mang-inasal d-inline-block" min="0" max="5"></meter></h5>
-                        </div>
-                </div>
-                    <div class="card-body reviewBody">
-                        <a class="user-link" href="/{{establishment.username}}">
-                            <h6 class="card-title reviewTitle">{{title}}</h6>
-                        </a>
-                        <p class="reviewtext truncate card-text">
-                            {{content}}
-                        </p>
-                        <div class="flex-center iconBox">
-                            <span class="chat chatbg "></span>
-                            <span class="cNum card-text">{{commentNum}}</span>
-                            <span class="up upbg "> </span>
-                            <span class="uvote card-text">{{likesNum}}</span>
-                            <span class="down downbg"></span>
-                            <span class="dvote card-text">{{dislikesNum}}</span>
-                            <span class="reply replybg"></span>
-                        </div>
-                    </div>
-                    <div class="wReply card-footer collapse">
-                        <form> <div class="form-group">
-                            <label for="c00001xxtext" class="form-label writeReply">Write a Reply</label>
-                            <textarea class="form-control" required  id="c00001xxtext" name="c00001xxtext" rows="3"></textarea>
-                            <button type="submit" class="postReply btn btn-success">Post</button>
-                            </div></form>
-                    </div>
-                    <ul class="comment list-group list-group-flush collapse"></ul>
-                </div>
-            </div>
+            {{#if topReviews}}
+            {{#each topReviews}}
+            {{> review this}}
             {{/each}}
+
+            <!-- Truncated reviews -->
+            {{#if truncatedReviews}}
+                    <div class="row mb-3">
+                        <button class="moreRev moreRevText">see more</button>
+                    </div>
+                    <div class="row moreRev collapse">
+                    {{#each truncatedReviews}}
+                    {{> review this}}
+                    {{/each}}
+                    </div>
+                {{/if}}
+            {{else}}
+                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
+            {{/if}}
         </div>
     </div>
 </div>
