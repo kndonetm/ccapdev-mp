@@ -9,8 +9,8 @@ const reviews = db.collection("reviews");
 const comments = db.collection("comments");
 
 userRouter.get("/users/:username", async (req, res, next) => {
-    // get user from users collection
     try {
+        // get user from users collection
         const user = await users.findOne({
             username: req.params.username,
         });

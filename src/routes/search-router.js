@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getDb } from '../model/conn.js';
+import { ObjectId } from 'mongodb';
 
 const searchRouter = Router();
 const db = getDb();
@@ -42,6 +43,18 @@ searchRouter.get("/search", async (req, res) => {
 
     const establishmentsArray = await establishments.find(estabQueryPipe).toArray();
     const reviewsArray = await reviews.aggregate(reviewQueryPipe).toArray();
+    
+    reviewsArray.forEach(async (review) => {
+        const establishment = await establishments.findOne({
+            _id: review.establishmentId,
+        });
+
+        // add establishment username to review object (needed for url)
+        review.estabUsername = establishment.username;
+
+        // add _id string copy
+        review.id = review._id.toString();
+    })
 
     res.render("search", {
         title: req.query.q + " - Search Results",
