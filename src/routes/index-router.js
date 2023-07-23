@@ -8,7 +8,11 @@ import establishmentRouter from "./establishment-router.js";
 import loginRegisterRouter from "./login-register-router.js";
 
 import { getDb } from '../model/conn.js';
+import fs from 'fs';
+import { dirname } from "path";
+import { fileURLToPath } from 'url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 const router = Router();
 const db = getDb();
 const establishments_db = db.collection("establishments");
@@ -74,6 +78,7 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
         reviews_db.insertOne(newReview);
         // res.sendStatus(200);
         res.status(200);
+        res.send("done review")
     } else if ( revID && parent && content){
       const newReply = {
         content: content,
@@ -86,18 +91,13 @@ router.post('/', upload.array('mediaInput'), async function (req, res) {
         edited: false,
     };
     comments_db.push(newReply);
-    // res.sendStatus(200);
     res.status(200);
+    res.send("done reply")
     } else {
-        // res.sendStatus(400);
         res.status(400);
-
     }
 })
-import fs from 'fs';
-import { dirname } from "path";
-import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
+
 
 router.patch('/editReview', upload.array('mediaInput'), async function (req, res) {
   const {estabID, title, rate, content, userID} = req.body;
@@ -115,6 +115,7 @@ router.patch('/editReview', upload.array('mediaInput'), async function (req, res
   let review = await reviews_db.findOne({establishmentId: new ObjectId(estabID), userId: new ObjectId(userID)
   });
 
+  if (review != null) {
   for (let img of review.images)
     fs.unlink(__dirname + "../../../public" + img.substring(7), (err) => {
       if (err)  console.error('Error deleting file:', err);
@@ -123,6 +124,7 @@ router.patch('/editReview', upload.array('mediaInput'), async function (req, res
     fs.unlink(__dirname + "../../../public" + vid.substring(7), (err) => {
       if (err) console.error('Error deleting file:', err);
     })
+  }
 
   reviews_db.updateOne(
       {establishmentId: new ObjectId(estabID),
@@ -136,10 +138,30 @@ router.patch('/editReview', upload.array('mediaInput'), async function (req, res
           images: imageURls,
           videos: videoUrls,
       }})
-      res.send('done')
+      res.status(200)
+      res.send('done edit')
 })
 
+router.delete('/', async function (req, res) {
+  let {reviewId} = req.body
+  let __iod = new ObjectId(reviewId);
+ let review = await reviews_db.findOne({_id: __iod});
 
+  if (review != null) {
+  for (let img of review.images)
+    fs.unlink(__dirname + "../../../public" + img.substring(7), (err) => {
+      if (err)  console.error('Error deleting file:', err);
+    })
+ for (let vid of review.videos)
+    fs.unlink(__dirname + "../../../public" + vid.substring(7), (err) => {
+      if (err) console.error('Error deleting file:', err);
+    })
+  }
+
+  reviews_db.deleteOne( { _id: __iod } )
+  res.status(200)
+  res.send("review Deleted")
+})
 
 router.post('/comment', function (req, res) {
   res.redirect("/");
@@ -174,6 +196,8 @@ router.patch('/', async (req,res) => {
         {$pull:{dislikes: userID},
       }); break;
   }
+  res.status(200)
+  res.send("done")
 })
 
 

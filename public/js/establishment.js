@@ -56,18 +56,18 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
     document.querySelector("#searchForm").submit();
 })
 
-function updateHelp (_id, u_id, potch) {
-    fetch('/', {
+async function updateHelp (_id, potch) {
+    await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
         reviewId: _id,
-        userID: u_id,
+        userID: "64aed2aff586db31f5a01231",
         updateH: potch
         }),
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-        }).then(console.log("yey")).catch((err) => console.log(err))
+        }).then(res => console.log(res)).catch((err) => console.log(err))
 }
 
 async function markUp (event) {
@@ -91,7 +91,7 @@ async function markUp (event) {
         $(upvote).text(votes - 1);
         potch = "up_";
     }
-    updateHelp (parent.id, "64aed2a8f586db31f5a01230", potch)
+    updateHelp (parent.id, potch)
 }
 
 function markDown (event) {
@@ -116,7 +116,7 @@ function markDown (event) {
         $(downvote).text(votes - 1);
         potch = "down_";
     }
-    updateHelp (parent.id, "64aed2a8f586db31f5a01230", potch)
+    updateHelp (parent.id, potch)
 }
 
 function showChat (event) {
@@ -140,18 +140,21 @@ function showEstabResponse (event) {
     $(parent.querySelector('.estabResponseText')).collapse('toggle') 
 }
 
-function deleteCommit (event) {
+async function deleteCommit (event) {
     parent = event.target.closest('.REVIEW')
     if (!parent.classList.contains('list-group-item')){
-        bye = document.querySelector('.yourReview')
-        bye.innerHTML = "";
-        clearForm = document.querySelector("#reviewForm")
-        clearForm.reset();
-        $('.revForm').collapse('show')
-        btn = document.querySelector('.postReview')
-        btn.innerHTML = "Post"
-        posted = false;
-        updateImgInputList ()
+        await fetch('/', {
+            method: 'DELETE',
+            body: JSON.stringify({
+            reviewId: parent.id
+            }),
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+            }).then(res => {console.log(res);
+                if (res.status == 200)
+                    location.reload(); 
+            }).catch((err) => console.log(err))
     } else {
         parent.remove();
     }
@@ -197,143 +200,20 @@ async function insertReview (event) {
         yo = await fetch("/editReview", {
             method: "PATCH",
             body: formDat,
-        }).then(response => {
-            console.log(response);
-            console.log("hety")
-        }).catch(err => console.log(err))
-        
-        location.reload();
+        })
+        .then(res => {console.log(res);
+            if (res.status == 200)
+                location.reload(); 
+        }).catch((err) => console.log(err))
     } else {
     fetch("/", {
         method: "POST",
         body: formDat,
-    }).then(response => {
-        console.log(response);
-    }).catch(err => console.log(err))
-    }
-
-    console.log("wyoo")
-    $('.yourReview').collapse('show')
-    console.log($('.revForm').collapse('hide'))
-    string1 = `<p class="fw-light mb-2">Your Review</p>
-    <div class="card REVIEW mb-3">
-                <div class="card-header reviewHeader flex-center">
-                <div class="user-profile flex-center">
-                <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="${localStorage.getItem('pfp')}" alt=""></a>
-                <div class="postDeats">
-                    <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
-                    <div class="c00000xx status">`
-    if (posted == false) {
-        string1a = "Just Now"
-    } else {
-        string1a = "moments ago • edited"
-    }
-    console.log(string1a)
-
-    string1b = `</div>
-                </div>
-                </div>
-            <div>
-                <h5 class="d-inline-blockz">
-                <span class="ratingz">` + rating + `.0</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
-                </meter></h5>
-            </div>
-    </div>
-    <div class="card-body reviewBody">
-        <h6 class="card-title reviewTitle">` + titlle +`</h6>
-        <p class="c00000xx reviewtext card-text">
-        ` + reviewDesc + `
-        </p>
-    
-        `;
-
-    string2 = ""
-    string3 = "";
-    if (thefiles.length > 0) {
-        string2 = '<div class="card-body revMedia">'
-        y = 4
-        if (thefiles.length > 4)
-            y = 3
-        for(let x = 0; x < y; x++) {
-            if (thefiles[x] instanceof File) {
-                theURL = URL.createObjectURL( thefiles[x]);
-                type = thefiles[x]['type'];
-        
-                switch (type.split('/')[0]) {
-                    case "image":
-                        string2 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
-                        break;
-                    case "video":
-                        string2 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
-                        break;
-                    case "audio":
-                        string2 += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
-                        break;
-                }
-            }
-        }
-        string3 = "</div>"
-    }
-    string4 ="";
-    string5 ="";
-    if (thefiles.length > 4) {
-        string3 = 
-        `<button class="c00000xx imgBtn" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
-        </div><div class="modal c00000xx moreImg">
-                            <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
-                                </div><div class="modal-body  moreImgBox">
-                ` 
-
-                for (x in thefiles) {
-                    if (thefiles[x] instanceof File) {
-                        theURL = URL.createObjectURL( thefiles[x]);
-                        type = thefiles[x]['type'];
-                
-                        switch (type.split('/')[0]) {
-                            case "image":
-                                string4 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
-                                break;
-                            case "video":
-                                string4 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
-                                break;
-                            case "audio":
-                                string4 += '<span class="audio"><audio  src="' + theURL +'" controls></span>'
-                                break;
-                        }
-                    }
-                }   
-                string5 = '</div></div> </div></div> '        
-    }
-    string6 = `
-            <div class="flex-center iconBox">
-            <span class=" chat chatbg "></span>
-            <span class=" cNum card-text">0</span>
-            <span class=" up upbg"> </span>
-            <span class=" uvote card-text">0</span>
-            <span class=" down downbg"></span>
-            <span class=" dvote card-text">0</span>
-            <span class="c00000xx editRev edit-review editbg ms-3"></span>
-            <span class="del-review delbg"></span>
-            
-        </div>
-        </form>
-    </div>
-
-    `;
-
-    reviewBox.innerHTML = string1 + string1a + string1b + string2 + string3  + string4 + string5 + string6;
-    
-    if (thefiles.length > 4) {
-    button = document.querySelector('.c00000xx.imgBtn')                                                     
-    button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
-    }
-
-    r = document.querySelector(':root');
-    r.style.setProperty('--yourRev', 'calc(' + rating + '/ 5 * 100%)');
-    posted = true;
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
 }
 
 var x = "";
