@@ -1,6 +1,6 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
-    // console.log(classlist)
+    console.log(localStorage.getItem('currentLogin'))
     logged = !(localStorage.getItem('currentLogin') == "false" ||
             localStorage.getItem('currentLogin') == null )
      console.log(logged)
@@ -10,18 +10,14 @@ document.addEventListener("click", event=> {
             classlist.contains('up') ||
             classlist.contains('postReview')
         )) {
-            var myModal = new bootstrap.Modal(document.getElementById('signin'), {
-                keyboard: false
-                })
-            myModal.show()
-         
+        window.location.replace("/login")   
     }  else {
         if (classlist.contains('reply')) {
             reply(event);
-            
-        } 
-        else if (classlist.contains('edit-reply')) {
+        } else if (classlist.contains('edit-reply')) {
             editReply(event);
+        } else if (classlist.contains('yellow')) {
+                deleteRespoEstab(event);
         } else if (classlist.contains('del-reply')) {
             deleteReplyfetch(event)
         }
@@ -55,7 +51,6 @@ document.addEventListener("submit", event=> {
         if (classlist.contains('postReview')) {
             insertReview (event)
         } else if (classlist.contains('postReply')) {
-            console.log("rehrehr")
             if (classlist.contains('estab'))
                 respoEstab(event)
             else
@@ -76,7 +71,6 @@ async function updateHelp (_id, potch) {
         method: 'PATCH',
         body: JSON.stringify({
         reviewId: _id,
-        userID: "64aed2aff586db31f5a01231",
         updateH: potch
         }),
         headers: {
@@ -208,7 +202,13 @@ $('button.moreRev').on({
 
     await fetch("/estabRespo", {
         method: "POST",
-        body: formm,
+        body: JSON.stringify({
+            revID: formm.get("revID"),
+            text: formm.get("text")
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
@@ -217,13 +217,16 @@ $('button.moreRev').on({
 
 async function editRespoEstab (event) {
     parent = event.target.closest('.REVIEW')
-    formm = new FormData(parent.querySelector('form'));
-    formm.append("revID", parent.id)
     event.preventDefault();
 
     await fetch("/estabRespo", {
-        method: "patch",
-        body: formm,
+        method: "PATCH",
+        body: JSON.stringify({
+            revID: event.target.closest('.card.REVIEW').id
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
@@ -233,12 +236,18 @@ async function editRespoEstab (event) {
 async function deleteRespoEstab (event) {
     parent = event.target.closest('.REVIEW')
     formm = new FormData(parent.querySelector('form'));
-    formm.append("revID", parent.id)
+    formm.append("revID", event.target.closest('.card.REVIEW').id)
     event.preventDefault();
 
     await fetch("/estabRespo", {
-        method: "delete",
-        body: formm,
+        method: "DELETE",
+        body: JSON.stringify({
+            revID: formm.get("revID"),
+            text: formm.get("text")
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
