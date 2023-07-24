@@ -274,12 +274,15 @@ router.post("/upload", uploadPfp.single("file"), (req, res) => {
   let filePath;
   try {
     filePath = req.file.path;
+    console.log(filePath)
+    const updatedPath = filePath.replace("public", "static");
+    console.log(updatedPath)
     console.log("File uploaded successfully:", req.file);
-    res.json({ path: filePath });
+    res.json({ path: updatedPath });
   } catch (error) {
     console.log("No file was uploaded.");
     res.status(400).json({ error: 'No file was uploaded.' });
-  }
+  } 
 })
 
 router.use((req,res) => {
