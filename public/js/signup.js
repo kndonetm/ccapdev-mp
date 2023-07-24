@@ -72,6 +72,7 @@ form.addEventListener("submit", async (e) => {
         // localStorage.setItem('savedUsername', data.user.username);
         // localStorage.setItem('descProf', data.user.description);
         // localStorage.setItem('pfp',  data.user.pfp);
+        localStorage.setItem('currentLogin', 'true')
 
         const redirect = "/users/" + username;
         location.assign(redirect);

@@ -27,6 +27,12 @@ form.addEventListener("submit", async (e) => {
         }
         if (data.user) {
             //change
+            console.log(data.user.name)
+            // localStorage.setItem('savedUsername', data.user.username);
+            // localStorage.setItem('descProf', data.user.description);
+            // localStorage.setItem('pfp',  data.user.pfp);
+
+            localStorage.setItem('currentLogin', 'true')
             const redirect = "/users/" + username;
             location.assign(redirect);
         }
