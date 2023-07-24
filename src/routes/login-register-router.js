@@ -2,8 +2,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
 // import User from '../model/User.js' 
-
-import { ObjectId } from "mongodb"
 import { getDb } from '../model/conn.js'
 import bcrypt from 'bcrypt'
 const db = getDb();

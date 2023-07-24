@@ -15,6 +15,7 @@ import hbsHelpers from './src/modules/handlebars-helpers/helpers.js'
 
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken'
+import { ObjectId } from "mongodb"
 
 
 const app = express();
@@ -36,14 +37,6 @@ var hbs = exphbs.create({
     extname: 'hbs'
 })
 
-app.engine("hbs", hbs.engine);
-app.set("view engine", "hbs");
-app.set("views", "./src/views");
-app.set("view cache", false);
-app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-app.use(express.json());
 
 app.get('*', async (req, res, next) => {
     const token = req.cookies.jwt
@@ -54,8 +47,12 @@ app.get('*', async (req, res, next) => {
                 res.locals.user = null
                 next()
             } else {
-                let user = await users_db.findOne({ _id: decodedToken });
+                const objectId = new ObjectId(decodedToken._id);
+                let user = await users_db.findOne({ _id: objectId});
                 res.locals.user = user
+                console.log(decodedToken._id)
+                console.log(user)
+                console.log(res.locals.user)
                 next()
             }
         })
@@ -64,6 +61,16 @@ app.get('*', async (req, res, next) => {
         next()
     }
 })
+
+app.engine("hbs", hbs.engine);
+app.set("view engine", "hbs");
+app.set("views", "./src/views");
+app.set("view cache", false);
+app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.use(express.json());
+
 
 app.use(router);
 
