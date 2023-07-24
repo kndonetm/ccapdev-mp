@@ -1,6 +1,10 @@
 import { ObjectId } from 'mongodb';
 import { Router } from 'express';
 import { getDb } from '../model/conn.js';
+import fs from 'fs';
+import { dirname } from "path";
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 
 const userRouter = Router();
 const db = getDb();
@@ -11,7 +15,7 @@ const reviews_db = db.collection("reviews");
 import multer from 'multer';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/assets/reviewPics/')
+    cb(null, 'public/assets/user_pfp/')
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "_" + file.originalname)
@@ -22,8 +26,16 @@ const upload = multer({ storage: storage })
 userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
   let img = "/static/assets/user_pfp/"  + req.file.filename;
   let sampleUSer = "64aed2aff586db31f5a01231"
+
+  let userr = await user_db.findOne({_id: new ObjectId(sampleUSer)  });
+  if (userr != null && userr.profilePicture !=null)
+  fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(24), (err) => {
+    if (err)  console.error('Error deleting file:', err);})
+
   user_db.updateOne({_id: new ObjectId(sampleUSer)},
   {$set:{profilePicture: img}})
+  res.status(200)
+  res.send("done edit pic")
 })
 
 userRouter.patch("/user/changeDesc", async function (req, res) { 

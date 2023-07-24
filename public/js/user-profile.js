@@ -61,14 +61,15 @@ window.addEventListener("load", event=> {
 
 document.addEventListener ("change", async events=>{
     const fileInputs = document.querySelector('#profile-img-caption');
-    const file = fileInputs.files[0];
-
-    await fetch("/user/changeDesc", {
+    formEl = document.forms.ImgChange;
+    formData = new FormData(formEl);
+    if (events.target.id == "profile-img-caption")
+    await fetch("/user/changePfp", {
         method: "PATCH",
-        body: formmm,
-    }).then(res => {console.log(res);
+        body: formData
+    }).then(res => { console.log(res)
         if (res.status == 200)
             location.reload(); 
     }).catch((err) => console.log(err))
-
+    console.log("yo")
 })

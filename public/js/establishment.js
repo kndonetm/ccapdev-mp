@@ -15,8 +15,15 @@ document.addEventListener("click", event=> {
          
     }  else {
         if (classlist.contains('reply')) {
-            reply(event)
-        } else if (classlist.contains('chat')) {
+            reply(event);
+            
+        } 
+        else if (classlist.contains('edit-reply')) {
+            editReply(event);
+        } else if (classlist.contains('del-reply')) {
+            deleteReplyfetch(event)
+        }
+        else if (classlist.contains('chat')) {
             showChat(event)
         } else if (classlist.contains('down')) {
             markDown(event)
@@ -46,7 +53,11 @@ document.addEventListener("submit", event=> {
         if (classlist.contains('postReview')) {
             insertReview (event)
         } else if (classlist.contains('postReply')) {
-            insertReply (event)
+            console.log("rehrehr")
+            if (classlist.contains('estab'))
+                respoEstab(event)
+            else
+                replyfetch (event)
         }
     } 
 })
@@ -57,6 +68,8 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
 })
 
 async function updateHelp (_id, potch) {
+    console.log(_id, potch);
+
     await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
@@ -143,7 +156,9 @@ function showEstabResponse (event) {
 async function deleteCommit (event) {
     parent = event.target.closest('.REVIEW')
     if (!parent.classList.contains('list-group-item')){
-        await fetch('/review', {
+        if (parent.classList.contains('estab')) 
+            deleteRespoEstab(event);
+        else await fetch('/review', {
             method: 'DELETE',
             body: JSON.stringify({
             reviewId: parent.id
@@ -155,8 +170,8 @@ async function deleteCommit (event) {
                 if (res.status == 200)
                     location.reload(); 
             }).catch((err) => console.log(err))
-    } else {
-        parent.remove();
+    }else {
+        deleteReplyfetch (event)
     }
 }
 
@@ -198,15 +213,129 @@ $('button.moreRev').on({
     }).catch((err) => console.log(err))
 }
 
+async function editRespoEstab (event) {
+    parent = event.target.closest('.REVIEW')
+    formm = new FormData(parent.querySelector('form'));
+    formm.append("revID", parent.id)
+    event.preventDefault();
+
+    await fetch("/estabRespo", {
+        method: "patch",
+        body: formm,
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
+async function deleteRespoEstab (event) {
+    parent = event.target.closest('.REVIEW')
+    formm = new FormData(parent.querySelector('form'));
+    formm.append("revID", parent.id)
+    event.preventDefault();
+
+    await fetch("/estabRespo", {
+        method: "delete",
+        body: formm,
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
+async function replyfetch (event) {
+    parent = event.target.closest('.REVIEW')
+    formm = new FormData(parent.querySelector('form'));
+    revID = parent.id;
+    parID = null;
+    event.preventDefault();
+    console.log("rehrdsehr")
+
+    if (parent.classList.contains('list-group-item')) {
+        parID = revID;
+        revID = null;
+    }
+
+    formm.append("revID", revID)
+    formm.append("parID", parID)
+    console.log("dsd")
+    console.log(formm.get("text"))
+
+    await fetch("/comment", {
+        method: "POST",
+        body: JSON.stringify({
+            revID: formm.get("revID"),
+            parID: formm.get("parID"),
+            text: formm.get("text")
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
+function editReply(event) {
+    console.log("Her")
+    parent = event.target.closest('.REVIEW')
+    desc = parent.querySelector( ".reviewtext");
+    textarea = parent.querySelector( ".yourRevEdit");
+    icon = parent.querySelector( ".edit-reply");
+    btn = parent.querySelector(".doneEdit");
+
+    desc.style.display = "none";
+    textarea.style.display = null;
+    icon.style.display = "none";
+    btn.style.display = null;
+    textarea.innerHTML = desc.innerHTML.trim();
+}
+
+async function editReplyfetch (event) {
+    formm = new FormData(parent.querySelector('.edit-comment-form'));
+    console.log(parent.querySelector('.edit-comment-form'))
+    console.log(formm);
+
+    formm.append("commID", parent.id)
+    event.preventDefault();
+
+    await fetch("/comment", {
+        method: "PATCH",
+        body: JSON.stringify({
+            commID: formm.get("commID"),
+            text: formm.get("text")
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
+async function deleteReplyfetch (event) {
+    parent = event.target.closest('.REVIEW')
+    console.log(parent.getAttribute("name"));
+
+    event.preventDefault();
+
+    await fetch("/comment", {
+        method: "DELETE",
+        body: JSON.stringify({commID: parent.id}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}
+
 async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
     console.log(formDat)
-    rating = formDat.get("rate");
-    estab = formDat.get("estabID");
-    titlle = formDat.get("title");
-    reviewDesc = formDat.get("content");
-    reviewBox = document.querySelector('.yourReview');
-    thefiles = document.querySelector('#mediaInput').files;
     event.preventDefault();
 
     if (formDat.get("userID") != "") {
@@ -264,64 +393,12 @@ function doneEditText(event){
     btn = parent.querySelector(".doneEdit");
     thestatus = parent.querySelector(".status");
     
-    textarea.style.display = "none";
-    desc.style.display = null;
-    btn.style.display = "none";
-    icon.style.display = null;
-    desc.innerHTML = textarea.value.trim();
-    thestatus.innerHTML = "moments ago • edited"
-}
-
-function insertReply (event) {
-    parent = event.target.closest('.REVIEW')
-    replyDesc = parent.querySelector('textarea').value;
-    replyList = parent.querySelector(':scope > .comment');
-    
-    if (replyList == null) {
-        replyList = parent.querySelector(':scope .comment');
+    if (parent.classList.contains('estab')) 
+        editRespoEstab (event)
+    else {
+        editReplyfetch (event)
     }
-
-    console.log(event.target)
-    console.log(parent)
-    console.log(replyList)
-
-    event.preventDefault();
-    string1 = `
-    <li class=" list-group-item REVIEW">
-                                <div class="user-profile flex-center">
-                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid" src="${localStorage.getItem('pfp')}" alt=""></a>
-                                    <div class="postDeats">
-                                        <a class="user-link" href="user-profile-view.html">${localStorage.getItem('savedUsername')}</a>
-                                        <div class=" status">Just Now</div>
-                                    </div>
-                                </div>
-                                <p class="reviewtext card-text">
-                                ` 
-    string2 = `
-                                </p>
-                                <textarea class=" card-text yourRevEdit form-control mb-2" style="display: none"></textarea>
-                                <div class="flex-center iconBox">
-                                    <span class="chat chatbg "></span>
-                                    <span class="cNum card-text">0</span>
-                                    <span class="up upbg"> </span>
-                                    <span class=" uvote card-text">0</span>
-                                    <span class="down downbg"></span>
-                                    <span class="dvote card-text">0</span>
-                                    <span class="edit-review editbg ms-3"></span>
-                                    <span class="del-review delbg"></span>
-                                    <button class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
-                                </div>
-                                <ul class="comment list-group list-group-flush collapse"></ul>
-                        </li>
-    
-    `;
-    replyList.innerHTML += (string1 + replyDesc + string2)
-    parent.querySelector('textarea').value = "";
-    
-    $(parent.querySelector('.wReply')).collapse('hide')
-    $(replyList).collapse('show')
 }
-
 
 let fileInput = document.querySelector('#mediaInput');
 let fileList = document.querySelector(".filelist");
