@@ -5,12 +5,14 @@ import multer from 'multer';
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 import establishmentRouter from "./establishment-router.js";
-import loginRegisterRouter from "./login-register-router.js";
 
 import { getDb } from '../model/conn.js';
 import fs from 'fs';
-import { dirname } from "path";
+import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
+import loginRegisterRouter from '../routes/login-register-router.js'
+
+import uploadPfp from '../middleware/upload.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 const router = Router();
@@ -313,7 +315,24 @@ router.route('/estabRespo')
     res.send("deleted estab respo")
   })
 
+
+router.post("/upload", uploadPfp.single("file"), (req, res) => {
+  let filePath;
+  try {
+    filePath = req.file.path;
+    console.log(filePath)
+    const updatedPath = filePath.replace("public", "static");
+    console.log(updatedPath)
+    console.log("File uploaded successfully:", req.file);
+    res.json({ path: updatedPath });
+  } catch (error) {
+    console.log("No file was uploaded.");
+    res.status(400).json({ error: 'No file was uploaded.' });
+  } 
+})
+
 router.use((req, res) => {
+
   res.send(`
   <!DOCTYPE html>
   <html>
@@ -326,6 +345,7 @@ router.use((req, res) => {
   </html>
   `)
 })
+
 
 export default router;
 
