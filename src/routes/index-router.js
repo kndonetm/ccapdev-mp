@@ -146,11 +146,6 @@ router.route('/review')
   res.send("review Deleted")
 })
 
-router.post('/comment', function (req, res) {
-  res.redirect("/");
-})
-
-
 router.patch('/', async (req,res) => {
   let {reviewId, userID, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
@@ -185,18 +180,27 @@ router.patch('/', async (req,res) => {
 
 router.route('/comment')
   .post(async function (req, res) {
-    const {revID, userID, parID, text} = req.body;
+    let {revID, parID, text} = req.body;
+    console.log(req.body)
 
-    if (revID && userID && parID && text ) {
+    let userID = "64aed2aff586db31f5a01231";
+    let par_id = null
+    if (parID != "null")
+      par_id = new ObjectId(parID)
+    if (revID == "null") {
+      let parComment = await comments_db.findOne({_id: new ObjectId(par_id)})
+      revID = parComment.reviewId
+    }
+    if (revID && userID && text ) {
         const newComment = {
             content: text,
             likes: [],
             dislikes: [],
             comments: [],
             datePosted: new Date (),
-            userId: revID,
-            parent: parID,
-            reviewId: revID,
+            userId: new ObjectId(userID),
+            parent: par_id,
+            reviewId: new ObjectId(revID),
             edited: false,
         };
         comments_db.insertOne(newComment);
@@ -259,7 +263,7 @@ router.route('/estabRespo')
         res.send("esited estab respo")
 })
 .delete(async function (req, res) {
-  const {revID, text} = req.body;
+  const {revID} = req.body;
     reviews_db.updateOne(
       {_id: new ObjectId(revID)}, 
       {$set: { "estabResponse": [] }
