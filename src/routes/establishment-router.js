@@ -341,7 +341,15 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }
       ]).toArray();
-      let currUser = "64aed2aff586db31f5a01231"
+      let currUser = null
+      let userIsEstab = false;
+      if(res.locals.user != null) {
+       currUser = res.locals.user._id.toString()
+       if (res.locals.user.establishmentId != null && res.locals.user.establishmentId.toString()
+        == selectedEstab._id.toString())
+        userIsEstab = true;
+      }
+
       let userReview = null;
 
       for (let review of reviews) {
