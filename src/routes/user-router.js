@@ -4,6 +4,8 @@ import { getDb } from '../model/conn.js';
 import fs from 'fs';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken'
+
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 
 const userRouter = Router();
@@ -24,28 +26,65 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
-  let img = "/static/assets/user_pfp/"  + req.file.filename;
-  let sampleUSer = "64aed2aff586db31f5a01231"
+  let img = "static/assets/user_pfp/"  + req.file.filename;
 
-  let userr = await user_db.findOne({_id: new ObjectId(sampleUSer)  });
+  let user;
+  let objectId;
+  const token = req.cookies.jwt;
+  
+  if (token) {
+    try {
+      let decodedToken = await jwt.verify(token, "secret");
+      objectId = new ObjectId(decodedToken._id);
+      user = await user_db.findOne({ _id: objectId });
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+
+  let userr = await user_db.findOne({_id: objectId });
   if (userr != null && userr.profilePicture !=null)
   fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(24), (err) => {
     if (err)  console.error('Error deleting file:', err);})
 
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+  user_db.updateOne({_id: objectId},
   {$set:{profilePicture: img}})
   res.status(200)
   res.send("done edit pic")
 })
 
 userRouter.patch("/user/changeDesc", async function (req, res) { 
-  let {userDesc} = req.body;
-  let sampleUSer = "64aed2aff586db31f5a01231"
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
-  {$set:{description: userDesc}})
-  res.status(200)
-  res.send("done edit desc")
+  let user;
+  let objectId;
+  const token = req.cookies.jwt;
+  
+  if (token) {
+    try {
+      let decodedToken = await jwt.verify(token, "secret");
+      objectId = new ObjectId(decodedToken._id);
+      user = await user_db.findOne({ _id: objectId });
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  
+  if (user) {
+    try {
+      let {userDesc} = req.body;
+  
+      // Perform the update operation only if 'user' is not null
+      await user_db.updateOne({ _id: user._id }, { $set: { description: userDesc } });
+  
+      res.status(200).send("done edit desc");
+    } catch (err) {
+      console.log("Error updating user description:", err);
+      res.status(500).send("Internal server error");
+    }
+  } else {
+    res.status(404).send("User not found");
+  }
 })
+
 
 userRouter.get("/users/:username", async (req, res, next) => {
     try {
@@ -396,7 +435,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
 
     const topReviews = reviews.slice(0, 5);
     const truncatedReviews = reviews.slice(5);
-    let sampleUSer = "64aed2aff586db31f5a01231"
+    let sampleUSer = res.locals.user._id.toString()
 
     if(user._id != sampleUSer) {
     res.render("user", {

@@ -53,7 +53,7 @@ const login = async (req, res) => {
 } 
 
 const signup = async (req, res) => {
-    const {username , password, description, pfp} = req.body
+    const {username , password, description, profilePicture} = req.body
     console.log(req.body)
 
     try{
@@ -63,7 +63,7 @@ const signup = async (req, res) => {
         } else {
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
-            user = await users_db.insertOne({username, password: hash, description, pfp})
+            user = await users_db.insertOne({username, password: hash, description, profilePicture, isAdmin: "false"})
             const token = createToken(user.insertedId)
             res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
             res.status(200).json({ user: user.insertedId })

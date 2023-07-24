@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 
 import { Router } from 'express'
+import jwt from 'jsonwebtoken'
 import multer from 'multer';
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
@@ -51,6 +52,7 @@ router.use(loginRegisterRouter);
 router.route('/review')
   .post(upload.array('mediaInput'), async function (req, res) {
     const { estabID, title, rate, content } = req.body;
+
     let imageURls = []
     let videoUrls = []
     for (let files of req.files) {
@@ -61,7 +63,20 @@ router.route('/review')
       else
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
-    let sampleUSer = "64aed2aff586db31f5a01231"
+
+    let user
+    const token = req.cookies.jwt
+ 
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        const objectId = new ObjectId(decodedToken._id);
+        user = await users_db.findOne({ _id: objectId });
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
+    console.log(user)
     if (title && rate && content) {
       const newReview = {
         title: title,
