@@ -1,0 +1,30 @@
+<div class="card-footer REVIEW estabResponseDiv">
+                        <button class="estabResponse">view establishment's response {{#if edited}} • edited {{/if}}</button>
+                        <div class=" estabResponseText collapse">
+                            <p class="reviewtext truncate mt-1 card-text ">
+                                {{content}}
+                            </p>
+                            <div class="flex-center iconBox">
+                                <span class="chat chatbg "></span>
+                                <span class="cNum card-text">{{length comments}}</span>
+                                <span class="up upbg"> </span>
+                                <span class="uvote card-text">{{length likes}}</span>
+                                <span class="down downbg"></span>
+                                <span class="dvote card-text">{{length dislikes}}</span>
+                                <span class="reply replybg"></span>
+                            </div>
+                            <div class="wReply card-footer collapse">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="a00001xxtext" class="form-label writeReply">Write a
+                                            Reply</label>
+                                        <textarea class="form-control" required id="a00001xxtext"
+                                            name="a00001xxtext" rows="3"></textarea>
+                                        <button type="submit" class="postReply btn btn-success">Post</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--  comment section list of reply -->
+                            <ul class="comment list-group list-group-flush collapse"></ul>
+                        </div>
+                    </div>
