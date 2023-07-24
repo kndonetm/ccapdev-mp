@@ -85,7 +85,7 @@ router.route('/review')
         images: imageURls,
         videos: videoUrls,
         datePosted: new Date(),
-        estabResponse: [],
+        estabResponse: null,
         establishmentId: new ObjectId(estabID),
         userId: new ObjectId(userID),
       };

@@ -349,8 +349,11 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       let userIsEstab = false;
       if(res.locals.user != null) {
        currUser = res.locals.user._id.toString()
-       userIsEstab = res.locals.user.isAdmin;
+       if (res.locals.user.establishmentId != null && res.locals.user.establishmentId.toString()
+        == selectedEstab._id.toString())
+        userIsEstab = true;
       }
+
       let userReview = null;
       console.log(currUser)
       console.log("helloee")
