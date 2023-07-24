@@ -35,6 +35,7 @@ form.addEventListener("submit", async (e) => {
     let pfp = "/static/assets/unknown.jpg"
   
     if (file.files[0]) {
+        console.log("nada");
       formData.append("file", file.files[0]);
       try {
         const res = await fetch("/upload", {
