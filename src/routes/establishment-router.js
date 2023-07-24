@@ -343,6 +343,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       ]).toArray();
       let currUser = "64aed2aff586db31f5a01231"
       let userReview = null;
+      let userIsEstab = true;
 
       for (let review of reviews) {
           // prioritize showing videos over images
@@ -386,7 +387,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       });
 
       if (userReview != null)
-      userReview.edit = true;
+        userReview.edit = true;
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
@@ -394,6 +395,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,
           rateSummary: rateSummary,
+          isEstab: userIsEstab,
           userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,

@@ -283,7 +283,7 @@ router.route('/estabRespo')
       reviews_db.updateOne(
         { _id: new ObjectId(revID) },
         {
-          $push: { estabResponse: newEstabRespo },
+          $set: { estabResponse: newEstabRespo },
         });
       // res.sendStatus(200);
       res.status(200);
@@ -297,17 +297,19 @@ router.route('/estabRespo')
     reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
-        $set: { "estabResponse.$.content": text, "estabResponse.$.edited": true }
+        $set: { "estabResponse.content": text, "estabResponse.edited": true }
       })
     res.status(200);
     res.send("esited estab respo")
   })
   .delete(async function (req, res) {
     const { revID } = req.body;
+    console.log("hy")
+    console.log(req.body)
     reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
-        $set: { "estabResponse": [] }
+        $set: { "estabResponse": null }
       })
     res.status(200);
     res.send("deleted estab respo")

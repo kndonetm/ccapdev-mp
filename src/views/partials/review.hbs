@@ -1,4 +1,4 @@
-                <div class="card mb-3 REVIEW" id="{{this._id}}">
+                <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
                     <!-- profile (req)-->
                     <div class="card-header reviewHeader flex-center">
                         <div class="user-profile flex-center">
@@ -39,13 +39,18 @@
                             <span class=" uvote card-text">{{length likes}}</span>
                             <span class=" down {{#if userDown}}downbgfill{{else}}downbg{{/if}}"></span>
                             <span class=" dvote card-text">{{length dislikes}}</span>
+                            {{#if @root.isEstab}}
+                            {{#unless estabResponse}}
+                            <span class="reply replybg"></span>
+                            {{/unless}}
+                            {{else}}
                             {{#if edit}}
                             <span class="c00000xx editRev edit-review editbg ms-3"></span>
                             <span class="del-review delbg"></span>
                             {{else}}
-                            <span class=" reply replybg"></span>
-                            {{/if}}
-                        </div>
+                            <span class="reply replybg"></span>
+                            {{/if}}{{/if}}
+                        </div>  
                     </div>
 
                     <!-- reply area (req)-->
@@ -54,15 +59,15 @@
                             <div class="form-group">
                                 <label for="text" class="form-label writeReply">Write a Reply</label>
                                 <textarea class="form-control" required id="{{this._id}}text" name="text" rows="3"></textarea>
-                                <button type="submit" class=" postReply btn btn-success">Post</button>
+                                <button type="submit" class="{{#if @root.isEstab}}estab{{/if}} postReply btn btn-success">Post</button>
                             </div>
                         </form>
                     </div>
 
                     <!-- establishment response (opt) -->
-                    {{#each estabResponse}}
-                    {{> EstabRespo this}}
-                    {{/each}}
+                    {{#if estabResponse}}
+                    {{> EstabRespo estabResponse}}
+                    {{/if}}
 
                     <!--  comment section list of review-->
                     <!-- UL ID is for review // the reply will have a unique ID -->

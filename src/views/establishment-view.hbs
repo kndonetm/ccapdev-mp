@@ -53,8 +53,8 @@
 
         <!-- everything else -->
         <div class="col ms-4 mt-5">
-
             <!-- rate form -->
+            {{#unless isEstab}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
                 <form action="/{{selectedEstab.username}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">
@@ -112,6 +112,8 @@
 
             <!-- form submitted injected here -->
             <div class="row yourReview collapse show">{{#if userReview}}{{> review userReview}}{{/if}}</div>
+            {{/unless}}
+            
             <p class="fw-light mb-2">Top Reviews</p>
 
             <!-- Top Reviews / one row per review-->
