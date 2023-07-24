@@ -13,6 +13,9 @@ const hbsHelpers = {
     'filename': (file) => file.split('/').slice(-1),
     'cmpId': function(a, b) {
         return a === b.toString();
+    },
+    'idIn': function(a, b) {
+        return b.includes(a.toString());
     }
 }
 

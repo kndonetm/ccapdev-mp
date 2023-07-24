@@ -151,32 +151,46 @@ router.route('/review')
   })
 
 router.patch('/', async (req, res) => {
+  console.log(req.body);
+
   let { reviewId, userID, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
 
+  console.log(__iod);
+
+  const x = await reviews_db.findOne({ _id: __iod });
+
+  let usedDb;
+
+  if (x) {
+    usedDb = reviews_db;
+  } else {
+    usedDb = comments_db;
+  }
+
   switch (updateH) {
     case "up":
-      reviews_db.updateOne(
+      usedDb.updateOne(
         { _id: __iod },
         {
           $push: { likes: userID },
           $pull: { dislikes: userID },
         }); break;
     case "up_":
-      reviews_db.updateOne(
+      usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
         }); break;
     case "down":
-      reviews_db.updateOne(
+      usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
           $push: { dislikes: userID },
         }); break;
     case "down_":
-      reviews_db.updateOne(
+      usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { dislikes: userID },
@@ -234,7 +248,7 @@ router.route('/comment')
     } catch (e) {
       console.error(e);
     }
-    
+
     res.status(200);
     res.send("esited comment")
   })

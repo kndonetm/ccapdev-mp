@@ -68,6 +68,8 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
 })
 
 async function updateHelp (_id, potch) {
+    console.log(_id, potch);
+
     await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
