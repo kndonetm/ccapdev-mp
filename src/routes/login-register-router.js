@@ -1,58 +1,78 @@
-import { ObjectId } from "mongodb"
-import { Router } from 'express'
-import { getDb } from '../model/conn.js';
 
-const loginRegisterRouter = Router();
-const db = getDb();
-const establishments_db = db.collection("establishments");
-const reviews_db = db.collection("reviews");
-const users_db = db.collection("users");
+import express from 'express';
+import jwt from 'jsonwebtoken'
+import model from '../model/User.js' 
 
-function saveLoginInfo(username, desc, image) {
-    localStorage.setItem('currentLogin', 'true');
-    localStorage.setItem('savedUsername', username);
-    localStorage.setItem('descProf', desc);
 
-    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '/static/assets/unknown.jpg');
+const loginRegisterRouter = express.Router()
+const handleErrors = (err) => {
+    let errors = { username: '', password: '' }
+    
+    if (err.message.includes('username')) {
+        errors.username = err.message
+    } else {
+        errors.password = err.message
+    }
+
+    return errors;
+  }
+
+//ayusin ung logic later
+const maxAge = 3 * 24 * 60 * 60
+const createToken = (_id) => {
+    return jwt.sign({_id}, process.env.SECRET, { expiresIn: maxAge}) 
 }
 
-loginRegisterRouter.post('/register', async function (req, res) {
+const login = async (req, res) => {
+    const {username , password} = req.body
+    console.log('trigger')
     try {
-        const result = await users_db.insertOne({
-            username: req.body.username,
-            password: req.body.password,
-            description: req.body.about,
-            profilePicture: req.body.profilePicture,
-        })
+        const user = await model.login(username, password)
+        const token = createToken(user._id)
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
+        res.status(200).json({ user: user._id })
+    } catch (error) {
+        const errors = handleErrors(error)
+        res.status(400).json({ errors })
+    } 
+} 
 
-        console.log(result);
-        res.sendStatus(200);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+const signup = async (req, res) => {
+    const {username , password, description, pfp} = req.body
+    
+    try{
+        const user = await model.signup(username , password, description, pfp)
+        const token = createToken(user._id)
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
+        res.status(200).json({ user: user._id })
+    } catch (error) {    
+        const errors = handleErrors(error)
+        res.status(400).json({ errors })
     }
-})
+}
 
-loginRegisterRouter.post('/login', async function (req, res) {
-    try {
-        const result = await users_db.findOne({
-            username: req.body.username,
-            password: req.body.password,
-        })
+const getUser = (req, res) => {
+    res.render('user')
+}
 
-        console.log(result);
-        if (result) {
-            res.json(result);
-            res.status(200);
-            res.send();
-        } else {
-            res.status(403).json({err: "Invalid username or password"}).send();
-        }
-    } catch (err) {
-        console.error(e);
-        
-        res.status(500).send();
-    }
-})
+const showLogin = (req, res) => {
+    res.render('layouts/login')
+}
+
+const showSignup = (req, res) => {
+    res.render('layouts/signup', {error: null})
+}
+
+const logout = (req, res) => {
+    res.cookie('jwt', '', {maxAge: 1})
+    res.redirect('/')
+}
+
+loginRegisterRouter.get('/login', showLogin)
+loginRegisterRouter.post('/login', login)
+loginRegisterRouter.get('/signup', showSignup)
+loginRegisterRouter.post('/signup', signup)
+loginRegisterRouter.get('/logout', logout)
+loginRegisterRouter.get('/:username', getUser)
 
 export default loginRegisterRouter;

@@ -1,107 +1,49 @@
 <nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
-    <div class="container p-1">
+    <div class="container pb-1 pt-1">
         <a href="/" class="navbar-brand h1 mb-0">
-            <img src="/static/assets/icon.png" alt="">
+            <!-- <img src="../assets/icon.png" alt=""> -->
             <span class="nav-name">ArcherEats</span>
         </a>
-        <form class="d-flex position-relative search-container" id="searchForm" action="/search" method="get">
-            <input type="text" class="form-control" name="q" placeholder="Search">
-            <button type="button" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
+        <form class="d-flex position-relative search-container mb-0">
+            <input type="text" class="form-control" placeholder="Search establishments">
+            <button type="submit" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
         </form>
         <ul class="navbar-nav">
+            {{#if user}}
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
+                        <div class="d-inline-block mb-0">
+                            <img src="../{{user.pfp}}" alt="" class="pfp">
+                            <span class="fs-6">Hello,<span class="fw-semibold"> {{user.username}}</span> </span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="" class="dropdown-item profile-view">Profile</a></li>
+                        <li><a href="/logout" class="dropdown-item logout">Logout</a></li>
+                    </ul>
+                </li>
+            {{else}}
+                <li class="nav-item me-2">
+                    <a href="/login">
+                        <button class="btn btn-success rounded-5">Sign in</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signup">
+                        <button class="btn btn-success rounded-5">Sign up</button>
+                    </a>
+                </li>
+            {{/if}}
         </ul>
     </div>
 </nav>
 
-<!--Modal-->
-<div class="modal modal-xl fade signin-modal" id="signin" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                <div class="d-flex">
-                    <div class="myform">
-                        <div class="d-flex mt-2">
-                            <img src="/static/assets/icon.png" alt="" class="me-2">
-                            <h5 class="nav-name">ArcherEats</h5>
-                        </div>
-                        <h1 class="text-center mt-5">Welcome Back!</h1>
-                        <form id="user-login-form">
-                            <div class="mb-3 mt-4 form-floating">
-                                <input required placeholder="username" type="text" class="form-control"
-                                    id="username-login" name="username-login">
-                                <label for="username-login" class="form-label">Username</label>
-                            </div>
-                            <div class="mb-3 form-floating">
-                                <input required placeholder="password" type="password" class="form-control"
-                                    id="password-login" name="password-login">
-                                <label for="password-login" class="form-label">Password</label>
-                            </div>
-                            <div class="error-text" id="error-text-login"></div>
-                            <input type="checkbox" id="remember-me">
-                            <label for="remember-me">
-                                <p class="subtext">Remember Me</p>
-                            </label>
-                            <button type="submit" class="btn btn-light mt-4 gy-0 signin-js">SIGN IN</button>
-                            <p class="pt-3 subtext">Don't have an account? <a href="#" data-bs-target="#register"
-                                    data-bs-toggle="modal">Sign up</a></p>
-                        </form>
-                        
-                    </div>
-                    <img src="/static/assets/modal-2.jpg" alt="" class="d-block">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-xl fade reg-modal" id="register" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                <div class="d-flex">
-                    <div class="myform">
-                        <div class="d-flex mt-2">
-                            <img src="/static/assets/icon.png" alt="" class="me-2">
-                            <h5 class="nav-name">ArcherEats</h5>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="register-intro">
-                                <h2 class="mt-5">Create your account</h2>
-                                <p class="text-start caption">Write food reviews for your fellow Lasallians!</p>
-                            </div>
-                            <div class="user-img">
-                                <img src="/static/assets/unknown.jpg" alt="" id="pfp-input">
-                                <input type="file" id="file">
-                                <label for="file" id="uploadbtn"><i class="fas fa-camera"></i></label>
-                            </div>
-                        </div>
-                        <form id="user-register-form">
-                            <div class="mb-3 mt-4 form-floating">
-                                <input required placeholder="username" type="text" class="form-control"
-                                    id="username-reg" name="username-reg">
-                                <label for="username-reg" class="form-label">Username</label>
-                            </div>
-                            <div class="mb-3 form-floating">
-                                <input required placeholder="password" type="password" class="form-control"
-                                    id="password-reg" name="password-reg">
-                                <label for="password-reg" class="form-label">Password</label>
-                            </div>
-                            <div class="mb-3 form-floating">
-                                <input required placeholder="about-you" type="text" class="form-control" id="about-you-reg"
-                                 name="about-you-reg">
-                                <label for="about-you-reg" class="form-label">About You</label>
-                            </div>
-                            <div class="error-text" id="error-text-reg"></div>
-                            <button type="submit" class="btn btn-light mt-4 gy-0 reg-js">SIGN UP</button>
-                            <p class="pt-3 subtext">Already have an account? <a href="#" data-bs-target="#signin"
-                                    data-bs-toggle="modal">Sign in</a></p>
-                        </form>
-                    </div>
-                    <img src="/static/assets/modal-1.jpg" alt="" class="d-block">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    document.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            document.querySelector('.navbar-custom').classList.add('floating-nav');
+        } else {
+            document.querySelector('.navbar-custom').classList.remove('floating-nav');
+        }
+    });
+</script>
