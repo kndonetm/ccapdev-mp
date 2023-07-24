@@ -4,10 +4,9 @@ import { getDb } from '../model/conn.js';
 import fs from 'fs';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
-import jwt from 'jsonwebtoken'
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
-
+import jwt from 'jsonwebtoken'
 const userRouter = Router();
 const db = getDb();
 const user_db = db.collection("users");
@@ -437,7 +436,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
     const truncatedReviews = reviews.slice(5);
     let sampleUSer = res.locals.user._id.toString()
 
-    if(user._id != sampleUSer) {
+    if(oid.toString() !== sampleUSer.toString()) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',
