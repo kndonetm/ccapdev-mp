@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 import express from 'express';
 import exphbs from 'express-handlebars';
+import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 
 import router from './src/routes/index-router.js';
@@ -15,10 +16,16 @@ import hbsHelpers from './src/modules/handlebars-helpers/helpers.js'
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken'
 
+
 const app = express();
 app.use(cookieParser())
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
+
+import User from './src/model/User.js' 
+// import { getDb } from './src/model/conn.js'
+// const db = getDb();;
+// const users_db = db.collection("users");
 
 app.use("/static", express.static(__dirname + "/public"));
 
@@ -41,18 +48,18 @@ app.use(express.json());
 app.get('*', async (req, res, next) => {
     const token = req.cookies.jwt
     if (token) {
-         jwt.verify(token, process.env.SECRET, async (err, decodedToken) => {
+         jwt.verify(token, "secret", async (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
                 res.locals.user = null
                 next()
             } else {
-                let user = await User.findById(decodedToken._id)
+                let user = await User.findById(decodedToken._id);
                 res.locals.user = user
                 next()
             }
         })
-    } else {
+    } else { 
         res.locals.user = null
         next()
     }

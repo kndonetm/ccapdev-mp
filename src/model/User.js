@@ -40,7 +40,8 @@ userSchema.statics.signup = async function (username , password, description, pf
 
 userSchema.statics.login = async function (username, password) {
     const user = await this.findOne({username})
-    
+    console.log(user)
+
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
 
@@ -55,6 +56,6 @@ userSchema.statics.login = async function (username, password) {
     //error checking modal
 }
 
-const model = mongoose.model('User', userSchema)
 
-export default model
+
+export default mongoose.model('User', userSchema)
