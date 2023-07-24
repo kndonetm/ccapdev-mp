@@ -5,7 +5,7 @@ import multer from 'multer';
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 import establishmentRouter from "./establishment-router.js";
-
+import jwt from 'jsonwebtoken'
 import { getDb } from '../model/conn.js';
 import fs from 'fs';
 import { dirname, relative } from "path";
@@ -62,12 +62,17 @@ router.route('/review')
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
 
-    let sampleUSer = null
-    let userIsEstab = false;
-    if(res.locals.user != null) {
-      sampleUSer = res.locals.user._id
-     userIsEstab = res.locals.user.isAdmin;
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
     }
+    console.log(userID)
 
     if (title && rate && content) {
       const newReview = {
@@ -82,7 +87,7 @@ router.route('/review')
         datePosted: new Date(),
         estabResponse: [],
         establishmentId: new ObjectId(estabID),
-        userId: new ObjectId(sampleUSer),
+        userId: new ObjectId(userID),
       };
       reviews_db.insertOne(newReview);
       // res.sendStatus(200);
@@ -165,14 +170,17 @@ router.patch('/', async (req, res) => {
   let { reviewId, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
 
-  let userID = null
-  let userIsEstab = false;
-  if(res.locals.user != null) {
-    userID = res.locals.user._id
-   userIsEstab = res.locals.user.isAdmin;
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
   }
-
-  console.log(__iod);
+  console.log(userID)
 
   const x = await reviews_db.findOne({ _id: __iod });
 
@@ -221,12 +229,17 @@ router.route('/comment')
     let { revID, parID, text } = req.body;
     console.log(req.body)
 
-    let userID = null
-    let userIsEstab = false;
-    if(res.locals.user != null) {
-      userID = res.locals.user._id
-     userIsEstab = res.locals.user.isAdmin;
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
     }
+    console.log(userID)
 
     let par_id = null
     if (parID != "null")

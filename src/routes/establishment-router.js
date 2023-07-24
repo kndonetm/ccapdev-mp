@@ -348,10 +348,12 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       let currUser = null
       let userIsEstab = false;
       if(res.locals.user != null) {
-       currUser = res.locals.user._id
+       currUser = res.locals.user._id.toString()
        userIsEstab = res.locals.user.isAdmin;
       }
       let userReview = null;
+      console.log(currUser)
+      console.log("helloee")
 
       for (let review of reviews) {
           // prioritize showing videos over images
@@ -393,7 +395,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       reviews = reviews.filter(function( review ) {
         return review.userId != currUser;
       });
-
+      console.log(userReview)
       if (userReview != null)
         userReview.edit = true;
       const topReviews = reviews.slice(0, 2);
