@@ -68,7 +68,7 @@ form.addEventListener("submit", async (e) => {
         passwordError.textContent = data.errors.password;
       }
       if (data.user) {
-        const redirect = "/user/" + username;
+        const redirect = "/users/" + username;
         location.assign(redirect);
       }
     } catch (err) {

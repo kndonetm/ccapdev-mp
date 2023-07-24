@@ -1,12 +1,13 @@
 
 import express from 'express';
 import jwt from 'jsonwebtoken'
-import User from '../model/User.js' 
+// import User from '../model/User.js' 
 
-// import { ObjectId } from "mongodb"
-// import { getDb } from '../model/conn.js'
-// const db = getDb();;
-// const users_db = db.collection("users");
+import { ObjectId } from "mongodb"
+import { getDb } from '../model/conn.js'
+import bcrypt from 'bcrypt'
+const db = getDb();
+const users_db = db.collection("users");
 
 const loginRegisterRouter = express.Router()
 const handleErrors = (err) => {
@@ -34,36 +35,41 @@ const login = async (req, res) => {
     console.log(req.body)
 
     try {
-        const user = await User.login(username, password)
-        const token = createToken(user._id)
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
-        res.status(200).json({ user: user._id })
+        const user = await users_db.findOne({username})
+        if (user) {
+            const auth = await bcrypt.compare(password, user.password)
+            if (auth) {
+                const token = createToken(user._id)
+                res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
+                res.status(200).json({ user: user._id })
+            } else {
+                 throw Error('incorrect password')
+            }  
+        } else {
+            throw Error('incorrect username')
+        }
     } catch (error) {
         const errors = handleErrors(error)
         res.status(400).json({ errors })
     } 
 } 
 
-// async function findUserByUsername(username) {
-//     try {
-//       const user = await users_db.findOne({ username });
-//       return user;
-//     } catch (error) {
-//       console.error('Error finding user:', error);
-//       throw error;
-//     } 
-//   }
-
 const signup = async (req, res) => {
     const {username , password, description, pfp} = req.body
     console.log(req.body)
-    
-    try{
-        const user = await User.signup(username , password, description, pfp)
-        const token = createToken(user._id)
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
 
-        res.status(200).json({ user: user._id })
+    try{
+        const user = await users_db.findOne({username})
+        if (user) {
+            throw Error('username already in use');
+        } else {
+            const salt = await bcrypt.genSalt(10)
+            const hash = await bcrypt.hash(password, salt)
+            await users_db.insertOne({username, password: hash, description, pfp})
+            const token = createToken(user._id)
+            res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
+            res.status(200).json({ user: user._id })
+        }
     } catch (error) {    
         const errors = handleErrors(error)
         res.status(400).json({ errors })

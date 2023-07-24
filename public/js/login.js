@@ -27,7 +27,7 @@ form.addEventListener("submit", async (e) => {
         }
         if (data.user) {
             //change
-            const redirect = "/user/" + username;
+            const redirect = "/users/" + username;
             location.assign(redirect);
         }
     } catch (err) {

@@ -22,10 +22,10 @@ app.use(cookieParser())
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 
-import User from './src/model/User.js' 
-// import { getDb } from './src/model/conn.js'
-// const db = getDb();;
-// const users_db = db.collection("users");
+// import User from './src/model/User.js' 
+import { getDb } from './src/model/conn.js'
+const db = getDb();
+const users_db = db.collection("users");
 
 app.use("/static", express.static(__dirname + "/public"));
 
@@ -54,7 +54,7 @@ app.get('*', async (req, res, next) => {
                 res.locals.user = null
                 next()
             } else {
-                let user = await User.findById(decodedToken._id);
+                let user = await users_db.findOne({ _id: decodedToken });
                 res.locals.user = user
                 next()
             }
