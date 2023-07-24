@@ -63,6 +63,7 @@ document.addEventListener ("change", async events=>{
     const fileInputs = document.querySelector('#profile-img-caption');
     formEl = document.forms.ImgChange;
     formData = new FormData(formEl);
+    if (events.target.id == "profile-img-caption")
     await fetch("/user/changePfp", {
         method: "PATCH",
         body: formData
