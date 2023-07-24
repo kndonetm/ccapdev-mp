@@ -61,7 +61,14 @@ router.route('/review')
       else
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
-    let sampleUSer = "64aed2aff586db31f5a01231"
+
+    let sampleUSer = null
+    let userIsEstab = false;
+    if(res.locals.user != null) {
+      sampleUSer = res.locals.user._id
+     userIsEstab = res.locals.user.isAdmin;
+    }
+
     if (title && rate && content) {
       const newReview = {
         title: title,
@@ -155,8 +162,15 @@ router.route('/review')
 router.patch('/', async (req, res) => {
   console.log(req.body);
 
-  let { reviewId, userID, updateH } = req.body;
+  let { reviewId, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
+
+  let userID = null
+  let userIsEstab = false;
+  if(res.locals.user != null) {
+    userID = res.locals.user._id
+   userIsEstab = res.locals.user.isAdmin;
+  }
 
   console.log(__iod);
 
@@ -207,7 +221,13 @@ router.route('/comment')
     let { revID, parID, text } = req.body;
     console.log(req.body)
 
-    let userID = "64aed2aff586db31f5a01231";
+    let userID = null
+    let userIsEstab = false;
+    if(res.locals.user != null) {
+      userID = res.locals.user._id
+     userIsEstab = res.locals.user.isAdmin;
+    }
+
     let par_id = null
     if (parID != "null")
       par_id = new ObjectId(parID)

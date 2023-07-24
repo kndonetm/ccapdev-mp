@@ -7,6 +7,10 @@ const db = getDb();
 const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 
+import jwt from 'jsonwebtoken'
+const users_db = db.collection("users");
+
+
 establishmentRouter.get("/:username", async function (req, res, next) {
     try {
       let selectedEstab = await establishments_db.findOne({ username: req.params.username });
@@ -341,9 +345,13 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }
       ]).toArray();
-      let currUser = "64aed2aff586db31f5a01231"
+      let currUser = null
+      let userIsEstab = false;
+      if(res.locals.user != null) {
+       currUser = res.locals.user._id
+       userIsEstab = res.locals.user.isAdmin;
+      }
       let userReview = null;
-      let userIsEstab = true;
 
       for (let review of reviews) {
           // prioritize showing videos over images
@@ -370,7 +378,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
 
       let NReviews = reviews.length;
       let sum = reviews.reduce((a, b) => a + parseInt(b.rating), 0);
-      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews) || 0}});
+      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews).toFixed(2) || 0}});
       selectedEstab = await establishments_db.findOne({ username: req.params.username });
       
       let rateSummary = {

@@ -5,7 +5,7 @@ import fs from 'fs';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
-
+import jwt from 'jsonwebtoken'
 const userRouter = Router();
 const db = getDb();
 const user_db = db.collection("users");
@@ -25,14 +25,25 @@ const upload = multer({ storage: storage })
 
 userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
   let img = "/static/assets/user_pfp/"  + req.file.filename;
-  let sampleUSer = "64aed2aff586db31f5a01231"
+ 
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
+    console.log(userID)
 
-  let userr = await user_db.findOne({_id: new ObjectId(sampleUSer)  });
+  let userr = await user_db.findOne({_id: new ObjectId(userID)  });
   if (userr != null && userr.profilePicture !=null)
   fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(24), (err) => {
     if (err)  console.error('Error deleting file:', err);})
 
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+  user_db.updateOne({_id: new ObjectId(userID)},
   {$set:{profilePicture: img}})
   res.status(200)
   res.send("done edit pic")
@@ -40,8 +51,20 @@ userRouter.patch("/user/changePfp", upload.single('media'), async function (req,
 
 userRouter.patch("/user/changeDesc", async function (req, res) { 
   let {userDesc} = req.body;
-  let sampleUSer = "64aed2aff586db31f5a01231"
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  console.log(userID)
+  
+  user_db.updateOne({_id: new ObjectId(userID)},
   {$set:{description: userDesc}})
   res.status(200)
   res.send("done edit desc")
@@ -396,9 +419,16 @@ userRouter.get("/users/:username", async (req, res, next) => {
 
     const topReviews = reviews.slice(0, 5);
     const truncatedReviews = reviews.slice(5);
-    let sampleUSer = "64aed2aff586db31f5a01231"
+    let sampleUSer = null
+      let userIsEstab = false;
+      if(res.locals.user != null) {
+        console.log(res.locals.user)
+        console.log("hello")
+        sampleUSer = res.locals.user._id
+       userIsEstab = res.locals.user.isAdmin;
+      }
 
-    if(user._id != sampleUSer) {
+    if(oid.toString() !== sampleUSer.toString()) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',

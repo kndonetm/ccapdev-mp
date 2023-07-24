@@ -1,18 +1,13 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
-    // console.log(classlist)
-    
-    if (localStorage.getItem('currentLogin') === null && 
+    console.log(localStorage.getItem('currentLogin'))
+    if (localStorage.getItem('currentLogin') === "false" && 
          (classlist.contains('reply') ||
             classlist.contains('down') ||
             classlist.contains('up') ||
             classlist.contains('postReview')
         )) {
-            var myModal = new bootstrap.Modal(document.getElementById('signin'), {
-                keyboard: false
-                })
-            myModal.show()
-         
+        window.location.replace("/login")   
     }  else {
         if (classlist.contains('reply')) {
             reply(event);
@@ -73,7 +68,6 @@ async function updateHelp (_id, potch) {
         method: 'PATCH',
         body: JSON.stringify({
         reviewId: _id,
-        userID: "64aed2aff586db31f5a01231",
         updateH: potch
         }),
         headers: {
