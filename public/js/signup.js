@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
     const password = form.password.value;
     const description = form.description.value;
     const formData = new FormData();
-    let pfp = "/static/assets/unknown.jpg"
+    let pfp = "static/assets/user_pfp/unknown.jpg"
   
     if (file.files[0]) {
         console.log("nada");
@@ -69,6 +69,10 @@ form.addEventListener("submit", async (e) => {
         passwordError.textContent = data.errors.password;
       }
       if (data.user) {
+        // localStorage.setItem('savedUsername', data.user.username);
+        // localStorage.setItem('descProf', data.user.description);
+        // localStorage.setItem('pfp',  data.user.pfp);
+
         const redirect = "/users/" + username;
         location.assign(redirect);
       }

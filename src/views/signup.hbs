@@ -8,6 +8,7 @@
             <div class="myform">
               <h1 class="nav-name text-center">ArcherEats</h1>
               <form
+                id ="user-register-form"
                 action="/signup"
                 method="POST"
                 enctype="multipart/form-data"
@@ -20,7 +21,7 @@
                     </p>
                   </div>
                   <div class="user-img">
-                    <img src="/images/pfp/unknown.jpg" alt="" id="pfp-input" />
+                    <img src="static/assets/user_pfp/unknown.jpg" alt="" id="pfp-input" />
                     <input type="file" id="file" name="file" />
                     <label for="file" id="uploadbtn"
                       ><i class="fas fa-camera"></i
@@ -47,6 +48,7 @@
                   />
                   <div class="password error"></div>
                   <label for="password-reg" class="form-label">Password</label>
+                  <div id="register-text-login"></div>
                 </div>
                 <div class="mb-3 form-floating">
                   <input

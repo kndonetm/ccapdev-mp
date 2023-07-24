@@ -6,7 +6,7 @@
                 <div class="myform">
                     <h1 class="nav-name text-center">ArcherEats</h1>
                     <h1 class="text-center mt-5">Welcome Back!</h1>
-                    <form id="loginForm" action="/login" method="POST">
+                    <form id="user-login-form" action="/login" method="POST" >
                         <div class="mb-3 mt-4 form-floating">
                             <input
                                 placeholder="username"
@@ -27,6 +27,7 @@
                             <div class="password error"></div>
                             <label for="password-login" class="form-label">Password</label>
                         </div>
+                        <div id="error-text-login"></div>
                         <input type="checkbox" id="remember-me" name="remember-me" />
                         <label for="remember-me"><p class="subtext">Remember Me</p></label>
                         <button class="btn btn-light mt-4 gy-0 signin-js" type="submit">SIGN IN</button>
