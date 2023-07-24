@@ -59,16 +59,16 @@ const signup = async (req, res) => {
     console.log(req.body)
 
     try{
-        const user = await users_db.findOne({username})
+        let user = await users_db.findOne({username})
         if (user) {
             throw Error('username already in use');
         } else {
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
-            await users_db.insertOne({username, password: hash, description, pfp})
-            const token = createToken(user._id)
+            user = await users_db.insertOne({username, password: hash, description, pfp})
+            const token = createToken(user.insertedId)
             res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
-            res.status(200).json({ user: user._id })
+            res.status(200).json({ user: user.insertedId })
         }
     } catch (error) {    
         const errors = handleErrors(error)

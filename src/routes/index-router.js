@@ -13,6 +13,8 @@ import { fileURLToPath } from 'url';
 
 import loginRegisterRouter from '../routes/login-register-router.js'
 
+import uploadPfp from '../middleware/upload.js'
+
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 const router = Router();
 const db = getDb();
@@ -269,15 +271,12 @@ router.route('/estabRespo')
         res.send("deleted estab respo")
 })
 
-router.post("/upload", upload.single("file"), (req, res) => {
-  // Multer middleware will handle the file upload
-
+router.post("/upload", uploadPfp.single("file"), (req, res) => {
   let filePath;
   try {
     filePath = req.file.path;
-    console.log(filePath)
     relativePath = path.relative('public', filePath)
- 
+    
     console.log("File uploaded successfully:", req.file);
     res.json({ path: relativePath });
   } catch (error) {
