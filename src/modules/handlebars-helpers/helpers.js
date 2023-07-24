@@ -11,6 +11,9 @@ const hbsHelpers = {
     'starr':  (num) => num / 5 *100,
     'check': (rate, star) => rate == star ? "checked": "",
     'filename': (file) => file.split('/').slice(-1),
+    'cmpId': function(a, b) {
+        return a === b.toString();
+    }
 }
 
 export default hbsHelpers;
