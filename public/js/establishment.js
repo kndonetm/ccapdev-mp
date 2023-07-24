@@ -15,8 +15,15 @@ document.addEventListener("click", event=> {
          
     }  else {
         if (classlist.contains('reply')) {
-            reply(event)
-        } else if (classlist.contains('chat')) {
+            reply(event);
+            
+        } 
+        else if (classlist.contains('edit-reply')) {
+            editReply(event);
+        } else if (classlist.contains('del-reply')) {
+            deleteReplyfetch(event)
+        }
+        else if (classlist.contains('chat')) {
             showChat(event)
         } else if (classlist.contains('down')) {
             markDown(event)
@@ -268,15 +275,38 @@ async function replyfetch (event) {
     }).catch((err) => console.log(err))
 }
 
-async function editReplyfetch (event) {
+function editReply(event) {
+    console.log("Her")
     parent = event.target.closest('.REVIEW')
-    formm = new FormData(parent.querySelector('form'));
+    desc = parent.querySelector( ".reviewtext");
+    textarea = parent.querySelector( ".yourRevEdit");
+    icon = parent.querySelector( ".edit-reply");
+    btn = parent.querySelector(".doneEdit");
+
+    desc.style.display = "none";
+    textarea.style.display = null;
+    icon.style.display = "none";
+    btn.style.display = null;
+    textarea.innerHTML = desc.innerHTML.trim();
+}
+
+async function editReplyfetch (event) {
+    formm = new FormData(parent.querySelector('.edit-comment-form'));
+    console.log(parent.querySelector('.edit-comment-form'))
+    console.log(formm);
+
     formm.append("commID", parent.id)
     event.preventDefault();
 
     await fetch("/comment", {
-        method: "patch",
-        body: formm,
+        method: "PATCH",
+        body: JSON.stringify({
+            commID: formm.get("commID"),
+            text: formm.get("text")
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
@@ -285,13 +315,16 @@ async function editReplyfetch (event) {
 
 async function deleteReplyfetch (event) {
     parent = event.target.closest('.REVIEW')
-    formm = new FormData(parent.querySelector('form'));
-    formm.append("commID", parent.id)
+    console.log(parent.getAttribute("name"));
+
     event.preventDefault();
 
     await fetch("/comment", {
-        method: "delete",
-        body: formm,
+        method: "DELETE",
+        body: JSON.stringify({commID: parent.id}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
