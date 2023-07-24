@@ -42,4 +42,17 @@
   "password": "12345",
   "description": "Vlogger, Food Enthusiast",
   "profilePicture": "/static/assets/user_pfp/steviee.png"
-}]
+},
+{
+  "_id": {
+    "$oid": "64be903c7c9be92e397fd6e9"
+  },
+  "username": "notMcdo",
+  "password": "12345",
+  "description": "Hello, I'm better than revenge",
+  "profilePicture": "/static/assets/user-pfp-placeholders/pfp_sample_1.png",
+  "establishmentId": {
+    "$oid": "64aed2b2f586db31f5a01233"
+  }
+}
+]
