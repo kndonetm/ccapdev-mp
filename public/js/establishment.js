@@ -201,12 +201,6 @@ $('button.moreRev').on({
 async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
     console.log(formDat)
-    rating = formDat.get("rate");
-    estab = formDat.get("estabID");
-    titlle = formDat.get("title");
-    reviewDesc = formDat.get("content");
-    reviewBox = document.querySelector('.yourReview');
-    thefiles = document.querySelector('#mediaInput').files;
     event.preventDefault();
 
     if (formDat.get("userID") != "") {
