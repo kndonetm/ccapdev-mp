@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 
 import express from 'express';
 import exphbs from 'express-handlebars';
-import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 
 import router from './src/routes/index-router.js';
@@ -50,9 +49,6 @@ app.get('*', async (req, res, next) => {
                 const objectId = new ObjectId(decodedToken._id);
                 let user = await users_db.findOne({ _id: objectId});
                 res.locals.user = user
-                console.log(decodedToken._id)
-                console.log(user)
-                console.log(res.locals.user)
                 next()
             }
         })
