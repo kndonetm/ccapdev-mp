@@ -58,6 +58,7 @@
 
             <!-- rate form -->
              {{#unless isEstab}}
+             {{#if user}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
                 <form action="/{{selectedEstab.username}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">
@@ -92,6 +93,7 @@
                     </div>
                 </form>
             </div>
+            {{/if}}
 
             <div class="modal IMGFILES">
                 <div class="modal-dialog modal-xl">

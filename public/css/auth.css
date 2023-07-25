@@ -154,3 +154,7 @@ body {
     color: #ff0099;
   }
   
+  a {
+    text-decoration: none;
+    color: rgb(37, 37, 37);
+  }
