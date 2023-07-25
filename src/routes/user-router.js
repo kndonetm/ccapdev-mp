@@ -424,6 +424,18 @@ userRouter.get("/users/:username", async (req, res, next) => {
         }
     })
 
+    for (let review of reviews) {
+      // prioritize showing videos over images
+      const nTopVideos = Math.min(review.videos.length, 3);
+      review.topVideos = review.videos.slice(0, nTopVideos);
+      review.truncatedVideos = review.videos.slice(nTopVideos);
+      const nTopImages = Math.min(review.images.length, 3 - nTopVideos);
+      review.topImages = review.images.slice(0, nTopImages);
+      review.truncatedImages = review.images.slice(nTopImages);
+      review.nTruncatedMedia = review.truncatedVideos.length + review.truncatedImages.length;
+      review.nMedia = review.videos.length + review.images.length;
+      }
+
     const topReviews = reviews.slice(0, 3);
     const truncatedReviews = reviews.slice(3);
     let userID
