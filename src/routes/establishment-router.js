@@ -337,7 +337,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }, {
           '$sort': {
-            'datePosted': -1, 
+            'likes': -1, 
             '_id': 1
           }
         }
