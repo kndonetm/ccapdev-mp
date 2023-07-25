@@ -12,7 +12,6 @@ import fs from 'fs';
 import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
 import loginRegisterRouter from '../routes/login-register-router.js'
-
 import uploadPfp from '../middleware/upload.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
@@ -22,6 +21,8 @@ const establishments_db = db.collection("establishments");
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
+
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -171,21 +172,6 @@ router.route('/review')
 router.patch('/', async (req, res) => {
   console.log(req.body);
 
-  let { reviewId, updateH } = req.body;
-  let __iod = new ObjectId(reviewId);
-
-  console.log(__iod);
-
-  const x = await reviews_db.findOne({ _id: __iod });
-
-  let usedDb;
-
-  if (x) {
-    usedDb = reviews_db;
-  } else {
-    usedDb = comments_db;
-  }
-
   let userID
   let token = req.cookies.jwt
   if (token) {
@@ -201,6 +187,21 @@ router.patch('/', async (req, res) => {
     res.status(402);
     res.send("")
   } else {
+    let { reviewId, updateH } = req.body;
+    let __iod = new ObjectId(reviewId);
+
+    console.log(__iod);
+
+    const x = await reviews_db.findOne({ _id: __iod });
+
+    let usedDb;
+
+    if (x) {
+      usedDb = reviews_db;
+    } else {
+      usedDb = comments_db;
+    }
+
   switch (updateH) {
     case "up":
       usedDb.updateOne(
