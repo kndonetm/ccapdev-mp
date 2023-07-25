@@ -15,12 +15,6 @@ searchRouter.get("/search", async (req, res) => {
         ]
     };
 
-    // add another condition if there is a filter
-    if(req.query.filter) {
-        let ratingFloor = Math.floor(req.query.filter);
-        estabQueryPipe.$and = [ { rating: { $gt: ratingFloor, $lt: ratingFloor + 1 } } ]
-    }
-
     const reviewQueryPipe = [
         {
             $match: {
@@ -40,6 +34,12 @@ searchRouter.get("/search", async (req, res) => {
         },
         { $unwind: "$user" }
     ];
+
+     // add another condition if there is a filter
+     if(req.query.filter) {
+        estabQueryPipe.$and = [ { rating: { $gt: req.query.filter, $lt: req.query.filter + 1} } ]
+
+    }
 
     const establishmentsArray = await establishments.find(estabQueryPipe).toArray();
     const reviewsArray = await reviews.aggregate(reviewQueryPipe).toArray();
