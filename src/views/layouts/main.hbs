@@ -29,13 +29,3 @@
         {{{body}}}
     </body>
 </html> 
-
-<script>
-    console.log( localStorage.getItem('currentLogin'))
-    localStorage.setItem('currentLogin', 'false');
-    document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('logout')) {
-        localStorage.setItem('currentLogin', 'false');
-    }
-    });
-</script>

@@ -56,13 +56,23 @@ searchRouter.get("/search", async (req, res) => {
         review.id = review._id.toString();
     })
 
+    let starFilter
+    if (req.query.filter == 1) {
+        starFilter = req.query.filter + ' Star'
+    } else if (req.query.filter >= 1) {
+        starFilter = req.query.filter + ' Stars'
+    } else {
+        starFilter = 'No filter'
+    }
+
     res.render("search", {
         title: req.query.q + " - Search Results",
         css:'<link href="static/css/search-result.css" rel="stylesheet">',
         js: '<script defer src="static/js/search-result.js"></script>',
         key: req.query.q,
         establishments: establishmentsArray,
-        reviews: reviewsArray
+        reviews: reviewsArray,
+        starFilter
     })
 });
 
