@@ -344,6 +344,8 @@ router.route('/estabRespo')
   })
   .patch(async function (req, res) {
     const { revID, text } = req.body;
+    console.log(req.body)
+    if (text) {
     reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
@@ -351,6 +353,7 @@ router.route('/estabRespo')
       })
     res.status(200);
     res.send("esited estab respo")
+    }
   })
   .delete(async function (req, res) {
     const { revID } = req.body;
