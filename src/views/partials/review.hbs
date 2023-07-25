@@ -48,8 +48,12 @@
                             <span class="c00000xx editRev edit-review editbg ms-3"></span>
                             <span class="del-review delbg"></span>
                             {{else}}
+                            {{#if @root.THEEEUSERR}}
+                            <span onclick="window.location.replace('{{user.link}}')" class="  edit-review editbg ms-3"></span>
+                            <span class="del-review delbg"></span>
+                            {{else}}
                             <span class="reply replybg"></span>
-                            {{/if}}{{/if}}
+                            {{/if}}{{/if}}{{/if}}
                         </div>  
                     </div>
 
