@@ -220,12 +220,15 @@ $('button.moreRev').on({
 
 async function editRespoEstab (event) {
     parent = event.target.closest('.REVIEW')
+    formm = new FormData(parent.querySelector('form'));
+    formm.append("revID", event.target.closest('.card.REVIEW').id)
     event.preventDefault();
 
     await fetch("/estabRespo", {
         method: "PATCH",
         body: JSON.stringify({
-            revID: event.target.closest('.card.REVIEW').id
+            revID: formm.get("revID"),
+            text: formm.get("text")
         }),
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
