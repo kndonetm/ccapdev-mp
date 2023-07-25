@@ -35,7 +35,7 @@
   "username": "notMcdo",
   "password": "$2b$10$EevmRfHYzD.1uaVorPGY3uhKlr/U6F/VPh/NJHJiA3eUCUsU4QB1G",
   "description": "Lol",
-  "profilePicture": "static/assets/user_pfp/1690278775145_mcdo_alt.png",
+  "profilePicture": "static/assets/user_pfp/mcdo_alt.png",
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
