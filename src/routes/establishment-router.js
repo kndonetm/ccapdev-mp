@@ -11,6 +11,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
     try {
       let selectedEstab = await establishments_db.findOne({ username: req.params.username });
       if(selectedEstab == null) next();
+
       const oid = new ObjectId(selectedEstab._id);
       let reviews = await reviews_db.aggregate([
         {
