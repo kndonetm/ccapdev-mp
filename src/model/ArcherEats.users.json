@@ -48,7 +48,7 @@
   "username": "jomz",
   "password": "$2b$10$QlDN8YtOnZ04ilk1PRk8susiaYjFyxpKvZzWUXbJzVYDrTvnJxzjm",
   "description": "frustrated student",
-  "profilePicture": "static\\assets\\user_pfp\\1690279243540.png"
+  "profilePicture": "static/assets/user_pfp/jomarzkii.png"
 },
 {
   "_id": {
@@ -57,5 +57,5 @@
   "username": "gaem",
   "password": "$2b$10$ZHS.01HF8PHMmJQOXEXzw.TIe3HdzfuriIqoTT1DBrIqqfadew6vm",
   "description": "gaming is my passion",
-  "profilePicture": "static\\assets\\user_pfp\\1690279360535.png"
+  "profilePicture": "static/assets/user_pfp/1690209328861_Screenshot 2023-05-23 230545.png"
 }]
