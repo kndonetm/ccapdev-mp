@@ -13,9 +13,11 @@ const hbsHelpers = {
     'check': (rate, star) => rate == star ? "checked": "",
     'filename': (file) => file.split('/').slice(-1),
     'cmpId': function(a, b) {
+        if (b == null) return false;
         return a === b.toString();
     },
     'idIn': function(a, b) {
+        if (a == null) return false;
         return b.includes(a.toString());
     }
 }
