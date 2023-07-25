@@ -403,6 +403,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,
           rateSummary: rateSummary,
+          isEstab: userIsEstab,
           userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,

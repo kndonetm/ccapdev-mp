@@ -333,7 +333,7 @@ router.route('/estabRespo')
       reviews_db.updateOne(
         { _id: new ObjectId(revID) },
         {
-          $push: { estabResponse: newEstabRespo },
+          $set: { estabResponse: newEstabRespo },
         });
       // res.sendStatus(200);
       res.status(200);
@@ -347,7 +347,7 @@ router.route('/estabRespo')
     reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
-        $set: { "estabResponse.$.content": text, "estabResponse.$.edited": true }
+        $set: { "estabResponse.content": text, "estabResponse.edited": true }
       })
     res.status(200);
     res.send("esited estab respo")
@@ -357,7 +357,7 @@ router.route('/estabRespo')
     reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
-        $set: { "estabResponse": [] }
+        $set: { "estabResponse": null }
       })
     res.status(200);
     res.send("deleted estab respo")
