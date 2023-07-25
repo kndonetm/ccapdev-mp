@@ -7,18 +7,10 @@
                             <form enctype="multipart/form-data" method="post" class="edit-comment-form">
         <textarea name='text' class=" card-text yourRevEdit form-control mb-2" style="display: none;"></textarea>
                   <div class="flex-center iconBox">
-                                <span class="chat chatbg "></span>
-                                <span class="cNum card-text">{{length comments}}</span>
-                                <span class="up upbg"> </span>
-                                <span class="uvote card-text">{{length likes}}</span>
-                                <span class="down downbg"></span>
-                                <span class="dvote card-text">{{length dislikes}}</span>
                                  {{#if @root.isEstab}}
                                 <span class="edit-reply editbg ms-3"></span>
                                 <span class="del-reply yellow delbg"></span>
                                 <button type="submit" class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none;">done</button>    
-                                {{else}}
-                                <span class="reply replybg"></span>
                                 {{/if}}
                             </div>
                             <div class="wReply card-footer collapse">

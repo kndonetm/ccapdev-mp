@@ -201,9 +201,10 @@ router.patch('/', async (req, res) => {
     } else {
       usedDb = comments_db;
     }
-
+    let xsa =await usedDb.findOne({ _id: __iod });
   switch (updateH) {
     case "up":
+      if(xsa.likes.includes(userID) == false)
       usedDb.updateOne(
         { _id: __iod },
         {
@@ -217,6 +218,7 @@ router.patch('/', async (req, res) => {
           $pull: { likes: userID },
         }); break;
     case "down":
+      if(xsa.dislikes.includes(userID) == false)
       usedDb.updateOne(
         { _id: __iod },
         {
