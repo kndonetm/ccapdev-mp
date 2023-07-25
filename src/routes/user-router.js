@@ -424,8 +424,8 @@ userRouter.get("/users/:username", async (req, res, next) => {
         }
     })
 
-    const topReviews = reviews.slice(0, 5);
-    const truncatedReviews = reviews.slice(5);
+    const topReviews = reviews.slice(0, 3);
+    const truncatedReviews = reviews.slice(3);
     let userID
     let token = req.cookies.jwt
     if (token) {

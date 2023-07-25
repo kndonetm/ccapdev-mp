@@ -40,6 +40,10 @@
     height: 1.75em;
 }
 
+.moreRev, .yourReview {
+    padding-inline: 0.8em;
+}
+
 button.moreRev, .estabResponse, .imgBtn, .JBimgBtn, .ARBimgBtn {
     outline: none;
     background: transparent;
