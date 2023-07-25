@@ -64,20 +64,18 @@ router.route('/review')
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
 
-    let user
-    const token = req.cookies.jwt
- 
+    let userID
+    let token = req.cookies.jwt
     if (token) {
       try {
         const decodedToken = await jwt.verify(token, "secret");
-        const objectId = new ObjectId(decodedToken._id);
-        user = await users_db.findOne({ _id: objectId });
+        userID = decodedToken._id
       } catch (err) {
         console.log("Error occurred:", err);
       }
     }
-    console.log(user)
-    if (title && rate && content) {
+    
+    if (title && rate && content && userID) {
       const newReview = {
         title: title,
         rating: rate,
@@ -90,7 +88,7 @@ router.route('/review')
         datePosted: new Date(),
         estabResponse: null,
         establishmentId: new ObjectId(estabID),
-        userId: new ObjectId(sampleUSer),
+        userId: new ObjectId(userID),
       };
       reviews_db.insertOne(newReview);
       // res.sendStatus(200);
@@ -170,7 +168,7 @@ router.route('/review')
 router.patch('/', async (req, res) => {
   console.log(req.body);
 
-  let { reviewId, userID, updateH } = req.body;
+  let { reviewId, updateH } = req.body;
   let __iod = new ObjectId(reviewId);
 
   console.log(__iod);
@@ -185,6 +183,18 @@ router.patch('/', async (req, res) => {
     usedDb = comments_db;
   }
 
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+
+  if (userID != null)
   switch (updateH) {
     case "up":
       usedDb.updateOne(
@@ -222,7 +232,18 @@ router.route('/comment')
     let { revID, parID, text } = req.body;
     console.log(req.body)
 
-    let userID = "64aed2aff586db31f5a01231";
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
+    console.log(userID)
+
     let par_id = null
     if (parID != "null")
       par_id = new ObjectId(parID)

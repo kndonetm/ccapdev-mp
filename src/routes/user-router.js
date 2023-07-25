@@ -27,61 +27,53 @@ const upload = multer({ storage: storage })
 userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
   let img = "static/assets/user_pfp/"  + req.file.filename;
 
-  let user;
-  let objectId;
-  const token = req.cookies.jwt;
-  
+  let userID
+  let token = req.cookies.jwt
   if (token) {
     try {
-      let decodedToken = await jwt.verify(token, "secret");
-      objectId = new ObjectId(decodedToken._id);
-      user = await user_db.findOne({ _id: objectId });
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
     } catch (err) {
       console.log("Error occurred:", err);
     }
   }
+  console.log(userID)
 
-  let userr = await user_db.findOne({_id: objectId });
+  let userr = await user_db.findOne({_id: new ObjectId(userID) });
   if (userr != null && userr.profilePicture !=null)
   fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(24), (err) => {
     if (err)  console.error('Error deleting file:', err);})
 
-  user_db.updateOne({_id: objectId},
+  user_db.updateOne({_id: new ObjectId(userID)},
   {$set:{profilePicture: img}})
   res.status(200)
   res.send("done edit pic")
 })
 
 userRouter.patch("/user/changeDesc", async function (req, res) { 
-  let user;
-  let objectId;
-  const token = req.cookies.jwt;
-  
+  let userID
+  let token = req.cookies.jwt
   if (token) {
     try {
-      let decodedToken = await jwt.verify(token, "secret");
-      objectId = new ObjectId(decodedToken._id);
-      user = await user_db.findOne({ _id: objectId });
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
     } catch (err) {
       console.log("Error occurred:", err);
     }
   }
-  
-  if (user) {
+  console.log(userID)
+
     try {
       let {userDesc} = req.body;
   
       // Perform the update operation only if 'user' is not null
-      await user_db.updateOne({ _id: user._id }, { $set: { description: userDesc } });
+      await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { description: userDesc } });
   
       res.status(200).send("done edit desc");
     } catch (err) {
       console.log("Error updating user description:", err);
       res.status(500).send("Internal server error");
     }
-  } else {
-    res.status(404).send("User not found");
-  }
 })
 
 
@@ -434,9 +426,19 @@ userRouter.get("/users/:username", async (req, res, next) => {
 
     const topReviews = reviews.slice(0, 5);
     const truncatedReviews = reviews.slice(5);
-    let sampleUSer = res.locals.user._id.toString()
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
+    console.log(user.profilePicture)
 
-    if(oid.toString() !== sampleUSer.toString()) {
+    if(oid !== userID) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',

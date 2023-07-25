@@ -1,8 +1,8 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
     console.log(localStorage.getItem('currentLogin'))
-    logged = !(localStorage.getItem('currentLogin') == "false" ||
-            localStorage.getItem('currentLogin') == null )
+    logged = !(localStorage.getItem('currentLogin') === "false" ||
+            localStorage.getItem('currentLogin') === null )
      console.log(logged)
     if (logged && 
          (classlist.contains('reply') ||

@@ -1,6 +1,7 @@
 const hbsHelpers = {
     'length': function(arr) {
-        return arr.length;
+        if (arr!= null) return arr.length;
+        else return 0;
     },
     'formatDate': function(date) {
         let month = date.toLocaleString('default', {month: 'long'});

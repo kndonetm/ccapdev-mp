@@ -60,9 +60,9 @@
                     </div>
 
                     <!-- establishment response (opt) -->
-                    {{#each estabResponse}}
-                    {{> EstabRespo this}}
-                    {{/each}}
+                    {{#if estabResponse}}
+                    {{> EstabRespo estabResponse}}
+                    {{/if}}
 
                     <!--  comment section list of review-->
                     <!-- UL ID is for review // the reply will have a unique ID -->
