@@ -18,8 +18,8 @@ User account credentials: \
 Usernames: \
 ___jstn \
 errol09 \
-anGeLICAA EELIIZaa \
-Jomar ng buhay mo \
+gaem \
+jomz \
 Steviee \
 All user accounts have the password 12345
 
