@@ -74,8 +74,11 @@ router.route('/review')
         console.log("Error occurred:", err);
       }
     }
-    
-    if (title && rate && content && userID) {
+
+    if (userID == null) {
+      res.status(402);
+      res.send("")
+    } else if (title && rate && content) {
       const newReview = {
         title: title,
         rating: rate,
@@ -194,7 +197,10 @@ router.patch('/', async (req, res) => {
     }
   }
 
-  if (userID != null)
+  if (userID == null) {
+    res.status(402);
+    res.send("")
+  } else {
   switch (updateH) {
     case "up":
       usedDb.updateOne(
@@ -225,6 +231,7 @@ router.patch('/', async (req, res) => {
   }
   res.status(200)
   res.send("done")
+}
 })
 
 router.route('/comment')
@@ -251,6 +258,11 @@ router.route('/comment')
       let parComment = await comments_db.findOne({ _id: new ObjectId(par_id) })
       revID = parComment.reviewId
     }
+
+    if (userID == null) {
+      res.status(402);
+      res.send("")
+    } else
     if (revID && userID && text) {
       const newComment = {
         content: text,

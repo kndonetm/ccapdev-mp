@@ -76,7 +76,10 @@ async function updateHelp (_id, potch) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-        }).then(res => console.log(res)).catch((err) => console.log(err))
+        }).then(res => {console.log(res);
+                if (res.status == 402)
+                window.location.replace("/login")  
+        }).catch((err) => console.log(err))
 }
 
 async function markUp (event) {
@@ -285,6 +288,8 @@ async function replyfetch (event) {
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
+            if (res.status == 402)
+            window.location.replace("/login")  
     }).catch((err) => console.log(err))
 }
 
@@ -366,6 +371,8 @@ async function insertReview (event) {
     }).then(res => {console.log(res);
         if (res.status == 200)
             location.reload(); 
+        if (res.status == 402)
+        window.location.replace("/login")  
     }).catch((err) => console.log(err))
 }
 }

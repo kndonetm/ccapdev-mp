@@ -436,9 +436,9 @@ userRouter.get("/users/:username", async (req, res, next) => {
         console.log("Error occurred:", err);
       }
     }
-    console.log(user.profilePicture)
+    console.log(userID)
 
-    if(oid !== userID) {
+    if(oid.toString() !== userID) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',
