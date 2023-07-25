@@ -13,12 +13,13 @@ const handleErrors = (err) => {
     
     if (err.message.includes('username')) {
         errors.username = err.message
-    } else {
+    } 
+    if (err.message.includes('password')) {
         errors.password = err.message
     }
-
+    
     return errors;
-  }
+}
 
 //ayusin ung logic later
 const maxAge = 3 * 24 * 60 * 60
@@ -28,11 +29,16 @@ const createToken = (_id) => {
 
 const login = async (req, res) => {
     // const currUser = req.body
-    const {username , password} = req.body
-
-    console.log(req.body)
-
+    const {username , password} = req.body 
+    
     try {
+        if (!username) {
+            throw Error('provide username')
+        }
+        if (!password) {
+            throw Error('provide password')
+        }
+
         const user = await users_db.findOne({username})
         if (user) {
             const auth = await bcrypt.compare(password, user.password)
@@ -41,7 +47,7 @@ const login = async (req, res) => {
                 res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
                 res.status(200).json({ user: user._id })
             } else {
-                 throw Error('incorrect password')
+                    throw Error('incorrect password')
             }  
         } else {
             throw Error('incorrect username')
@@ -50,20 +56,29 @@ const login = async (req, res) => {
         const errors = handleErrors(error)
         res.status(400).json({ errors })
     } 
+   
+
+    
 } 
 
 const signup = async (req, res) => {
     const {username , password, description, profilePicture} = req.body
-    console.log(req.body)
 
     try{
+        if (!username) {
+            throw Error('provide username')
+        }
+        if (!password) {
+            throw Error('provide password')
+        }
+
         let user = await users_db.findOne({username})
         if (user) {
             throw Error('username already in use');
         } else {
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
-            user = await users_db.insertOne({username, password: hash, description, profilePicture, isAdmin: "false"})
+            user = await users_db.insertOne({username, password: hash, description, profilePicture})
             const token = createToken(user.insertedId)
             res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
             res.status(200).json({ user: user.insertedId })
