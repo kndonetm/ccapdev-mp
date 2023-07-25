@@ -455,6 +455,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         js: '<script defer src="/static/js/user-profile.js"></script>',
         profilePicture: user.profilePicture,
         username: user.username,
+        THEEEUSERR: true,
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
