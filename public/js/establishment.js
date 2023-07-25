@@ -1,62 +1,49 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
-    console.log(localStorage.getItem('currentLogin'))
-    logged = !(localStorage.getItem('currentLogin') === "false" ||
-            localStorage.getItem('currentLogin') === null )
-     console.log(logged)
-    if (logged && 
-         (classlist.contains('reply') ||
-            classlist.contains('down') ||
-            classlist.contains('up') ||
-            classlist.contains('postReview')
-        )) {
-        window.location.replace("/login")   
-    }  else {
-        if (classlist.contains('reply')) {
-            reply(event);
-        } else if (classlist.contains('edit-reply')) {
-            editReply(event);
-        } else if (classlist.contains('yellow')) {
-                deleteRespoEstab(event);
-        } else if (classlist.contains('del-reply')) {
-            deleteReplyfetch(event)
-        }
-        else if (classlist.contains('chat')) {
-            showChat(event)
-        } else if (classlist.contains('down')) {
-            markDown(event)
-        } else if (classlist.contains('up')) {
-            markUp(event)
-        } else if (classlist.contains('c00000xx') && 
-                    classlist.contains('editRev')) {
-            editReview ()
-        }else if (classlist.contains('edit-review')) {
-            editText(event)
-        } else if (classlist.contains('doneEdit')) {
-            doneEditText(event)
-        } else if (classlist.contains('estabResponse')) {
-            showEstabResponse(event)
-        } else if (classlist.contains('reviewtext')) {
-            showMoreReadLess(event)
-        } else if (classlist.contains('del-review')) {
-            deleteCommit (event)
-        } 
+    if (classlist.contains('reply')) {
+        reply(event);
+    } else if (classlist.contains('edit-reply')) {
+        editReply(event);
+    } else if (classlist.contains('yellow')) {
+            deleteRespoEstab(event);
+    } else if (classlist.contains('del-reply')) {
+        deleteReplyfetch(event)
     }
+    else if (classlist.contains('chat')) {
+        showChat(event)
+    } else if (classlist.contains('down')) {
+        markDown(event)
+    } else if (classlist.contains('up')) {
+        markUp(event)
+    } else if (classlist.contains('c00000xx') && 
+                classlist.contains('editRev')) {
+        editReview ()
+    }else if (classlist.contains('edit-review')) {
+        editText(event)
+    } else if (classlist.contains('doneEdit')) {
+        doneEditText(event)
+    } else if (classlist.contains('estabResponse')) {
+        showEstabResponse(event)
+    } else if (classlist.contains('reviewtext')) {
+        showMoreReadLess(event)
+    } else if (classlist.contains('del-review')) {
+        deleteCommit (event)
+    } 
+ 
 
 })
 
 document.addEventListener("submit", event=> {
     event.preventDefault()
-    if (localStorage.getItem('currentLogin') !==  null) {
-        if (classlist.contains('postReview')) {
-            insertReview (event)
-        } else if (classlist.contains('postReply')) {
-            if (classlist.contains('estab'))
-                respoEstab(event)
-            else
-                replyfetch (event)
-        }
-    } 
+    if (classlist.contains('postReview')) {
+        insertReview (event)
+    } else if (classlist.contains('postReply')) {
+        if (classlist.contains('estab'))
+            respoEstab(event)
+        else
+            replyfetch (event)
+    }
+  
 })
 
 document.querySelector("#searchForm button").addEventListener("click", (event) => {
