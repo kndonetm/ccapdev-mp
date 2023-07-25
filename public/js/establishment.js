@@ -40,9 +40,10 @@ document.addEventListener("submit", event=> {
     } else if (classlist.contains('postReply')) {
         if (classlist.contains('estab'))
             respoEstab(event)
-        else
+        else {
             replyfetch (event)
-    }
+        }
+    } 
   
 })
 
@@ -253,16 +254,15 @@ async function replyfetch (event) {
     revID = parent.id;
     parID = null;
     event.preventDefault();
-    console.log("rehrdsehr")
 
     if (parent.classList.contains('list-group-item')) {
         parID = revID;
         revID = null;
+        formm = new FormData(parent.querySelector('form.herePo'))
     }
 
     formm.append("revID", revID)
     formm.append("parID", parID)
-    console.log("dsd")
     console.log(formm.get("text"))
 
     await fetch("/comment", {
@@ -400,9 +400,10 @@ function doneEditText(event){
     icon = parent.querySelector( ".edit-review");
     btn = parent.querySelector(".doneEdit");
     thestatus = parent.querySelector(".status");
-    
-    if (parent.classList.contains('estab')) 
+ 
+    if (parent.classList.contains('estab')){ 
         editRespoEstab (event)
+    }
     else {
         editReplyfetch (event)
     }
