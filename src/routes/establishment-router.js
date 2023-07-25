@@ -376,8 +376,6 @@ establishmentRouter.get("/:username", async function (req, res, next) {
         review.user.link = "/users/" + review.user.username;
       });
 
-      console.log(reviews)
-
       let NReviews = reviews.length;
       let sum = reviews.reduce((a, b) => a + parseInt(b.rating), 0);
       await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews).toFixed(1) || 0}});
