@@ -19,6 +19,9 @@ const hbsHelpers = {
     'idIn': function(a, b) {
         if (a == null) return false;
         return b.includes(a.toString());
+    },
+    'hey': function(a) {
+        console.log("check: " + a)
     }
 }
 

@@ -19,9 +19,9 @@
         <div class="flex-center iconBox">
             <span class="chat chatbg "></span>
             <span class="cNum card-text">{{length children}}</span>
-            <span class=" up {{#if (idIn user._id likes)}}upbgfill{{else}}upbg{{/if}}"> </span>
+            <span class=" up {{#if (idIn  @root.user._id likes)}}upbgfill{{else}}upbg{{/if}}"> </span>
             <span class="uvote card-text">{{length likes}}</span>
-            <span class=" down {{#if (idIn user._id dislikes)}}downbgfill{{else}}downbg{{/if}}"></span>
+            <span class=" down {{#if (idIn  @root.user._id dislikes)}}downbgfill{{else}}downbg{{/if}}"></span>
             <span class="dvote card-text">{{length dislikes}}</span>
             {{#if (cmpId @root.currentUser user._id)}}
             <span class="edit-reply editbg ms-3"></span>

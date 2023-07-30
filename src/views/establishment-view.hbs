@@ -55,10 +55,10 @@
 
         <!-- everything else -->
         <div class="col ms-4 mt-5">
-
+                {{hey @root.user._id}}
             <!-- rate form -->
              {{#unless isEstab}}
-             {{#if user}}
+             {{#if @root.user}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
                 <form action="/{{selectedEstab.username}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">

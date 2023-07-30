@@ -190,8 +190,6 @@ router.patch('/', async (req, res) => {
     let { reviewId, updateH } = req.body;
     let __iod = new ObjectId(reviewId);
 
-    console.log(__iod);
-
     const x = await reviews_db.findOne({ _id: __iod });
 
     let usedDb;

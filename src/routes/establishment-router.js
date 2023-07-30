@@ -363,10 +363,6 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           review.truncatedImages = review.images.slice(nTopImages);
           review.nTruncatedMedia = review.truncatedVideos.length + review.truncatedImages.length;
           review.nMedia = review.videos.length + review.images.length;
-          if(review.likes.includes(currUser))
-            review.userUp = 1;
-          else if(review.dislikes.includes(currUser))
-            review.userDown = 1;
           if (review.userId == currUser) 
             userReview = review;
       }
