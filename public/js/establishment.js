@@ -155,11 +155,26 @@ async function deleteCommit (event) {
             },
             }).then(res => {console.log(res);
                 if (res.status == 200)
-                    location.reload(); 
+                delRev ()
             }).catch((err) => console.log(err))
     }else {
         deleteReplyfetch (event)
     }
+}
+
+async function delRev () {
+    bye = document.querySelector('.yourReview')
+    bye.innerHTML = "";
+    clearForm = document.querySelector("#reviewForm")
+    clearForm.reset();
+    if (document.querySelector('input[name="title"]').value != "")
+        location.reload()
+    
+    btn = document.querySelector('.postReview')
+    btn.innerHTML = "Post"
+    updateImgInputList ()
+    document.querySelector('input[name="reviewID"]').value = "";
+    $('.revForm').collapse('show')
 }
 
 function showMoreReadLess(event) {
@@ -223,7 +238,7 @@ async function editRespoEstab (event) {
         },
     }).then(res => {console.log(res);
         if (res.status == 200)
-            location.reload(); 
+            doneTxt (event) 
     }).catch((err) => console.log(err))
 }
 
@@ -243,8 +258,10 @@ async function deleteRespoEstab (event) {
         'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            location.reload(); 
+        if (res.status == 200) {
+            parent.closest('.REVIEW.card').querySelector('.iconBox').innerHTML+= ` <span class="reply replybg"></span>`
+            parent.remove()
+        }
     }).catch((err) => console.log(err))
 }
 
@@ -277,8 +294,8 @@ async function replyfetch (event) {
         },
     }).then(res => {console.log(res);
         if (res.status == 200)
-            location.reload(); 
-            if (res.status == 402)
+            res.json().then(he => showReply (event, he))
+        if (res.status == 402)
             window.location.replace("/login")  
     }).catch((err) => console.log(err))
 }
@@ -317,7 +334,7 @@ async function editReplyfetch (event) {
             },
     }).then(res => {console.log(res);
         if (res.status == 200)
-            location.reload(); 
+            doneTxt (event) 
     }).catch((err) => console.log(err))
 }
 
@@ -334,9 +351,17 @@ async function deleteReplyfetch (event) {
             'Content-type': 'application/json; charset=UTF-8',
             },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            location.reload(); 
+        if (res.status == 200) {
+            asd = parent.closest('ul')
+            parent.remove()
+            updateCommentCount (asd)
+        }
     }).catch((err) => console.log(err))
+}
+
+function updateCommentCount (list) {
+    parent = list.closest(".REVIEW")
+    parent.querySelector('.cNum').innerHTML = list.childElementCount;
 }
 
 async function insertReview (event) {
@@ -344,7 +369,7 @@ async function insertReview (event) {
     console.log(formDat)
     event.preventDefault();
 
-    if (formDat.get("userID") != "") {
+    if (formDat.get("reviewID") != "") {
         console.log("posted HERE")
         yo = await fetch("/review", {
             method: "PATCH",
@@ -352,7 +377,7 @@ async function insertReview (event) {
         })
         .then(res => {console.log(res);
             if (res.status == 200)
-                location.reload(); 
+            res.json().then(he => doneEditReview( he))
         }).catch((err) => console.log(err))
     } else {
     fetch("/review", {
@@ -360,11 +385,36 @@ async function insertReview (event) {
         body: formDat,
     }).then(res => {console.log(res);
         if (res.status == 200)
-            location.reload(); 
+            res.json().then(he =>  showReview (he))
         if (res.status == 402)
         window.location.replace("/login")  
     }).catch((err) => console.log(err))
 }
+}
+
+async function doneEditReview(rez) {
+    media = await rez.images.length + rez.videos.length;
+    if (media > 0)
+         location.reload()
+
+    $('.revForm').collapse('hide')
+    $('.yourReview').collapse('show')
+    parent = document.querySelector('.yourReview')
+    stat = parent.querySelector(".status")
+    text = parent.querySelector(".reviewtext")
+    title = parent.querySelector(".reviewTitle")
+    media = parent.querySelector(".revMedia")
+    if (media != null)
+    media.remove()
+    if (stat.innerHTML.includes(" • edited") == false)
+    stat.innerHTML += " • edited";
+    title.innerHTML = rez.title;
+    text.innerHTML = rez.content;
+    r = parent.querySelector('.mang-inasal');
+    rate = rez.rating / 5 *100
+    r.style.setProperty('--percent', `${rate}%`);
+    s = parent.querySelector('.ratingz');
+    s.innerHTML = rez.rating + ".0";
 }
 
 var x = "";
@@ -373,7 +423,6 @@ function editReview() {
     $('.revForm').collapse('show')
     $('.yourReview').collapse('hide')
     bye = document.querySelector('.yourReview')
-    bye.innerHTML = "";
     btn = document.querySelector('.postReview')
     btn.innerHTML = "done"
 }
@@ -409,6 +458,25 @@ function doneEditText(event){
     }
 }
 
+function doneTxt (event) {
+    parent = event.target.closest('.REVIEW')
+    desc = parent.querySelector(".reviewtext");
+    textarea = parent.querySelector(".yourRevEdit");
+    icon = parent.querySelector( ".edit-reply");
+    btn = parent.querySelector(".doneEdit");
+    thestatus = parent.querySelector(".status");
+    if (thestatus == null)
+        thestatus = parent.querySelector(".estabResponse");
+    textarea.style.display = "none";
+    desc.style.display = null;
+    btn.style.display = "none";
+    icon.style.display = null;
+    desc.innerHTML = textarea.value.trim();
+    
+    if (thestatus.innerHTML.includes(" • edited") == false)
+        thestatus.innerHTML += " • edited";
+}
+
 let fileInput = document.querySelector('#mediaInput');
 let fileList = document.querySelector(".filelist");
 
@@ -430,4 +498,174 @@ function updateImgInputList () {
       }
       fileList.appendChild(listItem);
     }
+}
+
+function showReply (event, rez) {
+    parent = event.target.closest('.REVIEW')
+    replyList = parent.querySelector(':scope > .comment');
+    if (replyList == null) {
+        replyList = parent.querySelector(':scope .comment');
+    }
+
+    string1 = `
+    <li class=" list-group-item REVIEW" id="${rez._id}" name="${rez._id}">
+                                <div class="user-profile flex-center">
+                                    <a href="/users/${rez.user.link}" class="flex-center"><img class="pfpRev img-fluid" src="${rez.user.profilePicture}" alt=""></a>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="/users/${rez.user.link}">${rez.user.username}</a>
+                                        <div class=" status">Just Now</div>
+                                    </div>
+                                </div>
+                                <p class="reviewtext card-text">
+                                ` 
+    string2 = `
+                                </p>
+                                <form enctype="multipart/form-data" method="post" class="edit-comment-form">
+                                <textarea name='text' class=" card-text yourRevEdit form-control mb-2" style="display: none;"></textarea>
+                                <div class="flex-center iconBox">
+                                    <span class="chat chatbg "></span>
+                                    <span class="cNum card-text">0</span>
+                                    <span class="up upbg"> </span>
+                                    <span class=" uvote card-text">0</span>
+                                    <span class="down downbg"></span>
+                                    <span class="dvote card-text">0</span>
+                                    <span class="edit-reply editbg ms-3"></span>
+                                    <span class="del-reply delbg"></span>
+                                    <button type="submit" class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none;">done</button>    
+                                </div></form>
+
+                            <!-- reply comment section list -->
+                            <ul class="comment list-group list-group-flush collapse"></ul>
+                        </li>
+    
+    `;
+    
+    parent.querySelector('textarea').innerHTML = "";
+    parent.querySelector('textarea').value = "";
+    replyList.innerHTML += (string1 + rez.content + string2)
+    console.log(parent)
+    as = parent.querySelector('textarea')
+    console.log(as)
+    console.log("wa")
+    
+    $(parent.querySelector('.wReply')).collapse('hide')
+    $(replyList).collapse('show')
+    
+    updateCommentCount (replyList)
+}
+
+
+
+function showReview  ( rez) {
+    reviewBox = document.querySelector('.yourReview');
+    thefiles = document.querySelector('#mediaInput').files;
+    $('.yourReview').collapse('show')
+    $('.revForm').collapse('hide')
+    string1 = `<p class="fw-light mb-2">Your Review</p>
+    <div class="card REVIEW mb-3" id="${rez.review._id}">
+                <div class="card-header reviewHeader flex-center">
+                <div class="user-profile flex-center">
+                <a href="/users/${rez.user.link}" class="flex-center"><img class="pfpRev img-fluid" src="${rez.user.profilePicture}" alt=""></a>
+                <div class="postDeats">
+                    <a class="user-link" href="/users/${rez.user.link}">${rez.user.username}</a>
+                    <div class="c00000xx status">`
+    string1a = "Just Now"
+    string1b = `</div>
+                </div>
+                </div>
+            <div>
+                <h5 class="d-inline-blockz">
+                <span class="ratingz">` + rez.review.rating + `.0</span><meter class="average-rating yourRevRating mang-inasal d-inline-block" min="0" max="5">
+                </meter></h5>
+            </div>
+    </div>
+    <div class="card-body reviewBody">
+        <h6 class="card-title reviewTitle">` + rez.review.title +`</h6>
+        <p class="c00000xx reviewtext card-text">
+        ` + rez.review.content + `
+        </p>
+    
+        `;
+
+    string2 = ""
+    string3 = "";
+    if (thefiles.length > 0) {
+        string2 = '<div class="card-body revMedia">'
+        y = 4
+        if (thefiles.length > 4)
+            y = 3
+        for(let x = 0; x < y; x++) {
+            if (thefiles[x] instanceof File) {
+                theURL = URL.createObjectURL( thefiles[x]);
+                type = thefiles[x]['type'];
+        
+                switch (type.split('/')[0]) {
+                    case "image":
+                        string2 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                        break;
+                    case "video":
+                        string2 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                        break;
+                }
+            }
+        }
+        string3 = "</div>"
+    }
+    string4 ="";
+    string5 ="";
+    if (thefiles.length > 4) {
+        string3 = 
+        `<button class="c00000xx imgBtn" data-bs-toggle="modal" data-bs-target=".c00000xx.moreImg">+` + (thefiles.length-3) +`</button>
+        </div><div class="modal c00000xx moreImg">
+                            <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                                </div><div class="modal-body  moreImgBox">
+                `
+
+                for (x in thefiles) {
+                    if (thefiles[x] instanceof File) {
+                        theURL = URL.createObjectURL( thefiles[x]);
+                        type = thefiles[x]['type'];
+                
+                        switch (type.split('/')[0]) {
+                            case "image":
+                                string4 += '<span><img class="img-fluid" src="' + theURL +'"></span>'
+                                break;
+                            case "video":
+                                string4 += '<span><video class="img-fluid" src="' + theURL +'" controls /></span>'
+                                break;
+                        }
+                    }
+                }   
+                string5 = '</div></div> </div></div> '        
+    }
+    string6 = `
+            <div class="flex-center iconBox">
+            <span class=" chat chatbg "></span>
+            <span class=" cNum card-text">0</span>
+            <span class=" up upbg"> </span>
+            <span class=" uvote card-text">0</span>
+            <span class=" down downbg"></span>
+            <span class=" dvote card-text">0</span>
+            <span class="c00000xx editRev edit-review editbg ms-3"></span>
+            <span class="del-review delbg"></span>
+            
+        </div>
+        </form>
+    </div>
+
+    `;
+
+    reviewBox.innerHTML = string1 + string1a + string1b + string2 + string3  + string4 + string5 + string6;
+    
+    if (thefiles.length > 4) {
+    button = document.querySelector('.c00000xx.imgBtn')                                                     
+    button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
+    }
+
+    r = document.querySelector(':root');
+    r.style.setProperty('--yourRev', 'calc(' + rez.review.rating + '/ 5 * 100%)');
+    document.querySelector('input[name="reviewID"]').value = rez.review._id;
 }

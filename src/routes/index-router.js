@@ -75,11 +75,12 @@ router.route('/review')
         console.log("Error occurred:", err);
       }
     }
-
+    
     if (userID == null) {
       res.status(402);
       res.send("")
     } else if (title && rate && content) {
+      let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
       const newReview = {
         title: title,
         rating: rate,
@@ -97,13 +98,26 @@ router.route('/review')
       reviews_db.insertOne(newReview);
       // res.sendStatus(200);
       res.status(200);
-      res.send("done review")
+      res.send({review: newReview,
+                user: theUSER,
+      })
     } else {
       res.status(400);
     }
   })
   .patch(upload.array('mediaInput'), async function (req, res) {
-    const { estabID, title, rate, content, userID } = req.body;
+    const { title, rate, content, reviewID } = req.body;
+
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
 
     let imageURls = []
     let videoUrls = []
@@ -116,8 +130,7 @@ router.route('/review')
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
     let review = await reviews_db.findOne({
-      establishmentId: new ObjectId(estabID), userId: new ObjectId(userID)
-    });
+      _id: new ObjectId(reviewID)});
 
     if (review != null) {
       for (let img of review.images)
@@ -129,11 +142,10 @@ router.route('/review')
           if (err) console.error('Error deleting file:', err);
         })
     }
-
-    reviews_db.updateOne(
+    let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
+    await reviews_db.updateOne(
       {
-        establishmentId: new ObjectId(estabID),
-        userId: new ObjectId(userID)
+        _id: new ObjectId(reviewID)
       },
       {
         $set: {
@@ -146,7 +158,13 @@ router.route('/review')
         }
       })
     res.status(200)
-    res.send('done edit')
+    res.send({title: title,
+              content: content,
+              rating: rate,
+              images: imageURls,
+              videos: videoUrls,
+      user: theUSER,
+})
   })
   .delete(async function (req, res) {
     let { reviewId } = req.body
@@ -263,8 +281,8 @@ router.route('/comment')
     if (userID == null) {
       res.status(402);
       res.send("")
-    } else
-    if (revID && userID && text) {
+    } else  if (revID && userID && text) {
+      let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
       const newComment = {
         content: text,
         likes: [],
@@ -279,7 +297,10 @@ router.route('/comment')
       comments_db.insertOne(newComment);
       // res.sendStatus(200);
       res.status(200);
-      res.send("done comment")
+      res.send({content: newComment.content,
+        _id: newComment._id,
+        user: theUSER,
+})
     } else {
       res.status(400);
     }

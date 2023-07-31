@@ -77,7 +77,7 @@
                         </div>
                         <label for="c00000xxtext" class="form-label writeRevText">Write a Review</label>
                         <input type="hidden" name="estabID" value="{{selectedEstab._id}}" />
-                        <input type="hidden" name="userID" value="{{userReview.userId}}" />
+                        <input type="hidden" name="reviewID" value="{{userReview._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
                             required value="{{userReview.title}}"/>
                         <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="content"
