@@ -41,10 +41,10 @@ userRouter.patch("/user/changePfp", upload.single('media'), async function (req,
 
   let userr = await user_db.findOne({_id: new ObjectId(userID) });
   if (userr != null && userr.profilePicture !=null)
-  fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(24), (err) => {
+  fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(23), (err) => {
     if (err)  console.error('Error deleting file:', err);})
 
-  user_db.updateOne({_id: new ObjectId(userID)},
+  await user_db.updateOne({_id: new ObjectId(userID)},
   {$set:{profilePicture: img}})
   res.status(200)
   res.send("done edit pic")

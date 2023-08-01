@@ -95,7 +95,7 @@ router.route('/review')
         establishmentId: new ObjectId(estabID),
         userId: new ObjectId(userID),
       };
-      reviews_db.insertOne(newReview);
+      await reviews_db.insertOne(newReview);
       // res.sendStatus(200);
       res.status(200);
       res.send({review: newReview,
@@ -182,7 +182,7 @@ router.route('/review')
         })
     }
 
-    reviews_db.deleteOne({ _id: __iod })
+    await reviews_db.deleteOne({ _id: __iod })
     res.status(200)
     res.send("review Deleted")
   })
@@ -221,28 +221,28 @@ router.patch('/', async (req, res) => {
   switch (updateH) {
     case "up":
       if(xsa.likes.includes(userID) == false)
-      usedDb.updateOne(
+      await usedDb.updateOne(
         { _id: __iod },
         {
           $push: { likes: userID },
           $pull: { dislikes: userID },
         }); break;
     case "up_":
-      usedDb.updateOne(
+      await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
         }); break;
     case "down":
       if(xsa.dislikes.includes(userID) == false)
-      usedDb.updateOne(
+      await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
           $push: { dislikes: userID },
         }); break;
     case "down_":
-      usedDb.updateOne(
+      await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { dislikes: userID },
@@ -294,7 +294,7 @@ router.route('/comment')
         reviewId: new ObjectId(revID),
         edited: false,
       };
-      comments_db.insertOne(newComment);
+      await comments_db.insertOne(newComment);
       // res.sendStatus(200);
       res.status(200);
       res.send({content: newComment.content,
@@ -309,7 +309,7 @@ router.route('/comment')
     const { commID, text } = req.body;
 
     try {
-      comments_db.updateOne(
+      await comments_db.updateOne(
         { _id: new ObjectId(commID) },
         {
           $set: {
@@ -352,7 +352,7 @@ router.route('/estabRespo')
         edited: false,
         datePosted: new Date()
       };
-      reviews_db.updateOne(
+      await reviews_db.updateOne(
         { _id: new ObjectId(revID) },
         {
           $set: { estabResponse: newEstabRespo },
@@ -368,7 +368,7 @@ router.route('/estabRespo')
     const { revID, text } = req.body;
     console.log(req.body)
     if (text) {
-    reviews_db.updateOne(
+      await reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
         $set: { "estabResponse.content": text, "estabResponse.edited": true }
@@ -379,7 +379,7 @@ router.route('/estabRespo')
   })
   .delete(async function (req, res) {
     const { revID } = req.body;
-    reviews_db.updateOne(
+    await reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
         $set: { "estabResponse": null }

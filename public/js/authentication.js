@@ -10,7 +10,7 @@ function login(username, desc, modal, image) {
     localStorage.setItem('savedUsername', username);
     localStorage.setItem('descProf', desc);
 
-    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '/static/assets/unknown.jpg');
+    image ? localStorage.setItem('pfp', image) : localStorage.setItem('pfp', '/static/assets/user-pfp-placeholders/unknown.jpg');
 
     if (localStorage.getItem('savedUsername') && (document.querySelector('#password-reg').value || document.querySelector('#password-login').value)) {
         $(modal).modal('hide');
@@ -28,7 +28,7 @@ registerForm.addEventListener('submit', async () => {
         "about": formData.get("about-you-reg"),
 
         // TEMP: no profile pic uploads yet
-        "profilePicture": "/static/assets/user-pfp-placeholders/pfp_sample_1.png",
+        "profilePicture": "/static/assets/user-pfp-placeholders/unknown.jpg",
     }
 
     const jsonData = JSON.stringify(dataObj);

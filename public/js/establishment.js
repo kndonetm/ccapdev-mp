@@ -380,7 +380,7 @@ async function insertReview (event) {
             res.json().then(he => doneEditReview( he))
         }).catch((err) => console.log(err))
     } else {
-    fetch("/review", {
+    await fetch("/review", {
         method: "POST",
         body: formDat,
     }).then(res => {console.log(res);
@@ -540,13 +540,8 @@ function showReply (event, rez) {
     
     `;
     
-    parent.querySelector('textarea').innerHTML = "";
-    parent.querySelector('textarea').value = "";
+    parent.querySelector('.refly').value = "";
     replyList.innerHTML += (string1 + rez.content + string2)
-    console.log(parent)
-    as = parent.querySelector('textarea')
-    console.log(as)
-    console.log("wa")
     
     $(parent.querySelector('.wReply')).collapse('hide')
     $(replyList).collapse('show')

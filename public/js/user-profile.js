@@ -40,24 +40,24 @@ async function finishEditing() {
 
 editButton.addEventListener("click", toggleEditing);
 
-window.addEventListener("load", event=> {
-    if ( document.URL.includes("user-profile-view.html") ) {
-    thename = document.querySelector('.username')
-    thename.innerHTML = localStorage.getItem('savedUsername')
-    profdesc = document.querySelector('#profile-description')
-    profdesc.innerHTML =  localStorage.getItem('descProf')
-    anchor = document.querySelector('a.logout')
-    anchor.href = "index.html"
-    dpic = document.querySelector("#profile-img-top")
-    dpic.src = `${localStorage.getItem('pfp')}`;
-    pfP = document.querySelectorAll(".samplePfp")
-    sName = document.querySelectorAll(".sampleName")
-    for (let i=0; i < pfP.length; i++) {
-        pfP[i].src = `${localStorage.getItem('pfp')}`;
-    } for (let i=0; i < sName.length; i++) {
-        sName[i].innerHTML = localStorage.getItem('savedUsername')
-    }
-}})
+// window.addEventListener("load", event=> {
+//     if ( document.URL.includes("user-profile-view.html") ) {
+//     thename = document.querySelector('.username')
+//     thename.innerHTML = localStorage.getItem('savedUsername')
+//     profdesc = document.querySelector('#profile-description')
+//     profdesc.innerHTML =  localStorage.getItem('descProf')
+//     anchor = document.querySelector('a.logout')
+//     anchor.href = "index.html"
+//     dpic = document.querySelector("#profile-img-top")
+//     dpic.src = `${localStorage.getItem('pfp')}`;
+//     pfP = document.querySelectorAll(".samplePfp")
+//     sName = document.querySelectorAll(".sampleName")
+//     for (let i=0; i < pfP.length; i++) {
+//         pfP[i].src = `${localStorage.getItem('pfp')}`;
+//     } for (let i=0; i < sName.length; i++) {
+//         sName[i].innerHTML = localStorage.getItem('savedUsername')
+//     }
+// }})
 
 document.addEventListener ("change", async events=>{
     const fileInputs = document.querySelector('#profile-img-caption');

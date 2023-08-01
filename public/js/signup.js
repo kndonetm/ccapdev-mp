@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
     const password = form.password.value;
     const description = form.description.value;
     const formData = new FormData();
-    let profilePicture = "static/assets/user_pfp/unknown.jpg"
+    let profilePicture = "static/assets/user-pfp-placeholders/unknown.jpg"
   
     if (file.files[0]) {
         console.log("nada");
