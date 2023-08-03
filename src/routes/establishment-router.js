@@ -11,6 +11,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
     try {
       let selectedEstab = await establishments_db.findOne({ username: req.params.username });
       if(selectedEstab == null) next();
+
       const oid = new ObjectId(selectedEstab._id);
       let reviews = await reviews_db.aggregate([
         {
@@ -336,12 +337,20 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }, {
           '$sort': {
-            'datePosted': -1, 
+            'likes': -1, 
             '_id': 1
           }
         }
       ]).toArray();
-      let currUser = "64aed2aff586db31f5a01231"
+      let currUser = null
+      let userIsEstab = false;
+      if(res.locals.user != null) {
+       currUser = res.locals.user._id.toString()
+       if (res.locals.user.establishmentId != null && res.locals.user.establishmentId.toString()
+        == selectedEstab._id.toString())
+        userIsEstab = true;
+      }
+
       let userReview = null;
 
       for (let review of reviews) {
@@ -354,10 +363,6 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           review.truncatedImages = review.images.slice(nTopImages);
           review.nTruncatedMedia = review.truncatedVideos.length + review.truncatedImages.length;
           review.nMedia = review.videos.length + review.images.length;
-          if(review.likes.includes(currUser))
-            review.userUp = 1;
-          else if(review.dislikes.includes(currUser))
-            review.userDown = 1;
           if (review.userId == currUser) 
             userReview = review;
       }
@@ -369,7 +374,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
 
       let NReviews = reviews.length;
       let sum = reviews.reduce((a, b) => a + parseInt(b.rating), 0);
-      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews) || 0}});
+      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews).toFixed(1) || 0}});
       selectedEstab = await establishments_db.findOne({ username: req.params.username });
       
       let rateSummary = {
@@ -394,9 +399,11 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,
           rateSummary: rateSummary,
+          isEstab: userIsEstab,
           userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,
+          currentUser: currUser,
           css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">'
       })
     } catch (err) {

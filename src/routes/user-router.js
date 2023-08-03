@@ -1,7 +1,12 @@
 import { ObjectId } from 'mongodb';
 import { Router } from 'express';
 import { getDb } from '../model/conn.js';
+import fs from 'fs';
+import { dirname } from "path";
+import { fileURLToPath } from 'url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
+import jwt from 'jsonwebtoken'
 const userRouter = Router();
 const db = getDb();
 const user_db = db.collection("users");
@@ -11,7 +16,7 @@ const reviews_db = db.collection("reviews");
 import multer from 'multer';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/assets/reviewPics/')
+    cb(null, 'public/assets/user_pfp/')
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "_" + file.originalname)
@@ -20,20 +25,57 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 userRouter.patch("/user/changePfp", upload.single('media'), async function (req, res) { 
-  let img = "/static/assets/user_pfp/"  + req.file.filename;
-  let sampleUSer = "64aed2aff586db31f5a01231"
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
+  let img = "static/assets/user_pfp/"  + req.file.filename;
+
+  let userID
+  let token = req.cookies.jwt
+  if (token && req.file) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  console.log(userID)
+
+  let userr = await user_db.findOne({_id: new ObjectId(userID) });
+  if (userr != null && userr.profilePicture !=null)
+  fs.unlink(__dirname + "../../../public/assets/user_pfp/" + userr.profilePicture.substring(23), (err) => {
+    if (err)  console.error('Error deleting file:', err);})
+
+  await user_db.updateOne({_id: new ObjectId(userID)},
   {$set:{profilePicture: img}})
+  res.status(200)
+  res.send("done edit pic")
 })
 
 userRouter.patch("/user/changeDesc", async function (req, res) { 
-  let {userDesc} = req.body;
-  let sampleUSer = "64aed2aff586db31f5a01231"
-  user_db.updateOne({_id: new ObjectId(sampleUSer)},
-  {$set:{description: userDesc}})
-  res.status(200)
-  res.send("done edit desc")
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  console.log(userID)
+
+    try {
+      let {userDesc} = req.body;
+  
+      // Perform the update operation only if 'user' is not null
+      await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { description: userDesc } });
+  
+      res.status(200).send("done edit desc");
+    } catch (err) {
+      console.log("Error updating user description:", err);
+      res.status(500).send("Internal server error");
+    }
 })
+
 
 userRouter.get("/users/:username", async (req, res, next) => {
     try {
@@ -382,11 +424,33 @@ userRouter.get("/users/:username", async (req, res, next) => {
         }
     })
 
-    const topReviews = reviews.slice(0, 5);
-    const truncatedReviews = reviews.slice(5);
-    let sampleUSer = "64aed2aff586db31f5a01231"
+    for (let review of reviews) {
+      // prioritize showing videos over images
+      const nTopVideos = Math.min(review.videos.length, 3);
+      review.topVideos = review.videos.slice(0, nTopVideos);
+      review.truncatedVideos = review.videos.slice(nTopVideos);
+      const nTopImages = Math.min(review.images.length, 3 - nTopVideos);
+      review.topImages = review.images.slice(0, nTopImages);
+      review.truncatedImages = review.images.slice(nTopImages);
+      review.nTruncatedMedia = review.truncatedVideos.length + review.truncatedImages.length;
+      review.nMedia = review.videos.length + review.images.length;
+      }
 
-    if(user._id != sampleUSer) {
+    const topReviews = reviews.slice(0, 3);
+    const truncatedReviews = reviews.slice(3);
+    let userID
+    let token = req.cookies.jwt
+    if (token) {
+      try {
+        const decodedToken = await jwt.verify(token, "secret");
+        userID = decodedToken._id
+      } catch (err) {
+        console.log("Error occurred:", err);
+      }
+    }
+    console.log(userID)
+
+    if(oid.toString() !== userID) {
     res.render("user", {
         title: user.username + " - Profile",
         css:'<link href="/static/css/user-profile.css" rel="stylesheet">',
@@ -403,6 +467,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         js: '<script defer src="/static/js/user-profile.js"></script>',
         profilePicture: user.profilePicture,
         username: user.username,
+        THEEEUSERR: true,
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,

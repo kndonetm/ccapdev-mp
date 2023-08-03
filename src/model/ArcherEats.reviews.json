@@ -21,7 +21,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
@@ -44,7 +44,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [
+  "estabResponse": 
     {
       "content": "Thank you for your review! We're glad you had a positive experience at our store and we appreciate your support.",
       "likes": [],
@@ -55,7 +55,7 @@
         "$date": "2023-07-10T16:00:00.000Z"
       }
     }
-  ],
+  ,
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
@@ -78,7 +78,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
@@ -101,12 +101,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
   "userId": {
-    "$oid": "64aed2b1f586db31f5a01232"
+    "$oid": "64bf9d4b277396a7d5b725a3"
   }
 },
 {
@@ -124,12 +124,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64ad74f29c3a43fc64bb44d5"
   },
   "userId": {
-    "$oid": "64aed2aff586db31f5a01231"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   }
 },
 {
@@ -147,7 +147,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44bf586db31f5a0123a"
   },
@@ -170,7 +170,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [
+  "estabResponse": 
     {
       "content": "We apologize for any inconvenience you may have experienced during your visit to our store, and we appreciate your feedback as it helps us improve our services.",
       "likes": [],
@@ -181,7 +181,7 @@
         "$date": "2023-07-10T16:00:00.000Z"
       }
     }
-  ],
+  ,
   "establishmentId": {
     "$oid": "64aed44bf586db31f5a0123a"
   },
@@ -204,12 +204,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44bf586db31f5a0123a"
   },
   "userId": {
-    "$oid": "64aed2b1f586db31f5a01232"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   }
 },
 {
@@ -227,7 +227,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [
+  "estabResponse": 
     {
       "content": "We're sorry to hear that your expectations were not met during your recent visit to our store, and we appreciate you bringing this to our attention.",
       "likes": [],
@@ -238,12 +238,12 @@
         "$date": "2023-07-10T16:00:00.000Z"
       }
     }
-  ],
+  ,
   "establishmentId": {
     "$oid": "64aed44bf586db31f5a0123a"
   },
   "userId": {
-    "$oid": "64aed2aff586db31f5a01231"
+    "$oid": "64bf9d4b277396a7d5b725a3"
   }
 },
 {
@@ -261,7 +261,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44bf586db31f5a0123a"
   },
@@ -284,7 +284,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44ef586db31f5a0123c"
   },
@@ -307,12 +307,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44ef586db31f5a0123c"
   },
   "userId": {
-    "$oid": "64aed2b1f586db31f5a01232"
+    "$oid": "64bf9d4b277396a7d5b725a3"
   }
 },
 {
@@ -330,12 +330,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44ef586db31f5a0123c"
   },
   "userId": {
-    "$oid": "64aed2aff586db31f5a01231"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   }
 },
 {
@@ -353,7 +353,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44ef586db31f5a0123c"
   },
@@ -376,7 +376,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44ef586db31f5a0123c"
   },
@@ -399,7 +399,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [
+  "estabResponse": 
     {
       "content": "We strive to provide exceptional customer service, and we're sorry to hear that we fell short of your expectations. We value your feedback and will use it to make improvements moving forward.",
       "likes": [],
@@ -410,12 +410,12 @@
         "$date": "2023-07-10T16:00:00.000Z"
       }
     }
-  ],
+  ,
   "establishmentId": {
     "$oid": "64aed44df586db31f5a0123b"
   },
   "userId": {
-    "$oid": "64aed2b1f586db31f5a01232"
+    "$oid": "64bf9d4b277396a7d5b725a3"
   }
 },
 {
@@ -433,17 +433,17 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44df586db31f5a0123b"
   },
   "userId": {
-    "$oid": "64aed2aff586db31f5a01231"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   }
 },
 {
   "_id": {
-    "$oid": "64af6e338717111d66545324"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   },
   "title": "Spicy Goodness: Ate Rica's Spicy Bacsilog Packs a Punch!",
   "content": "If you're a fan of spicy food, Ate Rica's Spicy Bacsilog is a must-try. This version of the dish takes the classic bacsilog and adds a fiery kick. The combination of crispy bacon, spicy garlic fried rice, and a perfectly cooked sunny-side-up egg creates a symphony of flavors that will awaken your taste buds. The spice level is on point, adding an exciting dimension to the dish without overpowering the other flavors. Ate Rica's Spicy Bacsilog is a bold and flavorful choice for those who love some heat.",
@@ -456,7 +456,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44df586db31f5a0123b"
   },
@@ -479,7 +479,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44df586db31f5a0123b"
   },
@@ -502,7 +502,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44df586db31f5a0123b"
   },
@@ -532,12 +532,12 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44af586db31f5a01239"
   },
   "userId": {
-    "$oid": "64aed2aff586db31f5a01231"
+    "$oid": "64bf9d4b277396a7d5b725a3"
   }
 },
 {
@@ -555,7 +555,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [
+  "estabResponse": 
     {
       "content": "Thank you for sharing your concerns with us. We take customer feedback seriously and will address the issues you've raised to ensure a better experience for all our customers.",
       "likes": [],
@@ -566,7 +566,7 @@
         "$date": "2023-07-10T16:00:00.000Z"
       }
     }
-  ],
+  ,
   "establishmentId": {
     "$oid": "64aed44af586db31f5a01239"
   },
@@ -589,7 +589,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44af586db31f5a01239"
   },
@@ -612,7 +612,7 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44af586db31f5a01239"
   },
@@ -635,11 +635,11 @@
   "datePosted": {
     "$date": "2023-07-10T16:00:00.000Z"
   },
-  "estabResponse": [],
+  "estabResponse": null,
   "establishmentId": {
     "$oid": "64aed44af586db31f5a01239"
   },
   "userId": {
-    "$oid": "64aed2b1f586db31f5a01232"
+    "$oid": "64bf9dc0277396a7d5b725a4"
   }
 }]

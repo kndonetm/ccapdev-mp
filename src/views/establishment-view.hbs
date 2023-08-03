@@ -55,8 +55,10 @@
 
         <!-- everything else -->
         <div class="col ms-4 mt-5">
-
+                {{hey @root.user._id}}
             <!-- rate form -->
+             {{#unless isEstab}}
+             {{#if @root.user}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
                 <form action="/{{selectedEstab.username}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">
@@ -75,7 +77,7 @@
                         </div>
                         <label for="c00000xxtext" class="form-label writeRevText">Write a Review</label>
                         <input type="hidden" name="estabID" value="{{selectedEstab._id}}" />
-                        <input type="hidden" name="userID" value="{{userReview.userId}}" />
+                        <input type="hidden" name="reviewID" value="{{userReview._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
                             required value="{{userReview.title}}"/>
                         <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="content"
@@ -91,6 +93,7 @@
                     </div>
                 </form>
             </div>
+            {{/if}}
 
             <div class="modal IMGFILES">
                 <div class="modal-dialog modal-xl">
@@ -114,6 +117,7 @@
 
             <!-- form submitted injected here -->
             <div class="row yourReview collapse show">{{#if userReview}}{{> review userReview}}{{/if}}</div>
+             {{/unless}}
             <p class="fw-light mb-2">Top Reviews</p>
 
             <!-- Top Reviews / one row per review-->

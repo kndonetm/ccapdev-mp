@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
     const password = form.password.value;
     const description = form.description.value;
     const formData = new FormData();
-    let pfp = "static/assets/user_pfp/unknown.jpg"
+    let profilePicture = "static/assets/user-pfp-placeholders/unknown.jpg"
   
     if (file.files[0]) {
         console.log("nada");
@@ -46,7 +46,7 @@ form.addEventListener("submit", async (e) => {
         const data = await res.json();
         if (data.path) {
           const filePath = data.path;
-          pfp = filePath;
+          profilePicture = filePath;
   
           console.log("Uploaded file path:", filePath);
         }
@@ -59,7 +59,7 @@ form.addEventListener("submit", async (e) => {
     try {
       const res = await fetch("/signup", {
         method: "POST",
-        body: JSON.stringify({ username, password, description, pfp }),
+        body: JSON.stringify({ username, password, description, profilePicture }),
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
