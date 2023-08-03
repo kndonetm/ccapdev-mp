@@ -143,6 +143,8 @@ router.route('/review')
         })
     }
     let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
+
+    if (title && rate && content) {
     await reviews_db.updateOne(
       {
         _id: new ObjectId(reviewID)
@@ -164,7 +166,9 @@ router.route('/review')
               images: imageURls,
               videos: videoUrls,
       user: theUSER,
-})
+})} else {
+  res.status(400);
+}
   })
   .delete(async function (req, res) {
     let { reviewId } = req.body
@@ -308,6 +312,7 @@ router.route('/comment')
   .patch(async function (req, res) {
     const { commID, text } = req.body;
 
+    if (commID && text) {
     try {
       await comments_db.updateOne(
         { _id: new ObjectId(commID) },
@@ -323,7 +328,9 @@ router.route('/comment')
 
     res.status(200);
     res.send("esited comment")
-  })
+  }else {
+    res.status(400);
+  }})
   .delete(async function (req, res) {
     const { commID } = req.body;
     console.log(commID);
@@ -367,7 +374,7 @@ router.route('/estabRespo')
   .patch(async function (req, res) {
     const { revID, text } = req.body;
     console.log(req.body)
-    if (text) {
+    if (revID && text) {
       await reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {

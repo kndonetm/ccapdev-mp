@@ -29,7 +29,7 @@ userRouter.patch("/user/changePfp", upload.single('media'), async function (req,
 
   let userID
   let token = req.cookies.jwt
-  if (token) {
+  if (token && req.file) {
     try {
       const decodedToken = await jwt.verify(token, "secret");
       userID = decodedToken._id
