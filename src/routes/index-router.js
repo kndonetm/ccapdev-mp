@@ -45,6 +45,13 @@ router.get("/", async function (req, res) {
   });
 })
 
+router.get("/about", (req,res) => {
+  res.render("about", {
+    title: "About"
+  })
+})
+
+
 router.use(userRouter);
 router.use(searchRouter);
 router.use(establishmentRouter);
