@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
 
@@ -70,7 +69,7 @@ app.use(express.json());
 
 app.use(router);
 
-app.listen(process.env.SERVER_PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log("Express app now listening...");
     connectToMongo();
 });
