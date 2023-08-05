@@ -4,10 +4,11 @@
     {{#each children}}
     <li class="REVIEW list-group-item" id="{{this._id}}" name="{{_id}}">
         <div class="user-profile  flex-center">
-            <a href="/users/{{user._id}}" class="flex-center"><img class="pfpRev img-fluid"
+            {{hey user.username}}
+            <a href="/users/{{user.username}}" class="flex-center"><img class="pfpRev img-fluid"
                     src="/{{user.profilePicture}}" alt=""></a>
             <div class="postDeats">
-                <a class="user-link" href="/users/{{user._id}}">{{user.username}}</a>
+                <a class="user-link" href="/users/{{user.username}}">{{user.username}}</a>
                 <div class="status">{{formatDate datePosted}} {{#if edited}}• edited{{/if}}</div>
             </div>
         </div>
