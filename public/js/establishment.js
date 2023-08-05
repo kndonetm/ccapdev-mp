@@ -28,7 +28,14 @@ document.addEventListener("click", event=> {
         showMoreReadLess(event)
     } else if (classlist.contains('del-review')) {
         deleteCommit (event)
-    } 
+    } else if (classlist.contains('postReview')) {
+        if (document.querySelector('input[name="rate"]:checked')== null) {
+        if (document.querySelector('.rateEstabText').innerHTML.includes("please input your rating") == false)
+            document.querySelector('.rateEstabText').innerHTML += `
+            <span class="text-danger fs-6">&nbsp;&nbsp;*please input your rating</span>`
+        } else 
+        document.querySelector('.rateEstabText').innerHTML = 'Rate this establishment';
+    }
  
 
 })
@@ -36,6 +43,7 @@ document.addEventListener("click", event=> {
 document.addEventListener("submit", event=> {
     event.preventDefault()
     if (classlist.contains('postReview')) {
+        document.querySelector('.rateEstabText').innerHTML = 'Rate this establishment';
         insertReview (event)
     } else if (classlist.contains('postReply')) {
         if (classlist.contains('estab'))
