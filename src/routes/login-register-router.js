@@ -103,7 +103,10 @@ const showLogin = (req, res) => {
     const data = {
         css: `
             <link rel="stylesheet" href="/static/css/auth.css">
-        `
+        `,
+        js: `
+            <script src="/static/js/login.js" defer></script>
+        `,
     };
     res.render('login', data)
 }
