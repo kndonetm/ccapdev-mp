@@ -28,7 +28,14 @@ document.addEventListener("click", event=> {
         showMoreReadLess(event)
     } else if (classlist.contains('del-review')) {
         deleteCommit (event)
-    } 
+    } else if (classlist.contains('postReview')) {
+        if (document.querySelector('input[name="rate"]:checked')== null) {
+        if (document.querySelector('.rateEstabText').innerHTML.includes("please input your rating") == false)
+            document.querySelector('.rateEstabText').innerHTML += `
+            <span class="text-danger fs-6">&nbsp;&nbsp;*please input your rating</span>`
+        } else 
+        document.querySelector('.rateEstabText').innerHTML = 'Rate this establishment';
+    }
  
 
 })
@@ -36,6 +43,7 @@ document.addEventListener("click", event=> {
 document.addEventListener("submit", event=> {
     event.preventDefault()
     if (classlist.contains('postReview')) {
+        document.querySelector('.rateEstabText').innerHTML = 'Rate this establishment';
         insertReview (event)
     } else if (classlist.contains('postReply')) {
         if (classlist.contains('estab'))
@@ -53,8 +61,6 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
 })
 
 async function updateHelp (_id, potch) {
-    console.log(_id, potch);
-
     await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
@@ -64,9 +70,11 @@ async function updateHelp (_id, potch) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-        }).then(res => {console.log(res);
-                if (res.status == 402)
-                window.location.replace("/login")  
+        }).then(res => {
+            switch (res.status) {
+                case 200: ; break;
+                default:  statusResp(res.status);
+            }
         }).catch((err) => console.log(err))
 }
 
@@ -154,8 +162,10 @@ async function deleteCommit (event) {
             'Content-type': 'application/json; charset=UTF-8',
             },
             }).then(res => {console.log(res);
-                if (res.status == 200)
-                delRev ()
+                switch (res.status) {
+                    case 200: delRev (); break;
+                    default:  statusResp(res.status);
+                }
             }).catch((err) => console.log(err))
     }else {
         deleteReplyfetch (event)
@@ -216,8 +226,10 @@ $('button.moreRev').on({
         'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            location.reload(); 
+        switch (res.status) {
+            case 200: location.reload(); break;
+            default:  statusResp(res.status);
+        }
     }).catch((err) => console.log(err))
 }
 
@@ -237,8 +249,10 @@ async function editRespoEstab (event) {
         'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            doneTxt (event) 
+            switch (res.status) {
+                case 200: doneTxt (event); break;
+                default:  statusResp(res.status);
+            }
     }).catch((err) => console.log(err))
 }
 
@@ -258,11 +272,20 @@ async function deleteRespoEstab (event) {
         'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => {console.log(res);
-        if (res.status == 200) {
-            parent.closest('.REVIEW.card').querySelector('.iconBox').innerHTML+= ` <span class="reply replybg"></span>`
-            parent.remove()
-        }
+                switch (res.status) {
+                case 200: parent.closest('.REVIEW.card').querySelector('.iconBox').innerHTML+= ` <span class="reply replybg"></span>`
+                            parent.remove(); break;
+                default:  statusResp(res.status);
+                }
     }).catch((err) => console.log(err))
+}
+
+function statusResp (status) {
+    switch (status) {
+        case 401: console.log("401: no user credentials");window.location.replace("/login"); break;
+        case 400: console.log("400: Bad Request");break;
+        case 500: console.log("500: Internal Server Error");break;
+    }
 }
 
 async function replyfetch (event) {
@@ -280,7 +303,6 @@ async function replyfetch (event) {
 
     formm.append("revID", revID)
     formm.append("parID", parID)
-    console.log(formm.get("text"))
 
     await fetch("/comment", {
         method: "POST",
@@ -293,15 +315,14 @@ async function replyfetch (event) {
         'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            res.json().then(he => showReply (event, he))
-        if (res.status == 402)
-            window.location.replace("/login")  
+            switch (res.status) {
+                case 200: res.json().then(he => showReply (event, he)) ; break;
+                default:  statusResp(res.status);
+            }
     }).catch((err) => console.log(err))
 }
 
 function editReply(event) {
-    console.log("Her")
     parent = event.target.closest('.REVIEW')
     desc = parent.querySelector( ".reviewtext");
     textarea = parent.querySelector( ".yourRevEdit");
@@ -317,9 +338,6 @@ function editReply(event) {
 
 async function editReplyfetch (event) {
     formm = new FormData(parent.querySelector('.edit-comment-form'));
-    console.log(parent.querySelector('.edit-comment-form'))
-    console.log(formm);
-
     formm.append("commID", parent.id)
     event.preventDefault();
 
@@ -333,15 +351,15 @@ async function editReplyfetch (event) {
             'Content-type': 'application/json; charset=UTF-8',
             },
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            doneTxt (event) 
+            switch (res.status) {
+                case 200: doneTxt (event); break;
+                default:  statusResp(res.status);
+            }
     }).catch((err) => console.log(err))
 }
 
 async function deleteReplyfetch (event) {
     parent = event.target.closest('.REVIEW')
-    console.log(parent.getAttribute("name"));
-
     event.preventDefault();
 
     await fetch("/comment", {
@@ -351,10 +369,11 @@ async function deleteReplyfetch (event) {
             'Content-type': 'application/json; charset=UTF-8',
             },
     }).then(res => {console.log(res);
-        if (res.status == 200) {
-            asd = parent.closest('ul')
-            parent.remove()
-            updateCommentCount (asd)
+        switch (res.status) {
+            case 200: asd = parent.closest('ul')
+                    parent.remove()
+                    updateCommentCount (asd); break;
+            default:  statusResp(res.status);
         }
     }).catch((err) => console.log(err))
 }
@@ -366,28 +385,28 @@ function updateCommentCount (list) {
 
 async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
-    console.log(formDat)
     event.preventDefault();
 
     if (formDat.get("reviewID") != "") {
-        console.log("posted HERE")
         yo = await fetch("/review", {
             method: "PATCH",
             body: formDat,
         })
         .then(res => {console.log(res);
-            if (res.status == 200)
-            res.json().then(he => doneEditReview( he))
+            switch (res.status) {
+                case 200: res.json().then(he => doneEditReview( he)); break;
+                default:  statusResp(res.status);
+            }
         }).catch((err) => console.log(err))
     } else {
     await fetch("/review", {
         method: "POST",
         body: formDat,
     }).then(res => {console.log(res);
-        if (res.status == 200)
-            res.json().then(he =>  showReview (he))
-        if (res.status == 402)
-        window.location.replace("/login")  
+        switch (res.status) {
+            case 200: res.json().then(he =>  showReview (he)); break;
+            default:  statusResp(res.status);
+        }
     }).catch((err) => console.log(err))
 }
 }
@@ -428,7 +447,6 @@ function editReview() {
 }
 
 function editText(event) {
-    console.log("Her")
     parent = event.target.closest('.REVIEW')
     desc = parent.querySelector( ".reviewtext");
     textarea = parent.querySelector( ".yourRevEdit");
@@ -480,13 +498,14 @@ function doneTxt (event) {
 let fileInput = document.querySelector('#mediaInput');
 let fileList = document.querySelector(".filelist");
 
+if (fileInput) {
 fileInput.addEventListener("change", () => {
     updateImgInputList ()
 });
+}
 
 function updateImgInputList () {
     fileList.innerHTML = "";
-    console.log("hey")
     for (i of fileInput.files) {
       let listItem = document.createElement("li");
       let fileName = i.name;
@@ -659,7 +678,7 @@ function showReview  ( rez) {
     button = document.querySelector('.c00000xx.imgBtn')                                                     
     button.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('+ URL.createObjectURL( thefiles[3]) + ')'
     }
-
+    document.querySelector('#mediaInput').value ="";
     r = document.querySelector(':root');
     r.style.setProperty('--yourRev', 'calc(' + rez.review.rating + '/ 5 * 100%)');
     document.querySelector('input[name="reviewID"]').value = rez.review._id;

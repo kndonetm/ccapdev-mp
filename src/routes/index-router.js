@@ -45,6 +45,13 @@ router.get("/", async function (req, res) {
   });
 })
 
+router.get("/about", (req,res) => {
+  res.render("about", {
+    title: "About"
+  })
+})
+
+
 router.use(userRouter);
 router.use(searchRouter);
 router.use(establishmentRouter);
@@ -58,7 +65,6 @@ router.route('/review')
     let videoUrls = []
     for (let files of req.files) {
       let type = files.mimetype;
-      console.log(type)
       if (type.split('/')[0] == "image")
         imageURls.push("/static/assets/reviewPics/" + files.filename)
       else
@@ -77,8 +83,7 @@ router.route('/review')
     }
     
     if (userID == null) {
-      res.status(402);
-      res.send("")
+      res.sendStatus(401);
     } else if (title && rate && content) {
       let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
       const newReview = {
@@ -95,14 +100,16 @@ router.route('/review')
         establishmentId: new ObjectId(estabID),
         userId: new ObjectId(userID),
       };
-      await reviews_db.insertOne(newReview);
-      // res.sendStatus(200);
-      res.status(200);
-      res.send({review: newReview,
-                user: theUSER,
-      })
+      try {
+      let resp = await reviews_db.insertOne(newReview);
+      console.log(resp) 
+      } catch (err) {
+        console.log("Error occurred:", err);
+        res.sendStatus(500)
+      }
+      res.status(200).send({review: newReview, user: theUSER,})
     } else {
-      res.status(400);
+      res.sendStatus(400);
     }
   })
   .patch(upload.array('mediaInput'), async function (req, res) {
@@ -123,7 +130,6 @@ router.route('/review')
     let videoUrls = []
     for (let files of req.files) {
       let type = files.mimetype;
-
       if (type.split('/')[0] == "image")
         imageURls.push("/static/assets/reviewPics/" + files.filename)
       else
@@ -142,10 +148,14 @@ router.route('/review')
           if (err) console.error('Error deleting file:', err);
         })
     }
+
+    if (userID == null) {
+      res.sendStatus(401);
+    } else if (title && rate && content) {
     let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
 
-    if (title && rate && content) {
-    await reviews_db.updateOne(
+    try {
+    let resp = await reviews_db.updateOne(
       {
         _id: new ObjectId(reviewID)
       },
@@ -159,6 +169,11 @@ router.route('/review')
           videos: videoUrls,
         }
       })
+    console.log(resp)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.sendStatus(500)
+  }
     res.status(200)
     res.send({title: title,
               content: content,
@@ -167,11 +182,13 @@ router.route('/review')
               videos: videoUrls,
       user: theUSER,
 })} else {
-  res.status(400);
+  res.sendStatus(400);
 }
   })
   .delete(async function (req, res) {
     let { reviewId } = req.body
+
+    if (reviewId) {
     let __iod = new ObjectId(reviewId);
     let review = await reviews_db.findOne({ _id: __iod });
 
@@ -186,14 +203,21 @@ router.route('/review')
         })
     }
 
-    await reviews_db.deleteOne({ _id: __iod })
+    try {
+    let resp = await reviews_db.deleteOne({ _id: __iod })
+    console.log(resp)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.sendStatus(500)
+  }
     res.status(200)
     res.send("review Deleted")
+    } else {
+      res.sendStatus(400);
+    }
   })
 
 router.patch('/', async (req, res) => {
-  console.log(req.body);
-
   let userID
   let token = req.cookies.jwt
   if (token) {
@@ -206,8 +230,7 @@ router.patch('/', async (req, res) => {
   }
 
   if (userID == null) {
-    res.status(402);
-    res.send("")
+    res.sendStatus(401);
   } else {
     let { reviewId, updateH } = req.body;
     let __iod = new ObjectId(reviewId);
@@ -222,36 +245,38 @@ router.patch('/', async (req, res) => {
       usedDb = comments_db;
     }
     let xsa =await usedDb.findOne({ _id: __iod });
+    let resp
   switch (updateH) {
     case "up":
       if(xsa.likes.includes(userID) == false)
-      await usedDb.updateOne(
+      resp = await usedDb.updateOne(
         { _id: __iod },
         {
           $push: { likes: userID },
           $pull: { dislikes: userID },
         }); break;
     case "up_":
-      await usedDb.updateOne(
+      resp = await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
         }); break;
     case "down":
       if(xsa.dislikes.includes(userID) == false)
-      await usedDb.updateOne(
+      resp = await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { likes: userID },
           $push: { dislikes: userID },
         }); break;
     case "down_":
-      await usedDb.updateOne(
+      resp = await usedDb.updateOne(
         { _id: __iod },
         {
           $pull: { dislikes: userID },
         }); break;
   }
+  console.log(resp)
   res.status(200)
   res.send("done")
 }
@@ -260,8 +285,6 @@ router.patch('/', async (req, res) => {
 router.route('/comment')
   .post(async function (req, res) {
     let { revID, parID, text } = req.body;
-    console.log(req.body)
-
     let userID
     let token = req.cookies.jwt
     if (token) {
@@ -272,7 +295,6 @@ router.route('/comment')
         console.log("Error occurred:", err);
       }
     }
-    console.log(userID)
 
     let par_id = null
     if (parID != "null")
@@ -283,8 +305,7 @@ router.route('/comment')
     }
 
     if (userID == null) {
-      res.status(402);
-      res.send("")
+      res.sendStatus(401);
     } else  if (revID && userID && text) {
       let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
       const newComment = {
@@ -298,15 +319,20 @@ router.route('/comment')
         reviewId: new ObjectId(revID),
         edited: false,
       };
-      await comments_db.insertOne(newComment);
-      // res.sendStatus(200);
+      try {
+      let resp = await comments_db.insertOne(newComment);
+      console.log(resp)
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.sendStatus(500)
+    }
       res.status(200);
       res.send({content: newComment.content,
         _id: newComment._id,
         user: theUSER,
 })
     } else {
-      res.status(400);
+      res.sendStatus(400);
     }
   })
   .patch(async function (req, res) {
@@ -314,7 +340,7 @@ router.route('/comment')
 
     if (commID && text) {
     try {
-      await comments_db.updateOne(
+      let resp = await comments_db.updateOne(
         { _id: new ObjectId(commID) },
         {
           $set: {
@@ -322,25 +348,24 @@ router.route('/comment')
             edited: true
           }
         })
-    } catch (e) {
-      console.error(e);
+      console.log(resp)
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.sendStatus(500)
     }
-
     res.status(200);
     res.send("esited comment")
   }else {
-    res.status(400);
+    res.sendStatus(400);
   }})
   .delete(async function (req, res) {
     const { commID } = req.body;
-    console.log(commID);
-
-    console.log(req.body);
     try {
-      const val = await comments_db.deleteOne({ _id: new ObjectId(commID) })
-      console.log(val);
-    } catch (e) {
-      console.error(e);
+      const resp = await comments_db.deleteOne({ _id: new ObjectId(commID) })
+      console.log(resp);
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.sendStatus(500)
     }
     res.status(200);
     res.send("deleted comment")
@@ -359,38 +384,55 @@ router.route('/estabRespo')
         edited: false,
         datePosted: new Date()
       };
-      await reviews_db.updateOne(
+      try {
+      let resp = await reviews_db.updateOne(
         { _id: new ObjectId(revID) },
         {
           $set: { estabResponse: newEstabRespo },
         });
-      // res.sendStatus(200);
+      console.log(resp)
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.sendStatus(500)
+    }
       res.status(200);
       res.send("done estab respo")
     } else {
-      res.status(400);
+      res.sendStatus(400);
     }
   })
   .patch(async function (req, res) {
     const { revID, text } = req.body;
-    console.log(req.body)
+
     if (revID && text) {
-      await reviews_db.updateOne(
+      try {
+      let resp = await reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
         $set: { "estabResponse.content": text, "estabResponse.edited": true }
       })
+    console.log(resp)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.sendStatus(500)
+  }
     res.status(200);
     res.send("esited estab respo")
     }
   })
   .delete(async function (req, res) {
     const { revID } = req.body;
-    await reviews_db.updateOne(
+    try {
+    let resp = await reviews_db.updateOne(
       { _id: new ObjectId(revID) },
       {
         $set: { "estabResponse": null }
       })
+    console.log(resp)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.sendStatus(500)
+  }
     res.status(200);
     res.send("deleted estab respo")
   })
@@ -400,7 +442,7 @@ router.post("/upload", uploadPfp.single("file"), (req, res) => {
   let filePath;
   try {
     filePath = req.file.path;
-    console.log(filePath)
+
     const updatedPath = filePath.replace("public", "static");
     console.log(updatedPath)
     console.log("File uploaded successfully:", req.file);
