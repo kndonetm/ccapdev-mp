@@ -465,15 +465,16 @@ userRouter.get("/users/:username", async (req, res, next) => {
 
     // edit review object to be compatible with review partial
     // (review partial is made assuming it will only be used in establishment page)
-    reviews.forEach(async (review) => {
-      // assign establishment as "user"
+    const promises = reviews.map(async (review) => {
       const establishment = await establishments_db.findOne({ '_id': review.establishmentId });
       review.user = {
         username: establishment.displayedName,
         profilePicture: establishment.profilePicture,
         link: "/" + establishment.username
-      }
-    })
+      };
+    });
+  
+    await Promise.all(promises);
 
     for (let review of reviews) {
       // prioritize showing videos over images
@@ -517,9 +518,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
       }
     }
     console.log(userID)
-
-
-
+    
     if (oid.toString() !== userID) {
       res.render("user", {
         title: user.username + " - Profile",
