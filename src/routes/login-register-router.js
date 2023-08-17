@@ -17,12 +17,15 @@ const handleErrors = (err) => {
     if (err.message.includes('password')) {
         errors.password = err.message
     }
-    
+    if (err.message.includes('no credentials')) {
+        errors.username = "provide username"
+        errors.password = "provide password"
+    }
+
     return errors;
 }
 
-//ayusin ung logic later
-const maxAge = 3 * 24 * 60 * 60
+let maxAge = 3 * 7 * 24 * 60 * 60 //3 weeks
 const createToken = (_id) => {
     return jwt.sign({_id}, "secret", { expiresIn: maxAge}) 
 }
@@ -32,6 +35,9 @@ const login = async (req, res) => {
     const {username , password} = req.body 
     
     try {
+        if (!username && !password) {
+            throw Error('no credentials')
+        }
         if (!username) {
             throw Error('provide username')
         }
@@ -44,7 +50,7 @@ const login = async (req, res) => {
             const auth = await bcrypt.compare(password, user.password)
             if (auth) {
                 const token = createToken(user._id)
-                res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge})
+                res.cookie('jwt', token, {maxAge: maxAge}) //change to not httponly cuz wala na time kewk
                 res.status(200).json({ user: user._id })
             } else {
                     throw Error('incorrect password')
@@ -56,15 +62,15 @@ const login = async (req, res) => {
         const errors = handleErrors(error)
         res.status(400).json({ errors })
     } 
-   
-
-    
 } 
 
 const signup = async (req, res) => {
     const {username , password, description, profilePicture} = req.body
 
     try{
+        if (!username && !password) {
+            throw Error('no credentials')
+        }
         if (!username) {
             throw Error('provide username')
         }
